@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="app" lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>SISAPE</title>
+
+		<!--Import Bootstrap CSS-->
+		<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
+		
+
+		<!--Import Style CSS-->
+		<link type="text/css" rel="stylesheet" href="css/style.css"/>
+
+		<!--Let browser know website is optimized for mobile-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+
+	<body ng-view>
+		<!--Import jQuery before Bootstrap.js-->
+		<script type="text/javascript" src="js/jquery-2.2.2.min.js"></script>
+		
+		<!--Import Angular-->
+		<script type="text/javascript" src="js/angular.min.js"></script>
+		<script type="text/javascript" src="js/angular-cookies.min.js"></script>
+		<script type="text/javascript" src="js/angular-route.min.js"></script>
+
+		<!--Import Bootstrap-->
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		
+
+		<!--Import Javascript APP-->
+		<script type="text/javascript" src="app.js"></script>
+
+		<!--Import controllers-->
+		<script src="views/login/login.controller.js"></script>
+
+		<!--Import services-->
+		<script src="services/authentication.service.js"></script>
+		<script src="services/flash.service.js"></script>
+		<script src="services/user.service.local-storage.js"></script>
+	</body>
+</html>
