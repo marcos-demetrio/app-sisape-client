@@ -1,18 +1,50 @@
-﻿<div class="h-100 img-fundo" ng-controller="LoginController">
-	<div class="container">
-		<div class="card card-container">
-			<!--<img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" />-->
-			<img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
-			<p id="profile-name" class="profile-name-card"></p>
-			<form class="form-signin">
-				<span id="reauth-email" class="reauth-email"></span>
-				<input type="email" id="inputEmail" class="form-control" placeholder="Insira seu e-mail" required autofocus>
-				<input type="password" id="inputPassword" class="form-control" placeholder="Senha" required>
+﻿<nav class="navbar navbar-default" role="navigation">
+	<div class="container-fluid container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand">SISAPE</a>
+		</div>
 
-				<button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Entrar</button>
-			</form>
-			<a href="#/" class="perdeu-senha">Esqueceu a senha?</a>
-			<a href="#/paciente/novo" class="nova-conta">Criar uma conta</a>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="" data-toggle="modal" data-target="#myModal">Entrar</a></li>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+<div class="text-center">
+	<h1>Open log-in modal from navbar</h1>
+	<p class="lead">Go ahead, click the 'Log-in' button in the top right of the navbar.</p>
+</div>
+
+<div class="modal fade" id="myModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h4 class="modal-title">SISAPE - Acesso</h4>
+		</div>
+		<div class="modal-body">
+			<div class="form-group">
+			<label for="exampleInputEmail1">Email</label>
+			<input class="form-control" id="exampleInputEmail1" placeholder="Insira seu email" type="email">
+			</div>
+			<div class="form-group">
+			<label for="exampleInputPassword1">Senha</label>
+			<input class="form-control" id="exampleInputPassword1" placeholder="Insira sua senha" type="password">
+			</div>
+			<p class="text-right"><a href="">Esqueceu sua senha?</a></p>
+		</div>
+		<div class="modal-footer">
+			<a href="" data-dismiss="modal" class="btn btn-default">Fechar</a>
+			<a href="" class="btn btn-success">Entrar</a>
+		</div>
 		</div>
 	</div>
 </div>
