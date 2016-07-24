@@ -11,17 +11,19 @@
 	</head>
 
 	<body>
-		<section ng-view></section>
+		<div ui-view="viewMenu"></div>
+		<div ui-view="viewMain"></div>
+
 		<script type="text/javascript" src="js/jquery-2.2.2.min.js"></script>
-		
 		<script type="text/javascript" src="js/angular.min.js"></script>
 		<script type="text/javascript" src="js/angular-cookies.min.js"></script>
 		<script type="text/javascript" src="js/angular-route.min.js"></script>
 		<script type="text/javascript" src="js/angular-ui-router.min.js"></script>
-
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 		
 		<script type="text/javascript" src="app.js"></script>
+		<script type="text/javascript" src="app-config.js"></script>
+
 		<script src="views/login/login.controller.js"></script>
 		<script src="views/paciente/paciente.controller.js"></script>
 
