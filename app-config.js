@@ -29,7 +29,7 @@
 				}
 			})
 			.state('paciente', {
-				url: "/paciente/novo",
+				url: "/pacientes/novo",
 				views: {
 					"viewMain": {
 						controller: 'PacienteController',
@@ -41,7 +41,7 @@
 				}
 			})
 			.state('pacienteListagem', {
-				url: "/paciente/listagem",
+				url: "/pacientes",
 				views: {
 					"viewMain": {
 						controller: 'PacienteListagemController',
