@@ -1,6 +1,40 @@
+@media (max-width: 768px){
+	.panel-default{
+		margin-left: 8px;
+		margin-right: 8px;
+	}
+
+	#container {
+		padding-right: 0px;
+		padding-left: 0px;
+	}
+
+}
+
 body {
 	background: #f1f4f7;
 	color: #5f6468;
+}
+
+.sisape-link-panel{
+	float: right;
+	padding-top: 2px;
+}
+
+.sisape-titulo-panel{
+	float: left;
+	padding-top: 2px;
+}
+
+.sisape-order-list{
+	cursor: pointer;
+}
+
+.sisape-sortorder:after {
+  content: '\25b2';   // BLACK UP-POINTING TRIANGLE
+}
+.sisape-sortorder.reverse:after {
+  content: '\25bc';   // BLACK DOWN-POINTING TRIANGLE
 }
 
 .form-control {
@@ -37,6 +71,8 @@ body {
 .panel-footer {
 	background: #fff;
 	border-top: 1px solid #eee;
+	padding-right: 25px;
+	padding-bottom: 1px;
 }
 
 .panel-widget {

@@ -28,8 +28,20 @@
 					}
 				}
 			})
-			.state('paciente', {
+			.state('pacienteNovo', {
 				url: "/pacientes/novo",
+				views: {
+					"viewMain": {
+						controller: 'PacienteController',
+						templateUrl: 'views/paciente/paciente.view.html'
+					},
+					"viewMenu": {
+						templateUrl: 'views/menu/menu.view.html'
+					}
+				}
+			})
+			.state('pacienteEditar', {
+				url: "/pacientes/:id/editar",
 				views: {
 					"viewMain": {
 						controller: 'PacienteController',
