@@ -1,0 +1,45 @@
+﻿<div ng-controller="CboListagemController">
+	<div class="container" id="container">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="clearfix">
+					<span class="sisape-titulo-panel">CBO</span>
+					<a class="sisape-link-panel" href="#/cbo/novo">Novo</a>
+				</div>
+			</div>
+			<div class="panel-body">
+				<table class="table table-striped table-hover table-bordered table-responsive">
+					<thead>
+						<tr>
+							<th ng-click="sortBy('i_cbo')" class="text-center sisape-order-list">#
+								<span class="sisape-sortorder" ng-show="propertyName === 'i_cbo'" ng-class="{reverse: reverse}"></span>
+							</th>
+							<th ng-click="sortBy('nome')" class="sisape-order-list">Título
+								<span class="sisape-sortorder" ng-show="propertyName === 'nome'" ng-class="{reverse: reverse}"></span>
+							</th>
+							<th ng-click="sortBy('codigoCbo')" class="sisape-order-list">Código do CBO
+								<span class="sisape-sortorder" ng-show="propertyName === 'sigla'" ng-class="{reverse: reverse}"></span>
+							</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="item in itens | orderBy:propertyName:reverse">
+							<td ng-bind="item.i_cbo" class="text-center col-md-1 col-sm-1"></td>
+							<td ng-bind="item.nome"></td>
+							<td ng-bind="item.codigoCbo"></td>
+							<td class="text-center col-md-1 col-sm-1">
+								<a href="#/cbo/{{item.i_cbo}}/editar" class="btn btn-link btn-xs" rel="tooltip" data-placement="top" title="Visualizar CBO" tooltip>
+									<span class="glyphicon glyphicon-search" ></span>
+								</a>
+							</td>
+						</tr>
+						<tr id="tableVazia">
+							<td class="text-center" colspan="4s" ng-show="listaVazia">Sem dados para mostrar!</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

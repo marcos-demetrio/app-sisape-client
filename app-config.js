@@ -174,5 +174,42 @@
 					}
 				}
 			})
+
+			.state('cboNovo', {
+				url: "/cbo/novo",
+				views: {
+					"viewMain": {
+						controller: 'CboController',
+						templateUrl: 'views/cbo/cbo.view.html'
+					},
+					"viewMenu": {
+						templateUrl: 'views/menu/menu.view.html'
+					}
+				}
+			})
+			.state('cboEditar', {
+				url: "/cbo/:id/editar",
+				views: {
+					"viewMain": {
+						controller: 'CboController',
+						templateUrl: 'views/cbo/cbo.view.html'
+					},
+					"viewMenu": {
+						templateUrl: 'views/menu/menu.view.html'
+					}
+				}
+			})
+			.state('cboListagem', {
+				url: "/cbo",
+				views: {
+					"viewMain": {
+						controller: 'CboListagemController',
+						templateUrl: 'views/cbo/cbo.lista.html'
+					},
+					"viewMenu": {
+						templateUrl: 'views/menu/menu.view.html'
+					}
+				}
+			})
 	}
 })();

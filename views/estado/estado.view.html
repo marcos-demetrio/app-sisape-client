@@ -23,7 +23,7 @@
 						<div class="form-group" ng-class="{ 'has-error' : estadoForm.sigla.$invalid && !estadoForm.sigla.$pristine }">
 							<label class="col-sm-1 control-label" for="sigla">Sigla</label>
 							<div class="col-sm-5">
-								<input ng-model="form.sigla" id="sigla" required name="nome" type="text" placeholder="Insira a sigla do estado aqui" class="form-control" maxlength="2" autofocus>
+								<input ng-model="form.sigla" id="sigla" required name="sigla" type="text" placeholder="Insira a sigla do estado aqui" class="form-control" maxlength="2" autofocus>
 								<p ng-show="estadoForm.sigla.$error.required && !estadoForm.sigla.$pristine" class="help-block">Sigla é obrigatório.</p>
 							</div>
 						</div>
