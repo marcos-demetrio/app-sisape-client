@@ -1,0 +1,49 @@
+﻿<div ng-controller="MunicipioListagemController">
+	<div class="container" id="container">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="clearfix">
+					<span class="sisape-titulo-panel">Municípios</span>
+					<a class="sisape-link-panel" href="#/municipio/novo">Novo</a>
+				</div>
+			</div>
+			<div class="panel-body">
+				<table class="table table-striped table-hover table-bordered table-responsive">
+					<thead>
+						<tr>
+							<th ng-click="sortBy('i_municipio')" class="text-center sisape-order-list">#
+								<span class="sisape-sortorder" ng-show="propertyName === 'i_municipio'" ng-class="{reverse: reverse}"></span>
+							</th>
+							<th ng-click="sortBy('codigoIbge')" class="sisape-order-list">Código IBGE
+								<span class="sisape-sortorder" ng-show="propertyName === 'codigoIbge'" ng-class="{reverse: reverse}"></span>
+							</th>
+							<th ng-click="sortBy('nome')" class="sisape-order-list">Nome
+								<span class="sisape-sortorder" ng-show="propertyName === 'nome'" ng-class="{reverse: reverse}"></span>
+							</th>
+							<th ng-click="sortBy('estado.nome')" class="sisape-order-list">Estado
+								<span class="sisape-sortorder" ng-show="propertyName === 'estado.nome'" ng-class="{reverse: reverse}"></span>
+							</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="item in itens | orderBy:propertyName:reverse">
+							<td ng-bind="item.i_municipio" class="text-center col-md-1 col-sm-1"></td>
+							<td ng-bind="item.codigoIbge"></td>
+							<td ng-bind="item.nome"></td>
+							<td ng-bind="item.estado.nome"></td>
+							<td class="text-center col-md-1 col-sm-1">
+								<a href="#/municipio/{{item.i_municipio}}/editar" class="btn btn-link btn-xs" rel="tooltip" data-placement="top" title="Visualizar município" tooltip>
+									<span class="glyphicon glyphicon-search" ></span>
+								</a>
+							</td>
+						</tr>
+						<tr id="tableVazia">
+							<td class="text-center" colspan="4s" ng-show="listaVazia">Sem dados para mostrar!</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

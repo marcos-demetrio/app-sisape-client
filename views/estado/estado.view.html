@@ -1,0 +1,55 @@
+﻿<div ng-controller="EstadoController">
+	<div class="container" id="container">
+		<form class="form-horizontal" name="estadoForm" ng-submit="update()">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<span ng-bind="title" class="sisape-titulo-panel"></span>
+				</div>
+				<div class="panel-body">
+					<fieldset>
+						<!-- Id input-->
+						<input type="hidden" id="i_estado" name="i_estado" ng-model="form.i_estado" />
+
+						<!-- Nome input-->
+						<div class="form-group" ng-class="{ 'has-error' : estadoForm.nome.$invalid && !estadoForm.nome.$pristine }">
+							<label class="col-sm-1 control-label" for="nome">Nome</label>
+							<div class="col-sm-11">
+								<input ng-model="form.nome" id="nome" required name="nome" type="text" placeholder="Insira o nome do estado aqui" class="form-control" maxlength="100" autofocus>
+								<p ng-show="pestadoForm.nome.$error.required && !estadoForm.nome.$pristine" class="help-block">Nome é obrigatório.</p>
+							</div>
+						</div>
+						
+						<!-- Sigla input-->
+						<div class="form-group" ng-class="{ 'has-error' : estadoForm.sigla.$invalid && !estadoForm.sigla.$pristine }">
+							<label class="col-sm-1 control-label" for="sigla">Sigla</label>
+							<div class="col-sm-5">
+								<input ng-model="form.sigla" id="sigla" required name="nome" type="text" placeholder="Insira a sigla do estado aqui" class="form-control" maxlength="2" autofocus>
+								<p ng-show="estadoForm.sigla.$error.required && !estadoForm.sigla.$pristine" class="help-block">Sigla é obrigatório.</p>
+							</div>
+						</div>
+
+						<!-- País Select-->
+						<div class="form-group mdn-required" ng-class="{ 'has-error' : estadoForm.i_pais.$invalid && !estadoForm.i_pais.$pristine }">
+							<label for="i_pais" class="col-sm-1 control-label">País</label>
+							<div class="col-sm-5">
+								<select class="form-control" id="i_pais" name="i_pais" required ng-options="pais.nome for pais in paises track by pais.i_pais" ng-model="form.pais" autofocus></select>
+
+								<p ng-show="estadoForm.i_pais.$error.required && !estadoForm.i_pais.$pristine" class="help-block">Selecione um país.</p>
+							</div>
+						</div>
+					</fieldset>
+				</div>
+				<div class="panel-footer">
+					<!-- Form actions -->
+					<div class="form-group">
+						<div class="pull-right">
+							<button type="submit" class="btn btn-success" ng-disabled="estadoForm.$invalid">Ok</button>
+							<a ng-click="cancelar(estadoForm.$dirty)" class="btn btn-warning">Cancelar</a>
+							<a ng-click="excluir()" ng-show="editandoCadastro" class="btn btn-danger">Excluir</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

@@ -8,6 +8,12 @@
 
 	run.$inject = ['$rootScope', '$location', '$cookieStore', '$http'];
 	function run($rootScope, $location, $cookieStore, $http) {
+		$http.defaults.headers.common['Access-Control-Allow-Headers'] = 'Content-Type';
+		$http.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+		$http.defaults.headers.common['Access-Control-Allow-Methods'] = 'GET, POST, DELETE, PUT';
+		$http.defaults.headers.common['Access-Control-Allow-Credential'] = 'true';
+
+
 		// keep user logged in after page refresh
 		/*$rootScope.globals = $cookieStore.get('globals') || {};
 		if ($rootScope.globals.currentUser) {
