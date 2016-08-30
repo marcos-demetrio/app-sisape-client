@@ -4,7 +4,8 @@
 	angular
 		.module('app', ['ngCookies', 'ui.router', 'ui.bootstrap', 'angular-confirm', 'ui.mask', 'ngCpfCnpj'])
 		.run(run)
-		.value('API', 'http://localhost:8080/');
+		.value('API', 'http://localhost:8080/');//Desenvolviemnto
+		//.value('API', 'http://localhost:8080/app-sisape-ws/');//Produção
 
 	run.$inject = ['$rootScope', '$location', '$cookieStore', '$http'];
 	function run($rootScope, $location, $cookieStore, $http) {

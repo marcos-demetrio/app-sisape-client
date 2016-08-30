@@ -1,0 +1,45 @@
+﻿<div ng-controller="CidController">
+	<div class="container" id="container">
+		<form class="form-horizontal" name="cidForm" ng-submit="update()">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<span ng-bind="title" class="sisape-titulo-panel"></span>
+				</div>
+				<div class="panel-body">
+					<fieldset>
+						<!-- Id input-->
+						<input type="hidden" id="i_cid" name="i_cid" ng-model="form.i_cid" />
+
+						<!-- Código input-->
+						<div class="form-group" ng-class="{ 'has-error' : cidForm.codigoCid.$invalid && !cidForm.codigoCid.$pristine }">
+							<label class="col-sm-2 control-label" for="codigoCid">Código</label>
+							<div class="col-sm-5">
+								<input ng-model="form.codigoCid" id="codigoCid" required name="codigoCid" type="text" placeholder="Insira o Código aqui" class="form-control" maxlength="10" autofocus>
+								<p ng-show="cidForm.codigoCid.$error.required && !cidForm.codigoCid.$pristine" class="help-block">Código é obrigatório.</p>
+							</div>
+						</div>
+
+						<!-- Descrição input-->
+						<div class="form-group" ng-class="{ 'has-error' : cidForm.descricao.$invalid && !cidForm.descricao.$pristine }">
+							<label class="col-sm-2 control-label" for="descricao">Descrição</label>
+							<div class="col-sm-10">
+								<input ng-model="form.descricao" id="descricao" required name="descricao" type="text" placeholder="Insira a Descrição aqui" class="form-control" maxlength="255" autofocus>
+								<p ng-show="cidForm.descricao.$error.required && !cidForm.descricao.$pristine" class="help-block">Descrição é obrigatório.</p>
+							</div>
+						</div>
+					</fieldset>
+				</div>
+				<div class="panel-footer">
+					<!-- Form actions -->
+					<div class="form-group">
+						<div class="pull-right">
+							<button type="submit" class="btn btn-success" ng-disabled="cidForm.$invalid">Ok</button>
+							<a ng-click="cancelar(cidForm.$dirty)" class="btn btn-warning">Cancelar</a>
+							<a ng-click="excluir()" ng-show="editandoCadastro" class="btn btn-danger">Excluir</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

@@ -1,18 +1,18 @@
-﻿<div ng-controller="PacienteListagemController">
+﻿<div ng-controller="CidadaoListagemController">
 	<div class="container" id="container">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="clearfix">
-					<span class="sisape-titulo-panel">Pacientes</span>
-					<a class="sisape-link-panel" href="#/pacientes/novo">Novo</a>
+					<span class="sisape-titulo-panel">Cidadão</span>
+					<a class="sisape-link-panel" href="#/cidadao/novo">Novo</a>
 				</div>
 			</div>
 			<div class="panel-body">
 				<table class="table table-striped table-hover table-bordered table-responsive">
 					<thead>
 						<tr>
-							<th ng-click="sortBy('i_paciente')" class="text-center sisape-order-list">#
-								<span class="sisape-sortorder" ng-show="propertyName === 'i_paciente'" ng-class="{reverse: reverse}"></span>
+							<th ng-click="sortBy('i_cidadao')" class="text-center sisape-order-list">#
+								<span class="sisape-sortorder" ng-show="propertyName === 'i_cidadao'" ng-class="{reverse: reverse}"></span>
 							</th>
 							<th ng-click="sortBy('nome')" class="sisape-order-list">Nome
 								<span class="sisape-sortorder" ng-show="propertyName === 'nome'" ng-class="{reverse: reverse}"></span>
@@ -23,11 +23,11 @@
 					</thead>
 					<tbody>
 						<tr ng-repeat="item in itens | orderBy:propertyName:reverse">
-							<td ng-bind="item.i_paciente" class="text-center col-md-1 col-sm-1"></td>
+							<td ng-bind="item.i_cidadao" class="text-center col-md-1 col-sm-1"></td>
 							<td ng-bind="item.nome"></td>
 							<td ng-bind="item.cpf"></td>
 							<td class="text-center col-md-1 col-sm-1">
-								<a href="#/pacientes/{{item.i_paciente}}/editar" class="btn btn-link btn-xs" rel="tooltip" data-placement="top" title="Visualizar paciente" tooltip>
+								<a href="#/cidadao/{{item.i_cidadao}}/editar" class="btn btn-link btn-xs" rel="tooltip" data-placement="top" title="Visualizar cidadão" tooltip>
 									<span class="glyphicon glyphicon-search" ></span>
 								</a>
 							</td>

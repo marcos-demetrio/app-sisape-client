@@ -20,6 +20,17 @@
 					}
 				}
 			})
+
+			.state('inicio', {
+				url: "/inicio",
+				views: {
+					"viewMain": {
+						controller: 'InicioController',
+						templateUrl: 'views/inicio/inicio.view.html'
+					}
+				}
+			})
+
 			.state('naoEncontrado', {
 				url: "/404",
 				views: {
@@ -28,36 +39,36 @@
 					}
 				}
 			})
-			.state('pacienteNovo', {
-				url: "/pacientes/novo",
+			.state('cidadaoNovo', {
+				url: "/cidadao/novo",
 				views: {
 					"viewMain": {
-						controller: 'PacienteController',
-						templateUrl: 'views/paciente/paciente.view.html'
+						controller: 'CidadaoController',
+						templateUrl: 'views/cidadao/cidadao.view.html'
 					},
 					"viewMenu": {
 						templateUrl: 'views/menu/menu.view.html'
 					}
 				}
 			})
-			.state('pacienteEditar', {
-				url: "/pacientes/:id/editar",
+			.state('cidadaoEditar', {
+				url: "/cidadao/:id/editar",
 				views: {
 					"viewMain": {
-						controller: 'PacienteController',
-						templateUrl: 'views/paciente/paciente.view.html'
+						controller: 'CidadaoController',
+						templateUrl: 'views/cidadao/cidadao.view.html'
 					},
 					"viewMenu": {
 						templateUrl: 'views/menu/menu.view.html'
 					}
 				}
 			})
-			.state('pacienteListagem', {
-				url: "/pacientes",
+			.state('cidadaoListagem', {
+				url: "/cidadao",
 				views: {
 					"viewMain": {
-						controller: 'PacienteListagemController',
-						templateUrl: 'views/paciente/paciente.lista.html'
+						controller: 'CidadaoListagemController',
+						templateUrl: 'views/cidadao/cidadao.lista.html'
 					},
 					"viewMenu": {
 						templateUrl: 'views/menu/menu.view.html'
@@ -205,6 +216,42 @@
 					"viewMain": {
 						controller: 'CboListagemController',
 						templateUrl: 'views/cbo/cbo.lista.html'
+					},
+					"viewMenu": {
+						templateUrl: 'views/menu/menu.view.html'
+					}
+				}
+			})
+			.state('cidNovo', {
+				url: "/cid/novo",
+				views: {
+					"viewMain": {
+						controller: 'CidController',
+						templateUrl: 'views/cid/cid.view.html'
+					},
+					"viewMenu": {
+						templateUrl: 'views/menu/menu.view.html'
+					}
+				}
+			})
+			.state('cidEditar', {
+				url: "/cid/:id/editar",
+				views: {
+					"viewMain": {
+						controller: 'CidController',
+						templateUrl: 'views/cid/cid.view.html'
+					},
+					"viewMenu": {
+						templateUrl: 'views/menu/menu.view.html'
+					}
+				}
+			})
+			.state('cidListagem', {
+				url: "/cid",
+				views: {
+					"viewMain": {
+						controller: 'CidListagemController',
+						templateUrl: 'views/cid/cid.lista.html'
 					},
 					"viewMenu": {
 						templateUrl: 'views/menu/menu.view.html'

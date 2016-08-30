@@ -15,7 +15,7 @@
 							<label class="col-sm-2 control-label" for="nome">Título</label>
 							<div class="col-sm-10">
 								<input ng-model="form.nome" id="nome" required name="nome" type="text" placeholder="Insira o Título do CBO aqui" class="form-control" maxlength="100" autofocus>
-								<p ng-show="ppaisForm.nome.$error.required && !cboForm.nome.$pristine" class="help-block">Título do CBO é obrigatório.</p>
+								<p ng-show="cboForm.nome.$error.required && !cboForm.nome.$pristine" class="help-block">Título do CBO é obrigatório.</p>
 							</div>
 						</div>
 						

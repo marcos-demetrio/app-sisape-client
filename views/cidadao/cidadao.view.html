@@ -1,0 +1,166 @@
+﻿<div ng-controller="CidadaoController">
+	<div class="container" id="container">
+		<form class="form-horizontal" name="cidadaoForm" ng-submit="update()">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<span ng-bind="title" class="sisape-titulo-panel"></span>
+				</div>
+
+				<div class="panel-body tabs">
+					<fieldset>
+						<!-- Id Input -->
+						<input type="hidden" id="i_cidadao" name="i_cidadao" ng-model="form.i_cidadao" />
+
+						<ul class="nav nav-pills">
+							<li class="active"><a href ng-click="setTab(1)" ng-class="{'active' : isSet(1)}" data-toggle="tab">Dados gerais</a></li>
+							<li><a href ng-click="setTab(2)" ng-class="{'active' : isSet(2)}" data-toggle="tab">Localização</a></li>
+							<li><a href ng-click="setTab(3)" ng-class="{'active' : isSet(3)}" data-toggle="tab">Contato</a></li>
+							<li><a href ng-click="setTab(4)" ng-class="{'active' : isSet(4)}" data-toggle="tab">Informações complementares</a></li>
+						</ul>
+		
+						<div class="tab-content" ng-show="isSet(1)">
+							<div class="tab-pane fade in active">
+								<!-- Número Cartão Nacional de Saúde Input -->
+								<div class="form-group sisape-required" ng-class="{ 'has-error' : cidadaoForm.numeroCartaoNacionalSaude.$invalid && !cidadaoForm.numeroCartaoNacionalSaude.$pristine }">
+									<label class="col-sm-2 control-label" for="numeroCartaoNacionalSaude">Número do CNS</label>
+									<div class="col-sm-3">
+										<input ng-disabled="form.possuiCartaoNacionalSaude==false" ng-model="form.numeroCartaoNacionalSaude" ng-minlength="15" id="numeroCartaoNacionalSaude" name="numeroCartaoNacionalSaude" type="text" class="form-control" maxlength="15" autofocus>
+										<p ng-show="cidadaoForm.numeroCartaoNacionalSaude.$error.required && !cidadaoForm.numeroCartaoNacionalSaude.$pristine" class="help-block">Campo obrigatório.</p>
+										<p ng-show="cidadaoForm.numeroCartaoNacionalSaude.$error.minlength" class="help-block">Insira ao menos 15 caracteres.</p>
+									</div>
+
+									<div class="col-sm-5">
+										<div class="checkbox">
+											<label ng-click="setFocus()">
+												<input type="checkbox" ng-model="form.possuiCartaoNacionalSaude" ng-init="form.possuiCartaoNacionalSaude=true" id="possuiCartaoNacionalSaude" name="possuiCartaoNacionalSaude">Possui CNS
+											</label>
+										</div>
+									</div>
+								</div>
+
+								<!-- CPF Input -->
+								<div class="form-group" ng-class="{ 'has-error' : cidadaoForm.cpf.$invalid && !cidadaoForm.cpf.$pristine }">
+									<label class="col-sm-2 control-label" for="cpf">CPF</label>
+									<div class="col-sm-3">
+										<input ng-model="form.cpf" id="cpf" name="cpf" type="text" ng-cpf ui-mask="999.999.999-99" class="form-control" maxlength="14">
+										<p ng-show="cidadaoForm.cpf.$invalid && !cidadaoForm.cpf.$pristine" class="help-block">Campo inválido.</p>
+									</div>
+								</div>
+
+								<!-- Nome Completo Input -->
+								<div class="form-group sisape-required" ng-class="{ 'has-error' : cidadaoForm.nomeCompleto.$invalid && !cidadaoForm.nomeCompleto.$pristine }">
+									<label class="col-sm-2 control-label" for="nomeCompleto">Nome completo</label>
+									<div class="col-sm-10">
+										<input ng-model="form.nomeCompleto" id="nomeCompleto" required name="nomeCompleto" type="text" class="form-control" maxlength="100">
+										<p ng-show="cidadaoForm.nomeCompleto.$error.required && !cidadaoForm.nomeCompleto.$pristine" class="help-block">Campo obrigatório.</p>
+									</div>
+								</div>
+
+								<!-- Nome Social Input -->
+								<div class="form-group sisape-required" ng-class="{ 'has-error' : cidadaoForm.nomeSocial.$invalid && !cidadaoForm.nomeSocial.$pristine }">
+									<label class="col-sm-2 control-label" for="nomeSocial">Nome social</label>
+									<div class="col-sm-10">
+										<input ng-model="form.nomeSocial" id="nomeSocial" required name="nomeSocial" type="text" class="form-control" maxlength="100">
+										<p ng-show="cidadaoForm.nomeSocial.$error.required && !cidadaoForm.nomeSocial.$pristine" class="help-block">Campo obrigatório.</p>
+									</div>
+								</div>
+
+								<!-- Data de Nascimento Input -->
+								<div class="form-group sisape-required" ng-class="{ 'has-error' : (cidadaoForm.sexo.$invalid && !cidadaoForm.sexo.$pristine) || (cidadaoForm.dataNascimento.$invalid && !cidadaoForm.dataNascimento.$pristine) }">
+									<label class="col-sm-2 control-label" for="dataNascimento">Data de nascimento</label>
+									<div class="col-sm-2">
+										<p class="input-group">
+										<input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="form.dataNascimento" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Fechar" current-text="Hoje" clear-text="Limpar" />
+											<span class="input-group-btn">
+												<button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+											</span>
+										<p ng-show="cidadaoForm.dataNascimento.$error.required && !cidadaoForm.dataNascimento.$pristine" class="help-block">Campo obrigatório.</p>
+										</p>
+									</div>
+
+									<div class="col-sm-2">
+										<div class="checkbox">
+											<label>
+												<input type="checkbox" ng-model="form.faleceu" ng-init="form.faleceu=false" id="faleceu" name="faleceu">Faleceu?
+											</label>
+										</div>
+									</div>
+
+									<label for="sexo" class="col-sm-1 control-label">Sexo</label>
+									<div class="col-sm-2">
+										<select class="form-control" id="sexo" name="sexo" required ng-model="form.sexo">
+											<option value="FEMININO" selected="selected">Feminino</option>
+											<option value="MASCULINO">Masculino</option>
+										</select>
+										<p ng-show="cidadaoForm.sexo.$error.required && !cidadaoForm.sexo.$pristine" class="help-block">Campo obrigatório.</p>
+									</div>
+
+									<label for="racaCor" class="col-sm-1 control-label">Raça/Cor</label>
+									<div class="col-sm-2">
+										<select class="form-control" id="racaCor" name="racaCor" required ng-model="form.racaCor">
+											<option value="1" selected="selected">Branca</option>
+											<option value="2">Preta</option>
+											<option value="3">Parda</option>
+											<option value="4">Amarela</option>
+											<option value="5">Indígena</option>
+										</select>
+										<p ng-show="cidadaoForm.racaCor.$error.required && !cidadaoForm.racaCor.$pristine" class="help-block">Campo obrigatório.</p>
+									</div>
+								</div>
+
+								<!-- Nome Mãe Input -->
+								<div class="form-group sisape-required" ng-class="{ 'has-error' : cidadaoForm.nomeMae.$invalid && !cidadaoForm.nomeMae.$pristine }">
+									<label class="col-sm-2 control-label" for="nomeMae">Nome da mãe</label>
+									<div class="col-sm-6">
+										<input ng-model="form.nomeMae" id="nomeMae" name="nomeMae" type="text" class="form-control" maxlength="100">
+									</div>
+
+									<div class="col-sm-3">
+										<div class="checkbox">
+											<label>
+												<input type="checkbox" ng-model="form.desconheceNomeMae" ng-init="form.desconheceNomeMae=false" id="desconheceNomeMae" name="desconheceNomeMae">Desconhece a informação
+											</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="tab-content" ng-show="isSet(2)">
+							<div class="tab-pane fade in active">
+								<h4>Tab 2</h4>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget rutrum purus. Donec hendrerit ante ac metus sagittis elementum. Mauris feugiat nisl sit amet neque luctus, a tincidunt odio auctor. </p>
+							</div>
+						</div>
+
+
+						<div class="tab-content" ng-show="isSet(3)">
+							<div class="tab-pane fade in active">
+								<h4>Tab 3</h4>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget rutrum purus. Donec hendrerit ante ac metus sagittis elementum. Mauris feugiat nisl sit amet neque luctus, a tincidunt odio auctor. </p>
+							</div>
+						</div>
+
+						<div class="tab-content" ng-show="isSet(4)">
+							<div class="tab-pane fade in active">
+								<h4>Tab 4</h4>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget rutrum purus. Donec hendrerit ante ac metus sagittis elementum. Mauris feugiat nisl sit amet neque luctus, a tincidunt odio auctor. </p>
+							</div>
+						</div>
+					</fieldset>
+				</div>
+
+				<div class="panel-footer">
+					<!-- Form actions -->
+					<div class="form-group">
+						<div class="pull-right">
+							<button type="submit" class="btn btn-success" ng-disabled="cidadaoForm.$invalid">Ok</button>
+							<a ng-click="cancelar(cidadaoForm.$dirty)" class="btn btn-warning">Cancelar</a>
+							<a ng-click="excluir()" ng-show="editandoCadastro" class="btn btn-danger">Excluir</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
