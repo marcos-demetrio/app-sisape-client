@@ -9,17 +9,25 @@
 		padding-left: 0px;
 	}
 
+	.checkbox label {
+		margin-top: 6px;
+		font-weight: bold;
+		border-radius: 0px;
+	}
+}
+
+@media (min-width: 768px){
+	.checkbox label {
+		margin-top: 6px;
+		padding-left: 0px;
+		font-weight: bold;
+		border-radius: 0px;
+	}
 }
 
 body {
 	background: #e9ebee;
 	color: #5f6468;
-}
-
-.checkbox label {
-	margin-top: 6px;
-	font-weight: bold;
-	border-radius: 0px;
 }
 
 .tab-content{

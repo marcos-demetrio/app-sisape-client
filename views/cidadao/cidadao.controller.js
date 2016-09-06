@@ -6,14 +6,22 @@
 		.controller('CidadaoController', CidadaoController)
 		.controller('CidadaoListagemController', CidadaoListagemController);
 
-	CidadaoController.$inject = ['$scope', '$location', '$confirm', '$stateParams', '$window', 'CidadaoService'];
+	CidadaoController.$inject = ['$scope', '$location', '$confirm', '$stateParams', '$window', 'CidadaoService', 'MunicipioService', 'TipoLogradouroService', 'CboService'];
 
-	function CidadaoController($scope, $location, $confirm, $stateParams, $window, CidadaoService) {
-		$scope.setFocus = function() {
-			var element = $window.document.getElementById("numeroCartaoNacionalSaude");
-			element.focus();
+	function CidadaoController($scope, $location, $confirm, $stateParams, $window, CidadaoService, MunicipioService, TipoLogradouroService, CboService) {
+		$scope.ClickCheckBoxNumeroCartaoNacionalSaude = function(id) {
+			$window.document.getElementById('numeroCartaoNacionalSaude').focus();
+
+			$scope.form.numeroCartaoNacionalSaude = null;
 		};
 
+		$scope.ClickCheckBoxSemNumero = function() {
+			$window.document.getElementById('numero').focus();
+
+			$scope.form.numero = null;
+		};
+
+		//-- Campo Data
 		$scope.popup2 = {
 			opened: false
 		};
@@ -21,7 +29,9 @@
 		$scope.open2 = function() {
 			$scope.popup2.opened = true;
 		};
+		//--
 
+		//-- Controle Tabs
 		$scope.tab = 1;
 		$scope.setTab = function(newTab){
 			$scope.tab = newTab;
@@ -29,6 +39,19 @@
 		$scope.isSet = function(tabNum){
 			return $scope.tab === tabNum;
 		};
+		//--
+
+		MunicipioService.GetAll().then(function(data){
+			$scope.municipios = data;
+		});
+
+		TipoLogradouroService.GetAll().then(function(data){
+			$scope.tiposLogradouro = data;
+		});
+
+		CboService.GetAll().then(function(data){
+			$scope.listaCbo = data;
+		});
 
 		var cidadaoID = ($stateParams.id) ? parseInt($stateParams.id) : 0;
 
@@ -38,6 +61,16 @@
 		if(cidadaoID > 0){
 			CidadaoService.GetById(cidadaoID).then(function(data){
 				$scope.form = data;
+
+				var date = new Date();
+				var str = data.dataNascimento;
+				var dateArray = str.split("-");
+
+				date.setFullYear(parseInt(dateArray[0]));
+				date.setMonth(parseInt(dateArray[1])-1);  // months indexed as 0-11, substract 1
+				date.setDate(parseInt(dateArray[2]));
+
+				$scope.form.dataNascimento = date;
 			});
 		}
 
