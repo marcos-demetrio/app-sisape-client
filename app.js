@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular
-		.module('app', ['ngCookies', 'ui.router', 'ui.bootstrap', 'angular-confirm', 'ui.mask', 'ngCpfCnpj'])
+		.module('app', ['ngCookies', 'ui.router', 'ui.bootstrap', 'angular-confirm', 'ui.mask', 'ngCpfCnpj', 'brasil.filters'])
 		.run(run)
 		.value('API', 'http://localhost:8080/');//Desenvolviemnto
 		//.value('API', 'http://localhost:8080/app-sisape-ws/');//Produção

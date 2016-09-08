@@ -8,7 +8,7 @@
 	config.$inject = ['$locationProvider', '$stateProvider', '$urlRouterProvider'];
 	function config($locationProvider, $stateProvider, $urlRouterProvider) {
 
-		$urlRouterProvider.otherwise('/404');
+		$urlRouterProvider.otherwise('/inicio');
 
 		$stateProvider
 			.state('login', {

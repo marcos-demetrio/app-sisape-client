@@ -8,35 +8,58 @@
 				</div>
 			</div>
 			<div class="panel-body">
-				<table class="table table-striped table-hover table-bordered table-responsive">
-					<thead>
-						<tr>
-							<th ng-click="sortBy('i_cidadao')" class="text-center sisape-order-list">#
-								<span class="sisape-sortorder" ng-show="propertyName === 'i_cidadao'" ng-class="{reverse: reverse}"></span>
-							</th>
-							<th ng-click="sortBy('nome')" class="sisape-order-list">Nome
-								<span class="sisape-sortorder" ng-show="propertyName === 'nome'" ng-class="{reverse: reverse}"></span>
-							</th>
-							<th>CPF</th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr ng-repeat="item in itens | orderBy:propertyName:reverse">
-							<td ng-bind="item.i_cidadao" class="text-center col-md-1 col-sm-1"></td>
-							<td ng-bind="item.nome"></td>
-							<td ng-bind="item.cpf"></td>
-							<td class="text-center col-md-1 col-sm-1">
-								<a href="#/cidadao/{{item.i_cidadao}}/editar" class="btn btn-link btn-xs" rel="tooltip" data-placement="top" title="Visualizar cidadão" tooltip>
-									<span class="glyphicon glyphicon-search" ></span>
-								</a>
-							</td>
-						</tr>
-						<tr id="tableVazia">
-							<td class="text-center" colspan="4s" ng-show="listaVazia">Sem dados para mostrar!</td>
-						</tr>
-					</tbody>
-				</table>
+
+				<form class="form-horizontal">
+					<div class="form-group">
+						<div class="col-sm-6"> 
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="Pesquisar pelo nome completo do cidadão" autofocus="autofocus" name="keyword" ng-model="keyword"/>
+								<span class="input-group-btn">
+									<button ng-click="PesquisarCidadao()" class="btn btn-default">
+										<i class="glyphicon glyphicon-search"></i>
+									</button>
+								</span>
+							</div>
+						</div>
+				 	</div>
+			 	</form>
+
+			 	<div class="table-responsive">
+					<table class="table table-striped table-hover table-bordered">
+						<thead>
+							<tr>
+								<!--<th ng-click="sortBy('i_cidadao')" class="text-center sisape-order-list">#-->
+								<th class="text-center col-md-1">#
+									<!--<span class="sisape-sortorder" ng-show="propertyName === 'i_cidadao'" ng-class="{reverse: reverse}"></span>-->
+								</th>
+								<!--<th ng-click="sortBy('nomeCompleto')" class="sisape-order-list">Nome-->
+								<th>Nome
+									<!--<span class="sisape-sortorder" ng-show="propertyName === 'nomeCompleto'" ng-class="{reverse: reverse}"></span>-->
+								</th>
+								<th class="col-md-2">CPF</th>
+								<th class="text-center col-md-2">Data de nascimento</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<!--<tr ng-repeat="item in itens | orderBy:propertyName:reverse">-->
+							<tr ng-repeat="item in itens">
+								<td ng-bind="item.i_cidadao" class="text-center col-md-1"></td>
+								<td ng-bind="item.nomeCompleto"></td>
+								<td ng-bind="item.cpf | cpf" class="col-md-2"></td>
+								<td ng-bind="item.dataNascimento | date:'dd/MM/yyyy'" class="text-center col-md-2"></td>
+								<td class="text-center">
+									<a href="#/cidadao/{{item.i_cidadao}}/editar" class="btn btn-link btn-xs" rel="tooltip" data-placement="top" title="Visualizar cidadão" tooltip>
+										<span class="glyphicon glyphicon-search" ></span>
+									</a>
+								</td>
+							</tr>
+							<tr id="tableVazia">
+								<td class="text-center" colspan="5s" ng-show="listaVazia">Sem dados para mostrar!</td>
+							</tr>
+						</tbody>
+					</table>
+			 	</div>
 			</div>
 		</div>
 	</div>

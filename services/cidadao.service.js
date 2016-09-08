@@ -29,6 +29,10 @@
 			return $http.put(API + 'cidadao/' + id, cidadao).then(handleSuccess, handleError('Erro ao atualizar cidadão'));
 		}
 
+		service.PesquisarPorNomeCompleto = function PesquisarPorNomeCompleto(params) {
+			return $http.get(API + 'cidadao/nome/', params).then(handleSuccess, handleError('Erro ao pesquisar por nome completo do cidadão'));
+		}
+
 		return service;
 		
 		function handleSuccess(res) {

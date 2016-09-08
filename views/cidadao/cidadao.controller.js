@@ -120,6 +120,7 @@
 		});
 
 
+/*
 		$scope.propertyName = 'i_cidadao';
 		$scope.reverse = false;
 
@@ -127,6 +128,24 @@
 			$scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : false;
 			$scope.propertyName = propertyName;
 		};
+*/
+
+		$scope.PesquisarCidadao = function (){
+			var parameters = {
+				nome : $scope.keyword
+			};
+
+			var config = {
+				params : parameters
+			};
+
+			$scope.itens = [];
+			CidadaoService.PesquisarPorNomeCompleto(config).then(function(data){
+				$scope.itens = data;
+
+				$scope.listaVazia = $scope.itens.length === 0;
+			});
+		}
 	}
 
 })();
