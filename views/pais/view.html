@@ -1,0 +1,43 @@
+﻿<div ng-controller="PaisController">
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<h1 ng-bind-template="{{title}}"></h1>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<form class="form-horizontal form-vertical  js-form-loading" name="paisForm" ng-submit="update()">
+			<!-- Id input-->
+			<input type="hidden" id="i_pais" name="i_pais" ng-model="form.i_pais" />
+
+			<!-- Nome input-->
+			<div class="form-group" ng-class="{ 'has-error' : paisForm.nome.$invalid && !paisForm.nome.$pristine }">
+				<label class="col-sm-1 control-label" for="nome">Nome</label>
+				<div class="col-sm-11">
+					<input ng-model="form.nome" id="nome" required name="nome" type="text" class="form-control" maxlength="100" autofocus style="text-transform:uppercase">
+					<p ng-show="ppaisForm.nome.$error.required && !paisForm.nome.$pristine" class="help-block">Nome é obrigatório.</p>
+				</div>
+			</div>
+			
+			<!-- Sigla input-->
+			<div class="form-group" ng-class="{ 'has-error' : paisForm.sigla.$invalid && !paisForm.sigla.$pristine }">
+				<label class="col-sm-1 control-label" for="sigla">Sigla</label>
+				<div class="col-sm-3">
+					<input ng-model="form.sigla" id="sigla" required name="sigla" type="text" class="form-control" maxlength="3" style="text-transform:uppercase">
+					<p ng-show="paisForm.sigla.$error.required && !paisForm.sigla.$pristine" class="help-block">Sigla é obrigatório.</p>
+				</div>
+			</div>
+
+			<hr>
+
+			<div class="form-group">
+				<div style="margin-left: 15px;"><!--<div class="pull-right">-->
+					<button class="btn  btn-primary" type="submit" ng-disabled="paisForm.$invalid">Salvar</button>
+					<a ng-click="cancelar(paisForm.$dirty)" class="btn  btn-default">Cancelar</a>
+					<a ng-click="excluir()" ng-show="editandoCadastro" class="btn  btn-link aw-btn-link-danger">Excluir este país</a>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

@@ -1,0 +1,51 @@
+﻿<div ng-controller="MunicipioController">
+	<div class="page-header">
+		<div class="container-fluid">
+			<h1 ng-bind-template="{{title}}"></h1>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<form class="form-horizontal form-vertical  js-form-loading" name="municipioForm" ng-submit="update()">
+			<!-- Id input -->
+			<input type="hidden" id="i_municipio" name="i_municipio" ng-model="form.i_municipio" />
+
+			<!-- Nome input -->
+			<div class="form-group" ng-class="{ 'has-error' : municipioForm.nome.$invalid && !municipioForm.nome.$pristine }">
+				<label class="col-sm-2 control-label" for="nome">Nome</label>
+				<div class="col-sm-10">
+					<input ng-model="form.nome" id="nome" required name="nome" type="text" class="form-control" maxlength="100" autofocus>
+					<p ng-show="municipioForm.nome.$error.required && !municipioForm.nome.$pristine" class="help-block">Nome é obrigatório.</p>
+				</div>
+			</div>
+
+			<!-- Código IBGE input -->
+			<div class="form-group" ng-class="{ 'has-error' : municipioForm.codigoIbge.$invalid && !municipioForm.codigoIbge.$pristine }">
+				<label class="col-sm-2 control-label" for="codigoIbge">Código IBGE</label>
+				<div class="col-sm-10">
+					<input ng-model="form.codigoIbge" id="codigoIbge" required name="codigoIbge" type="text" class="form-control" maxlength="100">
+					<p ng-show="municipioForm.codigoIbge.$error.required && !municipioForm.codigoIbge.$pristine" class="help-block">Código IBGE é obrigatório.</p>
+				</div>
+			</div>
+			
+			<!-- Estado Select -->
+			<div class="form-group mdn-required" ng-class="{ 'has-error' : municipioForm.i_estado.$invalid && !municipioForm.i_estado.$pristine }">
+				<label for="i_estado" class="col-sm-2 control-label">Estado</label>
+				<div class="col-sm-5">
+					<select class="form-control" id="i_estado" name="i_estado" required ng-options="estado.nome for estado in estados track by estado.i_estado" ng-model="form.estado"></select>
+					<p ng-show="municipioForm.i_estado.$error.required && !municipioForm.i_estado.$pristine" class="help-block">Selecione um estado.</p>
+				</div>
+			</div>
+
+			<hr>
+
+			<div class="form-group">
+				<div style="margin-left: 15px;"><!--<div class="pull-right">-->
+					<button class="btn  btn-primary" type="submit" ng-disabled="municipioForm.$invalid">Salvar</button>
+					<a ng-click="cancelar(municipioForm.$dirty)" class="btn  btn-default">Cancelar</a>
+					<a ng-click="excluir()" ng-show="editandoCadastro" class="btn  btn-link aw-btn-link-danger">Excluir este município</a>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

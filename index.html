@@ -1,61 +1,200 @@
 <!DOCTYPE html>
-<html ng-app="app" lang="en">
+<html ng-app="app" lang="pt">
 	<head>
-		<meta charset="utf-8">
+		<meta charset="UTF-8"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
 		<title>SISAPE</title>
 
-		<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
-		<link type="text/css" rel="stylesheet" href="css/font-awesome.min.css"/>
-		<link type="text/css" rel="stylesheet" href="css/bootcards-desktop.min.css"/>
-		<link type="text/css" rel="stylesheet" href="css/style.css"/>
-		<!--<link type="text/css" rel="stylesheet" href="css/styles-lumino.css"/>-->
-		<!--<script type="text/javascript" src="js/lumino.glyphs.js"></script>-->
+		<link rel="stylesheet" type="text/css" href="assets/stylesheets/vendors.min.css"/>
+		<link rel="stylesheet" type="text/css" href="assets/stylesheets/algaworks.min.css"/>
+		<link rel="stylesheet" type="text/css" href="assets/stylesheets/application.css"/>
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
 	</head>
-
 	<body>
-		<div ui-view="viewMenu"></div>
-		<div ui-view="viewMain"></div>
+		<div class="aw-layout-loading  js-loading-overlay">
+			<div class="aw-layout-loading__container">
+				<span class="aw-balls-spinner">Carregando...</span>
+			</div>
+		</div>
 
-		<script type="text/javascript" src="js/jquery-2.2.2.min.js"></script>
-		<script type="text/javascript" src="js/angular.min.js"></script>
-		<script type="text/javascript" src="js/angular-cookies.min.js"></script>
-		<script type="text/javascript" src="js/angular-ui-router.min.js"></script>
-		<script type="text/javascript" src="js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="js/ui-bootstrap-tpls-2.0.0.min.js"></script>
-		<script type="text/javascript" src="js/angular-confirm.min.js"></script>
-		<script type="text/javascript" src="js/bootcards.min.js"></script>
+		<div class="aw-layout-page">
 
-		<script type="text/javascript" src="js/mask.min.js"></script>
+			<nav class="navbar  navbar-fixed-top  navbar-default  js-sticky-reference" id="main-navbar">
+				<div class="container-fluid">
 
-		<script type="text/javascript" src="js/cpf.js"></script>
-		<script type="text/javascript" src="js/cnpj.js"></script>
-		<script type="text/javascript" src="js/ngCpfCnpj.js"></script>
-		<script type="text/javascript" src="js/ng-filters-br.min.js"></script>
+					<div class="navbar-header">
+						<a class="navbar-brand  hidden-xs" href="#/dashboard">
+							<img alt="AlgaWorks" src="assets/images/logo.png"/>
+						</a>
 
-		<script type="text/javascript" src="app.js"></script>
-		<script type="text/javascript" src="app-config.js"></script>
-		<script type="text/javascript" src="app-directives.js"></script>
+						<ul class="nav  navbar-nav">
+							<li>
+								<a href class="js-sidebar-toggle"><i class="fa  fa-bars"></i></a>
+							</li>
+						</ul>
+					</div>
 
-		<script src="views/login/login.controller.js"></script>
-		<script src="views/pais/pais.controller.js"></script>
-		<script src="views/estado/estado.controller.js"></script>
-		<script src="views/municipio/municipio.controller.js"></script>
-		<script src="views/cbo/cbo.controller.js"></script>
-		<script src="views/cid/cid.controller.js"></script>
-		<script src="views/cidadao/cidadao.controller.js"></script>
-		<script src="views/inicio/inicio.controller.js"></script>
+					<ul class="nav navbar-nav  navbar-right">
+						<!--					
+						<li>
+							<a href class="js-search-modal-trigger-show"><i class="fa  fa-search"></i></a>
+						</li>
+						-->
+						
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href aria-expanded="false">
+								<i class="fa  fa-envelope"></i> <span class="label  label-danger  aw-label-corner">48</span>
+							</a>
+												
+							<ul class="dropdown-menu">
+								<li><a href="javascript:;">Item 1</a></li>
+								<li><a href="javascript:;">Item 2</a></li>
+							</ul>
+						</li>
+						
+						<li class="dropdown">
+							<a href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								<i class="fa  fa-user"></i>
+							</a>
+							
+							<ul class="dropdown-menu">
+								<li>
+									<div class="aw-logged-user">
+										<i class="fa fa-user dashboard-div-icon2 aw-logged-user__picture"></i>
+										<!--<img src="https://api.adorable.io/avatars/80/joaodascouves" width="80" height="80" alt="João das Couves" class="aw-logged-user__picture" />-->
+										<span class="aw-logged-user__name">João das Couves</span>
+									</div>
+								</li>
+								<li role="separator" class="divider"></li>
+								<li><a href>Meu perfil</a></li>
+								<li><a href>Alterar senha</a></li>
+								<li role="separator" class="divider"></li>
+								<li><a href>Sair</a></li>
+							</ul>
+						</li>
+					</ul>
 
-		<script src="services/authentication.service.js"></script>
-		<script src="services/flash.service.js"></script>
-		<script src="services/user.service.local-storage.js"></script>
-		<script src="services/pais.service.js"></script>
-		<script src="services/estado.service.js"></script>
-		<script src="services/municipio.service.js"></script>
-		<script src="services/cbo.service.js"></script>
-		<script src="services/cid.service.js"></script>
-		<script src="services/cidadao.service.js"></script>
-		<script src="services/tipo.logradouro.service.js"></script>
+				</div>
+			</nav>
+
+			<aside class="aw-layout-sidebar  js-sidebar">
+				<div class="aw-layout-sidebar__content">
+
+				<nav class="aw-menu  js-menu">
+					<ul class="aw-menu__list">
+
+						<li class="aw-menu__item">
+							<a href="#/inicio"><i class="fa fa-fw fa-home"></i><span>Início</span></a>
+						</li>
+
+						<li class="aw-menu__item  is-active">
+							<a href>
+								<i class="fa  fa-fw  fa-file-text"></i><span>Cadastros</span>
+								<i class="aw-menu__navigation-icon  fa"></i>
+							</a>
+					
+							<ul class="aw-menu__list  aw-menu__list--sublist">
+								<li class="aw-menu__item  aw-menu__item--link  is-active"><a href="#/pais"><i class="fa fa-wpforms" aria-hidden="true"></i>País</a></li>
+								<li class="aw-menu__item  aw-menu__item--link  is-active"><a href="#/estado"><i class="fa fa-wpforms" aria-hidden="true"></i>Estado</a></li>
+								<li class="aw-menu__item  aw-menu__item--link  is-active"><a href="#/municipio"><i class="fa fa-wpforms" aria-hidden="true"></i>Município</a></li>
+								<li class="aw-menu__item  aw-menu__item--link  is-active"><a href="#/cbo"><i class="fa fa-wpforms" aria-hidden="true"></i>CBO</a></li>
+								<li class="aw-menu__item  aw-menu__item--link  is-active"><a href="#/cid"><i class="fa fa-wpforms" aria-hidden="true"></i>CID</a></li>
+							</ul>
+						</li>
+
+						<!--<li class="aw-menu__item  is-expanded">
+							<a href>
+								<i class="fa  fa-fw  fa-file-text"></i><span>Páginas comuns</span>
+								<i class="aw-menu__navigation-icon  fa"></i>
+							</a>
+
+							<ul class="aw-menu__list  aw-menu__list--sublist">
+								<li class="aw-menu__item  aw-menu__item--link"><a href="pagina-vazia.html">Página vazia</a></li>
+								<li class="aw-menu__item  aw-menu__item--link"><a href="login.html">Login</a></li>
+								<li class="aw-menu__item  aw-menu__item--link"><a href="esqueceu-a-senha.html">Esqueceu a senha</a></li>
+								<li class="aw-menu__item  aw-menu__item--link"><a href="403.html">403</a></li>
+								<li class="aw-menu__item  aw-menu__item--link"><a href="404.html">404</a></li>
+								<li class="aw-menu__item  aw-menu__item--link"><a href="500.html">500</a></li>
+							</ul>
+						</li>-->
+
+					</ul>
+				</nav>
+
+				</div>
+			</aside>
+
+			<section class="aw-layout-content  js-content">
+				<div ng-view></div>
+			</section>
+		
+			<footer class="aw-layout-footer  js-content">
+				<div class="container-fluid">
+					<span class="aw-footer-disclaimer">&copy; 2016 SISAPE. Todos os direitos reservados.</span>
+				</div>
+			</footer>
+
+		</div>
+
+		<div class="aw-search-modal  js-search-modal">
+			<form action="#" class="aw-search-modal__form">
+				<input class="aw-search-modal__input  js-search-modal-input" type="text" placeholder="O que você está procurando?"/>
+				<div class="aw-search-modal__input-icon">
+					<i class="glyphicon  glyphicon-search  js-search-modal-go"></i>
+				</div>
+			</form>
+			
+			<div class="aw-search-modal__controls">
+				<i class="glyphicon glyphicon-remove  js-search-modal-close"></i>
+			</div>
+		</div>
+
+		<script src="assets/javascripts/vendors.min.js"></script>
+		<script src="assets/javascripts/algaworks.min.js"></script>
+
+		<script src="assets/javascripts/angular.min.js"></script>
+		<script src="assets/javascripts/angular-cookies.min.js"></script>
+		<script src="assets/javascripts/angular-route.min.js"></script>
+
+		<script src="assets/javascripts/cpf.js"></script>
+		<script src="assets/javascripts/cnpj.js"></script>
+		<script src="assets/javascripts/ngCpfCnpj.js"></script>
+		<script src="assets/javascripts/ng-filters-br.min.js"></script>
+		<script src="assets/javascripts/ui-bootstrap-tpls-2.0.0.min.js"></script>
+		<script src="assets/javascripts/mask.min.js"></script>
+
+		<script src="assets/app.js"></script>
+		<script src="assets/app-config.js"></script>
+
+		<script src="views/cidadao/service.js"></script>
+		<script src="views/cidadao/controller.js"></script>
+
+		<script src="views/pais/service.js"></script>
+		<script src="views/pais/controller.js"></script>
+
+		<script src="views/estado/service.js"></script>
+		<script src="views/estado/controller.js"></script>
+
+		<script src="views/cbo/service.js"></script>
+		<script src="views/cbo/controller.js"></script>
+
+		<script src="views/cid/service.js"></script>
+		<script src="views/cid/controller.js"></script>
+
+		<script src="views/municipio/service.js"></script>
+		<script src="views/municipio/controller.js"></script>
+
+		<script src="views/tipo-logradouro/service.js"></script>
+		
+		<script src="views/inicio/controller.js"></script>
+
 	</body>
 </html>

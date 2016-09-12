@@ -1,0 +1,81 @@
+﻿<div ng-controller="CidListagemController">
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-8">
+					<h1 ng-bind-template="{{title}}"></h1>
+				</div>
+				
+				<div class="col-xs-4">
+					<div class="aw-page-header-controls">
+						<a class="btn btn-primary" href="#/cid/novo">
+							<i class="fa fa-plus-circle"></i> <span class="hidden-xs hidden-sm">Novo CID</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<form class="form-vertical  js-form-loading">
+			<div class="form-group">
+				<label for="input-nome">Descrição</label>
+				<input id="input-nome" type="text" class="form-control" ng-model="descricao" style="text-transform:uppercase">
+			</div>
+			
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="form-group">
+						<label for="input-codigo">Código CID</label>
+						
+						<div class="form-inline">
+							<input type="text" id="input-codigo" class="form-control aw-form-control-inline-sm" maxlength="20" ng-model="codigoCid" style="text-transform:uppercase">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<button class="btn  btn-primary" ng-click="Pesquisar()">Pesquisar</button>
+				<button class="btn  btn-default" ng-click="Limpar()">Limpar</button>
+			</div>
+		</form>
+		
+		<div class="alert  aw-alert-no-results" role="alert" ng-show="listaVazia">
+			A pesquisa não retornou nenhum CID.
+		</div>
+
+		<div class="table-responsive" ng-show="!listaVazia">
+			<table id="tabela-produtos" class="table  table-striped  table-bordered  table-hover  table-condensed  js-sticky-table">
+				<thead class="aw-table-header-solid">
+					<tr>
+						<th class="text-center">#</th>
+						<th>Descrição</th>
+						<th class="text-center">Código</th>
+						<th class="text-center">Ações</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr ng-repeat="item in itens">
+						<td ng-bind="item.i_cid" class="text-center col-md-1 col-sm-1 col-xs-1"></td>
+						<td ng-bind="item.descricao"></td>
+						<td ng-bind="item.codigoCid" class="text-center col-md-1 col-sm-1 col-xs-1"></td>
+						<td class="table-pesq-produto-col-acoes col-md-1 col-sm-1 col-xs-1">
+							<div class="btn-group">
+								<a class="btn  btn-default btn-xs" href="#/cid/{{item.i_cid}}/editar">Editar</a>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+			
+		<div class="row">
+			<div class="col-xs-12  col-md-4  aw-text-xs-center  aw-text-md-right" style="float: right;">
+				<span class="aw-pagination-info" ng-bind-template="{{totalItens}} CID(s) encontrado(s)" ng-show="!listaVazia"></span>
+			</div>
+		</div>
+	</div>
+</div>

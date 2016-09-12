@@ -1,0 +1,43 @@
+﻿<div ng-controller="CboController">
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<h1 ng-bind-template="{{title}}"></h1>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<form class="form-horizontal form-vertical  js-form-loading" name="cboForm" ng-submit="update()">
+			<!-- Id input-->
+			<input type="hidden" id="i_cbo" name="i_cbo" ng-model="form.i_cbo" />
+
+			<!-- Nome input-->
+			<div class="form-group" ng-class="{ 'has-error' : cboForm.nome.$invalid && !cboForm.nome.$pristine }">
+				<label class="col-sm-2 control-label" for="nome">Título</label>
+				<div class="col-sm-10">
+					<input ng-model="form.nome" id="nome" required name="nome" type="text" class="form-control" maxlength="100" autofocus>
+					<p ng-show="cboForm.nome.$error.required && !cboForm.nome.$pristine" class="help-block">Título do CBO é obrigatório.</p>
+				</div>
+			</div>
+			
+			<!-- Código do CBO input-->
+			<div class="form-group" ng-class="{ 'has-error' : cboForm.codigoCbo.$invalid && !cboForm.codigoCbo.$pristine }">
+				<label class="col-sm-2 control-label" for="codigoCbo">Código do CBO</label>
+				<div class="col-sm-5">
+					<input ng-model="form.codigoCbo" id="codigoCbo" required name="codigoCbo" type="number" class="form-control" maxlength="20">
+					<p ng-show="cboForm.codigoCbo.$error.required && !cboForm.codigoCbo.$pristine" class="help-block">Código do CBO é obrigatório.</p>
+				</div>
+			</div>
+
+			<hr>
+
+			<div class="form-group">
+				<div style="margin-left: 15px;"><!--<div class="pull-right">-->
+					<button class="btn  btn-primary" type="submit" ng-disabled="cboForm.$invalid">Salvar</button>
+					<a ng-click="cancelar(cboForm.$dirty)" class="btn  btn-default">Cancelar</a>
+					<a ng-click="excluir()" ng-show="editandoCadastro" class="btn  btn-link aw-btn-link-danger">Excluir este CBO</a>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

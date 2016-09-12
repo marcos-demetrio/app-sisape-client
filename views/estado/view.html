@@ -1,0 +1,52 @@
+﻿<div ng-controller="EstadoController">
+	<div class="page-header">
+		<div class="container-fluid">
+			<h1 ng-bind-template="{{title}}"></h1>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<form class="form-horizontal form-vertical  js-form-loading" name="estadoForm" ng-submit="update()">
+			<!-- Id input-->
+			<input type="hidden" id="i_estado" name="i_estado" ng-model="form.i_estado" />
+
+			<!-- Nome input-->
+			<div class="form-group" ng-class="{ 'has-error' : estadoForm.nome.$invalid && !estadoForm.nome.$pristine }">
+				<label class="col-sm-1 control-label" for="nome">Nome</label>
+				<div class="col-sm-11">
+					<input ng-model="form.nome" id="nome" required name="nome" type="text" class="form-control" maxlength="100" autofocus style="text-transform:uppercase">
+					<p ng-show="pestadoForm.nome.$error.required && !estadoForm.nome.$pristine" class="help-block">Nome é obrigatório.</p>
+				</div>
+			</div>
+			
+			<!-- Sigla input-->
+			<div class="form-group" ng-class="{ 'has-error' : estadoForm.sigla.$invalid && !estadoForm.sigla.$pristine }">
+				<label class="col-sm-1 control-label" for="sigla">Sigla</label>
+				<div class="col-sm-5">
+					<input ng-model="form.sigla" id="sigla" required name="sigla" type="text" class="form-control" maxlength="2" style="text-transform:uppercase">
+					<p ng-show="estadoForm.sigla.$error.required && !estadoForm.sigla.$pristine" class="help-block">Sigla é obrigatório.</p>
+				</div>
+			</div>
+
+			<!-- País Select-->
+			<div class="form-group mdn-required" ng-class="{ 'has-error' : estadoForm.i_pais.$invalid && !estadoForm.i_pais.$pristine }">
+				<label for="i_pais" class="col-sm-1 control-label">País</label>
+				<div class="col-sm-5">
+					<select class="form-control" id="i_pais" name="i_pais" required ng-options="pais.nome for pais in paises track by pais.i_pais" ng-model="form.pais"></select>
+
+					<p ng-show="estadoForm.i_pais.$error.required && !estadoForm.i_pais.$pristine" class="help-block">Selecione um país.</p>
+				</div>
+			</div>
+
+			<hr>
+
+			<div class="form-group">
+				<div style="margin-left: 15px;"><!--<div class="pull-right">-->
+					<button class="btn  btn-primary" type="submit" ng-disabled="estadoForm.$invalid">Salvar</button>
+					<a ng-click="cancelar(estadoForm.$dirty)" class="btn  btn-default">Cancelar</a>
+					<a ng-click="excluir()" ng-show="editandoCadastro" class="btn  btn-link aw-btn-link-danger">Excluir este estado</a>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

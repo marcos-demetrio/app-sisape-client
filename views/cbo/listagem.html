@@ -1,0 +1,81 @@
+﻿<div ng-controller="CboListagemController">
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-8">
+					<h1 ng-bind-template="{{title}}"></h1>
+				</div>
+				
+				<div class="col-xs-4">
+					<div class="aw-page-header-controls">
+						<a class="btn btn-primary" href="#/cbo/novo">
+							<i class="fa fa-plus-circle"></i> <span class="hidden-xs hidden-sm">Novo CBO</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<form class="form-vertical  js-form-loading">
+			<div class="form-group">
+				<label for="input-nome">Nome</label>
+				<input id="input-nome" type="text" class="form-control" ng-model="nomeCbo">
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="form-group">
+						<label for="input-codigo">Código CBO</label>
+						
+						<div class="form-inline">
+							<input type="number" id="input-codigo" class="form-control aw-form-control-inline-sm" maxlength="20" ng-model="codigoCbo">
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<button class="btn  btn-primary" ng-click="Pesquisar()">Pesquisar</button>
+				<button class="btn  btn-default" ng-click="Limpar()">Limpar</button>
+			</div>
+		</form>
+		
+		<div class="alert  aw-alert-no-results" role="alert" ng-show="listaVazia">
+			A pesquisa não retornou nenhum CBO.
+		</div>
+
+		<div class="table-responsive" ng-show="!listaVazia">
+			<table id="tabela-produtos" class="table  table-striped  table-bordered  table-hover  table-condensed  js-sticky-table">
+				<thead class="aw-table-header-solid">
+					<tr>
+						<th class="text-center">#</th>
+						<th>Nome</th>
+						<th class="text-center">Código do CBO</th>
+						<th class="text-center">Ações</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr ng-repeat="item in itens">
+						<td ng-bind="item.i_cbo" class="text-center col-md-1 col-sm-1 col-xs-1"></td>
+						<td ng-bind="item.nome"></td>
+						<td ng-bind="item.codigoCbo" class="text-center col-md-2 col-sm-2 col-xs-2"></td>
+						<td class="table-pesq-produto-col-acoes col-md-1 col-sm-1 col-xs-1">
+							<div class="btn-group">
+								<a class="btn  btn-default btn-xs" href="#/cbo/{{item.i_cbo}}/editar">Editar</a>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+			
+		<div class="row">
+			<div class="col-xs-12  col-md-4  aw-text-xs-center  aw-text-md-right" style="float: right;">
+				<span class="aw-pagination-info" ng-bind-template="{{totalItens}} cbo(s) encontrado(s)" ng-show="!listaVazia"></span>
+			</div>
+		</div>
+	</div>
+</div>

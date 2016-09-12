@@ -1,0 +1,381 @@
+<div ng-controller="CidadaoController">
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<h1 ng-bind-template="{{title}}"></h1>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<form class="form-horizontal form-vertical  js-form-loading" name="cidadaoForm" ng-submit="update()">
+			<!-- Id Input -->
+			<input type="hidden" id="i_cidadao" name="i_cidadao" ng-model="form.i_cidadao" />
+
+			<ul class="nav nav-pills">
+				<li class="active"><a href ng-click="setTab(1)" ng-class="{'active' : isSet(1)}" data-toggle="tab">Dados</a></li>
+				<li><a href ng-click="setTab(2)" ng-class="{'active' : isSet(2)}" data-toggle="tab">Localização</a></li>
+				<li><a href ng-click="setTab(3)" ng-class="{'active' : isSet(3)}" data-toggle="tab">Contato</a></li>
+				<li><a href ng-click="setTab(4)" ng-class="{'active' : isSet(4)}" data-toggle="tab">Outros</a></li>
+			</ul>
+
+			<br>
+
+			<div class="tab-content" ng-show="isSet(1)">
+				<div class="tab-pane fade in active">
+					<!-- Número Cartão Nacional de Saúde Input -->
+					<div class="form-group sisape-required" ng-class="{ 'has-error' : cidadaoForm.numeroCartaoNacionalSaude.$invalid && !cidadaoForm.numeroCartaoNacionalSaude.$pristine }">
+						<label class="col-sm-2 control-label" for="numeroCartaoNacionalSaude">Número do CNS</label>
+						<div class="col-sm-3">
+							<input ng-disabled="form.possuiCartaoNacionalSaude==false" ng-model="form.numeroCartaoNacionalSaude" ng-minlength="15" id="numeroCartaoNacionalSaude" name="numeroCartaoNacionalSaude" type="text" class="form-control" maxlength="15" autofocus>
+							<p ng-show="cidadaoForm.numeroCartaoNacionalSaude.$error.required && !cidadaoForm.numeroCartaoNacionalSaude.$pristine" class="help-block">Campo obrigatório.</p>
+							<p ng-show="cidadaoForm.numeroCartaoNacionalSaude.$error.minlength" class="help-block">Insira ao menos 15 caracteres.</p>
+						</div>
+
+						<div class="col-sm-5">
+							<div class="checkbox">
+								<label ng-click="ClickCheckBoxNumeroCartaoNacionalSaude()">
+									<input type="checkbox" ng-model="form.possuiCartaoNacionalSaude" ng-init="form.possuiCartaoNacionalSaude=true" id="possuiCartaoNacionalSaude" name="possuiCartaoNacionalSaude">Possui CNS
+								</label>
+							</div>
+						</div>
+					</div>
+
+					<!-- CPF Input -->
+					<div class="form-group" ng-class="{ 'has-error' : cidadaoForm.cpf.$invalid && !cidadaoForm.cpf.$pristine }">
+						<label class="col-sm-2 control-label" for="cpf">CPF</label>
+						<div class="col-sm-3">
+							<input ng-model="form.cpf" id="cpf" name="cpf" type="text" ng-cpf ui-mask="999.999.999-99" class="form-control" maxlength="14">
+							<p ng-show="cidadaoForm.cpf.$invalid && !cidadaoForm.cpf.$pristine" class="help-block">Campo inválido.</p>
+						</div>
+					</div>
+
+					<!-- Nome Completo Input -->
+					<div class="form-group sisape-required" ng-class="{ 'has-error' : cidadaoForm.nomeCompleto.$invalid && !cidadaoForm.nomeCompleto.$pristine }">
+						<label class="col-sm-2 control-label" for="nomeCompleto">Nome completo</label>
+						<div class="col-sm-10">
+							<input ng-model="form.nomeCompleto" id="nomeCompleto" required name="nomeCompleto" type="text" class="form-control" maxlength="100">
+							<p ng-show="cidadaoForm.nomeCompleto.$error.required && !cidadaoForm.nomeCompleto.$pristine" class="help-block">Campo obrigatório.</p>
+						</div>
+					</div>
+
+					<!-- Nome Social Input -->
+					<div class="form-group" ng-class="{ 'has-error' : cidadaoForm.nomeSocial.$invalid && !cidadaoForm.nomeSocial.$pristine }">
+						<label class="col-sm-2 control-label" for="nomeSocial">Nome social</label>
+						<div class="col-sm-10">
+							<input ng-model="form.nomeSocial" id="nomeSocial" name="nomeSocial" type="text" class="form-control" maxlength="100">
+						</div>
+					</div>
+
+					<!-- Data de Nascimento Input -->
+					<div class="form-group sisape-required" ng-class="{ 'has-error' : (cidadaoForm.sexo.$invalid && !cidadaoForm.sexo.$pristine) || (cidadaoForm.dataNascimento.$invalid && !cidadaoForm.dataNascimento.$pristine) }">
+						<label class="col-sm-2 control-label" for="dataNascimento">Data de nascimento</label>
+						<div class="col-sm-2">
+							<p class="input-group">
+							<input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="form.dataNascimento" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Fechar" current-text="Hoje" clear-text="Limpar" />
+								<span class="input-group-btn">
+									<button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+								</span>
+							<p ng-show="cidadaoForm.dataNascimento.$error.required && !cidadaoForm.dataNascimento.$pristine" class="help-block">Campo obrigatório.</p>
+							</p>
+						</div>
+
+						<div class="col-sm-2">
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" ng-model="form.faleceu" ng-init="form.faleceu=false" id="faleceu" name="faleceu">Faleceu?
+								</label>
+							</div>
+						</div>
+
+						<label for="sexo" class="col-sm-1 control-label">Sexo</label>
+						<div class="col-sm-2">
+							<select class="form-control" id="sexo" name="sexo" required ng-model="form.sexo">
+								<option value="FEMININO" selected="selected">Feminino</option>
+								<option value="MASCULINO">Masculino</option>
+							</select>
+							<p ng-show="cidadaoForm.sexo.$error.required && !cidadaoForm.sexo.$pristine" class="help-block">Campo obrigatório.</p>
+						</div>
+
+						<label for="racaCor" class="col-sm-1 control-label">Raça/Cor</label>
+						<div class="col-sm-2">
+							<select class="form-control" id="racaCor" name="racaCor" required ng-model="form.racaCor">
+								<option value="BRANCA" selected="selected">Branca</option>
+								<option value="PRETA">Preta</option>
+								<option value="PARDA">Parda</option>
+								<option value="AMARELA">Amarela</option>
+								<option value="INDIGENA">Indígena</option>
+							</select>
+							<p ng-show="cidadaoForm.racaCor.$error.required && !cidadaoForm.racaCor.$pristine" class="help-block">Campo obrigatório.</p>
+						</div>
+					</div>
+
+					<!-- Nome Mãe Input -->
+					<div class="form-group sisape-required" ng-class="{ 'has-error' : cidadaoForm.nomeMae.$invalid && !cidadaoForm.nomeMae.$pristine }">
+						<label class="col-sm-2 control-label" for="nomeMae">Nome da mãe</label>
+						<div class="col-sm-6">
+							<input ng-model="form.nomeMae" id="nomeMae" name="nomeMae" type="text" class="form-control" maxlength="100">
+						</div>
+
+						<div class="col-sm-3">
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" ng-model="form.desconheceNomeMae" ng-init="form.desconheceNomeMae=false" id="desconheceNomeMae" name="desconheceNomeMae">Desconhece a informação
+								</label>
+							</div>
+						</div>
+					</div>
+
+					<!-- Municípo de Nascimento Select-->
+					<div class="form-group sisape-required" ng-class="{ 'has-error' : cidadaoForm.municipioNascimento.$invalid && !cidadaoForm.municipioNascimento.$pristine }">
+						<label for="municipioNascimento" class="col-sm-2 control-label">Município de nasc.</label>
+						<div class="col-sm-6">
+							<select class="form-control" id="municipioNascimento" name="municipioNascimento" required ng-options="municipioNascimento.nome + '/' + municipioNascimento.estado.sigla + '/' + municipioNascimento.estado.pais.sigla for municipioNascimento in municipios track by municipioNascimento.nome" ng-model="form.municipioNascimento" autofocus></select>
+
+							<p ng-show="cidadaoForm.municipioNascimento.$error.required && !cidadaoForm.municipioNascimento.$pristine" class="help-block">Selecione um município.</p>
+						</div>
+
+						<div class="col-sm-3">
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" ng-model="form.estrangeiro" ng-init="form.estrangeiro=false" id="estrangeiro" name="estrangeiro">Estrangeiro?
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="tab-content" ng-show="isSet(2)">
+				<div class="tab-pane fade in active">
+					<div class="row">
+						<div class="col-md-6">
+							<!-- Tipo Logradouro Select-->
+							<div class="form-group">
+								<label for="tipoLogradouro" class="col-sm-3 control-label">Tipo Logradouro</label>
+								<div class="col-sm-7">
+									<select class="form-control" id="tipoLogradouro" name="tipoLogradouro" required ng-options="tipoLogradouro.descricao for tipoLogradouro in tiposLogradouro track by tipoLogradouro.descricao" ng-model="form.tipoLogradouro"></select>
+								</div>
+							</div>
+
+							<!-- Logradouro Select-->
+							<div class="form-group">
+								<!-- Logradouro Select-->
+								<label class="col-sm-3 control-label" for="logradouro">Logradouro</label>
+								<div class="col-sm-7">
+									<input ng-model="form.logradouro" id="logradouro" name="logradouro" type="text" class="form-control" maxlength="100">
+								</div>
+							</div>
+
+							<!-- CEP Input -->
+							<div class="form-group" ng-class="{ 'has-error' : cidadaoForm.cep.$invalid && !cidadaoForm.cep.$pristine }">
+								<label class="col-sm-3 control-label" for="cep">CEP</label>
+								<div class="col-sm-4">
+									<input ng-model="form.cep" id="cep" name="cep" type="text" ui-mask="99999-999" class="form-control">
+									<p ng-show="cidadaoForm.cep.$invalid && !cidadaoForm.cep.$pristine" class="help-block">Campo inválido.</p>
+								</div>
+							</div>
+
+							<!-- Bairro Input -->
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="bairro">Bairro</label>
+								<div class="col-sm-7">
+									<input ng-model="form.bairro" id="bairro" name="bairro" type="text" class="form-control" maxlength="100">
+								</div>
+							</div>
+
+						</div>
+
+						<div class="col-md-6">
+							<!-- Número Input -->
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="numero">Número</label>
+								<div class="col-sm-4">
+									<input ng-disabled="form.semNumero==true" ng-model="form.numero" id="numero" name="numero" type="text" class="form-control">
+								</div>
+
+								<!-- Sem Número Check -->
+								<div class="col-sm-4">
+									<div class="checkbox">
+										<label ng-click="ClickCheckBoxSemNumero()">
+											<input type="checkbox" ng-model="form.semNumero" ng-init="form.semNumero=false" id="semNumero" name="semNumero">Sem Número
+										</label>
+									</div>
+								</div>
+							</div>
+
+							<!-- Complemento Input -->
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="complemento">Complemento</label>
+								<div class="col-sm-7">
+									<input ng-model="form.complemento" id="complemento" name="complemento" type="text" class="form-control" maxlength="100">
+								</div>
+							</div>
+
+							<!-- Ponto de referência Input -->
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="pontoReferencia">Referência</label>
+								<div class="col-sm-7">
+									<input ng-model="form.pontoReferencia" id="pontoReferencia" name="pontoReferencia" type="text" class="form-control" maxlength="100">
+								</div>
+							</div>
+
+							<!-- Municípo Select-->
+							<div class="form-group">
+								<label for="municipio" class="col-sm-3 control-label">Município</label>
+								<div class="col-sm-7">
+									<select class="form-control" id="municipio" name="municipio" required ng-options="municipio.nome + '/' + municipio.estado.sigla + '/' + municipio.estado.pais.sigla for municipio in municipios track by municipio.nome" ng-model="form.municipio"></select>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="tab-content" ng-show="isSet(3)">
+				<div class="tab-pane fade in active">
+					<!-- Tel. Residêncial Input -->
+					<div class="form-group" ng-class="{ 'has-error' : cidadaoForm.telefoneResidencial.$invalid && !cidadaoForm.telefoneResidencial.$pristine }">
+						<label class="col-sm-2 control-label" for="telefoneResidencial">Tel. Residêncial</label>
+						<div class="col-sm-3">
+							<input ng-model="form.telefoneResidencial" id="telefoneResidencial" name="telefoneResidencial" type="text" ui-mask="(999)99999-9999" class="form-control">
+							<p ng-show="cidadaoForm.telefoneResidencial.$invalid && !cidadaoForm.telefoneResidencial.$pristine" class="help-block">Campo inválido.</p>
+						</div>
+					</div>
+
+					<!-- Tel. Celular Input -->
+					<div class="form-group" ng-class="{ 'has-error' : cidadaoForm.telefoneCelular.$invalid && !cidadaoForm.telefoneCelular.$pristine }">
+						<label class="col-sm-2 control-label" for="telefoneCelular">Tel. Celular</label>
+						<div class="col-sm-3">
+							<input ng-model="form.telefoneCelular" id="telefoneCelular" name="telefoneCelular" type="text" ui-mask="(999)99999-9999" class="form-control">
+							<p ng-show="cidadaoForm.telefoneCelular.$invalid && !cidadaoForm.telefoneCelular.$pristine" class="help-block">Campo inválido.</p>
+						</div>
+					</div>
+
+					<!-- Tel. Contato Input -->
+					<div class="form-group" ng-class="{ 'has-error' : cidadaoForm.telefoneContato.$invalid && !cidadaoForm.telefoneContato.$pristine }">
+						<label class="col-sm-2 control-label" for="telefoneContato">Tel. Contato</label>
+						<div class="col-sm-3">
+							<input ng-model="form.telefoneContato" id="telefoneContato" name="telefoneContato" type="text" ui-mask="(999)99999-9999" class="form-control">
+							<p ng-show="cidadaoForm.telefoneContato.$invalid && !cidadaoForm.telefoneContato.$pristine" class="help-block">Campo inválido.</p>
+						</div>
+					</div>
+
+					<!-- Email Input -->
+					<div class="form-group" ng-class="{ 'has-error' : cidadaoForm.email.$invalid && !cidadaoForm.email.$pristine }">
+						<label class="col-sm-2 control-label" for="email">E-mail</label>
+						<div class="col-sm-7">
+							<input ng-model="form.email" id="email" name="email" type="mail" class="form-control" maxlength="100">
+							<p ng-show="cidadaoForm.email.$invalid && !cidadaoForm.email.$pristine" class="help-block">Campo inválido.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="tab-content" ng-show="isSet(4)">
+				<div class="tab-pane fade in active">
+					<div class="row">
+						<div class="col-md-6">
+							<!-- Etnia Input -->
+							<div class="form-group">
+								<label class="col-sm-4 control-label" for="etnia">Etnia</label>
+								<div class="col-sm-7">
+									<input ng-model="form.etnia" id="etnia" name="etnia" type="text" class="form-control" maxlength="50">
+								</div>
+							</div>
+
+
+							<!-- Estado civil Input -->
+							<div class="form-group">
+								<label for="estadoCivil" class="col-sm-4 control-label">Estado civil</label>
+								<div class="col-sm-4">
+									<select class="form-control" id="estadoCivil" name="estadoCivil" required ng-model="form.estadoCivil">
+										<option value="SOLTEIRO" selected="selected">Solteiro(a)</option>
+										<option value="CASADO">Casado(a)</option>
+										<option value="DIVORCIADO">Divorciado(a)</option>
+										<option value="VIUVO">Viúvo(a)</option>
+									</select>
+								</div>
+							</div>
+
+							<!-- Escolaridade Select-->
+							<div class="form-group">
+								<label for="escolaridade" class="col-sm-4 control-label">Escolaridade</label>
+								<div class="col-sm-7">
+									<select class="form-control" id="escolaridade" name="escolaridade" required ng-model="form.escolaridade">
+										<option value="FUNDAMENTAL_INCOMPLETO" selected="selected">Fundamental incompleto</option>
+										<option value="FUNDAMENTAL_COMPLETO">Fundamental completo</option>
+										<option value="MEDIO_INCOMPLETO">Médio incompleto</option>
+										<option value="MEDIO_COMPLETO">Médio completo</option>
+										<option value="SUPERIOR_INCOMPLETO">Superior incompleto</option>
+										<option value="SUPERIOR_COMPLETO">Superior completo</option>
+										<option value="POS_GRADUACAO_LATO_SENSO_INCOMPLETO">Pós graduação incompleto</option>
+										<option value="POS_GRADUACAO_LATO_SENSO_COMPLETO">Pós graduação completo</option>
+										<option value="POS_GRADUACAO_STRICTO_SENSO_NIVEL_MESTRADO_INCOMPLETO">Pós graduação mestrado incompleto</option>
+										<option value="POS_GRADUACAO_STRICTO_SENSO_NIVEL_MESTRADO_COMPLETO">Pós graduação mestrado completo</option>
+										<option value="POS_GRADUACAO_STRICTO_SENSO_NIVEL_DOUTOR_INCOMPLETO">Pós graduação doutorado incompleto</option>
+										<option value="POS_GRADUACAO_STRICTO_SENSO_NIVEL_DOUTOR_COMPLETO">Pós graduação doutorado completo</option>
+									</select>
+								</div>
+							</div>
+
+							<!-- Número do prontuário Input -->
+							<div class="form-group">
+								<label class="col-sm-4 control-label" for="numeroProntuario">Número do prontuário</label>
+								<div class="col-sm-7">
+									<input ng-model="form.numeroProntuario" id="numeroProntuario" name="numeroProntuario" type="number" min="0" class="form-control">
+								</div>
+							</div>
+
+						</div>
+
+						<div class="col-md-6">
+							<!-- Tipo sanguíneo Input -->
+							<div class="form-group">
+								<label for="tipoSanguineo" class="col-sm-4 control-label">Tipo sanguíneo</label>
+								<div class="col-sm-7">
+									<select class="form-control" id="tipoSanguineo" name="tipoSanguineo" required ng-model="form.tipoSanguineo">
+										<option value="TIPO_A_POSITIVO" selected="selected">A+</option>
+										<option value="TIPO_A_NEGATIVO">A-</option>
+										<option value="TIPO_B_POSITIVO">B+</option>
+										<option value="TIPO_B_NEGATIVO">B-</option>
+										<option value="TIPO_AB_POSITIVO">AB+</option>
+										<option value="TIPO_AB_NEGATIVO">AB-</option>
+										<option value="TIPO_O_POSITIVO">O+</option>
+										<option value="TIPO_O_NEGATIVO">O-</option>
+									</select>
+								</div>
+							</div>
+
+							<!-- CBO Select-->
+							<div class="form-group">
+								<label for="cbo" class="col-sm-4 control-label">CBO</label>
+								<div class="col-sm-7">
+									<select class="form-control" id="cbo" name="cbo" required ng-options="cbo.codigoCbo + '/' + cbo.nome for cbo in listaCbo track by cbo.nome" ng-model="form.cbo"></select>
+								</div>
+							</div>
+
+							<!-- NIS / PIS / PASEP Input -->
+							<div class="form-group">
+								<label class="col-sm-4 control-label" for="nisPisPasep">NIS / PIS / PASEP</label>
+								<div class="col-sm-7">
+									<input ng-model="form.nisPisPasep" id="nisPisPasep" name="nisPisPasep" type="number" min="0" class="form-control">
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<hr>
+
+			<div class="form-group">
+				<div style="margin-left: 15px;"><!--<div class="pull-right">-->
+					<button class="btn  btn-primary" type="submit" ng-disabled="cidadaoForm.$invalid">Salvar</button>
+					<a ng-click="cancelar(cidadaoForm.$dirty)" class="btn  btn-default">Cancelar</a>
+					<a ng-click="excluir()" ng-show="editandoCadastro" class="btn  btn-link aw-btn-link-danger">Excluir este cidadão</a>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
