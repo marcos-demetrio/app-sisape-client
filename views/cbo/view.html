@@ -11,21 +11,21 @@
 			<!-- Id input-->
 			<input type="hidden" id="i_cbo" name="i_cbo" ng-model="form.i_cbo" />
 
-			<!-- Nome input-->
-			<div class="form-group" ng-class="{ 'has-error' : cboForm.nome.$invalid && !cboForm.nome.$pristine }">
-				<label class="col-sm-2 control-label" for="nome">Título</label>
-				<div class="col-sm-10">
-					<input ng-model="form.nome" id="nome" required name="nome" type="text" class="form-control" maxlength="100" autofocus>
-					<p ng-show="cboForm.nome.$error.required && !cboForm.nome.$pristine" class="help-block">Título do CBO é obrigatório.</p>
-				</div>
-			</div>
-			
 			<!-- Código do CBO input-->
 			<div class="form-group" ng-class="{ 'has-error' : cboForm.codigoCbo.$invalid && !cboForm.codigoCbo.$pristine }">
-				<label class="col-sm-2 control-label" for="codigoCbo">Código do CBO</label>
-				<div class="col-sm-5">
+				<label class="col-sm-1 control-label" for="codigoCbo">Código</label>
+				<div class="col-sm-2">
 					<input ng-model="form.codigoCbo" id="codigoCbo" required name="codigoCbo" type="number" class="form-control" maxlength="20">
 					<p ng-show="cboForm.codigoCbo.$error.required && !cboForm.codigoCbo.$pristine" class="help-block">Código do CBO é obrigatório.</p>
+				</div>
+			</div>
+
+			<!-- Nome input-->
+			<div class="form-group" ng-class="{ 'has-error' : cboForm.nome.$invalid && !cboForm.nome.$pristine }">
+				<label class="col-sm-1 control-label" for="nome">Título</label>
+				<div class="col-sm-5">
+					<input ng-model="form.nome" id="nome" required name="nome" type="text" class="form-control" maxlength="100" autofocus>
+					<p ng-show="cboForm.nome.$error.required && !cboForm.nome.$pristine" class="help-block">Título do CBO é obrigatório.</p>
 				</div>
 			</div>
 

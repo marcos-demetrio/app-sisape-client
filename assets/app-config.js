@@ -132,5 +132,23 @@
 				controller: 'CidController',
 				title: 'Cadastro de CID'
 			})
+
+			.when('/ubs', {
+				templateUrl: 'views/unidade-basica-saude/listagem.html',
+				controller: 'UbsListagemController',
+				title: 'Pesquisa de Unidade Básica de Saúde'
+			})
+
+			.when('/ubs/:id/editar', {
+				templateUrl: 'views/unidade-basica-saude/view.html',
+				controller: 'UbsController',
+				title: 'Cadastro de Unidade Básica de Saúde'
+			})
+
+			.when('/ubs/novo', {
+				templateUrl: 'views/unidade-basica-saude/view.html',
+				controller: 'UbsController',
+				title: 'Cadastro de Unidade Básica de Saúde'
+			})
 	}
 })();

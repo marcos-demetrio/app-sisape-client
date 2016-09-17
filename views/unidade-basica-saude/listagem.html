@@ -1,4 +1,4 @@
-﻿<div ng-controller="CboListagemController">
+﻿<div ng-controller="UbsListagemController">
 	<div class="page-header">
 		<div class="container-fluid">
 			<div class="row">
@@ -8,8 +8,8 @@
 				
 				<div class="col-xs-4">
 					<div class="aw-page-header-controls">
-						<a class="btn btn-primary" href="#/cbo/novo">
-							<i class="fa fa-plus-circle"></i> <span class="hidden-xs hidden-sm">Novo CBO</span>
+						<a class="btn btn-primary" href="#/ubs/novo">
+							<i class="fa fa-plus-circle"></i> <span class="hidden-xs hidden-sm">Nova UBS</span>
 						</a>
 					</div>
 				</div>
@@ -19,21 +19,9 @@
 
 	<div class="container-fluid">
 		<form class="form-vertical  js-form-loading">
-			<div class="row">
-				<div class="col-sm-12">
-					<div class="form-group">
-						<label for="input-codigo">Código</label>
-						
-						<div class="form-inline">
-							<input type="number" id="input-codigo" class="form-control aw-form-control-inline-sm" maxlength="20" ng-model="codigoCbo">
-						</div>
-					</div>
-				</div>
-			</div>
-		
 			<div class="form-group">
 				<label for="input-nome">Nome</label>
-				<input id="input-nome" type="text" class="form-control" ng-model="nomeCbo">
+				<input id="input-nome" type="text" class="form-control" ng-model="keyword">
 			</div>
 			
 			<div class="form-group">
@@ -43,7 +31,7 @@
 		</form>
 		
 		<div class="alert  aw-alert-no-results" role="alert" ng-show="listaVazia">
-			A pesquisa não retornou nenhum CBO.
+			A pesquisa não retornou nenhuma unidade básica de saúde
 		</div>
 
 		<div class="table-responsive" ng-show="!listaVazia">
@@ -51,20 +39,32 @@
 				<thead class="aw-table-header-solid">
 					<tr>
 						<th class="text-center">#</th>
-						<th class="text-center">Código</th>
 						<th>Nome</th>
+						<th class="text-center">Telefone 1</th>
+						<th class="text-center">Telefone 1</th>
+						<th>Bairro</th>
+						<th>Cidade/UF</th>
+						<th>Tipo de Estabelecimento</th>
+						<th class="text-center">Status</th>
 						<th class="text-center">Ações</th>
 					</tr>
 				</thead>
 
 				<tbody>
 					<tr ng-repeat="item in itens">
-						<td ng-bind="item.i_cbo" class="text-center col-md-1 col-sm-1 col-xs-1"></td>
-						<td ng-bind="item.codigoCbo" class="text-center col-md-2 col-sm-2 col-xs-2"></td>
+						<td ng-bind="item.i_unidade_basica_saude" class="text-center col-md-1 col-sm-1 col-xs-1"></td>
 						<td ng-bind="item.nome"></td>
+						<td ng-bind="item.telefonePrincipal | tel" class="text-center col-md-1 col-sm-1 col-xs-1"></td>
+						<td ng-bind="item.telefoneSecundario | tel" class="text-center col-md-1 col-sm-1 col-xs-1"></td>
+						<td ng-bind="item.bairro"></td>
+						<td ng-bind="item.municipio.nome + '/' + item.municipio.estado.sigla"></td>
+						<td ng-bind="item.tipoEstabelecimento.nome"></td>
+						<td class="text-center col-md-1 col-sm-1 col-xs-1">
+							<span ng-class="IsAtivo(item.status) ? 'label label-success' : 'label label-danger'" ng-bind="IsAtivo(item.status) ? 'Ativo' : 'Inativo'"></span></td>
+						</td>
 						<td class="table-pesq-produto-col-acoes col-md-1 col-sm-1 col-xs-1">
 							<div class="btn-group">
-								<a class="btn  btn-default btn-xs" href="#/cbo/{{item.i_cbo}}/editar">Editar</a>
+								<a class="btn  btn-default btn-xs" href="#/ubs/{{item.i_unidade_basica_saude}}/editar">Editar</a>
 							</div>
 						</td>
 					</tr>
@@ -74,7 +74,7 @@
 			
 		<div class="row">
 			<div class="col-xs-12  col-md-4  aw-text-xs-center  aw-text-md-right" style="float: right;">
-				<span class="aw-pagination-info" ng-bind-template="{{totalItens}} cbo(s) encontrado(s)" ng-show="!listaVazia"></span>
+				<span class="aw-pagination-info" ng-bind-template="{{totalItens}} ubs encontrada" ng-show="!listaVazia"></span>
 			</div>
 		</div>
 	</div>

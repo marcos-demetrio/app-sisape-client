@@ -1,0 +1,87 @@
+﻿<div ng-controller="UbsController">
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<h1 ng-bind-template="{{title}}"></h1>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<form class="form-horizontal form-vertical  js-form-loading" name="ubsForm" ng-submit="update()">
+			<!-- Id Input -->
+			<input type="hidden" id="i_unidade_basica_saude" name="i_unidade_basica_saude" ng-model="form.i_unidade_basica_saude" />
+
+			<ul class="nav nav-pills">
+				<li class="active"><a href ng-click="setTab(1)" ng-class="{'active' : isSet(1)}" data-toggle="tab">Dados</a></li>
+				<li><a href ng-click="setTab(2)" ng-class="{'active' : isSet(2)}" data-toggle="tab">Localização</a></li>
+				<li><a href ng-click="setTab(3)" ng-class="{'active' : isSet(3)}" data-toggle="tab">Contato</a></li>
+				<li><a href ng-click="setTab(4)" ng-class="{'active' : isSet(4)}" data-toggle="tab">Outros</a></li>
+			</ul>
+
+			<br>
+
+			<div class="tab-content" ng-show="isSet(1)">
+				<div class="tab-pane fade in active">
+					<div class="row">
+						<div class="col-md-12">
+							<!-- Nome Input -->
+							<div class="form-group sisape-required" ng-class="{ 'has-error' : ubsForm.nome.$invalid && !ubsForm.nome.$pristine }">
+								<label class="col-sm-2 control-label" for="nome">Nome</label>
+								<div class="col-sm-10">
+									<input ng-model="form.nome" id="nome" required name="nome" type="text" class="form-control" maxlength="100">
+									<p ng-show="ubsForm.nome.$error.required && !ubsForm.nome.$pristine" class="help-block">Campo obrigatório.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-6">
+							<!-- CNPJ Input -->
+							<div class="form-group" ng-class="{ 'has-error' : ubsForm.cnpj.$invalid && !ubsForm.cnpj.$pristine }">
+								<label class="col-sm-2 control-label" for="cnpj">CNPJ</label>
+								<div class="col-sm-3">
+									<input ng-model="form.cnpj" id="cnpj" name="cnpj" type="text" ng-cnpj ui-mask="99.999.999/9999-99" class="form-control" maxlength="17">
+									<p ng-show="ubsForm.cnpj.$invalid && !ubsForm.cnpj.$pristine" class="help-block">Campo inválido.</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="tab-content" ng-show="isSet(2)">
+				<div class="tab-pane fade in active">
+	
+				</div>
+			</div>
+
+			<div class="tab-content" ng-show="isSet(3)">
+				<div class="tab-pane fade in active">
+
+				</div>
+			</div>
+
+			<div class="tab-content" ng-show="isSet(4)">
+				<div class="tab-pane fade in active">
+	
+				
+				</div>
+			</div>
+			
+			<hr>
+
+			<div class="form-group">
+				<div style="margin-left: 15px;"><!--<div class="pull-right">-->
+					<button class="btn  btn-primary" type="submit" ng-disabled="ubsForm.$invalid">Salvar</button>
+					<a ng-click="cancelar(ubsForm.$dirty)" class="btn  btn-default">Cancelar</a>
+					<a ng-click="excluir()" ng-show="editandoCadastro" class="btn  btn-link aw-btn-link-danger">Excluir esta UBS</a>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

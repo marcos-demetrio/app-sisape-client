@@ -13,8 +13,8 @@
 
 			<!-- Código input-->
 			<div class="form-group" ng-class="{ 'has-error' : cidForm.codigoCid.$invalid && !cidForm.codigoCid.$pristine }">
-				<label class="col-sm-2 control-label" for="codigoCid">Código</label>
-				<div class="col-sm-5">
+				<label class="col-sm-1 control-label" for="codigoCid">Código</label>
+				<div class="col-sm-2">
 					<input ng-model="form.codigoCid" id="codigoCid" required name="codigoCid" type="text" class="form-control" maxlength="10" autofocus style="text-transform:uppercase">
 					<p ng-show="cidForm.codigoCid.$error.required && !cidForm.codigoCid.$pristine" class="help-block">Código é obrigatório.</p>
 				</div>
@@ -22,8 +22,8 @@
 
 			<!-- Descrição input-->
 			<div class="form-group" ng-class="{ 'has-error' : cidForm.descricao.$invalid && !cidForm.descricao.$pristine }">
-				<label class="col-sm-2 control-label" for="descricao">Descrição</label>
-				<div class="col-sm-10">
+				<label class="col-sm-1 control-label" for="descricao">Descrição</label>
+				<div class="col-sm-8">
 					<input ng-model="form.descricao" id="descricao" required name="descricao" type="text" class="form-control" maxlength="255" style="text-transform:uppercase">
 					<p ng-show="cidForm.descricao.$error.required && !cidForm.descricao.$pristine" class="help-block">Descrição é obrigatório.</p>
 				</div>
