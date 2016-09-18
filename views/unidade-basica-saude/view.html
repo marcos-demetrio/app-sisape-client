@@ -22,47 +22,160 @@
 
 			<div class="tab-content" ng-show="isSet(1)">
 				<div class="tab-pane fade in active">
-					<div class="row">
-						<div class="col-md-12">
-							<!-- Nome Input -->
-							<div class="form-group sisape-required" ng-class="{ 'has-error' : ubsForm.nome.$invalid && !ubsForm.nome.$pristine }">
-								<label class="col-sm-2 control-label" for="nome">Nome</label>
-								<div class="col-sm-10">
-									<input ng-model="form.nome" id="nome" required name="nome" type="text" class="form-control" maxlength="100">
-									<p ng-show="ubsForm.nome.$error.required && !ubsForm.nome.$pristine" class="help-block">Campo obrigatório.</p>
-								</div>
-							</div>
+					<!-- Nome Input -->
+					<div class="form-group sisape-required" ng-class="{ 'has-error' : ubsForm.nome.$invalid && !ubsForm.nome.$pristine }">
+						<label class="col-sm-2 control-label" for="nome">Nome</label>
+						<div class="col-sm-10">
+							<input ng-model="form.nome" id="nome" required name="nome" type="text" class="form-control" maxlength="100">
+							<p ng-show="ubsForm.nome.$error.required && !ubsForm.nome.$pristine" class="help-block">Campo obrigatório.</p>
 						</div>
 					</div>
 
-					<div class="row">
-						<div class="col-md-6">
-							<!-- CNPJ Input -->
-							<div class="form-group" ng-class="{ 'has-error' : ubsForm.cnpj.$invalid && !ubsForm.cnpj.$pristine }">
-								<label class="col-sm-2 control-label" for="cnpj">CNPJ</label>
-								<div class="col-sm-3">
-									<input ng-model="form.cnpj" id="cnpj" name="cnpj" type="text" ng-cnpj ui-mask="99.999.999/9999-99" class="form-control" maxlength="17">
-									<p ng-show="ubsForm.cnpj.$invalid && !ubsForm.cnpj.$pristine" class="help-block">Campo inválido.</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							
+					<!-- CNPJ Input -->
+					<div class="form-group" ng-class="{ 'has-error' : ubsForm.cnpj.$invalid && !ubsForm.cnpj.$pristine }">
+						<label class="col-sm-2 control-label" for="cnpj">CNPJ</label>
+						<div class="col-sm-3">
+							<input ng-model="form.cnpj" id="cnpj" name="cnpj" type="text" ng-cnpj ui-mask="99.999.999/9999-99" class="form-control" maxlength="17">
+							<p ng-show="ubsForm.cnpj.$invalid && !ubsForm.cnpj.$pristine" class="help-block">Campo inválido.</p>
 						</div>
 					</div>
 
+					<!-- Cadastro Nacional de Estabelecimento de Saúde -->
+					<div class="form-group sisape-required" ng-class="{ 'has-error' : ubsForm.codigo_cnes.$invalid && !ubsForm.codigo_cnes.$pristine }">
+						<label class="col-sm-2 control-label" for="codigo_cnes">CNES</label>
+						<div class="col-sm-3">
+							<input ng-model="form.codigo_cnes" ng-minlength="15" id="codigo_cnes" name="codigo_cnes" type="text" class="form-control" maxlength="15" autofocus>
+							<p ng-show="ubsForm.codigo_cnes.$error.required && !ubsForm.codigo_cnes.$pristine" class="help-block">Campo obrigatório.</p>
+						</div>
+					</div>
+					
+					<!-- Esfera Administrativa -->
+					<div class="form-group sisape-required" ng-class="{ 'has-error' : ubsForm.esferaAdministrativa.$invalid && !ubsForm.esferaAdministrativa.$pristine }">					
+						<label for="esferaAdministrativa" class="col-sm-2 control-label">Esfera administrativa</label>
+						<div class="col-sm-2">
+							<select class="form-control" id="esferaAdministrativa" name="esferaAdministrativa" required ng-model="form.esferaAdministrativa">
+								<option value="PUBLICO_FEDERAL" selected="selected">Federal</option>
+								<option value="PUBLICO_ESTADUAL">Estadual</option>
+								<option value="PUBLICO_MUNICIPAL">Municipal</option>
+							</select>
+							<p ng-show="ubsForm.esferaAdministrativa.$error.required && !ubsForm.esferaAdministrativa.$pristine" class="help-block">Campo obrigatório.</p>
+						</div>
+					</div>
+
+					<!-- Tipo de Estabelecimento Select-->
+					<div class="form-group sisape-required" ng-class="{ 'has-error' : ubsForm.tipoEstabelecimento.$invalid && !ubsForm.tipoEstabelecimento.$pristine }">
+						<label for="tipoEstabelecimento" class="col-sm-2 control-label">Tipo unidade</label>
+						<div class="col-sm-6">
+							<select class="form-control ls-select" id="tipoEstabelecimento" name="select-simples-grande" required ng-options="tipoEstabelecimento.nome for tipoEstabelecimento in tiposEstabelecimento track by tipoEstabelecimento.nome" ng-model="form.tipoEstabelecimento"></select>
+
+							<p ng-show="ubsForm.tipoEstabelecimento.$error.required && !ubsForm.tipoEstabelecimento.$pristine" class="help-block">Selecione um tipo de estabelecimento.</p>
+						</div>
+					</div>
+					
 				</div>
 			</div>
 
 			<div class="tab-content" ng-show="isSet(2)">
 				<div class="tab-pane fade in active">
-	
+					<!-- CEP Input -->
+					<div class="form-group" ng-class="{ 'has-error' : ubsForm.cep.$invalid && !ubsForm.cep.$pristine }">
+						<label class="col-sm-1 control-label" for="cep">CEP</label>
+						<div class="col-sm-4">
+							<input ng-model="form.cep" id="cep" name="cep" type="text" ui-mask="99999-999" class="form-control">
+							<p ng-show="ubsForm.cep.$invalid && !ubsForm.cep.$pristine" class="help-block">Campo inválido.</p>
+						</div>
+					</div>
+					
+					<!-- Bairro Input -->
+					<div class="form-group" ng-class="{ 'has-error' : ubsForm.bairro.$invalid && !ubsForm.bairro.$pristine }">
+						<label class="col-sm-1 control-label" for="bairro">Bairro</label>
+						<div class="col-sm-7">
+							<input ng-model="form.bairro" id="bairro" name="bairro" required type="text" class="form-control" maxlength="100">
+							<p ng-show="ubsForm.bairro.$error.required && !ubsForm.bairro.$pristine" class="help-block">Campo obrigatório.</p>
+						</div>
+					</div>
+
+					<!-- Logradouro Select-->
+					<div class="form-group" ng-class="{ 'has-error' : ubsForm.logradouro.$invalid && !ubsForm.logradouro.$pristine }">
+						<!-- Logradouro Select-->
+						<label class="col-sm-1 control-label" for="logradouro">Logradouro</label>
+						<div class="col-sm-7">
+							<input ng-model="form.logradouro" id="logradouro" name="logradouro" type="text" class="form-control" maxlength="255">
+							<p ng-show="ubsForm.logradouro.$error.required && !ubsForm.logradouro.$pristine" class="help-block">Campo obrigatório.</p>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-1 control-label" for="numero">Número</label>
+						<div class="col-sm-4">
+							<input ng-disabled="form.semNumero==true" ng-model="form.numero" id="numero" name="numero" type="text" class="form-control">
+						</div>
+
+						<!-- Sem Número Check -->
+						<div class="col-sm-4">
+							<div class="checkbox">
+								<label ng-click="ClickCheckBoxSemNumero()">
+									<input type="checkbox" ng-model="form.semNumero" ng-init="form.semNumero=false" id="semNumero" name="semNumero">Sem Número
+								</label>
+							</div>
+						</div>
+					</div>
+					
+					<!-- Complemento Input -->
+					<div class="form-group">
+						<label class="col-sm-1 control-label" for="complemento">Complemento</label>
+						<div class="col-sm-7">
+							<input ng-model="form.complemento" id="complemento" name="complemento" type="text" class="form-control" maxlength="100">
+						</div>
+					</div>
+
+					<!-- Ponto de referência Input -->
+					<div class="form-group">
+						<label class="col-sm-1 control-label" for="pontoReferencia">Referência</label>
+						<div class="col-sm-7">
+							<input ng-model="form.pontoReferencia" id="pontoReferencia" name="pontoReferencia" type="text" class="form-control" maxlength="100">
+						</div>
+					</div>
 				</div>
 			</div>
 
 			<div class="tab-content" ng-show="isSet(3)">
 				<div class="tab-pane fade in active">
+					<!-- Tel. 1 Input -->
+					<div class="form-group" ng-class="{ 'has-error' : ubsForm.telefonePrincipal.$invalid && !ubsForm.telefonePrincipal.$pristine }">
+						<label class="col-sm-1 control-label" for="telefonePrincipal">Telefone 1</label>
+						<div class="col-sm-3">
+							<input ng-model="form.telefonePrincipal" id="telefonePrincipal" name="telefonePrincipal" type="text" ui-mask="(99)99999-9999" class="form-control">
+							<p ng-show="ubsForm.telefonePrincipal.$invalid && !ubsForm.telefonePrincipal.$pristine" class="help-block">Campo inválido.</p>
+						</div>
+					</div>
 
+					<!-- Tel. 2 Input -->
+					<div class="form-group" ng-class="{ 'has-error' : ubsForm.telefoneSecundario.$invalid && !ubsForm.telefoneSecundario.$pristine }">
+						<label class="col-sm-1 control-label" for="telefoneSecundario">Telefone 2</label>
+						<div class="col-sm-3">
+							<input ng-model="form.telefoneSecundario" id="telefoneSecundario" name="telefoneSecundario" type="text" ui-mask="(99)99999-9999" class="form-control">
+							<p ng-show="ubsForm.telefoneSecundario.$invalid && !ubsForm.telefoneSecundario.$pristine" class="help-block">Campo inválido.</p>
+						</div>
+					</div>
+
+					<!-- Tel. Fax Input -->
+					<div class="form-group" ng-class="{ 'has-error' : ubsForm.telefoneFax.$invalid && !ubsForm.telefoneFax.$pristine }">
+						<label class="col-sm-1 control-label" for="telefoneFax">Telefone Fax</label>
+						<div class="col-sm-3">
+							<input ng-model="form.telefoneFax" id="telefoneFax" name="telefoneFax" type="text" ui-mask="(99)99999-9999" class="form-control">
+							<p ng-show="ubsForm.telefoneFax.$invalid && !ubsForm.telefoneFax.$pristine" class="help-block">Campo inválido.</p>
+						</div>
+					</div>
+
+					<!-- Email Input -->
+					<div class="form-group" ng-class="{ 'has-error' : ubsForm.email.$invalid && !ubsForm.email.$pristine }">
+						<label class="col-sm-1 control-label" for="email">E-mail</label>
+						<div class="col-sm-7">
+							<input ng-model="form.email" id="email" name="email" type="mail" class="form-control" maxlength="255">
+							<p ng-show="ubsForm.email.$invalid && !ubsForm.email.$pristine" class="help-block">Campo inválido.</p>
+						</div>
+					</div>
 				</div>
 			</div>
 

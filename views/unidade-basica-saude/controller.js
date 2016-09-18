@@ -6,9 +6,9 @@
 		.controller('UbsController', UbsController)
 		.controller('UbsListagemController', UbsListagemController);
 
-	UbsController.$inject = ['$scope', '$location', '$route', '$routeParams', 'UbsService', 'MunicipioService'];
+	UbsController.$inject = ['$scope', '$location', '$route', '$routeParams', '$window', 'UbsService', 'MunicipioService', 'TipoEstabelecimentoUbsService'];
 
-	function UbsController($scope, $location, $route, $routeParams, UbsService, MunicipioService) {
+	function UbsController($scope, $location, $route, $routeParams, $window, UbsService, MunicipioService, TipoEstabelecimentoUbsService) {
 		//-- Controle Tabs
 		$scope.tab = 1;
 		$scope.setTab = function(newTab){
@@ -28,6 +28,12 @@
 		//-- Carregar lista de estados
 		MunicipioService.GetAll().then(function(data){
 			$scope.municipios = data;
+		});
+		//--
+		
+		//-- Carregar lista de estados
+		TipoEstabelecimentoUbsService.GetAll().then(function(data){
+			$scope.tiposEstabelecimento = data;
 		});
 		//--
 
@@ -105,6 +111,14 @@
 				});
 			}
 		}
+		//--
+		
+		//-- Limpa dados do campo caso desmarque a opção no checkbox
+		$scope.ClickCheckBoxSemNumero = function() {
+			$window.document.getElementById('numero').focus();
+
+			$scope.form.numero = null;
+		};
 		//--
 	}
 
