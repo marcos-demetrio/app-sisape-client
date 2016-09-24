@@ -26,6 +26,10 @@
 		}
 
 		service.Update = function Update(ubs, id) {
+			
+			console.log('UpdateService: ', ubs);
+			console.log('UpdateServiceStringify: ', JSON.stringify(ubs));
+			
 			return $http.put(API + 'ubs/' + id, ubs).then(handleSuccess, handleError('Erro ao atualizar ubs'));
 		}
 

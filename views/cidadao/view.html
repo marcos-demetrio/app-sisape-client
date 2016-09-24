@@ -23,8 +23,8 @@
 			<div class="tab-content" ng-show="isSet(1)">
 				<div class="tab-pane fade in active">
 					<!-- Número Cartão Nacional de Saúde Input -->
-					<div class="form-group sisape-required" ng-class="{ 'has-error' : cidadaoForm.numeroCartaoNacionalSaude.$invalid && !cidadaoForm.numeroCartaoNacionalSaude.$pristine }">
-						<label class="col-sm-2 control-label" for="numeroCartaoNacionalSaude">Número do CNS</label>
+					<div class="form-group" ng-class="{ 'has-error' : cidadaoForm.numeroCartaoNacionalSaude.$invalid && !cidadaoForm.numeroCartaoNacionalSaude.$pristine }">
+						<label class="col-sm-2 control-label sisape-required" for="numeroCartaoNacionalSaude">Número do CNS</label>
 						<div class="col-sm-3">
 							<input ng-disabled="form.possuiCartaoNacionalSaude==false" ng-model="form.numeroCartaoNacionalSaude" ng-minlength="15" id="numeroCartaoNacionalSaude" name="numeroCartaoNacionalSaude" type="text" class="form-control" maxlength="15" autofocus>
 							<p ng-show="cidadaoForm.numeroCartaoNacionalSaude.$error.required && !cidadaoForm.numeroCartaoNacionalSaude.$pristine" class="help-block">Campo obrigatório.</p>
@@ -33,9 +33,8 @@
 
 						<div class="col-sm-5">
 							<div class="checkbox">
-								<label ng-click="ClickCheckBoxNumeroCartaoNacionalSaude()">
-									<input type="checkbox" ng-model="form.possuiCartaoNacionalSaude" ng-init="form.possuiCartaoNacionalSaude=true" id="possuiCartaoNacionalSaude" name="possuiCartaoNacionalSaude">Possui CNS
-								</label>
+								<input type="checkbox" ng-model="form.possuiCartaoNacionalSaude" ng-init="form.possuiCartaoNacionalSaude=true" id="possuiCartaoNacionalSaude" name="possuiCartaoNacionalSaude">
+								<label ng-click="ClickCheckBoxNumeroCartaoNacionalSaude()" for="possuiCartaoNacionalSaude">Possui CNS</label>
 							</div>
 						</div>
 					</div>
@@ -66,8 +65,9 @@
 						</div>
 					</div>
 
+
 					<!-- Data de Nascimento Input -->
-					<div class="form-group sisape-required" ng-class="{ 'has-error' : (cidadaoForm.sexo.$invalid && !cidadaoForm.sexo.$pristine) || (cidadaoForm.dataNascimento.$invalid && !cidadaoForm.dataNascimento.$pristine) }">
+					<div class="form-group sisape-required" ng-class="{ 'has-error' : cidadaoForm.dataNascimento.$invalid && !cidadaoForm.dataNascimento.$pristine }">
 						<label class="col-sm-2 control-label" for="dataNascimento">Data de nascimento</label>
 						<div class="col-sm-2">
 							<p class="input-group">
@@ -79,15 +79,17 @@
 							</p>
 						</div>
 
-						<div class="col-sm-2">
+						<div class="col-sm-3">
 							<div class="checkbox">
-								<label>
-									<input type="checkbox" ng-model="form.faleceu" ng-init="form.faleceu=false" id="faleceu" name="faleceu">Faleceu?
-								</label>
+								<input type="checkbox" ng-model="form.faleceu" ng-init="form.faleceu=false" id="faleceu" name="faleceu">
+								<label for="faleceu">Faleceu?</label>
 							</div>
 						</div>
+					</div>
 
-						<label for="sexo" class="col-sm-1 control-label">Sexo</label>
+					<!-- Sexo' Input -->
+					<div class="form-group sisape-required" ng-class="{ 'has-error' : cidadaoForm.sexo.$invalid && !cidadaoForm.sexo.$pristine }">
+						<label for="sexo" class="col-sm-2 control-label">Sexo</label>
 						<div class="col-sm-2">
 							<select class="form-control" id="sexo" name="sexo" required ng-model="form.sexo">
 								<option value="FEMININO" selected="selected">Feminino</option>
@@ -95,8 +97,11 @@
 							</select>
 							<p ng-show="cidadaoForm.sexo.$error.required && !cidadaoForm.sexo.$pristine" class="help-block">Campo obrigatório.</p>
 						</div>
+					</div>
 
-						<label for="racaCor" class="col-sm-1 control-label">Raça/Cor</label>
+					<!-- Raça Cor Input -->
+					<div class="form-group sisape-required" ng-class="{ 'has-error' : (cidadaoForm.sexo.$invalid && !cidadaoForm.sexo.$pristine) || (cidadaoForm.dataNascimento.$invalid && !cidadaoForm.dataNascimento.$pristine) }">
+						<label for="racaCor" class="col-sm-2 control-label">Raça/Cor</label>
 						<div class="col-sm-2">
 							<select class="form-control" id="racaCor" name="racaCor" required ng-model="form.racaCor">
 								<option value="BRANCA" selected="selected">Branca</option>
@@ -118,9 +123,8 @@
 
 						<div class="col-sm-3">
 							<div class="checkbox">
-								<label>
-									<input type="checkbox" ng-model="form.desconheceNomeMae" ng-init="form.desconheceNomeMae=false" id="desconheceNomeMae" name="desconheceNomeMae">Desconhece a informação
-								</label>
+								<input type="checkbox" ng-model="form.desconheceNomeMae" ng-init="form.desconheceNomeMae=false" id="desconheceNomeMae" name="desconheceNomeMae">
+								<label for="desconheceNomeMae">Desconhece a informação</label>
 							</div>
 						</div>
 					</div>
@@ -136,9 +140,8 @@
 
 						<div class="col-sm-3">
 							<div class="checkbox">
-								<label>
-									<input type="checkbox" ng-model="form.estrangeiro" ng-init="form.estrangeiro=false" id="estrangeiro" name="estrangeiro">Estrangeiro?
-								</label>
+								<input type="checkbox" ng-model="form.estrangeiro" ng-init="form.estrangeiro=false" id="estrangeiro" name="estrangeiro">
+								<label for="estrangeiro">Estrangeiro?</label>
 							</div>
 						</div>
 					</div>
@@ -196,9 +199,8 @@
 								<!-- Sem Número Check -->
 								<div class="col-sm-4">
 									<div class="checkbox">
-										<label ng-click="ClickCheckBoxSemNumero()">
-											<input type="checkbox" ng-model="form.semNumero" ng-init="form.semNumero=false" id="semNumero" name="semNumero">Sem Número
-										</label>
+										<input type="checkbox" ng-model="form.semNumero" ng-init="form.semNumero=false" id="semNumero" name="semNumero">
+										<label for="semNumero" ng-click="ClickCheckBoxSemNumero()">Sem Número</label>
 									</div>
 								</div>
 							</div>

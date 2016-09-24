@@ -60,7 +60,7 @@
 						<td ng-bind="item.municipio.nome + '/' + item.municipio.estado.sigla"></td>
 						<td ng-bind="item.tipoEstabelecimento.nome"></td>
 						<td class="text-center col-md-1 col-sm-1 col-xs-1">
-							<span ng-class="IsAtivo(item.status) ? 'label label-success' : 'label label-danger'" ng-bind="IsAtivo(item.status) ? 'Ativo' : 'Inativo'"></span></td>
+							<span ng-class="item.ativo ? 'label label-success' : 'label label-danger'" ng-bind="item.ativo ? 'Ativo' : 'Inativo'"></span></td>
 						</td>
 						<td class="table-pesq-produto-col-acoes col-md-1 col-sm-1 col-xs-1">
 							<div class="btn-group">

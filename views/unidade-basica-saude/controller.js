@@ -9,6 +9,7 @@
 	UbsController.$inject = ['$scope', '$location', '$route', '$routeParams', '$window', 'UbsService', 'MunicipioService', 'TipoEstabelecimentoUbsService'];
 
 	function UbsController($scope, $location, $route, $routeParams, $window, UbsService, MunicipioService, TipoEstabelecimentoUbsService) {
+		
 		//-- Controle Tabs
 		$scope.tab = 1;
 		$scope.setTab = function(newTab){
@@ -25,22 +26,78 @@
 		$scope.editandoCadastro = (ubsID > 0);
 		//--
 
-		//-- Carregar lista de estados
+		//-- Carregar lista de municipios
 		MunicipioService.GetAll().then(function(data){
 			$scope.municipios = data;
 		});
 		//--
 		
-		//-- Carregar lista de estados
+		//-- Carregar lista de tipos de estabelecimento
 		TipoEstabelecimentoUbsService.GetAll().then(function(data){
 			$scope.tiposEstabelecimento = data;
 		});
 		//--
+		
+		$scope.verificadata = function(data) {
+			console.log('data.parametroUbs.horarioMatutinoInicio:', $scope.form.parametroUbs.horarioMatutinoInicio);
+			console.log('data.parametroUbs.horarioMatutinoFim:', $scope.form.parametroUbs.horarioMatutinoFim);
+			
+			console.log('horarioVespertinoInicio', new Date($scope.form.parametroUbs.horarioVespertinoInicio));
+			
+			
+		}
 
 		//-- Caso esteja editando, obtem os dados do cadastro
 		if(ubsID > 0){
 			UbsService.GetById(ubsID).then(function(data){
+				//if(data.parametroUbs != undefined){
+					moment.locale('pt-BR');
+					console.log(moment.utc().format('h:mm'));
+					
+					console.log('newdate:', new Date());
+					
+					if(data.parametroUbs.horarioMatutinoInicio != null){
+						data.parametroUbs.horarioMatutinoInicio = new Date(data.parametroUbs.horarioMatutinoInicio);
+					}
+					
+					if(data.parametroUbs.horarioMatutinoFim != null){
+						data.parametroUbs.horarioMatutinoFim = new Date(data.parametroUbs.horarioMatutinoFim);
+					}
+					
+					if(data.parametroUbs.horarioVespertinoInicio != null){
+						data.parametroUbs.horarioVespertinoInicio = new Date(data.parametroUbs.horarioVespertinoInicio);
+					}
+					
+					if(data.parametroUbs.horarioVespertinoFim != null){
+						data.parametroUbs.horarioVespertinoFim = new Date(data.parametroUbs.horarioVespertinoFim);
+					}
+					
+					if(data.parametroUbs.horarioNoturnoInicio != null){
+						data.parametroUbs.horarioNoturnoInicio = new Date(data.parametroUbs.horarioNoturnoInicio);
+					}
+					
+					if(data.parametroUbs.horarioNoturnoFim != null){
+						data.parametroUbs.horarioNoturnoFim = new Date(data.parametroUbs.horarioNoturnoFim);
+					}
+					
+					
+					
+				/*	data.parametroUbs.horarioMatutinoInicio	= new Date('01/01/2016 ' + data.parametroUbs.horarioMatutinoInicio || '00:00:00');
+					data.parametroUbs.horarioMatutinoFim		= new Date('01/01/2016 ' + data.parametroUbs.horarioMatutinoFim || '00:00:00');
+					data.parametroUbs.horarioVespertinoInicio	= new Date('01/01/2016 ' + data.parametroUbs.horarioVespertinoInicio || '00:00:00');
+					data.parametroUbs.horarioVespertinoFim		= new Date('01/01/2016 ' + data.parametroUbs.horarioVespertinoFim || '00:00:00');
+					data.parametroUbs.horarioNoturnoInicio		= new Date('01/01/2016 ' + data.parametroUbs.horarioNoturnoInicio || '00:00:00');
+					data.parametroUbs.horarioNoturnoFim			= new Date('01/01/2016 ' + data.parametroUbs.horarioNoturnoFim || '00:00:00');*/
+			//	}
+				
 				$scope.form = data;
+				
+				/*$scope.form.parametroUbs.horarioMatutinoInicio		= new Date('01/01/2016 ' + data.parametroUbs.horarioMatutinoInicio);
+				$scope.form.parametroUbs.horarioMatutinoFim			= new Date('01/01/2016 ' + data.parametroUbs.horarioMatutinoFim);
+				$scope.form.parametroUbs.horarioVespertinoInicio	= new Date('01/01/2016 ' + data.parametroUbs.horarioVespertinoInicio);
+				$scope.form.parametroUbs.horarioVespertinoFim		= new Date('01/01/2016 ' + data.parametroUbs.horarioVespertinoFim);
+				$scope.form.parametroUbs.horarioNoturnoInicio		= new Date('01/01/2016 ' + data.parametroUbs.horarioNoturnoInicio);
+				$scope.form.parametroUbs.horarioNoturnoFim			= new Date('01/01/2016 ' + data.parametroUbs.horarioNoturnoFim);*/
 			});
 		}
 		//--
@@ -97,16 +154,13 @@
 
 		//-- Gravar os dados do cadastro no banco de dados
 		$scope.update = function(){
-			var estado = angular.fromJson($scope.form.estado);
-
-			$scope.form.estado = estado;
-
 			if(ubsID > 0){
-				MunicipioService.Update($scope.form, ubsID).then(function(data){
+				console.log($scope.form);
+				UbsService.Update($scope.form, ubsID).then(function(data){
 					$location.path('/ubs');
 				})
 			}else{			
-				MunicipioService.Create($scope.form).then(function(data){
+				UbsService.Create($scope.form).then(function(data){
 					$location.path('/ubs');
 				});
 			}
@@ -163,7 +217,7 @@
 
 		// Verifica Status
 		$scope.IsAtivo = function (status){
-			return status == 'ATIVO';
+			return status == true;
 		}
 		//--
 	}

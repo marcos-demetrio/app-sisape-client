@@ -136,19 +136,19 @@
 			.when('/ubs', {
 				templateUrl: 'views/unidade-basica-saude/listagem.html',
 				controller: 'UbsListagemController',
-				title: 'Pesquisa de Unidade Básica de Saúde'
+				title: 'Pesquisa de UBS'
 			})
 
 			.when('/ubs/:id/editar', {
 				templateUrl: 'views/unidade-basica-saude/view.html',
 				controller: 'UbsController',
-				title: 'Cadastro de Unidade Básica de Saúde'
+				title: 'Cadastro de UBS'
 			})
 
 			.when('/ubs/novo', {
 				templateUrl: 'views/unidade-basica-saude/view.html',
 				controller: 'UbsController',
-				title: 'Cadastro de Unidade Básica de Saúde'
+				title: 'Cadastro de UBS'
 			})
 	}
 })();
