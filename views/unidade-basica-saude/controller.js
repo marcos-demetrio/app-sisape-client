@@ -6,17 +6,27 @@
 		.controller('UbsController', UbsController)
 		.controller('UbsListagemController', UbsListagemController);
 
-	UbsController.$inject = ['$scope', '$location', '$route', '$routeParams', '$window', 'UbsService', 'MunicipioService', 'TipoEstabelecimentoUbsService'];
+	UbsController.$inject = ['$scope', '$timeout', '$location', '$route', '$routeParams', '$window', 'UbsService', 'MunicipioService', 'TipoEstabelecimentoUbsService'];
 
-	function UbsController($scope, $location, $route, $routeParams, $window, UbsService, MunicipioService, TipoEstabelecimentoUbsService) {
+	function UbsController($scope, $timeout, $location, $route, $routeParams, $window, UbsService, MunicipioService, TipoEstabelecimentoUbsService) {
 		
-		//-- Controle Tabs
+		//-- Controle Tabs Principal
 		$scope.tab = 1;
 		$scope.setTab = function(newTab){
 			$scope.tab = newTab;
 		};
 		$scope.isSet = function(tabNum){
 			return $scope.tab === tabNum;
+		};
+		//--
+		
+		//-- Controle Tabs Parâmetros
+		$scope.tabParmto = 1;
+		$scope.setTabParmto = function(newTab){
+			$scope.tabParmto = newTab;
+		};
+		$scope.isSetTabParmto = function(tabNum){
+			return $scope.tabParmto === tabNum;
 		};
 		//--
 		
@@ -38,15 +48,6 @@
 		});
 		//--
 		
-		$scope.verificadata = function(data) {
-			console.log('data.parametroUbs.horarioMatutinoInicio:', $scope.form.parametroUbs.horarioMatutinoInicio);
-			console.log('data.parametroUbs.horarioMatutinoFim:', $scope.form.parametroUbs.horarioMatutinoFim);
-			
-			console.log('horarioVespertinoInicio', new Date($scope.form.parametroUbs.horarioVespertinoInicio));
-			
-			
-		}
-
 		//-- Caso esteja editando, obtem os dados do cadastro
 		if(ubsID > 0){
 			UbsService.GetById(ubsID).then(function(data){
@@ -167,13 +168,24 @@
 		}
 		//--
 		
-		//-- Limpa dados do campo caso desmarque a opção no checkbox
+		//-- Limpa dados do campo caso desmarque a opção no checkbox semNumero
 		$scope.ClickCheckBoxSemNumero = function() {
 			$window.document.getElementById('numero').focus();
 
 			$scope.form.numero = null;
 		};
 		//--
+		
+		//-- Limpa dados do campo caso desmarque a opção no checkbox dos horáriios
+		$scope.setFocusHorario = function(idHorarioInicio, idHorarioFim) {
+			$timeout(function() {
+				$(idHorarioInicio).focus();
+				
+				$(idHorarioInicio).val("");
+				$(idHorarioFim).val("");
+			}, 100);
+		};
+		//--		
 	}
 
 	UbsListagemController.$inject = ['$scope', '$location', '$window', 'UbsService'];

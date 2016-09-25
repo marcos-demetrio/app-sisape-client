@@ -199,23 +199,31 @@
 
 			<div class="tab-content" ng-show="isSet(4)">
 				<div class="tab-pane fade in active">
-					
+					<ul class="nav nav-pills "><!--nav-stacked-->
+						<li class="active"><a href ng-click="setTabParmto(1)" ng-class="{'active' : isSetTabParmto(1)}" data-toggle="tab">Tempo padrão</a></li>
+						<li><a href ng-click="setTabParmto(2)" ng-class="{'active' : isSetTabParmto(2)}" data-toggle="tab">Complexidade</a></li>
+						<li><a href ng-click="setTabParmto(3)" ng-class="{'active' : isSetTabParmto(3)}" data-toggle="tab">Serviços</a></li>
+						<li><a href ng-click="setTabParmto(4)" ng-class="{'active' : isSetTabParmto(4)}" data-toggle="tab">Horários</a></li>
+					</ul>
+						
+					<br>
+						
 					<!-- Duração Padrão Input -->
-					<div class="panel panel-info">
+					<div class="panel panel-info" ng-show="isSetTabParmto(1)">
 						<div class="panel-heading">Tempo padrão de duração para atendimentos</div>
 						<div class="panel-body">
 							<div class="form-group">
-								<label class="col-sm-9 control-label" for="duracaoPadraoAtendimento">Duração da consulta (min)</label>
-								<div class="col-sm-3">
+								<label class="col-sm-2 control-label" for="duracaoPadraoAtendimento">Duração da consulta (min)</label>
+								<div class="col-sm-2">
 									<input ng-model="form.parametroUbs.duracaoPadraoAtendimento" id="duracaoPadraoAtendimento" name="duracaoPadraoAtendimento" type="number" class="form-control" min="0" maxlength="3">
 									<p ng-show="ubsForm.duracaoPadraoAtendimento.$invalid && !ubsForm.duracaoPadraoAtendimento.$pristine" class="help-block">Campo inválido.</p>
 								</div>
 							</div>
 						</div>
 					</div>
-					
+							
 					<!--Complexidade-->
-					<div class="panel panel-info">
+					<div class="panel panel-info" ng-show="isSetTabParmto(2)">
 						<div class="panel-heading">Complexidade</div><!--<h2>Complexidade</h2>-->
 						<div class="panel-body">
 							<div class="row">
@@ -231,7 +239,7 @@
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
-										<div class="col-xs-7 col-sm-7 col-md-7">
+										<div class="col-xs-8 col-sm-8 col-md-8">
 											<div class="checkbox">
 												<input type="checkbox" ng-model="form.parametroUbs.complexidadeMedia" ng-init="form.complexidadeMedia=true" id="complexidadeMedia" name="complexidadeMedia">
 												<label for="complexidadeMedia">Complexidade média</label>
@@ -241,7 +249,7 @@
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">					
-										<div class="col-xs-7 col-sm-7 col-md-7">
+										<div class="col-xs-8 col-sm-8 col-md-8">
 											<div class="checkbox">
 												<input type="checkbox" ng-model="form.parametroUbs.complexidadeAlta" ng-init="form.complexidadeAlta=true" id="complexidadeAlta" name="complexidadeAlta">
 												<label for="complexidadeAlta">Complexidade alta</label>
@@ -252,9 +260,9 @@
 							</div>
 						</div>
 					</div>
-					
+							
 					<!--Tipo de Serviço-->
-					<div class="panel panel-info">
+					<div class="panel panel-info" ng-show="isSetTabParmto(3)">
 						<div class="panel-heading">Tipos de serviços</div><!--<h2>Tipos de serviços</h2>-->
 						<div class="panel-body">
 							<div class="row">
@@ -263,7 +271,7 @@
 										<div class="col-xs-7 col-sm-7 col-md-7">
 											<div class="checkbox">
 												<input type="checkbox" ng-model="form.parametroUbs.tipoServicoAdm" ng-init="form.tipoServicoAdm=true" id="tipoServicoAdm" name="tipoServicoAdm">
-												<label for="tipoServicoAdm">Adm.</label>
+												<label for="tipoServicoAdm">Administrativos</label>
 											</div>
 										</div>
 									</div>
@@ -345,9 +353,9 @@
 							</div>
 						</div>
 					</div>
-					
+							
 					<!--Horarios-->
-					<div class="panel panel-info">
+					<div class="panel panel-info" ng-show="isSetTabParmto(4)">
 						<div class="panel-heading">Horários</div><!--<h2>Complexidade</h2>-->
 						<div class="panel-body">
 							<div class="row">
@@ -357,7 +365,7 @@
 											<div class="form-group" style="margin-bottom: 5px">
 												<div class="col-xs-7 col-sm-7 col-md-7">
 													<div class="checkbox">
-														<input type="checkbox" ng-model="form.parametroUbs.horarioMatutino" ng-init="form.horarioMatutino=true" id="horarioMatutino" name="horarioMatutino">
+														<input type="checkbox" ng-change="setFocusHorario('#horarioMatutinoInicio', '#horarioMatutinoFim')" ng-model="form.parametroUbs.horarioMatutino" ng-init="form.parametroUbs.horarioMatutino=false" id="horarioMatutino" name="horarioMatutino">
 														<label for="horarioMatutino">Matutino</label>
 													</div>
 												</div>
@@ -367,7 +375,7 @@
 											<div class="form-group" ng-class="{ 'has-error' : ubsForm.horarioMatutinoInicio.$error.time && !ubsForm.horarioMatutinoInicio.$pristine }">
 												<label class="col-sm-2 control-label" for="horarioMatutinoInicio">Início</label>
 												<div class="col-sm-6">
-													<input type="time" id="horarioMatutinoInicio" name="horarioMatutinoInicio" ng-model="form.parametroUbs.horarioMatutinoInicio" class="form-control"/>
+													<input type="time" ng-disabled="form.parametroUbs.horarioMatutino==false" id="horarioMatutinoInicio" name="horarioMatutinoInicio" ng-model="form.parametroUbs.horarioMatutinoInicio" class="form-control"/>
 													<p ng-show="ubsForm.horarioMatutinoInicio.$error.time && !ubsForm.horarioMatutinoInicio.$pristine" class="help-block">Hora inválida.</p>
 												</div>
 											</div>
@@ -375,7 +383,7 @@
 											<div class="form-group" ng-class="{ 'has-error' : ubsForm.horarioMatutinoFim.$error.time && !ubsForm.horarioMatutinoFim.$pristine }">
 												<label class="col-sm-2 control-label" for="horarioMatutinoFim">Fim</label>
 												<div class="col-sm-6">
-													<input type="time" id="horarioMatutinoFim" name="horarioMatutinoFim" ng-model="form.parametroUbs.horarioMatutinoFim" class="form-control"/>
+													<input type="time" ng-disabled="form.parametroUbs.horarioMatutino==false" id="horarioMatutinoFim" name="horarioMatutinoFim" ng-model="form.parametroUbs.horarioMatutinoFim" class="form-control"/>
 													<p ng-show="ubsForm.horarioMatutinoFim.$error.time && !ubsForm.horarioMatutinoFim.$pristine" class="help-block">Hora inválida.</p>
 												</div>
 											</div>
@@ -388,7 +396,7 @@
 											<div class="form-group" style="margin-bottom: 5px">
 												<div class="col-xs-7 col-sm-7 col-md-7">
 													<div class="checkbox">
-														<input type="checkbox" ng-model="form.parametroUbs.horarioVespertino" ng-init="form.horarioVespertino=true" id="horarioVespertino" name="horarioVespertino">
+														<input type="checkbox" ng-change="setFocusHorario('#horarioVespertinoInicio', '#horarioVespertinoFim')" ng-model="form.parametroUbs.horarioVespertino" ng-init="form.parametroUbs.horarioVespertino=false" id="horarioVespertino" name="horarioVespertino">
 														<label for="horarioVespertino">Vespertino</label>
 													</div>
 												</div>
@@ -399,7 +407,7 @@
 											<div class="form-group" ng-class="{ 'has-error' : ubsForm.horarioVespertinoInicio.$error.time && !ubsForm.horarioVespertinoInicio.$pristine }">
 												<label class="col-sm-2 control-label" for="horarioVespertinoInicio">Início</label>
 												<div class="col-sm-6">
-													<input type="time" id="horarioVespertinoInicio" name="horarioVespertinoInicio" ng-model="form.parametroUbs.horarioVespertinoInicio" class="form-control"/>
+													<input type="time" ng-disabled="form.parametroUbs.horarioVespertino==false" id="horarioVespertinoInicio" name="horarioVespertinoInicio" ng-model="form.parametroUbs.horarioVespertinoInicio" class="form-control"/>
 													<p ng-show="ubsForm.horarioVespertinoInicio.$error.time && !ubsForm.horarioVespertinoInicio.$pristine" class="help-block">Hora inválida.</p>
 												</div>
 											</div>
@@ -407,7 +415,7 @@
 											<div class="form-group" ng-class="{ 'has-error' : ubsForm.horarioVespertinoFim.$error.time && !ubsForm.horarioVespertinoFim.$pristine }">
 												<label class="col-sm-2 control-label" for="horarioVespertinoFim">Fim</label>
 												<div class="col-sm-6">
-													<input type="time" id="horarioVespertinoFim" name="horarioVespertinoFim" ng-model="form.parametroUbs.horarioVespertinoFim" class="form-control"/>
+													<input type="time" ng-disabled="form.parametroUbs.horarioVespertino==false" id="horarioVespertinoFim" name="horarioVespertinoFim" ng-model="form.parametroUbs.horarioVespertinoFim" class="form-control"/>
 													<p ng-show="ubsForm.horarioVespertinoFim.$error.time && !ubsForm.horarioVespertinoFim.$pristine" class="help-block">Hora inválida.</p>
 												</div>
 											</div>
@@ -420,7 +428,7 @@
 											<div class="form-group" style="margin-bottom: 5px">
 												<div class="col-xs-7 col-sm-7 col-md-7">
 													<div class="checkbox">
-														<input type="checkbox" ng-model="form.parametroUbs.horarioNoturno" ng-init="form.horarioNoturno=true" id="horarioNoturno" name="horarioNoturno">
+														<input type="checkbox" ng-change="setFocusHorario('#horarioNoturnoInicio', '#horarioNoturnoFim')" ng-model="form.parametroUbs.horarioNoturno" ng-init="form.parametroUbs.horarioNoturno=false" id="horarioNoturno" name="horarioNoturno">
 														<label for="horarioNoturno">Noturno</label>
 													</div>
 												</div>
@@ -431,7 +439,7 @@
 											<div class="form-group" ng-class="{ 'has-error' : ubsForm.horarioNoturnoInicio.$error.time && !ubsForm.horarioNoturnoInicio.$pristine }">
 												<label class="col-sm-2 control-label" for="horarioNoturnoInicio">Início</label>
 												<div class="col-sm-6">
-													<input type="time" id="horarioNoturnoInicio" name="horarioNoturnoInicio" ng-model="form.parametroUbs.horarioNoturnoInicio" class="form-control"/>
+													<input type="time" ng-disabled="form.parametroUbs.horarioNoturno==false" id="horarioNoturnoInicio" name="horarioNoturnoInicio" ng-model="form.parametroUbs.horarioNoturnoInicio" class="form-control"/>
 													<p ng-show="ubsForm.horarioNoturnoInicio.$error.time && !ubsForm.horarioNoturnoInicio.$pristine" class="help-block">Hora inválida.</p>
 												</div>
 											</div>
@@ -439,7 +447,7 @@
 											<div class="form-group" ng-class="{ 'has-error' : ubsForm.horarioNoturnoFim.$error.time && !ubsForm.horarioNoturnoFim.$pristine }">
 												<label class="col-sm-2 control-label" for="horarioNoturnoFim">Fim</label>
 												<div class="col-sm-6">
-													<input type="time" id="horarioNoturnoFim" name="horarioNoturnoFim" ng-model="form.parametroUbs.horarioNoturnoFim" class="form-control"/>
+													<input type="time" ng-disabled="form.parametroUbs.horarioNoturno==false" id="horarioNoturnoFim" name="horarioNoturnoFim" ng-model="form.parametroUbs.horarioNoturnoFim" class="form-control"/>
 													<p ng-show="ubsForm.horarioNoturnoFim.$error.time && !ubsForm.horarioNoturnoFim.$pristine" class="help-block">Hora inválida.</p>
 												</div>
 											</div>
@@ -459,7 +467,6 @@
 					<button class="btn  btn-primary" type="submit" ng-disabled="ubsForm.$invalid">Salvar</button>
 					<a ng-click="cancelar(ubsForm.$dirty)" class="btn  btn-default">Cancelar</a>
 					<a ng-click="excluir()" ng-show="editandoCadastro" class="btn  btn-link aw-btn-link-danger">Excluir esta UBS</a>
-					<a ng-click="verificadata()" class="btn  btn-link aw-btn-link-danger">Testar Datas</a>
 				</div>
 			</div>
 		</form>
