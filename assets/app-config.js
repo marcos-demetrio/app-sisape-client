@@ -150,5 +150,23 @@
 				controller: 'UbsController',
 				title: 'Cadastro de UBS'
 			})
+			
+			.when('/profissional', {
+				templateUrl: 'views/profissional/listagem.html',
+				controller: 'ProfissionalListagemController',
+				title: 'Pesquisa de Profissional'
+			})
+
+			.when('/profissional/:id/editar', {
+				templateUrl: 'views/profissional/view.html',
+				controller: 'ProfissionalController',
+				title: 'Cadastro de Profissional'
+			})
+
+			.when('/profissional/novo', {
+				templateUrl: 'views/profissional/view.html',
+				controller: 'ProfissionalController',
+				title: 'Cadastro de Profissional'
+			})
 	}
 })();

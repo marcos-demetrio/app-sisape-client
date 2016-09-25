@@ -52,10 +52,6 @@
 		if(ubsID > 0){
 			UbsService.GetById(ubsID).then(function(data){
 				//if(data.parametroUbs != undefined){
-					moment.locale('pt-BR');
-					console.log(moment.utc().format('h:mm'));
-					
-					console.log('newdate:', new Date());
 					
 					if(data.parametroUbs.horarioMatutinoInicio != null){
 						data.parametroUbs.horarioMatutinoInicio = new Date(data.parametroUbs.horarioMatutinoInicio);
@@ -156,7 +152,6 @@
 		//-- Gravar os dados do cadastro no banco de dados
 		$scope.update = function(){
 			if(ubsID > 0){
-				console.log($scope.form);
 				UbsService.Update($scope.form, ubsID).then(function(data){
 					$location.path('/ubs');
 				})
