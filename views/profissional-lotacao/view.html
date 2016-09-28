@@ -1,0 +1,54 @@
+﻿<div ng-controller="ProfissionalLotacaoController">
+	<div class="page-header">
+		<div class="container-fluid">
+			<h1 ng-bind-template="{{title}}"></h1>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<form class="form-horizontal form-vertical  js-form-loading" name="lotacaoForm" ng-submit="update()">
+			<!-- Id input-->
+			<input type="hidden" id="i_profissional_lotacao" name="i_profissional_lotacao" ng-model="form.i_profissional_lotacao" />
+
+			<!-- UBS Select-->
+			<div class="form-group mdn-required" ng-class="{ 'has-error' : lotacaoForm.i_unidade_basica_saude.$invalid && !lotacaoForm.i_unidade_basica_saude.$pristine }">
+				<label for="i_unidade_basica_saude" class="col-sm-1 control-label">UBS</label>
+				<div class="col-sm-5">
+					<select class="form-control" id="i_unidade_basica_saude" name="i_unidade_basica_saude" required ng-options="unidade.nome for unidade in unidades track by unidade.i_unidade_basica_saude" ng-model="form.unidadeBasicaSaude"></select>
+
+					<p ng-show="lotacaoForm.i_unidade_basica_saude.$error.required && !lotacaoForm.i_unidade_basica_saude.$pristine" class="help-block">Selecione uma UBS.</p>
+				</div>
+			</div>
+			
+			<!-- Profissional Select-->
+			<div class="form-group mdn-required" ng-class="{ 'has-error' : lotacaoForm.i_profissional.$invalid && !lotacaoForm.i_profissional.$pristine }">
+				<label for="i_unidade_basica_saude" class="col-sm-1 control-label">Profissional</label>
+				<div class="col-sm-5">
+					<select class="form-control" id="i_profissional" name="i_profissional" required ng-options="profissional.nome for profissional in profissionais track by profissional.i_profissional" ng-model="form.profissional"></select>
+
+					<p ng-show="lotacaoForm.i_profissional.$error.required && !lotacaoForm.i_profissional.$pristine" class="help-block">Selecione um profissional.</p>
+				</div>
+			</div>
+			
+			<!-- CBO Select-->
+			<div class="form-group mdn-required" ng-class="{ 'has-error' : lotacaoForm.i_cbo.$invalid && !lotacaoForm.i_cbo.$pristine }">
+				<label for="i_cbo" class="col-sm-1 control-label">CBO</label>
+				<div class="col-sm-5">
+					<select class="form-control" id="i_cbo" name="i_cbo" required ng-options="cbo.nome for cbo in cbos track by cbo.i_cbo" ng-model="form.cbo"></select>
+
+					<p ng-show="lotacaoForm.i_cbo.$error.required && !lotacaoForm.i_cbo.$pristine" class="help-block">Selecione um CBO.</p>
+				</div>
+			</div>
+
+			<hr>
+
+			<div class="form-group">
+				<div style="margin-left: 15px;"><!--<div class="pull-right">-->
+					<button class="btn  btn-primary" type="submit" ng-disabled="lotacaoForm.$invalid">Salvar</button>
+					<a ng-click="cancelar(lotacaoForm.$dirty)" class="btn  btn-default">Cancelar</a>
+					<a ng-click="excluir()" ng-show="editandoCadastro" class="btn  btn-link aw-btn-link-danger">Excluir esta lotação</a>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

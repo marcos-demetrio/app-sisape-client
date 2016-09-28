@@ -168,5 +168,41 @@
 				controller: 'ProfissionalController',
 				title: 'Cadastro de Profissional'
 			})
+			
+			.when('/lotacao', {
+				templateUrl: 'views/profissional-lotacao/listagem.html',
+				controller: 'ProfissionalLotacaoListagemController',
+				title: 'Pesquisa de Lotação'
+			})
+
+			.when('/lotacao/:id/editar', {
+				templateUrl: 'views/profissional-lotacao/view.html',
+				controller: 'ProfissionalLotacaoController',
+				title: 'Cadastro de Lotação'
+			})
+
+			.when('/lotacao/novo', {
+				templateUrl: 'views/profissional-lotacao/view.html',
+				controller: 'ProfissionalLotacaoController',
+				title: 'Cadastro de Lotação'
+			})
+			
+			.when('/agenda', {
+				templateUrl: 'views/profissional-agenda/listagem.html',
+				controller: 'ProfissionalAgendaListagemController',
+				title: 'Pesquisa de Agenda'
+			})
+
+			.when('/agenda/:id/editar', {
+				templateUrl: 'views/profissional-agenda/view.html',
+				controller: 'ProfissionalAgendaController',
+				title: 'Cadastro de Agenda'
+			})
+
+			.when('/agenda/novo', {
+				templateUrl: 'views/profissional-agenda/view.html',
+				controller: 'ProfissionalAgendaController',
+				title: 'Cadastro de Agenda'
+			})
 	}
 })();

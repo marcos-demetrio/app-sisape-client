@@ -95,7 +95,21 @@
 							<a href="#/inicio"><i class="fa fa-fw fa-home"></i><span>Início</span></a>
 						</li>
 
-						<li class="aw-menu__item  is-expanded"><!--<li class="aw-menu__item  is-active">-->
+						<li class="aw-menu__item"><!--<li class="aw-menu__item  is-active">-->
+							<a href>
+								<i class="fa  fa-fw  fa-file-text"></i><span>Processos</span>
+								<i class="aw-menu__navigation-icon  fa"></i>
+							</a>
+					
+							<ul class="aw-menu__list  aw-menu__list--sublist"><!--onclick="$('.js-sidebar, .js-content').toggleClass('is-toggled');"-->
+								<li class="aw-menu__item  aw-menu__item--link  is-expanded"><a  href="#/pais"><i class="fa fa-wpforms" aria-hidden="true"></i>Agendar atendimento</a></li>
+								<li class="aw-menu__item  aw-menu__item--link  is-expanded"><a href="#/pais"><i class="fa fa-wpforms" aria-hidden="true"></i>Fila de atendimentos</a></li>
+								<li class="aw-menu__item  aw-menu__item--link  is-expanded"><a href="#/pais"><i class="fa fa-wpforms" aria-hidden="true"></i>Atendimento</a></li>
+								<li class="aw-menu__item  aw-menu__item--link  is-expanded"><a href="#/pais"><i class="fa fa-wpforms" aria-hidden="true"></i>Acompanhamento</a></li>
+							</ul>
+						</li>
+						
+						<li class="aw-menu__item"><!--<li class="aw-menu__item  is-active">--><!--is-expanded-->
 							<a href>
 								<i class="fa  fa-fw  fa-file-text"></i><span>Cadastros</span>
 								<i class="aw-menu__navigation-icon  fa"></i>
@@ -110,6 +124,7 @@
 								<li class="aw-menu__item  aw-menu__item--link  is-expanded"><a href="#/cidadao"><i class="fa fa-wpforms" aria-hidden="true"></i>Cidadão</a></li>
 								<li class="aw-menu__item  aw-menu__item--link  is-expanded"><a href="#/ubs"><i class="fa fa-wpforms" aria-hidden="true"></i>UBS</a></li>
 								<li class="aw-menu__item  aw-menu__item--link  is-expanded"><a href="#/profissional"><i class="fa fa-wpforms" aria-hidden="true"></i>Profissional</a></li>
+								<li class="aw-menu__item  aw-menu__item--link  is-expanded"><a href="#/lotacao"><i class="fa fa-wpforms" aria-hidden="true"></i>Profissional Lotação</a></li>
 							</ul>
 						</li>
 
@@ -201,6 +216,12 @@
 		
 		<script src="views/profissional/service.js"></script>
 		<script src="views/profissional/controller.js"></script>
+		
+		<script src="views/profissional-lotacao/service.js"></script>
+		<script src="views/profissional-lotacao/controller.js"></script>
+		
+		<script src="views/profissional-agenda/service.js"></script>
+		<script src="views/profissional-agenda/controller.js"></script>
 
 		<script src="views/unidade-basica-saude-tipo-estabelecimento/service.js"></script>
 		

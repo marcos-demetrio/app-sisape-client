@@ -14,8 +14,6 @@
 			<ul class="nav nav-pills">
 				<li class="active"><a href ng-click="setTab(1)" ng-class="{'active' : isSet(1)}" data-toggle="tab">Dados</a></li>
 				<li><a href ng-click="setTab(2)" ng-class="{'active' : isSet(2)}" data-toggle="tab">Localização</a></li>
-				<li><a href ng-click="setTab(3)" ng-class="{'active' : isSet(3)}" data-toggle="tab">Agenda</a></li>
-				<li><a href ng-click="setTab(4)" ng-class="{'active' : isSet(4)}" data-toggle="tab">Parâmetros</a></li>
 			</ul>
 
 			<br>
@@ -30,13 +28,6 @@
 							<p ng-show="profissionalForm.numeroCartaoNacionalSaude.$error.required && !profissionalForm.numeroCartaoNacionalSaude.$pristine" class="help-block">Campo obrigatório.</p>
 							<p ng-show="profissionalForm.numeroCartaoNacionalSaude.$error.minlength" class="help-block">Insira ao menos 15 caracteres.</p>
 						</div>
-
-						<div class="col-sm-5">
-							<div class="checkbox">
-								<input type="checkbox" ng-model="form.possuiCartaoNacionalSaude" ng-init="form.possuiCartaoNacionalSaude=true" id="possuiCartaoNacionalSaude" name="possuiCartaoNacionalSaude">
-								<label ng-click="ClickCheckBoxNumeroCartaoNacionalSaude()" for="possuiCartaoNacionalSaude">Possui CNS</label>
-							</div>
-						</div>
 					</div>
 
 					<!-- CPF Input -->
@@ -48,9 +39,9 @@
 						</div>
 					</div>
 
-					<!-- Nome Completo Input -->
+					<!-- Nome Input -->
 					<div class="form-group sisape-required" ng-class="{ 'has-error' : profissionalForm.nome.$invalid && !profissionalForm.nome.$pristine }">
-						<label class="col-sm-2 control-label" for="nome">Nome completo</label>
+						<label class="col-sm-2 control-label" for="nome">Nome</label>
 						<div class="col-sm-10">
 							<input ng-model="form.nome" id="nome" required name="nome" type="text" class="form-control" maxlength="100">
 							<p ng-show="profissionalForm.nome.$error.required && !profissionalForm.nome.$pristine" class="help-block">Campo obrigatório.</p>
@@ -71,7 +62,7 @@
 						</div>
 					</div>
 					
-					<!-- Sexo' Input -->
+					<!-- Sexo Input -->
 					<div class="form-group sisape-required" ng-class="{ 'has-error' : profissionalForm.sexo.$invalid && !profissionalForm.sexo.$pristine }">
 						<label for="sexo" class="col-sm-2 control-label">Sexo</label>
 						<div class="col-sm-2">
@@ -187,16 +178,6 @@
 					</div>
 				</div>
 			</div>
-
-			<div class="tab-content" ng-show="isSet(3)">
-				<div class="tab-pane fade in active">
-				</div>
-			</div>
-
-			<div class="tab-content" ng-show="isSet(4)">
-				<div class="tab-pane fade in active">
-				</div>
-			</div>
 			
 			<hr>
 
@@ -204,7 +185,7 @@
 				<div style="margin-left: 15px;"><!--<div class="pull-right">-->
 					<button class="btn  btn-primary" type="submit" ng-disabled="profissionalForm.$invalid">Salvar</button>
 					<a ng-click="cancelar(profissionalForm.$dirty)" class="btn  btn-default">Cancelar</a>
-					<a ng-click="excluir()" ng-show="editandoCadastro" class="btn  btn-link aw-btn-link-danger">Excluir este cidadão</a>
+					<a ng-click="excluir()" ng-show="editandoCadastro" class="btn  btn-link aw-btn-link-danger">Excluir este profissional</a>
 				</div>
 			</div>
 		</form>

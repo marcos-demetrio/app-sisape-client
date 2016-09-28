@@ -1,0 +1,137 @@
+﻿<div ng-controller="ProfissionalAgendaController">
+	<div class="page-header">
+		<div class="container-fluid">
+			<h1 ng-bind-template="{{title}}"></h1>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<form class="form-horizontal form-vertical  js-form-loading" name="agendaForm" ng-submit="update()">
+			<!-- Id input-->
+			<input type="hidden" id="i_profissional_agenda" name="i_profissional_agenda" ng-model="form.i_profissional_agenda" />
+
+			<!-- Lotação Select-->
+			<div class="form-group mdn-required" ng-class="{ 'has-error' : agendaForm.i_profissional_lotacao.$invalid && !agendaForm.i_profissional_lotacao.$pristine }">
+				<label for="i_profissional_lotacao" class="col-sm-1 control-label">Lotação</label>
+				<div class="col-sm-11">
+					<select	required
+								class="form-control"
+								id="i_profissional_lotacao"
+								name="i_profissional_lotacao"
+								ng-model="form.lotacao"
+								ng-options="lotacao.unidadeBasicaSaude.nome + ' - ' + lotacao.profissional.nome + ' - ' + lotacao.cbo.nome for lotacao in lotacoes track by lotacao.i_profissional_lotacao"
+								ng-change="selecionarAgenda(form.lotacao.i_profissional_lotacao)">
+					</select>
+
+					<p ng-show="agendaForm.i_profissional_lotacao.$error.required && !agendaForm.i_profissional_lotacao.$pristine" class="help-block">Selecione uma lotação.</p>
+				</div>
+			</div>
+			
+			<div class="panel-group" aria-multiselectable="true">
+				<div class="panel panel-default" ng-repeat="item in diasSemana">
+					<div class="panel-heading" style="cursor: pointer;" ng-click="collapsePanel($index)">
+						<h4 class="panel-title">{{ getDescricaoDiaSemana(item.diaSemana) }}</h4>
+					</div>
+					
+					<div ng-show="isPanelCollapsed($index)">
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-4">
+									<div class="checkbox">
+										<input 	type="checkbox"
+													id="horarioMatutino{{$index}}"
+													name="horarioMatutino"
+													ng-model="item.horarioMatutino">
+										<label for="horarioMatutino{{$index}}"  >Matutino</label>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="checkbox">
+										<input 	type="checkbox"
+													id="horarioVespertino{{$index}}"
+													name="horarioVespertino"
+													ng-model="item.horarioVespertino">
+										<label for="horarioVespertino{{$index}}">Vespertino</label>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="checkbox">
+										<input 	type="checkbox"
+													id="horarioNoturno{{$index}}"
+													name="horarioNoturno"
+													ng-model="item.horarioNoturno">
+										<label for="horarioNoturno{{$index}}">Noturno</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="panel panel-default">
+				<div class="panel-heading">Configuração semanal</div>
+				<!--<div class="panel-body">
+					<p>...</p>
+				</div>-->
+
+				<!-- Table -->
+				<table class="table">
+					<thead class="aw-table-header-solid">
+						<tr>
+							<th>#</th>
+							<th>Dia da semana</th>
+							<th>Matutino</th>
+							<th>Vespertino</th>
+							<th>Noturno</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr ng-repeat="item in diasSemana">
+							<td>{{ $index }}</td>
+							<td>{{ getDescricaoDiaSemana(item.diaSemana) }}</td>
+							<td>
+								<div class="checkbox">
+									<input 	type="checkbox"
+												id="horarioMatutino"
+												name="horarioMatutino"
+												ng-model="item.horarioMatutino">
+									<label for="horarioMatutino"></label>
+								</div>
+							</td>
+							<td>
+								<div class="checkbox">
+									<input 	type="checkbox"
+												id="horarioVespertino"
+												name="horarioVespertino"
+												ng-model="item.horarioVespertino">
+									<label for="horarioVespertino"></label>
+								</div>
+							</td>
+							<td>
+								<div class="checkbox">
+									<input 	type="checkbox"
+												id="horarioNoturno"
+												name="horarioNoturno"
+												ng-model="item.horarioNoturno">
+									<label for="horarioNoturno"></label>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<hr>
+
+			<div class="form-group">
+				<div style="margin-left: 15px;"><!--<div class="pull-right">-->
+					<button class="btn  btn-primary" type="submit" ng-disabled="agendaForm.$invalid">Salvar</button>
+					<a ng-click="cancelar(agendaForm.$dirty)" class="btn  btn-default">Cancelar</a>
+					<a ng-click="excluir()" ng-show="editandoCadastro" class="btn  btn-link aw-btn-link-danger">Excluir esta agenda</a>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
