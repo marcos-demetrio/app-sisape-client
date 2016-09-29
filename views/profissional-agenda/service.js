@@ -21,8 +21,8 @@
 			return $http.delete(API + 'agendaprofissional/' + id).then(handleSuccess, handleError('Erro ao excluir agenda pelo ID: ' + id));
 		}
 
-		service.Create = function Create(agendaProfissional) {
-			return $http.post(API + 'agendaprofissional/', agendaProfissional).then(handleSuccess, handleError('Erro ao criar agenda'));
+		service.Create = function Create(agendaProfissional, id) {
+			return $http.post(API + 'agendaprofissional/' + id, agendaProfissional).then(handleSuccess, handleError('Erro ao criar agenda'));
 		}
 
 		service.Update = function Update(agendaProfissional, id) {

@@ -28,7 +28,7 @@
 			</div>
 			
 			<div class="panel-group" aria-multiselectable="true">
-				<div class="panel panel-default" ng-repeat="item in diasSemana">
+				<div class="panel panel-info" ng-repeat="item in diasSemana">
 					<div class="panel-heading" style="cursor: pointer;" ng-click="collapsePanel($index)">
 						<h4 class="panel-title">{{ getDescricaoDiaSemana(item.diaSemana) }}</h4>
 					</div>
@@ -37,30 +37,132 @@
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-md-4">
-									<div class="checkbox">
-										<input 	type="checkbox"
-													id="horarioMatutino{{$index}}"
-													name="horarioMatutino"
-													ng-model="item.horarioMatutino">
-										<label for="horarioMatutino{{$index}}"  >Matutino</label>
+									<div class="panel panel-info">
+										<div class="panel-heading">
+											<div class="form-group" style="margin-bottom: 5px">
+												<div class="col-xs-7 col-sm-7 col-md-7">
+													<div class="checkbox">
+														<input	type="checkbox"
+																	ng-model="item.horarioMatutino"
+																	id="horarioMatutino{{$index}}"
+																	name="horarioMatutino{{$index}}">
+														<label for="horarioMatutino{{$index}}">Matuino</label>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="panel-body">
+											<div class="form-group">
+												<label class="col-sm-2 control-label" for="horarioMatutinoInicio{{$index}}">Início</label>
+												<div class="col-sm-6">
+													<input	type="text"
+																ng-disabled="item.horarioMatutino==false"
+																id="horarioMatutinoInicio{{$index}}"
+																name="horarioMatutinoInicio{{$index}}"
+																ng-model="item.horarioMatutinoInicio"
+																class="form-control"/>
+												</div>
+											</div>
+											
+											<div class="form-group">
+												<label class="col-sm-2 control-label" for="horarioMatutinoFim{{$index}}">Fim</label>
+												<div class="col-sm-6">
+													<input	type="text"
+																ng-disabled="item.horarioMatutino==false"
+																id="horarioMatutinoFim{{$index}}"
+																name="horarioMatutinoFim{{$index}}"
+																ng-model="item.horarioMatutinoFim"
+																class="form-control"/>
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
 								<div class="col-md-4">
-									<div class="checkbox">
-										<input 	type="checkbox"
-													id="horarioVespertino{{$index}}"
-													name="horarioVespertino"
-													ng-model="item.horarioVespertino">
-										<label for="horarioVespertino{{$index}}">Vespertino</label>
+									<div class="panel panel-info">
+										<div class="panel-heading">
+											<div class="form-group" style="margin-bottom: 5px">
+												<div class="col-xs-7 col-sm-7 col-md-7">
+													<div class="checkbox">
+														<input	type="checkbox"
+																	ng-model="item.horarioVespertino"
+																	id="horarioVespertino{{$index}}"
+																	name="horarioVespertino{{$index}}">
+														<label for="horarioVespertino{{$index}}">Vespertino</label>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="panel-body">
+											<div class="form-group">
+												<label class="col-sm-2 control-label" for="horarioVespertinoInicio{{$index}}">Início</label>
+												<div class="col-sm-6">
+													<input	type="text"
+																ng-disabled="item.horarioVespertino==false"
+																id="horarioVespertinoInicio{{$index}}"
+																name="horarioVespertinoInicio{{$index}}"
+																ng-model="item.horarioVespertinoInicio"
+																class="form-control"/>
+												</div>
+											</div>
+											
+											<div class="form-group">
+												<label class="col-sm-2 control-label" for="horarioVespertinoFim{{$index}}">Fim</label>
+												<div class="col-sm-6">
+													<input	type="text"
+																ng-disabled="item.horarioVespertino==false"
+																id="horarioVespertinoFim{{$index}}"
+																name="horarioVespertinoFim{{$index}}"
+																ng-model="item.horarioVespertinoFim"
+																class="form-control"/>
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
 								<div class="col-md-4">
-									<div class="checkbox">
-										<input 	type="checkbox"
-													id="horarioNoturno{{$index}}"
-													name="horarioNoturno"
-													ng-model="item.horarioNoturno">
-										<label for="horarioNoturno{{$index}}">Noturno</label>
+									<div class="panel panel-info">
+										<div class="panel-heading">
+											<div class="form-group" style="margin-bottom: 5px">
+												<div class="col-xs-7 col-sm-7 col-md-7">
+													<div class="checkbox">
+														<input	type="checkbox"
+																	ng-model="item.horarioNoturno"
+																	id="horarioNoturno{{$index}}"
+																	name="horarioNoturno{{$index}}">
+														<label for="horarioNoturno{{$index}}">Noturno</label>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="panel-body">
+											<div class="form-group">
+												<label class="col-sm-2 control-label" for="horarioNoturnoInicio{{$index}}">Início</label>
+												<div class="col-sm-6">
+													<input	type="text"
+																ng-disabled="item.horarioNoturno==false"
+																id="horarioNoturnoInicio{{$index}}"
+																name="horarioNoturnoInicio{{$index}}"
+																ng-model="item.horarioNoturnoInicio"
+																class="form-control"/>
+												</div>
+											</div>
+											
+											<div class="form-group">
+												<label class="col-sm-2 control-label" for="horarioNoturnoFim{{$index}}">Fim</label>
+												<div class="col-sm-6">
+													<input	type="text"
+																ng-disabled="item.horarioNoturno==false"
+																id="horarioNoturnoFim{{$index}}"
+																name="horarioNoturnoFim{{$index}}"
+																ng-model="item.horarioNoturnoFim"
+																class="form-control"/>
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -69,60 +171,6 @@
 				</div>
 			</div>
 			
-			<div class="panel panel-default">
-				<div class="panel-heading">Configuração semanal</div>
-				<!--<div class="panel-body">
-					<p>...</p>
-				</div>-->
-
-				<!-- Table -->
-				<table class="table">
-					<thead class="aw-table-header-solid">
-						<tr>
-							<th>#</th>
-							<th>Dia da semana</th>
-							<th>Matutino</th>
-							<th>Vespertino</th>
-							<th>Noturno</th>
-						</tr>
-					</thead>
-
-					<tbody>
-						<tr ng-repeat="item in diasSemana">
-							<td>{{ $index }}</td>
-							<td>{{ getDescricaoDiaSemana(item.diaSemana) }}</td>
-							<td>
-								<div class="checkbox">
-									<input 	type="checkbox"
-												id="horarioMatutino"
-												name="horarioMatutino"
-												ng-model="item.horarioMatutino">
-									<label for="horarioMatutino"></label>
-								</div>
-							</td>
-							<td>
-								<div class="checkbox">
-									<input 	type="checkbox"
-												id="horarioVespertino"
-												name="horarioVespertino"
-												ng-model="item.horarioVespertino">
-									<label for="horarioVespertino"></label>
-								</div>
-							</td>
-							<td>
-								<div class="checkbox">
-									<input 	type="checkbox"
-												id="horarioNoturno"
-												name="horarioNoturno"
-												ng-model="item.horarioNoturno">
-									<label for="horarioNoturno"></label>
-								</div>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-
 			<hr>
 
 			<div class="form-group">

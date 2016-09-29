@@ -94,10 +94,6 @@
 
 		//-- Gravar os dados do cadastro no banco de dados
 		$scope.update = function(){
-			var pais = angular.fromJson($scope.form.pais);
-
-			$scope.form.pais = pais;
-
 			if(lotacaoID > 0){
 				ProfissionalLotacaoService.Update($scope.form, lotacaoID).then(function(data){
 					$location.path('/lotacao');

@@ -3,8 +3,7 @@
 
 	angular
 		.module('app')
-		.controller('ProfissionalAgendaController', ProfissionalAgendaController)
-		.controller('ProfissionalAgendaListagemController', ProfissionalAgendaListagemController);
+		.controller('ProfissionalAgendaController', ProfissionalAgendaController);
 
 	ProfissionalAgendaController.$inject = ['$scope', '$location', '$route', '$routeParams', 'ProfissionalAgendaService', 'ProfissionalLotacaoService', 'UbsService', 'ProfissionalService', 'CboService'];
 
@@ -27,12 +26,6 @@
 			return $scope.panel[panelNum].collapsed;
 		};
 		//--
-	
-		//-- Pegar a variável 'id' vinda da url, se for maior que zero esta editando, senão está inserindo
-		var agendaID = ($routeParams.id) ? parseInt($routeParams.id) : 0;
-
-		$scope.editandoCadastro = (agendaID > 0);
-		//--
 
 		//-- Carregar lista de Lotação
 		ProfissionalLotacaoService.GetAll().then(function(data){
@@ -46,21 +39,21 @@
 				$scope.diasSemana = [];
 				$scope.diasSemana = data;
 				
-				if(data.length > 0){
-					console.log(data);
-				}else{
+				$scope.editandoCadastro = (data.length > 0);
+				
+				if(data.length === 0){
 					$scope.diasSemana = [
-						{diaSemana: "DOMINGO"		, horarioMatutino: false, horarioMatutinoInicio: null, horarioMatutinoFim: null, horarioVespertino: false, horarioVespertinoInicio: null, horarioVespertinoFim: null, horarioNoturno: false, horarioNoturnoInicio: null, horarioNoturnoFim: null},
-						{diaSemana: "SEGUNDA_FEIRA", horarioMatutino: false, horarioMatutinoInicio: null, horarioMatutinoFim: null, horarioVespertino: false, horarioVespertinoInicio: null, horarioVespertinoFim: null, horarioNoturno: false, horarioNoturnoInicio: null, horarioNoturnoFim: null},
-						{diaSemana: "TERCA_FEIRA"	, horarioMatutino: false, horarioMatutinoInicio: null, horarioMatutinoFim: null, horarioVespertino: false, horarioVespertinoInicio: null, horarioVespertinoFim: null, horarioNoturno: false, horarioNoturnoInicio: null, horarioNoturnoFim: null},
-						{diaSemana: "QUARTA_FEIRA"	, horarioMatutino: false, horarioMatutinoInicio: null, horarioMatutinoFim: null, horarioVespertino: false, horarioVespertinoInicio: null, horarioVespertinoFim: null, horarioNoturno: false, horarioNoturnoInicio: null, horarioNoturnoFim: null},
-						{diaSemana: "QUINTA_FEIRA"	, horarioMatutino: false, horarioMatutinoInicio: null, horarioMatutinoFim: null, horarioVespertino: false, horarioVespertinoInicio: null, horarioVespertinoFim: null, horarioNoturno: false, horarioNoturnoInicio: null, horarioNoturnoFim: null},
-						{diaSemana: "SEXTA_FEIRA"	, horarioMatutino: false, horarioMatutinoInicio: null, horarioMatutinoFim: null, horarioVespertino: false, horarioVespertinoInicio: null, horarioVespertinoFim: null, horarioNoturno: false, horarioNoturnoInicio: null, horarioNoturnoFim: null},
-						{diaSemana: "SABADO"			, horarioMatutino: false, horarioMatutinoInicio: null, horarioMatutinoFim: null, horarioVespertino: false, horarioVespertinoInicio: null, horarioVespertinoFim: null, horarioNoturno: false, horarioNoturnoInicio: null, horarioNoturnoFim: null}
+						{i_profissional_agenda: null, lotacao: null, diaSemana: "DOMINGO"			, horarioMatutino: false, horarioMatutinoInicio: null, horarioMatutinoFim: null, horarioVespertino: false, horarioVespertinoInicio: null, horarioVespertinoFim: null, horarioNoturno: false, horarioNoturnoInicio: null, horarioNoturnoFim: null},
+						{i_profissional_agenda: null, lotacao: null, diaSemana: "SEGUNDA_FEIRA"	, horarioMatutino: false, horarioMatutinoInicio: null, horarioMatutinoFim: null, horarioVespertino: false, horarioVespertinoInicio: null, horarioVespertinoFim: null, horarioNoturno: false, horarioNoturnoInicio: null, horarioNoturnoFim: null},
+						{i_profissional_agenda: null, lotacao: null, diaSemana: "TERCA_FEIRA"	, horarioMatutino: false, horarioMatutinoInicio: null, horarioMatutinoFim: null, horarioVespertino: false, horarioVespertinoInicio: null, horarioVespertinoFim: null, horarioNoturno: false, horarioNoturnoInicio: null, horarioNoturnoFim: null},
+						{i_profissional_agenda: null, lotacao: null, diaSemana: "QUARTA_FEIRA"	, horarioMatutino: false, horarioMatutinoInicio: null, horarioMatutinoFim: null, horarioVespertino: false, horarioVespertinoInicio: null, horarioVespertinoFim: null, horarioNoturno: false, horarioNoturnoInicio: null, horarioNoturnoFim: null},
+						{i_profissional_agenda: null, lotacao: null, diaSemana: "QUINTA_FEIRA"	, horarioMatutino: false, horarioMatutinoInicio: null, horarioMatutinoFim: null, horarioVespertino: false, horarioVespertinoInicio: null, horarioVespertinoFim: null, horarioNoturno: false, horarioNoturnoInicio: null, horarioNoturnoFim: null},
+						{i_profissional_agenda: null, lotacao: null, diaSemana: "SEXTA_FEIRA"	, horarioMatutino: false, horarioMatutinoInicio: null, horarioMatutinoFim: null, horarioVespertino: false, horarioVespertinoInicio: null, horarioVespertinoFim: null, horarioNoturno: false, horarioNoturnoInicio: null, horarioNoturnoFim: null},
+						{i_profissional_agenda: null, lotacao: null, diaSemana: "SABADO"			, horarioMatutino: false, horarioMatutinoInicio: null, horarioMatutinoFim: null, horarioVespertino: false, horarioVespertinoInicio: null, horarioVespertinoFim: null, horarioNoturno: false, horarioNoturnoInicio: null, horarioNoturnoFim: null}
 					];
 				}
 				
-				console.log($scope.diasSemana);
+				//console.log($scope.diasSemana);
 			});
 		}
 		//--
@@ -94,30 +87,6 @@
 			return descricaoDiaSemana;
 		}
 
-		//-- Excluir cadastro, faz a confirmação
-		$scope.excluir = function() {
-			swal({   
-					title: "Tem certeza?",
-					text: "Você não poderá recuperar a agenda após excluir.",
-					type: "warning",
-					showCancelButton: true,
-					confirmButtonColor: "#DD6B55",
-					confirmButtonText: "Sim, excluir agora!",
-					cancelButtonText: "Não!",
-					closeOnConfirm: true,
-					closeOnCancel: true
-				},
-				function(isConfirm){
-					if (isConfirm) {
-						ProfissionalAgendaService.Delete(agendaID).then(function(data){
-							$location.path('/lotacao');
-							$route.reload();
-						});
-					}
-				});
-		}
-		//--
-
 		//-- Cancela operação no cadastro, se alterou alguma informação, faz a confirmação
 		$scope.cancelar = function(dirty) {
 			if(dirty){
@@ -146,34 +115,20 @@
 
 		//-- Gravar os dados do cadastro no banco de dados
 		$scope.update = function(){
-			var pais = angular.fromJson($scope.form.pais);
-
-			$scope.form.pais = pais;
-
-			if(agendaID > 0){
-				ProfissionalAgendaService.Update($scope.form, agendaID).then(function(data){
-					$location.path('/lotacao');
-				})
+			var lotacaoID = $scope.form.lotacao.i_profissional_lotacao;
+			
+			if($scope.editandoCadastro){
+				ProfissionalAgendaService.Update($scope.diasSemana, lotacaoID).then(function(data){
+					//$location.path('/agenda');
+					$scope.form.lotacao = null;
+				});
 			}else{			
-				ProfissionalAgendaService.Create($scope.form).then(function(data){
-					$location.path('/lotacao');
+				ProfissionalAgendaService.Create($scope.diasSemana, lotacaoID).then(function(data){
+					//$location.path('/agenda');
+					$scope.form.lotacao = null;
 				});
 			}
 		}
 		//--
-	}
-
-	ProfissionalAgendaListagemController.$inject = ['$scope', '$location', '$window', 'ProfissionalAgendaService'];
-
-	function ProfissionalAgendaListagemController($scope, $location, $window, ProfissionalAgendaService) {
-		$scope.listaVazia = true;
-		$scope.itens = [];
-
-		ProfissionalAgendaService.GetAll().then(function(data){
-			$scope.itens = data;
-			$scope.totalItens = $scope.itens.length;
-
-			$scope.listaVazia = $scope.itens.length === 0;
-		});
 	}
 })();

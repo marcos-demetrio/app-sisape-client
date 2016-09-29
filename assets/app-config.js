@@ -188,18 +188,6 @@
 			})
 			
 			.when('/agenda', {
-				templateUrl: 'views/profissional-agenda/listagem.html',
-				controller: 'ProfissionalAgendaListagemController',
-				title: 'Pesquisa de Agenda'
-			})
-
-			.when('/agenda/:id/editar', {
-				templateUrl: 'views/profissional-agenda/view.html',
-				controller: 'ProfissionalAgendaController',
-				title: 'Cadastro de Agenda'
-			})
-
-			.when('/agenda/novo', {
 				templateUrl: 'views/profissional-agenda/view.html',
 				controller: 'ProfissionalAgendaController',
 				title: 'Cadastro de Agenda'
