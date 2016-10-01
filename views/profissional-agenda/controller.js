@@ -36,13 +36,15 @@
 		//-- Ao selecionar uma lotacao
 		$scope.selecionarAgenda = function(idLotacao) {
 			ProfissionalAgendaService.GetByLotacao(idLotacao).then(function(data){
+				var dias = [];
 				$scope.diasSemana = [];
-				$scope.diasSemana = data;
-				
+
+				dias = data;
+
 				$scope.editandoCadastro = (data.length > 0);
 				
 				if(data.length === 0){
-					$scope.diasSemana = [
+					dias = [
 						{i_profissional_agenda: null, lotacao: null, diaSemana: "DOMINGO"			, horarioMatutino: false, horarioMatutinoInicio: null, horarioMatutinoFim: null, horarioVespertino: false, horarioVespertinoInicio: null, horarioVespertinoFim: null, horarioNoturno: false, horarioNoturnoInicio: null, horarioNoturnoFim: null},
 						{i_profissional_agenda: null, lotacao: null, diaSemana: "SEGUNDA_FEIRA"	, horarioMatutino: false, horarioMatutinoInicio: null, horarioMatutinoFim: null, horarioVespertino: false, horarioVespertinoInicio: null, horarioVespertinoFim: null, horarioNoturno: false, horarioNoturnoInicio: null, horarioNoturnoFim: null},
 						{i_profissional_agenda: null, lotacao: null, diaSemana: "TERCA_FEIRA"	, horarioMatutino: false, horarioMatutinoInicio: null, horarioMatutinoFim: null, horarioVespertino: false, horarioVespertinoInicio: null, horarioVespertinoFim: null, horarioNoturno: false, horarioNoturnoInicio: null, horarioNoturnoFim: null},
@@ -52,8 +54,47 @@
 						{i_profissional_agenda: null, lotacao: null, diaSemana: "SABADO"			, horarioMatutino: false, horarioMatutinoInicio: null, horarioMatutinoFim: null, horarioVespertino: false, horarioVespertinoInicio: null, horarioVespertinoFim: null, horarioNoturno: false, horarioNoturnoInicio: null, horarioNoturnoFim: null}
 					];
 				}
-				
-				//console.log($scope.diasSemana);
+
+				var dateArray = [];
+				for (var i = dias.length - 1; i >= 0; i--) {
+					if(dias[i].horarioMatutinoInicio != null){
+						dateArray = dias[i].horarioMatutinoInicio.split(":");
+
+						dias[i].horarioMatutinoInicio = new Date(2016, 1, 1, parseInt(dateArray[0]), parseInt(dateArray[1]), parseInt(dateArray[2]));
+					}
+
+					if(dias[i].horarioMatutinoFim != null){
+						dateArray = dias[i].horarioMatutinoFim.split(":");
+
+						dias[i].horarioMatutinoFim = new Date(2016, 1, 1, parseInt(dateArray[0]), parseInt(dateArray[1]), parseInt(dateArray[2]));
+					}
+
+					if(dias[i].horarioVespertinoInicio != null){
+						dateArray = dias[i].horarioVespertinoInicio.split(":");
+
+						dias[i].horarioVespertinoInicio = new Date(2016, 1, 1, parseInt(dateArray[0]), parseInt(dateArray[1]), parseInt(dateArray[2]));
+					}
+
+					if(dias[i].horarioVespertinoFim != null){
+						dateArray = dias[i].horarioVespertinoFim.split(":");
+
+						dias[i].horarioVespertinoFim = new Date(2016, 1, 1, parseInt(dateArray[0]), parseInt(dateArray[1]), parseInt(dateArray[2]));
+					}
+
+					if(dias[i].horarioNoturnoInicio != null){
+						dateArray = dias[i].horarioNoturnoInicio.split(":");
+
+						dias[i].horarioNoturnoInicio = new Date(2016, 1, 1, parseInt(dateArray[0]), parseInt(dateArray[1]), parseInt(dateArray[2]));
+					}
+
+					if(dias[i].horarioNoturnoFim != null){
+						dateArray = dias[i].horarioNoturnoFim.split(":");
+
+						dias[i].horarioNoturnoFim = new Date(2016, 1, 1, parseInt(dateArray[0]), parseInt(dateArray[1]), parseInt(dateArray[2]));
+					}
+				}
+
+				$scope.diasSemana = dias;
 			});
 		}
 		//--
@@ -87,45 +128,18 @@
 			return descricaoDiaSemana;
 		}
 
-		//-- Cancela operação no cadastro, se alterou alguma informação, faz a confirmação
-		$scope.cancelar = function(dirty) {
-			if(dirty){
-				swal({   
-						title: "Tem certeza?",
-						text: "Você não poderá recuperar os dados alterados da agenda após cancelar.",
-						type: "warning",
-						showCancelButton: true,
-						confirmButtonColor: "#DD6B55",
-						confirmButtonText: "Sim, cancelar agora!",
-						cancelButtonText: "Não!",
-						closeOnConfirm: true,
-						closeOnCancel: true
-					},
-					function(isConfirm){
-						if (isConfirm) {
-							$location.path('/lotacao');
-							$route.reload();
-						}
-					});
-			}else{
-				$location.path('/lotacao');
-			}
-		}
-		//--
-
 		//-- Gravar os dados do cadastro no banco de dados
 		$scope.update = function(){
 			var lotacaoID = $scope.form.lotacao.i_profissional_lotacao;
-			
 			if($scope.editandoCadastro){
 				ProfissionalAgendaService.Update($scope.diasSemana, lotacaoID).then(function(data){
-					//$location.path('/agenda');
-					$scope.form.lotacao = null;
+					$location.path('/agenda');
+					$route.reload();
 				});
 			}else{			
 				ProfissionalAgendaService.Create($scope.diasSemana, lotacaoID).then(function(data){
-					//$location.path('/agenda');
-					$scope.form.lotacao = null;
+					$location.path('/agenda');
+					$route.reload();
 				});
 			}
 		}

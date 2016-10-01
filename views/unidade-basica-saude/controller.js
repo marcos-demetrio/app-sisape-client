@@ -51,31 +51,44 @@
 		//-- Caso esteja editando, obtem os dados do cadastro
 		if(ubsID > 0){
 			UbsService.GetById(ubsID).then(function(data){
-				//if(data.parametroUbs != undefined){
-					
+				if(data.parametroUbs != undefined){
+					var dateArray = [];
 					if(data.parametroUbs.horarioMatutinoInicio != null){
-						data.parametroUbs.horarioMatutinoInicio = new Date(data.parametroUbs.horarioMatutinoInicio);
+						dateArray = data.parametroUbs.horarioMatutinoInicio.split(":");
+
+						data.parametroUbs.horarioMatutinoInicio = new Date(2016, 1, 1, parseInt(dateArray[0]), parseInt(dateArray[1]), parseInt(dateArray[2]));
 					}
-					
+
 					if(data.parametroUbs.horarioMatutinoFim != null){
-						data.parametroUbs.horarioMatutinoFim = new Date(data.parametroUbs.horarioMatutinoFim);
+						dateArray = data.parametroUbs.horarioMatutinoFim.split(":");
+
+						data.parametroUbs.horarioMatutinoFim = new Date(2016, 1, 1, parseInt(dateArray[0]), parseInt(dateArray[1]), parseInt(dateArray[2]));
 					}
-					
+
 					if(data.parametroUbs.horarioVespertinoInicio != null){
-						data.parametroUbs.horarioVespertinoInicio = new Date(data.parametroUbs.horarioVespertinoInicio);
+						dateArray = data.parametroUbs.horarioVespertinoInicio.split(":");
+
+						data.parametroUbs.horarioVespertinoInicio = new Date(2016, 1, 1, parseInt(dateArray[0]), parseInt(dateArray[1]), parseInt(dateArray[2]));
 					}
-					
+
 					if(data.parametroUbs.horarioVespertinoFim != null){
-						data.parametroUbs.horarioVespertinoFim = new Date(data.parametroUbs.horarioVespertinoFim);
+						dateArray = data.parametroUbs.horarioVespertinoFim.split(":");
+
+						data.parametroUbs.horarioVespertinoFim = new Date(2016, 1, 1, parseInt(dateArray[0]), parseInt(dateArray[1]), parseInt(dateArray[2]));
 					}
-					
+
 					if(data.parametroUbs.horarioNoturnoInicio != null){
-						data.parametroUbs.horarioNoturnoInicio = new Date(data.parametroUbs.horarioNoturnoInicio);
+						dateArray = data.parametroUbs.horarioNoturnoInicio.split(":");
+
+						data.parametroUbs.horarioNoturnoInicio = new Date(2016, 1, 1, parseInt(dateArray[0]), parseInt(dateArray[1]), parseInt(dateArray[2]));
 					}
-					
+
 					if(data.parametroUbs.horarioNoturnoFim != null){
-						data.parametroUbs.horarioNoturnoFim = new Date(data.parametroUbs.horarioNoturnoFim);
+						dateArray = data.parametroUbs.horarioNoturnoFim.split(":");
+
+						data.parametroUbs.horarioNoturnoFim = new Date(2016, 1, 1, parseInt(dateArray[0]), parseInt(dateArray[1]), parseInt(dateArray[2]));
 					}
+				}
 					
 					
 					

@@ -56,7 +56,7 @@
 											<div class="form-group">
 												<label class="col-sm-2 control-label" for="horarioMatutinoInicio{{$index}}">Início</label>
 												<div class="col-sm-6">
-													<input	type="text"
+													<input	type="time"
 																ng-disabled="item.horarioMatutino==false"
 																id="horarioMatutinoInicio{{$index}}"
 																name="horarioMatutinoInicio{{$index}}"
@@ -68,7 +68,7 @@
 											<div class="form-group">
 												<label class="col-sm-2 control-label" for="horarioMatutinoFim{{$index}}">Fim</label>
 												<div class="col-sm-6">
-													<input	type="text"
+													<input	type="time"
 																ng-disabled="item.horarioMatutino==false"
 																id="horarioMatutinoFim{{$index}}"
 																name="horarioMatutinoFim{{$index}}"
@@ -99,7 +99,7 @@
 											<div class="form-group">
 												<label class="col-sm-2 control-label" for="horarioVespertinoInicio{{$index}}">Início</label>
 												<div class="col-sm-6">
-													<input	type="text"
+													<input	type="time"
 																ng-disabled="item.horarioVespertino==false"
 																id="horarioVespertinoInicio{{$index}}"
 																name="horarioVespertinoInicio{{$index}}"
@@ -111,7 +111,7 @@
 											<div class="form-group">
 												<label class="col-sm-2 control-label" for="horarioVespertinoFim{{$index}}">Fim</label>
 												<div class="col-sm-6">
-													<input	type="text"
+													<input	type="time"
 																ng-disabled="item.horarioVespertino==false"
 																id="horarioVespertinoFim{{$index}}"
 																name="horarioVespertinoFim{{$index}}"
@@ -142,7 +142,7 @@
 											<div class="form-group">
 												<label class="col-sm-2 control-label" for="horarioNoturnoInicio{{$index}}">Início</label>
 												<div class="col-sm-6">
-													<input	type="text"
+													<input	type="time"
 																ng-disabled="item.horarioNoturno==false"
 																id="horarioNoturnoInicio{{$index}}"
 																name="horarioNoturnoInicio{{$index}}"
@@ -154,7 +154,7 @@
 											<div class="form-group">
 												<label class="col-sm-2 control-label" for="horarioNoturnoFim{{$index}}">Fim</label>
 												<div class="col-sm-6">
-													<input	type="text"
+													<input	type="time"
 																ng-disabled="item.horarioNoturno==false"
 																id="horarioNoturnoFim{{$index}}"
 																name="horarioNoturnoFim{{$index}}"
@@ -176,8 +176,6 @@
 			<div class="form-group">
 				<div style="margin-left: 15px;"><!--<div class="pull-right">-->
 					<button class="btn  btn-primary" type="submit" ng-disabled="agendaForm.$invalid">Salvar</button>
-					<a ng-click="cancelar(agendaForm.$dirty)" class="btn  btn-default">Cancelar</a>
-					<a ng-click="excluir()" ng-show="editandoCadastro" class="btn  btn-link aw-btn-link-danger">Excluir esta agenda</a>
 				</div>
 			</div>
 		</form>
