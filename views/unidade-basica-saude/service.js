@@ -21,6 +21,10 @@
 			return $http.delete(API + 'ubs/' + id).then(handleSuccess, handleError('Erro ao excluir ubs pelo ID: ' + id));
 		}
 
+		service.DeleteZonaAtendimento = function DeleteZonaAtendimento(idZona) {
+			return $http.delete(API + 'ubs/zona/' + idZona).then(handleSuccess, handleError('Erro ao excluir Zona de Atendimento pelo ID: ' + idZona));
+		}
+
 		service.Create = function Create(ubs) {
 			return $http.post(API + 'ubs/', ubs).then(handleSuccess, handleError('Erro ao criar ubs'));
 		}

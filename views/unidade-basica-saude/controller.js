@@ -9,7 +9,8 @@
 	UbsController.$inject = ['$scope', '$timeout', '$location', '$route', '$routeParams', '$window', 'UbsService', 'MunicipioService', 'TipoEstabelecimentoUbsService'];
 
 	function UbsController($scope, $timeout, $location, $route, $routeParams, $window, UbsService, MunicipioService, TipoEstabelecimentoUbsService) {
-		
+		$scope.zonasExcluidas = [];
+
 		//-- Controle Tabs Principal
 		$scope.tab = 1;
 		$scope.setTab = function(newTab){
@@ -89,25 +90,8 @@
 						data.parametroUbs.horarioNoturnoFim = new Date(2016, 1, 1, parseInt(dateArray[0]), parseInt(dateArray[1]), parseInt(dateArray[2]));
 					}
 				}
-					
-					
-					
-				/*	data.parametroUbs.horarioMatutinoInicio	= new Date('01/01/2016 ' + data.parametroUbs.horarioMatutinoInicio || '00:00:00');
-					data.parametroUbs.horarioMatutinoFim		= new Date('01/01/2016 ' + data.parametroUbs.horarioMatutinoFim || '00:00:00');
-					data.parametroUbs.horarioVespertinoInicio	= new Date('01/01/2016 ' + data.parametroUbs.horarioVespertinoInicio || '00:00:00');
-					data.parametroUbs.horarioVespertinoFim		= new Date('01/01/2016 ' + data.parametroUbs.horarioVespertinoFim || '00:00:00');
-					data.parametroUbs.horarioNoturnoInicio		= new Date('01/01/2016 ' + data.parametroUbs.horarioNoturnoInicio || '00:00:00');
-					data.parametroUbs.horarioNoturnoFim			= new Date('01/01/2016 ' + data.parametroUbs.horarioNoturnoFim || '00:00:00');*/
-			//	}
-				
+
 				$scope.form = data;
-				
-				/*$scope.form.parametroUbs.horarioMatutinoInicio		= new Date('01/01/2016 ' + data.parametroUbs.horarioMatutinoInicio);
-				$scope.form.parametroUbs.horarioMatutinoFim			= new Date('01/01/2016 ' + data.parametroUbs.horarioMatutinoFim);
-				$scope.form.parametroUbs.horarioVespertinoInicio	= new Date('01/01/2016 ' + data.parametroUbs.horarioVespertinoInicio);
-				$scope.form.parametroUbs.horarioVespertinoFim		= new Date('01/01/2016 ' + data.parametroUbs.horarioVespertinoFim);
-				$scope.form.parametroUbs.horarioNoturnoInicio		= new Date('01/01/2016 ' + data.parametroUbs.horarioNoturnoInicio);
-				$scope.form.parametroUbs.horarioNoturnoFim			= new Date('01/01/2016 ' + data.parametroUbs.horarioNoturnoFim);*/
 			});
 		}
 		//--
@@ -133,6 +117,36 @@
 						});
 					}
 				});
+		}
+		//--
+
+		//-- Excluir zona, não faz a confirmação
+		$scope.excluirZona = function(item, index) {
+			if(item.i_sequencial > 0){
+				$scope.zonasExcluidas.push({
+					itemZona: item
+				});
+			}
+
+			$scope.form.zonaAtendimento.splice(index, 1);
+		}
+		//--
+
+		//-- Adicionar zona
+		$scope.adicionarZona = function() {
+			var descricao = $scope.descricaoZona || '';
+
+			if(descricao === ''){
+				$window.document.getElementById('btn-input').focus();
+			}else{
+				var zona = {
+					i_sequencial: null,
+					descricao: $scope.descricaoZona
+				}
+
+				$scope.form.zonaAtendimento.push(zona);
+				$scope.descricaoZona = '';
+			}
 		}
 		//--
 
@@ -166,6 +180,16 @@
 		$scope.update = function(){
 			if(ubsID > 0){
 				UbsService.Update($scope.form, ubsID).then(function(data){
+					var zonaID = 0;
+
+					for (var i = $scope.zonasExcluidas.length - 1; i >= 0; i--) {
+						zonaID = $scope.zonasExcluidas[i].itemZona.i_sequencial;
+
+						UbsService.DeleteZonaAtendimento(zonaID).then(function(data){
+
+						});
+					};
+
 					$location.path('/ubs');
 				})
 			}else{			

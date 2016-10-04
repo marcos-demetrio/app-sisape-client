@@ -16,6 +16,7 @@
 				<li><a href ng-click="setTab(2)" ng-class="{'active' : isSet(2)}" data-toggle="tab">Localização</a></li>
 				<li><a href ng-click="setTab(3)" ng-class="{'active' : isSet(3)}" data-toggle="tab">Contato</a></li>
 				<li><a href ng-click="setTab(4)" ng-class="{'active' : isSet(4)}" data-toggle="tab">Parâmetros</a></li>
+				<li><a href ng-click="setTab(5)" ng-class="{'active' : isSet(5)}" data-toggle="tab">Zona de Atendimento</a></li>
 			</ul>
 
 			<br>
@@ -460,6 +461,44 @@
 				</div>
 			</div>
 			
+			<div class="tab-content" ng-show="isSet(5)">
+				<div class="tab-pane fade in active">
+					<div class="panel panel-info">
+						<table class="table">
+							<thead class="aw-table-header-solid">
+								<tr>
+									<th>Descrição</th>
+									<th class="text-center">Ações</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="item in form.zonaAtendimento">
+									<td ng-bind="item.descricao"></td>
+									<td class="table-pesq-produto-col-acoes col-md-1 col-sm-1 col-xs-1">
+										<div class="btn-group">
+											<a class="btn btn-default btn-xs" ng-click="excluirZona(item, $index)">Excluir</a>
+										</div>
+									</td>
+								</tr>
+								<tr ng-show="!form.zonaAtendimento.length">
+									<td colspan="2" class="text-center">
+										Nenum item na lista.
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="panel-footer">
+							<div class="input-group">
+								<input id="btn-input" type="text" class="form-control" ng-model="descricaoZona" maxlength="255" />
+								<span class="input-group-btn">
+									<a class="btn btn-primary" ng-click="adicionarZona()">Adicionar</a>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
 			<hr>
 
 			<div class="form-group">
