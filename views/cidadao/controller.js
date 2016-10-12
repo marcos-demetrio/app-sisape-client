@@ -202,5 +202,13 @@
 			$window.document.getElementById('input-nome').focus();
 		}
 		//--
+		
+		//-- Imprimir
+		$scope.Imprimir = function (){
+			CidadaoService.Print($scope.form).then(function(data){
+					$location.path('/cidadao');
+				})
+		}
+		//--
 	}
 })();

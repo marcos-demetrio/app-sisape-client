@@ -32,6 +32,10 @@
 		service.PesquisarPorNomeCompleto = function PesquisarPorNomeCompleto(params) {
 			return $http.get(API + 'cidadao/nome/', params).then(handleSuccess, handleError('Erro ao pesquisar por nome completo do cidadão'));
 		}
+		
+		service.Print = function Print(params) {
+			return $http.post(API + 'cidadao/print', params).then(handleSuccess, handleError('Erro ao gerar o relatório de cidadão'));
+		}
 
 		return service;
 		

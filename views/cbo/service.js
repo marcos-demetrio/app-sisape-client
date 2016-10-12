@@ -32,7 +32,10 @@
 		service.PesquisarPorFiltro = function PesquisarPorFiltro(params) {
 			return $http.get(API + 'classificacaobrasileiraocupacao/nome/', params).then(handleSuccess, handleError('Erro ao pesquisar por nome do cbo'));
 		}
-
+		
+		service.Print = function Print(params) {
+			return $http.post(API + 'classificacaobrasileiraocupacao/print', params).then(handleSuccess, handleError('Erro ao gerar o relatório de cbo'));
+		}
 		return service;
 		
 		function handleSuccess(res) {

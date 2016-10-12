@@ -137,5 +137,13 @@
 			$window.document.getElementById('input-nome').focus();
 		}
 		//--
+		
+		//-- Imprimir
+		$scope.Imprimir = function (){
+			MunicipioService.Print($scope.form).then(function(data){
+					$location.path('/municipio');
+				})
+		}
+		//--
 	}
 })();

@@ -36,6 +36,10 @@
 		service.PesquisarPorNome = function PesquisarPorNome(params) {
 			return $http.get(API + 'ubs/nome/', params).then(handleSuccess, handleError('Erro ao pesquisar por nome do ubs'));
 		}
+		
+		service.Print = function Print(params) {
+			return $http.post(API + 'ubs/print', params).then(handleSuccess, handleError('Erro ao gerar o relatório de ubs'));
+		}
 
 		return service;
 		

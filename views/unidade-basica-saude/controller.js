@@ -264,5 +264,13 @@
 			return status == true;
 		}
 		//--
+		
+		//-- Imprimir
+		$scope.Imprimir = function (){
+			UbsService.Print($scope.form).then(function(data){
+					$location.path('/ubs');
+				})
+		}
+		//--
 	}
 })();

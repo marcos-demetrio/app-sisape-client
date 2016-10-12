@@ -129,5 +129,13 @@
 			$window.document.getElementById('input-nome').focus();
 		}
 		//--
+		
+		//-- Imprimir
+		$scope.Imprimir = function (){
+			CboService.Print($scope.form).then(function(data){
+					$location.path('/cbo');
+				})
+		}
+		//--
 	}
 })();

@@ -32,6 +32,10 @@
 		service.PesquisarPorNome = function PesquisarPorNome(params) {
 			return $http.get(API + 'estado/nome/', params).then(handleSuccess, handleError('Erro ao pesquisar por nome do estado'));
 		}
+		
+		service.Print = function Print(params) {
+			return $http.post(API + 'estado/print', params).then(handleSuccess, handleError('Erro ao gerar o relatório de estado'));
+		}
 
 		return service;
 		

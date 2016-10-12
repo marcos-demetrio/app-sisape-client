@@ -128,5 +128,13 @@
 			$window.document.getElementById('input-nome').focus();
 		}
 		//--
+		
+		//-- Imprimir
+		$scope.Imprimir = function (){
+			CidService.Print($scope.form).then(function(data){
+					$location.path('/cid');
+				})
+		}
+		//--
 	}
 })();

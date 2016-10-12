@@ -32,6 +32,10 @@
 		service.PesquisarPorNome = function PesquisarPorNome(params) {
 			return $http.get(API + 'profissional/', params).then(handleSuccess, handleError('Erro ao pesquisar por nome do Profissional'));
 		}
+		
+		service.Print = function Print(params) {
+			return $http.post(API + 'profissional/print', params).then(handleSuccess, handleError('Erro ao gerar o relatório de profissional'));
+		}
 
 		return service;
 		

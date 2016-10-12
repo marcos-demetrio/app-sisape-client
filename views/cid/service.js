@@ -32,6 +32,10 @@
 		service.PesquisarPorFiltro = function PesquisarPorFiltro(params) {
 			return $http.get(API + 'classificacaointernacionaldoenca/descricao/', params).then(handleSuccess, handleError('Erro ao pesquisar por nome do CID'));
 		}
+		
+		service.Print = function Print(params) {
+			return $http.post(API + 'classificacaointernacionaldoenca/print', params).then(handleSuccess, handleError('Erro ao gerar o relatório de CID'));
+		}
 
 		return service;
 		

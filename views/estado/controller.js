@@ -137,5 +137,13 @@
 			$window.document.getElementById('input-nome').focus();
 		}
 		//--
+		
+		//-- Imprimir
+		$scope.Imprimir = function (){
+			EstadoService.Print($scope.form).then(function(data){
+					$location.path('/estado');
+				})
+		}
+		//--
 	}
 })();
