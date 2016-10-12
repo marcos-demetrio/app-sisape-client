@@ -6,9 +6,10 @@
 		.controller('CidadaoController', CidadaoController)
 		.controller('CidadaoListagemController', CidadaoListagemController);
 
-	CidadaoController.$inject = ['$scope', '$location', '$route', '$routeParams', '$window', 'CidadaoService', 'MunicipioService', 'TipoLogradouroService', 'CboService'];
+	CidadaoController.$inject = ['$scope', '$rootScope','$location', '$route', '$routeParams', '$window', 'CidadaoService', 'MunicipioService', 'TipoLogradouroService', 'CboService'];
 
-	function CidadaoController($scope, $location, $route, $routeParams, $window, CidadaoService, MunicipioService, TipoLogradouroService, CboService) {
+	function CidadaoController($scope, $rootScope, $location, $route, $routeParams, $window, CidadaoService, MunicipioService, TipoLogradouroService, CboService) {
+
 		//-- Controle Tabs
 		$scope.tab = 1;
 		$scope.setTab = function(newTab){
@@ -61,15 +62,26 @@
 		}
 		//--
 
+		var controleUrlRedirecionamento;
+
+		switch ($rootScope.userLoggedIn.tipoUsuario) {
+			case "C":
+				controleUrlRedirecionamento = '/inicio';
+				break;
+			default:
+				controleUrlRedirecionamento = '/cidadao';
+				break;
+		}
+
 		//-- Gravar os dados do cadastro no banco de dados
 		$scope.update = function(){
 			if(cidadaoID > 0){
 				CidadaoService.Update($scope.form, cidadaoID).then(function(data){
-					$location.path('/cidadao');
+					$location.path(controleUrlRedirecionamento);
 				})
 			}else{
 				CidadaoService.Create($scope.form).then(function(data){
-					$location.path('/cidadao');
+					$location.path(controleUrlRedirecionamento);
 				});
 			}
 		}
@@ -91,12 +103,12 @@
 					},
 					function(isConfirm){
 						if (isConfirm) {
-							$location.path('/cidadao');
+							$location.path(controleUrlRedirecionamento);
 							$route.reload();
 						}
 					});
 			}else{
-				$location.path('/cidadao');
+				$location.path(controleUrlRedirecionamento);
 			}
   		}
   		//--
@@ -117,7 +129,7 @@
 				function(isConfirm){
 					if (isConfirm) {
 						CidadaoService.Delete(cidadaoID).then(function(data){
-							$location.path('/cidadao');
+							$location.path(controleUrlRedirecionamento);
 							$route.reload();
 						});
 					}

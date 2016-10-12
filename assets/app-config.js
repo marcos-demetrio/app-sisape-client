@@ -25,6 +25,18 @@
 				title: 'Início'
 			})
 
+			.when('/login', {
+				templateUrl: 'views/login/view-login.html',
+				controller: 'LoginController',
+				title: 'Login'
+			})
+
+			.when('/esqueciminhasenha', {
+				templateUrl: 'views/login/view-esqueci-minha-senha.html',
+				controller: 'LoginController',
+				title: 'Esqueci Minha Senha'
+			})
+
 			.when('/cidadao', {
 				templateUrl: 'views/cidadao/listagem.html',
 				controller: 'CidadaoListagemController',
@@ -191,6 +203,24 @@
 				templateUrl: 'views/profissional-agenda/view.html',
 				controller: 'ProfissionalAgendaController',
 				title: 'Cadastro de Agenda'
+			})
+
+			.when('/agendamento', {
+				templateUrl: 'views/agendamento/listagem.html',
+				controller: 'AgendamentoListagemController',
+				title: 'Pesquisa de Agendamentos'
+			})
+
+			.when('/agendamento/:id/editar', {
+				templateUrl: 'views/agendamento/view.html',
+				controller: 'AgendamentoController',
+				title: 'Cadastro de Agendamento'
+			})
+
+			.when('/agendamento/novo', {
+				templateUrl: 'views/agendamento/view.html',
+				controller: 'AgendamentoController',
+				title: 'Cadastro de Agendamento'
 			})
 	}
 })();

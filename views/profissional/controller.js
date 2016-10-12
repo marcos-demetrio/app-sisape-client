@@ -6,9 +6,9 @@
 		.controller('ProfissionalController', ProfissionalController)
 		.controller('ProfissionalListagemController', ProfissionalListagemController);
 
-	ProfissionalController.$inject = ['$scope', '$location', '$route', '$routeParams', '$window', 'ProfissionalService', 'MunicipioService', 'TipoLogradouroService', 'CboService'];
+	ProfissionalController.$inject = ['$scope', '$rootScope', '$location', '$route', '$routeParams', '$window', 'ProfissionalService', 'MunicipioService', 'TipoLogradouroService', 'CboService'];
 
-	function ProfissionalController($scope, $location, $route, $routeParams, $window, ProfissionalService, MunicipioService, TipoLogradouroService, CboService) {
+	function ProfissionalController($scope, $rootScope, $location, $route, $routeParams, $window, ProfissionalService, MunicipioService, TipoLogradouroService, CboService) {
 		//-- Controle Tabs
 		$scope.tab = 1;
 		$scope.setTab = function(newTab){
@@ -61,15 +61,26 @@
 		}
 		//--
 
+		var controleUrlRedirecionamento;
+
+		switch ($rootScope.userLoggedIn.tipoUsuario) {
+			case "P":
+				controleUrlRedirecionamento = '/inicio';
+				break;
+			default:
+				controleUrlRedirecionamento = '/profissional';
+				break;
+		}
+
 		//-- Gravar os dados do cadastro no banco de dados
 		$scope.update = function(){
 			if(profissionalID > 0){
 				ProfissionalService.Update($scope.form, profissionalID).then(function(data){
-					$location.path('/profissional');
+					$location.path(controleUrlRedirecionamento);
 				})
 			}else{
 				ProfissionalService.Create($scope.form).then(function(data){
-					$location.path('/profissional');
+					$location.path(controleUrlRedirecionamento);
 				});
 			}
 		}
@@ -91,12 +102,12 @@
 					},
 					function(isConfirm){
 						if (isConfirm) {
-							$location.path('/profissional');
+							$location.path(controleUrlRedirecionamento);
 							$route.reload();
 						}
 					});
 			}else{
-				$location.path('/profissional');
+				$location.path(controleUrlRedirecionamento);
 			}
   		}
   		//--
@@ -117,7 +128,7 @@
 				function(isConfirm){
 					if (isConfirm) {
 						ProfissionalService.Delete(profissionalID).then(function(data){
-							$location.path('/profissional');
+							$location.path(controleUrlRedirecionamento);
 							$route.reload();
 						});
 					}

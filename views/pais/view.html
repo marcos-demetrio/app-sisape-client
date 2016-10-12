@@ -16,7 +16,7 @@
 				<label class="col-sm-1 control-label" for="nome">Nome</label>
 				<div class="col-sm-11">
 					<input ng-model="form.nome" id="nome" required name="nome" type="text" class="form-control" maxlength="100" autofocus style="text-transform:uppercase">
-					<p ng-show="ppaisForm.nome.$error.required && !paisForm.nome.$pristine" class="help-block">Nome é obrigatório.</p>
+					<p ng-show="paisForm.nome.$error.required && !paisForm.nome.$pristine" class="help-block">Nome é obrigatório.</p>
 				</div>
 			</div>
 			

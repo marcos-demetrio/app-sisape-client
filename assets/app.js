@@ -4,8 +4,9 @@
 	angular
 		.module('app', ['ngCookies', 'ngRoute', 'brasil.filters', 'ui.bootstrap', 'ui.mask', 'ngCpfCnpj'])
 		.run(run)
-		//.value('API', 'http://localhost:8080/');//Desenvolviemnto
-		.value('API', 'http://localhost:8080/app-sisape-ws/');//Produção
+		.controller('MenuController', MenuController)
+		.value('API', 'http://localhost:8080/');//Desenvolviemnto
+		//.value('API', 'http://localhost:8080/app-sisape-ws/');//Produção
 
 	run.$inject = ['$rootScope', '$location', '$cookieStore', '$http'];
 	function run($rootScope, $location, $cookieStore, $http) {
@@ -14,12 +15,77 @@
 		$http.defaults.headers.common['Access-Control-Allow-Methods'] = 'GET, POST, DELETE, PUT';
 		$http.defaults.headers.common['Access-Control-Allow-Credential'] = 'true';
 
-		$rootScope.$on('$locationChangeStart', function (event, next, current) {
+		$rootScope.globals = $cookieStore.get('globals') || {};
 
+		$rootScope.$on('$locationChangeStart', function (event, next, current) {
+			// redirect to login page if not logged in and trying to access a restricted page
+			var restrictedPage = $.inArray($location.path(), ['/login', '/esqueciminhasenha']) === -1;
+
+			$rootScope.userLoggedIn = $rootScope.globals.currentUser;
+			if (restrictedPage && ! $rootScope.userLoggedIn) {
+				$location.path('/login');
+			}
+
+			$rootScope.criarMenu();
+
+			if($rootScope.userLoggedIn){
+				$rootScope.ajustarMenuUsuario($rootScope.userLoggedIn.id, $rootScope.userLoggedIn.tipoUsuario);
+			}
 		});
 
 		$rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
 			$rootScope.title = current.$$route.title;
+			$rootScope.urlLogin = $location.url() == '/login' || $location.url() == '/esqueciminhasenha';
 		});
+
+		$rootScope.inArray = function (item, array) {
+			return array.indexOf(item) > -1;
+		};
+
+		$rootScope.ajustarMenuUsuario = function (id, tipoUsuario) {
+			var url;
+
+			switch (tipoUsuario) {
+				case "C":
+					url = '#/cidadao/';
+					break;
+				case "P":
+					url = '#/profissional/';
+					break;
+			}
+
+			$rootScope.meusDadosUrl = url + id + '/editar';
+		}
+
+		$rootScope.criarMenu = function () {
+			$rootScope.listaMenuProcessos = [
+				{tipoUsuario: ['S', 'G', 'P', 'C'], url: '#/agendamento', descricao: 'Agendar atendimento'},
+				{tipoUsuario: ['S', 'G', 'P'], url: '#/inicio', descricao: 'Fila de atendimentos'},
+				{tipoUsuario: ['S', 'G', 'P'], url: '#/inicio', descricao: 'Atendimento'},
+				{tipoUsuario: ['S', 'G', 'P'], url: '#/inicio', descricao: 'Acompanhamento'}
+			];
+
+			$rootScope.listaMenuCadastros = [
+				{tipoUsuario: ['S', 'G'], url: '#/pais', descricao: 'País'},
+				{tipoUsuario: ['S', 'G'], url: '#/estado', descricao: 'Estado'},
+				{tipoUsuario: ['S', 'G'], url: '#/municipio', descricao: 'Município'},
+				{tipoUsuario: ['S', 'G'], url: '#/cbo', descricao: 'CBO'},
+				{tipoUsuario: ['S', 'G'], url: '#/cid', descricao: 'CID'},
+				{tipoUsuario: ['S', 'G', 'P', 'C'], url: '#/cidadao', descricao: 'Cidadão'},
+				{tipoUsuario: ['S'], url: '#/ubs', descricao: 'UBS'},
+				{tipoUsuario: ['S', 'G'], url: '#/profissional', descricao: 'Profissional'},
+				{tipoUsuario: ['S', 'G'], url: '#/lotacao', descricao: 'Profissional Lotação'},
+				{tipoUsuario: ['S', 'G'], url: '#/agenda', descricao: 'Profissional Agenda'}
+			];
+		};
+	}
+
+	MenuController.$inject = ['$scope', '$location', 'AuthenticationService'];
+
+	function MenuController($scope, $location, AuthenticationService) {
+		$scope.logout = function logout() {
+			AuthenticationService.ClearCredentials();
+			$location.path('/login');
+		};
 	}
 })();

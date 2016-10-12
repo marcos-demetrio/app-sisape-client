@@ -1,0 +1,59 @@
+﻿<div ng-controller="AgendamentoController">
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<h1 ng-bind-template="{{title}}"></h1>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<form class="form-horizontal form-vertical  js-form-loading" name="agendamentoForm" ng-submit="update()">
+			<!-- Id input-->
+			<input type="hidden" id="i_agendamento" name="i_agendamento" ng-model="form.i_agendamento" />
+
+			<!-- Data do Agendamento Input -->
+			<div class="form-group sisape-required" ng-class="{ 'has-error' : agendamentoForm.dataAgendamento.$invalid && !agendamentoForm.dataAgendamento.$pristine }">
+				<label class="col-sm-2 control-label" for="dataAgendamento">Data do agendamento</label>
+				<div class="col-sm-2">
+					<p class="input-group">
+					<input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="form.dataAgendamento" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Fechar" current-text="Hoje" clear-text="Limpar" id="dataAgendamento" />
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+						</span>
+					<p ng-show="agendamentoForm.dataAgendamento.$error.required && !agendamentoForm.dataAgendamento.$pristine" class="help-block">Campo obrigatório.</p>
+					</p>
+				</div>
+			</div>
+
+			<!-- Queixa Principal Input -->
+			<div class="form-group sisape-required" ng-class="{ 'has-error' : agendamentoForm.queixaPrincipal.$invalid && !agendamentoForm.queixaPrincipal.$pristine }">
+				<label class="col-sm-2 control-label" for="queixaPrincipal">Queixa Principal</label>
+				<div class="col-sm-10">
+					<textarea ng-model="form.queixaPrincipal" id="queixaPrincipal" required name="queixaPrincipal" class="form-control" rows="3" maxlength="1024"></textarea>
+					<p ng-show="agendamentoForm.queixaPrincipal.$error.required && !agendamentoForm.queixaPrincipal.$pristine" class="help-block">Campo obrigatório.</p>
+				</div>
+			</div>
+
+			
+
+			<!-- Nome input
+			<div class="form-group" ng-class="{ 'has-error' : agendamentoForm.nome.$invalid && !agendamentoForm.nome.$pristine }">
+				<label class="col-sm-1 control-label" for="nome">Nome</label>
+				<div class="col-sm-11">
+					<input ng-model="form.nome" id="nome" required name="nome" type="text" class="form-control" maxlength="100" autofocus style="text-transform:uppercase">
+					<p ng-show="agendamentoForm.nome.$error.required && !agendamentoForm.nome.$pristine" class="help-block">Nome é obrigatório.</p>
+				</div>
+			</div>
+		-->
+			<hr>
+
+			<div class="form-group">
+				<div style="margin-left: 15px;"><!--<div class="pull-right">-->
+					<button class="btn  btn-primary" type="submit" ng-disabled="agendamentoForm.$invalid">Salvar</button>
+					<a ng-click="cancelar(agendamentoForm.$dirty)" class="btn  btn-default">Cancelar</a>
+					<a ng-click="excluir()" ng-show="editandoCadastro" class="btn  btn-link aw-btn-link-danger">Excluir este agendamento</a>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
