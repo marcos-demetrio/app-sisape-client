@@ -52,43 +52,28 @@
 		//-- Caso esteja editando, obtem os dados do cadastro
 		if(ubsID > 0){
 			UbsService.GetById(ubsID).then(function(data){
-				if(data.parametroUbs != undefined){
-					var dateArray = [];
-					if(data.parametroUbs.horarioMatutinoInicio != null){
-						dateArray = data.parametroUbs.horarioMatutinoInicio.split(":");
+				if(data.parametroUbs.horarioMatutinoInicio){
+					data.parametroUbs.horarioMatutinoInicio = new Date(data.parametroUbs.horarioMatutinoInicio);
+				}
 
-						data.parametroUbs.horarioMatutinoInicio = new Date(2016, 1, 1, parseInt(dateArray[0]), parseInt(dateArray[1]), parseInt(dateArray[2]));
-					}
+				if(data.parametroUbs.horarioMatutinoFim){
+					data.parametroUbs.horarioMatutinoFim = new Date(data.parametroUbs.horarioMatutinoFim);
+				}
 
-					if(data.parametroUbs.horarioMatutinoFim != null){
-						dateArray = data.parametroUbs.horarioMatutinoFim.split(":");
+				if(data.parametroUbs.horarioVespertinoInicio){
+					data.parametroUbs.horarioVespertinoInicio = new Date(data.parametroUbs.horarioVespertinoInicio);
+				}
 
-						data.parametroUbs.horarioMatutinoFim = new Date(2016, 1, 1, parseInt(dateArray[0]), parseInt(dateArray[1]), parseInt(dateArray[2]));
-					}
+				if(data.parametroUbs.horarioVespertinoFim){
+					data.parametroUbs.horarioVespertinoFim = new Date(data.parametroUbs.horarioVespertinoFim);
+				}
 
-					if(data.parametroUbs.horarioVespertinoInicio != null){
-						dateArray = data.parametroUbs.horarioVespertinoInicio.split(":");
+				if(data.parametroUbs.horarioNoturnoInicio){
+					data.parametroUbs.horarioNoturnoInicio = new Date(data.parametroUbs.horarioNoturnoInicio);
+				}
 
-						data.parametroUbs.horarioVespertinoInicio = new Date(2016, 1, 1, parseInt(dateArray[0]), parseInt(dateArray[1]), parseInt(dateArray[2]));
-					}
-
-					if(data.parametroUbs.horarioVespertinoFim != null){
-						dateArray = data.parametroUbs.horarioVespertinoFim.split(":");
-
-						data.parametroUbs.horarioVespertinoFim = new Date(2016, 1, 1, parseInt(dateArray[0]), parseInt(dateArray[1]), parseInt(dateArray[2]));
-					}
-
-					if(data.parametroUbs.horarioNoturnoInicio != null){
-						dateArray = data.parametroUbs.horarioNoturnoInicio.split(":");
-
-						data.parametroUbs.horarioNoturnoInicio = new Date(2016, 1, 1, parseInt(dateArray[0]), parseInt(dateArray[1]), parseInt(dateArray[2]));
-					}
-
-					if(data.parametroUbs.horarioNoturnoFim != null){
-						dateArray = data.parametroUbs.horarioNoturnoFim.split(":");
-
-						data.parametroUbs.horarioNoturnoFim = new Date(2016, 1, 1, parseInt(dateArray[0]), parseInt(dateArray[1]), parseInt(dateArray[2]));
-					}
+				if(data.parametroUbs.horarioNoturnoFim){
+					data.parametroUbs.horarioNoturnoFim = new Date(data.parametroUbs.horarioNoturnoFim);
 				}
 
 				$scope.form = data;

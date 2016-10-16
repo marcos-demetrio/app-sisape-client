@@ -6,9 +6,9 @@
 		.controller('AgendamentoController', AgendamentoController)
 		.controller('AgendamentoListagemController', AgendamentoListagemController);
 
-	AgendamentoController.$inject = ['$scope', '$location', '$route', '$routeParams', 'AgendamentoService'];
+	AgendamentoController.$inject = ['$scope', '$location', '$route', '$routeParams', 'AgendamentoService', 'CidadaoService', 'ProfissionalLotacaoService', 'CidService'];
 
-	function AgendamentoController($scope, $location, $route, $routeParams, AgendamentoService) {
+	function AgendamentoController($scope, $location, $route, $routeParams, AgendamentoService, CidadaoService, ProfissionalLotacaoService, CidService) {
 		
 		//-- Pegar a variável 'id' vinda da url, se for maior que zero esta editando, senão está inserindo
 		var agendamentoID = ($routeParams.id) ? parseInt($routeParams.id) : 0;
@@ -34,6 +34,28 @@
 		};
 		//--
 
+		//-- Carregar lista de Cidadao
+		CidadaoService.GetAll().then(function(data){
+			$scope.cidadaos = data;
+		});
+		//--
+
+		//-- Carregar lista de CID's
+		CidService.GetAll().then(function(data){
+			$scope.listaCid = data;
+		});
+		//--
+
+		//-- Carregar lista de Profissionais
+		ProfissionalLotacaoService.GetAll().then(function(data){
+			$scope.profissionais = data;
+		});
+		//--
+
+		$scope.sintomas = [
+			{i_cid: 1, descricao: 'Teste'}
+		];
+
 		//-- Excluir cadastro, faz a confirmação
 		$scope.excluir = function() {
 			swal({   
@@ -50,7 +72,7 @@
 				function(isConfirm){
 					if (isConfirm) {
 						AgendamentoService.Delete(agendamentoID).then(function(data){
-							$location.path('/pais');
+							$location.path('/agendamento');
 							$route.reload();
 						});
 					}
@@ -74,12 +96,12 @@
 					},
 					function(isConfirm){
 						if (isConfirm) {
-							$location.path('/pais');
+							$location.path('/agendamento');
 							$route.reload();
 						}
 					});
 			}else{
-				$location.path('/pais');
+				$location.path('/agendamento');
 			}
 		}
 		//--
@@ -88,11 +110,11 @@
 		$scope.update = function(){
 			if(agendamentoID > 0){
 				AgendamentoService.Update($scope.form, agendamentoID).then(function(data){
-					$location.path('/pais');
+					$location.path('/agendamento');
 				})
 			}else{
 				AgendamentoService.Create($scope.form).then(function(data){
-					$location.path('/pais');
+					$location.path('/agendamento');
 				});
 			}
 		}

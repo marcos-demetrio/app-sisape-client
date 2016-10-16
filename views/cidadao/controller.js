@@ -6,9 +6,9 @@
 		.controller('CidadaoController', CidadaoController)
 		.controller('CidadaoListagemController', CidadaoListagemController);
 
-	CidadaoController.$inject = ['$scope', '$rootScope','$location', '$route', '$routeParams', '$window', 'CidadaoService', 'MunicipioService', 'TipoLogradouroService', 'CboService'];
+	CidadaoController.$inject = ['$scope', '$rootScope','$location', '$route', '$routeParams', '$window', 'CidadaoService', 'MunicipioService', 'TipoLogradouroService', 'CboService', 'UbsService'];
 
-	function CidadaoController($scope, $rootScope, $location, $route, $routeParams, $window, CidadaoService, MunicipioService, TipoLogradouroService, CboService) {
+	function CidadaoController($scope, $rootScope, $location, $route, $routeParams, $window, CidadaoService, MunicipioService, TipoLogradouroService, CboService, UbsService) {
 
 		//-- Controle Tabs
 		$scope.tab = 1;
@@ -18,6 +18,12 @@
 		$scope.isSet = function(tabNum){
 			return $scope.tab === tabNum;
 		};
+		//--
+
+		//-- Carregar lista de UBS
+		UbsService.GetAll().then(function(data){
+			$scope.unidades = data;
+		});
 		//--
 
 		//-- Carregar lista de municípios

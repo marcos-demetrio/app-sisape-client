@@ -14,9 +14,11 @@
 			})
 
 			.when('/404', {
-				templateUrl: 'views/404.html',
-				controller: 'Erro404Controller',
-				title: '404'
+				templateUrl: 'views/404.html'
+			})
+
+			.when('/403', {
+				templateUrl: 'views/403.html'
 			})
 
 			.when('/inicio', {

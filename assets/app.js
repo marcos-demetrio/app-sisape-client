@@ -29,6 +29,24 @@
 			$rootScope.criarMenu();
 
 			if($rootScope.userLoggedIn){
+
+				/*for (var i = $rootScope.listaMenuCadastros.length - 1; i >= 0; i--) {
+					var strUrl = '#' + $location.path();
+					//console.log($rootScope.listaMenuCadastros[i].url);
+					if(strUrl.startsWith($rootScope.listaMenuCadastros[i].url)){
+						var tipos = $rootScope.listaMenuCadastros[i].tipoUsuario;
+
+						console.log($rootScope.listaMenuCadastros[i].url, tipos);
+						console.log($rootScope.listaMenuCadastros[i].url, $rootScope.userLoggedIn.tipoUsuario);
+
+						if(!$.inArray($rootScope.userLoggedIn.tipoUsuario, tipos)){
+							console.log('negado');
+						}
+						//console.log($rootScope.listaMenuCadastros[i].url);
+						//$location.path('/403');
+					}
+				};*/
+
 				$rootScope.ajustarMenuUsuario($rootScope.userLoggedIn.id, $rootScope.userLoggedIn.tipoUsuario);
 			}
 		});
