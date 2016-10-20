@@ -23,12 +23,12 @@
 			<div class="tab-content" ng-show="isSet(1)">
 				<div class="tab-pane fade in active">
 					<!-- UBS Select-->
-					<div class="form-group mdn-required" ng-class="{ 'has-error' : lotacaoForm.i_unidade_basica_saude.$invalid && !lotacaoForm.i_unidade_basica_saude.$pristine }">
+					<div class="form-group mdn-required" ng-class="{ 'has-error' : cidadaoForm.i_unidade_basica_saude.$invalid && !cidadaoForm.i_unidade_basica_saude.$pristine }">
 						<label for="i_unidade_basica_saude" class="col-sm-2 control-label">UBS</label>
 						<div class="col-sm-5">
 							<select class="form-control" id="i_unidade_basica_saude" name="i_unidade_basica_saude" required ng-options="unidade.nome for unidade in unidades track by unidade.i_unidade_basica_saude" ng-model="form.unidadeBasicaSaude" ng-disabled="editandoCadastro && userLoggedIn.tipoUsuario == 'C'"></select>
 
-							<p ng-show="lotacaoForm.i_unidade_basica_saude.$error.required && !lotacaoForm.i_unidade_basica_saude.$pristine" class="help-block">Selecione uma UBS.</p>
+							<p ng-show="cidadaoForm.i_unidade_basica_saude.$error.required && !cidadaoForm.i_unidade_basica_saude.$pristine" class="help-block">Selecione uma UBS.</p>
 						</div>
 					</div>
 
