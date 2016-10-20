@@ -17,8 +17,16 @@
 			return $http.get(API + 'agendamento/' + id).then(handleSuccess, handleError('Erro obtendo agendamento pelo ID: ' + id));
 		}
 
+		service.GetHorariosByUbs = function GetHorariosByUbs(id) {
+			return $http.get(API + 'agendamento/horarios/' + id).then(handleSuccess, handleError('Erro obtendo horariosdo agendamento pelo ID da ubs: ' + id));
+		}
+
 		service.Delete = function Delete(id) {
 			return $http.delete(API + 'agendamento/' + id).then(handleSuccess, handleError('Erro ao excluir agendamento pelo ID: ' + id));
+		}
+
+		service.DeleteSintoma = function DeleteSintoma(id) {
+			return $http.delete(API + 'agendamento/sintoma/' + id).then(handleSuccess, handleError('Erro ao excluir agendamento pelo ID: ' + id));
 		}
 
 		service.Create = function Create(agendamento) {

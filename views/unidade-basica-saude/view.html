@@ -213,15 +213,21 @@
 					<div class="panel panel-info" ng-show="isSetTabParmto(1)">
 						<div class="panel-heading">Tempo padrão de duração para atendimentos</div>
 						<div class="panel-body">
-							<div class="form-group">
-								<label class="col-sm-2 control-label" for="duracaoPadraoAtendimento">Duração da consulta (min)</label>
+							<!-- Duração da consulta Input -->
+							<div class="form-group sisape-required" ng-class="{ 'has-error' : ubsForm.duracaoPadraoAtendimento.$invalid && !ubsForm.duracaoPadraoAtendimento.$pristine }">
+								<label for="duracaoPadraoAtendimento" class="col-sm-2 control-label">Duração da consulta</label>
 								<div class="col-sm-2">
-									<input ng-model="form.parametroUbs.duracaoPadraoAtendimento" id="duracaoPadraoAtendimento" name="duracaoPadraoAtendimento" type="number" class="form-control" min="0" maxlength="3">
-									<p ng-show="ubsForm.duracaoPadraoAtendimento.$invalid && !ubsForm.duracaoPadraoAtendimento.$pristine" class="help-block">Campo inválido.</p>
+									<select class="form-control" id="duracaoPadraoAtendimento" name="duracaoPadraoAtendimento" required convert-to-number ng-model="form.parametroUbs.duracaoPadraoAtendimento">
+										<option value="10" selected>10 min</option>
+										<option value="20">20 min</option>
+										<option value="30">30 min</option>
+									</select>
+									<p ng-show="ubsForm.duracaoPadraoAtendimento.$error.required && !ubsForm.duracaoPadraoAtendimento.$pristine" class="help-block">Campo obrigatório.</p>
 								</div>
 							</div>
 						</div>
 					</div>
+
 							
 					<!--Complexidade-->
 					<div class="panel panel-info" ng-show="isSetTabParmto(2)">

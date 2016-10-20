@@ -14,7 +14,18 @@
 		var agendamentoID = ($routeParams.id) ? parseInt($routeParams.id) : 0;
 
 		$scope.editandoCadastro = (agendamentoID > 0);
+
 		//--
+
+		if($scope.form == null){
+			$scope.form = {};
+		}
+		
+		if($scope.form.agendamentoSintoma == null){
+			$scope.form.agendamentoSintoma = [];
+		}
+
+		var ubsID = 0;
 
 		//-- Caso esteja editando, obtem os dados do cadastro
 		if(agendamentoID > 0){
@@ -22,6 +33,29 @@
 				$scope.form = data;
 			});
 		}
+		//--
+
+		//-- Adicionar sintoma
+		$scope.mudouCidadao = function() {
+			ubsID = $scope.form.cidadao.unidadeBasicaSaude.i_unidade_basica_saude;
+
+			AgendamentoService.GetHorariosByUbs(ubsID).then(function(data){
+				for (var i = data[0].senhas.length - 1; i >= 0; i--) {
+					data[0].senhas[i].horario = new Date(data[0].senhas[i].horario);
+				};
+
+				$scope.listaHorarios = data[0];
+
+				console.log($scope.listaHorarios);
+			});
+		}
+		//--
+
+		//-- Carregar lista de horarios
+		/*AgendamentoService.GetHorariosByUbs($scope.form.cidadao.i_unidade_basica_saude).then(function(data){
+			$scope.listaHorarios = data;
+			console.log(data);
+		});*/
 		//--
 
 		//-- Campo Data
@@ -51,10 +85,17 @@
 			$scope.profissionais = data;
 		});
 		//--
+		
+		//-- Adicionar sintoma
+		$scope.adicionarSintoma = function() {
+			var sintoma = {
+				i_cid: null,
+				descricao: ''
+			}
 
-		$scope.sintomas = [
-			{i_cid: 1, descricao: 'Teste'}
-		];
+			$scope.form.agendamentoSintoma.push(sintoma);
+		}
+		//--
 
 		//-- Excluir cadastro, faz a confirmação
 		$scope.excluir = function() {
@@ -79,6 +120,20 @@
 				});
   		}
   		//--
+
+  		$scope.sintomasExcluidos = [];
+
+		//-- Excluir sintoma, não faz a confirmação
+		$scope.excluirSintoma = function(item, index) {
+			if(item.i_sequencial > 0){
+				$scope.sintomasExcluidos.push({
+					itemSintoma: item
+				});
+			}
+
+			$scope.form.agendamentoSintoma.splice(index, 1);
+		}
+		//--
 
 		//-- Cancela operação no cadastro, se alterou alguma informação, faz a confirmação
 		$scope.cancelar = function(dirty) {
@@ -110,6 +165,16 @@
 		$scope.update = function(){
 			if(agendamentoID > 0){
 				AgendamentoService.Update($scope.form, agendamentoID).then(function(data){
+					var sintomaID = 0;
+
+					for (var i = $scope.sintomasExcluidos.length - 1; i >= 0; i--) {
+						sintomaID = $scope.sintomasExcluidos[i].itemSintoma.i_sequencial;
+
+						AgendamentoService.DeleteSintoma(sintomaID).then(function(data){
+
+						});
+					};
+
 					$location.path('/agendamento');
 				})
 			}else{

@@ -5,10 +5,12 @@
 		.module('app', ['ngCookies', 'ngRoute', 'brasil.filters', 'ui.bootstrap', 'ui.mask', 'ngCpfCnpj'])
 		.run(run)
 		.controller('MenuController', MenuController)
+		.directive('convertToNumber', ConvertToNumber)
 		.value('API', 'http://localhost:8080/');//Desenvolviemnto
 		//.value('API', 'http://localhost:8080/app-sisape-ws/');//Produção
 
 	run.$inject = ['$rootScope', '$location', '$cookieStore', '$http'];
+	
 	function run($rootScope, $location, $cookieStore, $http) {
 		$http.defaults.headers.common['Access-Control-Allow-Headers'] = 'Content-Type';
 		$http.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
@@ -104,6 +106,22 @@
 		$scope.logout = function logout() {
 			AuthenticationService.ClearCredentials();
 			$location.path('/login');
+		};
+	}
+
+	ConvertToNumber.inject = [];
+
+	function ConvertToNumber(){
+		return {
+			require: 'ngModel',
+			link: function(scope, element, attrs, ngModel) {
+				ngModel.$parsers.push(function(val) {
+					return parseInt(val, 10);
+				});
+				ngModel.$formatters.push(function(val) {
+					return '' + val;
+				});
+			}
 		};
 	}
 })();
