@@ -1,0 +1,34 @@
+﻿<div ng-controller="ExameController">
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<h1 ng-bind-template="{{title}}"></h1>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<form class="form-horizontal form-vertical  js-form-loading" name="exameForm" ng-submit="update()">
+			<!-- Id input-->
+			<input type="hidden" id="i_exame" name="i_exame" ng-model="form.i_exame" />
+
+			<!-- Nome input-->
+			<div class="form-group" ng-class="{ 'has-error' : exameForm.nome.$invalid && !exameForm.nome.$pristine }">
+				<label class="col-sm-1 control-label" for="nome">Nome</label>
+				<div class="col-sm-11">
+					<input ng-model="form.nome" id="nome" required name="nome" type="text" class="form-control" maxlength="100" autofocus>
+					<p ng-show="exameForm.nome.$error.required && !exameForm.nome.$pristine" class="help-block">Nome é obrigatório.</p>
+				</div>
+			</div>
+			
+			<hr>
+
+			<div class="form-group">
+				<div style="margin-left: 15px;"><!--<div class="pull-right">-->
+					<button class="btn  btn-primary" type="submit" ng-disabled="exameForm.$invalid">Salvar</button>
+					<a ng-click="cancelar(exameForm.$dirty)" class="btn  btn-default">Cancelar</a>
+					<a ng-click="excluir()" ng-show="editandoCadastro" class="btn  btn-link aw-btn-link-danger">Excluir este exame</a>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

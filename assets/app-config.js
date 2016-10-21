@@ -224,5 +224,41 @@
 				controller: 'AgendamentoController',
 				title: 'Cadastro de Agendamento'
 			})
+			
+			.when('/medicamento', {
+				templateUrl: 'views/medicamento/listagem.html',
+				controller: 'MedicamentoListagemController',
+				title: 'Pesquisa de Medicamento'
+			})
+
+			.when('/medicamento/:id/editar', {
+				templateUrl: 'views/medicamento/view.html',
+				controller: 'MedicamentoController',
+				title: 'Cadastro de Medicamento'
+			})
+
+			.when('/medicamento/novo', {
+				templateUrl: 'views/medicamento/view.html',
+				controller: 'MedicamentoController',
+				title: 'Cadastro de Medicamento'
+			})
+			
+			.when('/exame', {
+				templateUrl: 'views/exame/listagem.html',
+				controller: 'ExameListagemController',
+				title: 'Pesquisa de Exame'
+			})
+
+			.when('/exame/:id/editar', {
+				templateUrl: 'views/exame/view.html',
+				controller: 'ExameController',
+				title: 'Cadastro de Exame'
+			})
+
+			.when('/exame/novo', {
+				templateUrl: 'views/exame/view.html',
+				controller: 'ExameController',
+				title: 'Cadastro de Exame'
+			})
 	}
 })();

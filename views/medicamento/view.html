@@ -1,0 +1,41 @@
+﻿<div ng-controller="MedicamentoController">
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<h1 ng-bind-template="{{title}}"></h1>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<form class="form-horizontal form-vertical  js-form-loading" name="medicamentoForm" ng-submit="update()">
+			<!-- Id input-->
+			<input type="hidden" id="i_medicamento" name="i_medicamento" ng-model="form.i_medicamento" />
+
+			<div class="form-group sisape-required" ng-class="{ 'has-error' : medicamentoForm.nome.$error.required && !medicamentoForm.nome.$pristine }">
+				<label class="col-sm-2 control-label" for="nome">Nome</label>
+				<div class="col-sm-6">
+					<input ng-model="form.nome" id="nome" required name="nome" type="text" class="form-control" maxlength="255" autofocus>
+					<p ng-show="medicamentoForm.nome.$error.required && !medicamentoForm.nome.$pristine" class="help-block">Nome é obrigatório.</p>
+				</div>
+				
+				<!-- Ativo Check -->
+				<div class="col-sm-4">
+					<div class="checkbox">
+						<input type="checkbox" ng-model="form.possuiEmEstoque" ng-init="form.possuiEmEstoque=true" id="possuiEmEstoque" name="possuiEmEstoque">
+						<label for="possuiEmEstoque">Possui em estoque</label>
+					</div>
+				</div>
+			</div>
+
+			<hr>
+
+			<div class="form-group">
+				<div style="margin-left: 15px;"><!--<div class="pull-right">-->
+					<button class="btn  btn-primary" type="submit" ng-disabled="medicamentoForm.$invalid">Salvar</button>
+					<a ng-click="cancelar(medicamentoForm.$dirty)" class="btn  btn-default">Cancelar</a>
+					<a ng-click="excluir()" ng-show="editandoCadastro" class="btn  btn-link aw-btn-link-danger">Excluir este medicamento</a>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

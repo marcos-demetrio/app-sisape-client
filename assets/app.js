@@ -91,6 +91,8 @@
 				{tipoUsuario: ['S', 'G'], url: '#/municipio', descricao: 'Município'},
 				{tipoUsuario: ['S', 'G'], url: '#/cbo', descricao: 'CBO'},
 				{tipoUsuario: ['S', 'G'], url: '#/cid', descricao: 'CID'},
+				{tipoUsuario: ['S', 'G'], url: '#/medicamento', descricao: 'Medicamento'},
+				{tipoUsuario: ['S', 'G'], url: '#/exame', descricao: 'Exame'},
 				{tipoUsuario: ['S', 'G', 'P', 'C'], url: '#/cidadao', descricao: 'Cidadão'},
 				{tipoUsuario: ['S'], url: '#/ubs', descricao: 'UBS'},
 				{tipoUsuario: ['S', 'G'], url: '#/profissional', descricao: 'Profissional'},
