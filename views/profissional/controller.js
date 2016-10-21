@@ -204,7 +204,15 @@
 		
 		//-- Imprimir
 		$scope.Imprimir = function (){
-			ProfissionalService.Print($scope.form).then(function(data){
+			var parameters = {
+				nome : $scope.keyword
+			};
+
+			var config = {
+				params : parameters
+			};
+
+			ProfissionalService.Print(config).then(function(data){
 					$location.path('/profissional');
 				})
 		}

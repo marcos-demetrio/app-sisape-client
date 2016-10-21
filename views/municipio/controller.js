@@ -140,7 +140,15 @@
 		
 		//-- Imprimir
 		$scope.Imprimir = function (){
-			MunicipioService.Print($scope.form).then(function(data){
+			var parameters = {
+				nome : $scope.keyword
+			};
+
+			var config = {
+				params : parameters
+			};
+
+			MunicipioService.Print(config).then(function(data){
 					$location.path('/municipio');
 				})
 		}

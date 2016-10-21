@@ -132,7 +132,16 @@
 		
 		//-- Imprimir
 		$scope.Imprimir = function (){
-			CboService.Print($scope.form).then(function(data){
+			var parameters = {
+				nome : $scope.nomeCbo,
+				codigoCbo : $scope.codigoCbo
+			};
+
+			var config = {
+				params : parameters
+			};
+			
+			CboService.Print(config).then(function(data){
 					$location.path('/cbo');
 				})
 		}

@@ -34,7 +34,7 @@
 		}
 		
 		service.Print = function Print(params) {
-			return $http.post(API + 'classificacaobrasileiraocupacao/print', params).then(handleSuccess, handleError('Erro ao gerar o relatório de cbo'));
+			return $http.get(API + 'classificacaobrasileiraocupacao/print/', params).then(handleSuccess, handleError('Erro ao gerar o relatório de cbo'));
 		}
 		return service;
 		

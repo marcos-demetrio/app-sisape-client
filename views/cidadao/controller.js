@@ -211,7 +211,15 @@
 		
 		//-- Imprimir
 		$scope.Imprimir = function (){
-			CidadaoService.Print($scope.form).then(function(data){
+			var parameters = {
+				nome : $scope.keyword
+			};
+
+			var config = {
+				params : parameters
+			};
+			
+			CidadaoService.Print(config).then(function(data){
 					$location.path('/cidadao');
 				})
 		}

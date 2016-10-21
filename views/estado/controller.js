@@ -140,7 +140,15 @@
 		
 		//-- Imprimir
 		$scope.Imprimir = function (){
-			EstadoService.Print($scope.form).then(function(data){
+			var parameters = {
+				nome : $scope.keyword
+			};
+
+			var config = {
+				params : parameters
+			};
+
+			EstadoService.Print(config).then(function(data){
 					$location.path('/estado');
 				})
 		}

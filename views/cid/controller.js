@@ -131,7 +131,15 @@
 		
 		//-- Imprimir
 		$scope.Imprimir = function (){
-			CidService.Print($scope.form).then(function(data){
+			var parameters = {
+				descricao : $scope.descricao,
+				codigoCid : $scope.codigoCid
+			};
+
+			var config = {
+				params : parameters
+			};
+			CidService.Print(config).then(function(data){
 					$location.path('/cid');
 				})
 		}

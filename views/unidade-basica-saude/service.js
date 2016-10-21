@@ -38,7 +38,7 @@
 		}
 		
 		service.Print = function Print(params) {
-			return $http.post(API + 'ubs/print', params).then(handleSuccess, handleError('Erro ao gerar o relatório de ubs'));
+			return $http.get(API + 'ubs/print/', params).then(handleSuccess, handleError('Erro ao gerar o relatório de ubs'));
 		}
 
 		return service;

@@ -252,7 +252,15 @@
 		
 		//-- Imprimir
 		$scope.Imprimir = function (){
-			UbsService.Print($scope.form).then(function(data){
+			var parameters = {
+				nome : $scope.keyword
+			};
+
+			var config = {
+				params : parameters
+			};
+
+			UbsService.Print(config).then(function(data){
 					$location.path('/ubs');
 				})
 		}

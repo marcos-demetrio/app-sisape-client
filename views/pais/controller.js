@@ -130,7 +130,15 @@
 		
 		//-- Imprimir
 		$scope.Imprimir = function (){
-			PaisService.Print($scope.form).then(function(data){
+			var parameters = {
+				nome : $scope.keyword
+			};
+
+			var config = {
+				params : parameters
+			};
+
+			PaisService.Print(config).then(function(data){
 					$location.path('/pais');
 				})
 		}

@@ -34,7 +34,7 @@
 		}
 		
 		service.Print = function Print(params) {
-			return $http.post(API + 'estado/print', params).then(handleSuccess, handleError('Erro ao gerar o relatório de estado'));
+			return $http.get(API + 'estado/print/', params).then(handleSuccess, handleError('Erro ao gerar o relatório de estado'));
 		}
 
 		return service;

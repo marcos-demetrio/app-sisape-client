@@ -34,7 +34,7 @@
 		}
 		
 		service.Print = function Print(params) {
-			return $http.post(API + 'municipio/print', params).then(handleSuccess, handleError('Erro ao gerar o relatório de município'));
+			return $http.get(API + 'municipio/print/', params).then(handleSuccess, handleError('Erro ao gerar o relatório de município'));
 		}
 
 		return service;

@@ -34,7 +34,7 @@
 		}
 		
 		service.Print = function Print(params) {
-			return $http.post(API + 'profissional/print', params).then(handleSuccess, handleError('Erro ao gerar o relatório de profissional'));
+			return $http.get(API + 'profissional/print/', params).then(handleSuccess, handleError('Erro ao gerar o relatório de profissional'));
 		}
 
 		return service;

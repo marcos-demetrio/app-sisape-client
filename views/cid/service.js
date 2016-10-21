@@ -34,7 +34,7 @@
 		}
 		
 		service.Print = function Print(params) {
-			return $http.post(API + 'classificacaointernacionaldoenca/print', params).then(handleSuccess, handleError('Erro ao gerar o relatório de CID'));
+			return $http.get(API + 'classificacaointernacionaldoenca/print/', params).then(handleSuccess, handleError('Erro ao gerar o relatório de CID'));
 		}
 
 		return service;

@@ -34,7 +34,7 @@
 		}
 		
 		service.Print = function Print(params) {
-			return $http.post(API + 'pais/print', params).then(handleSuccess, handleError('Erro ao gerar o relatório de país'));
+			return $http.get(API + 'pais/print/', params).then(handleSuccess, handleError('Erro ao gerar o relatório de país'));
 		}
 
 		return service;
