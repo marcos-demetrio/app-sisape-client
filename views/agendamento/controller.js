@@ -35,19 +35,73 @@
 		}
 		//--
 
+		$scope.listaHorarios = [];
+
 		//-- Adicionar sintoma
 		$scope.mudouCidadao = function() {
 			ubsID = $scope.form.cidadao.unidadeBasicaSaude.i_unidade_basica_saude;
 
 			AgendamentoService.GetHorariosByUbs(ubsID).then(function(data){
-				for (var i = data[0].senhas.length - 1; i >= 0; i--) {
-					data[0].senhas[i].horario = new Date(data[0].senhas[i].horario);
+				for (var i = data.length - 1; i >= 0; i--) {
+					console.log(data);
+					switch (data[i].periodoDia) {
+						case "MATUTINO":
+							$scope.listaHorariosMatutino = data[i];
+							break;
+						case "VESPERTINO":
+							$scope.listaHorariosVespertino = data[i];
+							break;
+						case "NOTURNO":
+							$scope.listaHorariosNoturno = data[i];
+							break;
+					}
 				};
-
-				$scope.listaHorarios = data[0];
-
-				console.log($scope.listaHorarios);
 			});
+		}
+		//--
+
+		//-- Adicionar sintoma
+		$scope.mudouData = function() {
+			console.log($scope.form.dataAgendamento)
+		}
+		//--
+
+		var horarioAtivo = [
+			{numero: 0},
+			{numero: 0},
+			{numero: 0}
+		];
+
+		$scope.clickHorario = function(numeroAtivo, periodoDia) {
+			switch (periodoDia) {
+				case "M":
+					horarioAtivo[0].ativo = numeroAtivo;
+					break;
+				case "V":
+					horarioAtivo[1].ativo = numeroAtivo;
+					break;
+				case "N":
+					horarioAtivo[2].ativo = numeroAtivo;
+					break;
+			}
+		}
+
+		$scope.isActive = function(numeroAtivo, periodoDia) {
+			var horarioAtivoReturn = false;
+
+			switch (periodoDia) {
+				case "M":
+					horarioAtivoReturn = horarioAtivo[0].ativo == numeroAtivo;
+					break;
+				case "V":
+					horarioAtivoReturn = horarioAtivo[1].ativo == numeroAtivo;
+					break;
+				case "N":
+					horarioAtivoReturn = horarioAtivo[2].ativo == numeroAtivo;
+					break;
+			}
+
+			return horarioAtivoReturn;
 		}
 		//--
 
@@ -77,6 +131,7 @@
 		//-- Carregar lista de CID's
 		CidService.GetAll().then(function(data){
 			$scope.listaCid = data;
+			$scope.listaCid.push(null);
 		});
 		//--
 

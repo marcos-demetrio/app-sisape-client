@@ -1,5 +1,4 @@
 ﻿<div ng-controller="AgendamentoController">
-
 	<div class="page-header">
 		<div class="container-fluid">
 			<h1 ng-bind-template="{{title}}"></h1>
@@ -36,7 +35,7 @@
 				<label class="col-sm-2 control-label" for="dataAgendamento">Data do agendamento</label>
 				<div class="col-sm-2">
 					<p class="input-group">
-					<input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="form.dataAgendamento" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Fechar" current-text="Hoje" clear-text="Limpar" id="dataAgendamento" />
+					<input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="form.dataAgendamento" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Fechar" current-text="Hoje" clear-text="Limpar" id="dataAgendamento" ng-change="mudouData()" />
 						<span class="input-group-btn">
 							<button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
 						</span>
@@ -45,7 +44,39 @@
 				</div>
 			</div>
 
-
+			<!-- Horários itens -->
+			<div class="row">
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Período</label>
+					<div class="col-sm-3" style="overflow-y: scroll;height: 200px;">
+						<label>Matutino</label>
+						<div class="list-group">
+							<a href class="list-group-item" ng-show="item.disponivel" ng-class="{ 'active' : isActive(item.numero, 'M') }" ng-repeat="item in listaHorariosMatutino.senhas | orderBy:'numero'" ng-click="clickHorario(item.numero, 'M')">
+								{{item.horario | date:'HH:mm:ss'}}
+								<span class="badge" ng-bind="item.numero + 'º'"></span>
+							</a>
+						</div>
+					</div>
+					
+					<div class="col-sm-3" style="overflow-y: scroll;height: 200px;">
+						<label>Vespertino</label>
+						<div class="list-group">
+							<a href class="list-group-item" ng-show="item.disponivel" ng-class="{ 'active' : isActive(item.numero, 'V') }" ng-repeat="item in listaHorariosVespertino.senhas | orderBy:'numero'" ng-click="clickHorario(item.numero, 'V')">
+								{{item.horario | date:'HH:mm:ss'}} <span class="badge" ng-bind="item.numero + 'º'"></span>
+							</a>
+						</div>
+					</div>
+					
+					<div class="col-sm-3" style="overflow-y: scroll;height: 200px;">
+						<label>Noturno</label>
+						<div class="list-group">
+							<a href class="list-group-item" ng-show="item.disponivel" ng-class="{ 'active' : isActive(item.numero, 'N') }" ng-repeat="item in listaHorariosNoturno.senhas | orderBy:'numero'" ng-click="clickHorario(item.numero, 'N')">
+								{{item.horario | date:'HH:mm:ss'}} <span class="badge" ng-bind="item.numero + 'º'"></span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
 
 			<!-- Queixa Principal Input -->
 			<div class="form-group sisape-required" ng-class="{ 'has-error' : agendamentoForm.queixaPrincipal.$invalid && !agendamentoForm.queixaPrincipal.$pristine }">
@@ -97,17 +128,6 @@
 
 				</div>
 			</div>
-
-		<table class="table">
-			<tr>
-				<th>Phone Number</th>
-				<th>Age</th>
-			</tr>
-			<tr ng-repeat="horario in listaHorarios">
-				<td>{{horario.senhas.horario}}</td>
-				<td>{{horario.senhas.numero}}</td>
-			</tr>
-		</table>
 
 			<hr>
 

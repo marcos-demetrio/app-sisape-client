@@ -26,7 +26,7 @@
 					<div class="form-group mdn-required" ng-class="{ 'has-error' : cidadaoForm.i_unidade_basica_saude.$invalid && !cidadaoForm.i_unidade_basica_saude.$pristine }">
 						<label for="i_unidade_basica_saude" class="col-sm-2 control-label">UBS</label>
 						<div class="col-sm-5">
-							<select class="form-control" id="i_unidade_basica_saude" name="i_unidade_basica_saude" required ng-options="unidade.nome for unidade in unidades track by unidade.i_unidade_basica_saude" ng-model="form.unidadeBasicaSaude" ng-disabled="editandoCadastro && userLoggedIn.tipoUsuario == 'C'"></select>
+							<select ng-disabled="editandoCadastro && !inArray(userLoggedIn.tipoUsuario, ['S', 'G', 'P'])" class="form-control" id="i_unidade_basica_saude" name="i_unidade_basica_saude" required ng-options="unidade.nome for unidade in unidades track by unidade.i_unidade_basica_saude" ng-model="form.unidadeBasicaSaude" ng-disabled="editandoCadastro && userLoggedIn.tipoUsuario == 'C'"></select>
 
 							<p ng-show="cidadaoForm.i_unidade_basica_saude.$error.required && !cidadaoForm.i_unidade_basica_saude.$pristine" class="help-block">Selecione uma UBS.</p>
 						</div>
@@ -143,7 +143,7 @@
 					<div class="form-group sisape-required" ng-class="{ 'has-error' : cidadaoForm.municipioNascimento.$invalid && !cidadaoForm.municipioNascimento.$pristine }">
 						<label for="municipioNascimento" class="col-sm-2 control-label">Município de nasc.</label>
 						<div class="col-sm-6">
-							<select class="form-control" id="municipioNascimento" name="municipioNascimento" required ng-options="municipioNascimento.nome + '/' + municipioNascimento.estado.sigla + '/' + municipioNascimento.estado.pais.sigla for municipioNascimento in municipios track by municipioNascimento.nome" ng-model="form.municipioNascimento" autofocus></select>
+							<select data-live-search="true" class="form-control" id="municipioNascimento" name="municipioNascimento" required ng-options="municipioNascimento.nome + '/' + municipioNascimento.estado.sigla + '/' + municipioNascimento.estado.pais.sigla for municipioNascimento in municipios track by municipioNascimento.nome" ng-model="form.municipioNascimento" autofocus></select>
 
 							<p ng-show="cidadaoForm.municipioNascimento.$error.required && !cidadaoForm.municipioNascimento.$pristine" class="help-block">Selecione um município.</p>
 						</div>
