@@ -55,14 +55,14 @@
 				//console.log(data);
 
 				for (var i = data.length - 1; i >= 0; i--) {
-					$scope.listaHorarios.push({
+					/*$scope.listaHorarios.push({
 						horario: new Date(data[i].horario)
-					});
-					//data[i].horario = new Date(data[i].horario);
+					});*/
+					data[i].horario = new Date(data[i].horario);
 				};
 				//$scope.listaHorarios.push(null)
-				//console.log($scope.listaHorarios);
-				//$scope.listaHorarios = data;
+				$scope.listaHorarios = data;
+				console.log($scope.listaHorarios);
 			});
 		}
 		//--
