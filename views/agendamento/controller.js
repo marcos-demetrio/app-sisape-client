@@ -42,20 +42,17 @@
 			ubsID = $scope.form.cidadao.unidadeBasicaSaude.i_unidade_basica_saude;
 
 			AgendamentoService.GetHorariosByUbs(ubsID).then(function(data){
+				//console.log(data);
+
 				for (var i = data.length - 1; i >= 0; i--) {
-					console.log(data);
-					switch (data[i].periodoDia) {
-						case "MATUTINO":
-							$scope.listaHorariosMatutino = data[i];
-							break;
-						case "VESPERTINO":
-							$scope.listaHorariosVespertino = data[i];
-							break;
-						case "NOTURNO":
-							$scope.listaHorariosNoturno = data[i];
-							break;
-					}
+					$scope.listaHorarios.push({
+						horario: new Date(data[i].horario)
+					});
+					//data[i].horario = new Date(data[i].horario);
 				};
+				//$scope.listaHorarios.push(null)
+				console.log($scope.listaHorarios);
+				//$scope.listaHorarios = data;
 			});
 		}
 		//--
@@ -219,6 +216,7 @@
   		//-- Gravar os dados do cadastro no banco de dados
 		$scope.update = function(){
 			if(agendamentoID > 0){
+				console.log($scope.form);
 				AgendamentoService.Update($scope.form, agendamentoID).then(function(data){
 					var sintomaID = 0;
 

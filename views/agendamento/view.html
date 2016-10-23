@@ -44,7 +44,17 @@
 				</div>
 			</div>
 
-			<!-- Horários itens -->
+			<!-- Horarios Select-->
+			<div class="form-group mdn-required" ng-class="{ 'has-error' : agendamentoForm.horaAgendamento.$invalid && !agendamentoForm.horaAgendamento.$pristine }">
+				<label for="horaAgendamento" class="col-sm-2 control-label">Horário</label>
+				<div class="col-sm-3">
+					<select class="form-control" id="horaAgendamento" name="horaAgendamento" required ng-options="(listaHorario.horario | date:'HH:mm') + ' - Número da senha: ' + listaHorario.numero for listaHorario in listaHorarios | orderBy:'horario' track by listaHorario.horario" ng-model="form.horaAgendamento"></select>
+
+					<p ng-show="agendamentoForm.horaAgendamento.$error.required && !agendamentoForm.horaAgendamento.$pristine" class="help-block">Selecione um horário.</p>
+				</div>
+			</div>
+
+			<!-- Horários itens 
 			<div class="row">
 				<div class="form-group">
 					<label class="col-sm-2 control-label">Período</label>
@@ -52,7 +62,7 @@
 						<label>Matutino</label>
 						<div class="list-group">
 							<a href class="list-group-item" ng-show="item.disponivel" ng-class="{ 'active' : isActive(item.numero, 'M') }" ng-repeat="item in listaHorariosMatutino.senhas | orderBy:'numero'" ng-click="clickHorario(item.numero, 'M')">
-								{{item.horario | date:'HH:mm:ss'}}
+								{{item.horario | date:'HH:mm'}}
 								<span class="badge" ng-bind="item.numero + 'º'"></span>
 							</a>
 						</div>
@@ -62,7 +72,7 @@
 						<label>Vespertino</label>
 						<div class="list-group">
 							<a href class="list-group-item" ng-show="item.disponivel" ng-class="{ 'active' : isActive(item.numero, 'V') }" ng-repeat="item in listaHorariosVespertino.senhas | orderBy:'numero'" ng-click="clickHorario(item.numero, 'V')">
-								{{item.horario | date:'HH:mm:ss'}} <span class="badge" ng-bind="item.numero + 'º'"></span>
+								{{item.horario | date:'HH:mm'}} <span class="badge" ng-bind="item.numero + 'º'"></span>
 							</a>
 						</div>
 					</div>
@@ -71,12 +81,12 @@
 						<label>Noturno</label>
 						<div class="list-group">
 							<a href class="list-group-item" ng-show="item.disponivel" ng-class="{ 'active' : isActive(item.numero, 'N') }" ng-repeat="item in listaHorariosNoturno.senhas | orderBy:'numero'" ng-click="clickHorario(item.numero, 'N')">
-								{{item.horario | date:'HH:mm:ss'}} <span class="badge" ng-bind="item.numero + 'º'"></span>
+								{{item.horario | date:'HH:mm'}} <span class="badge" ng-bind="item.numero + 'º'"></span>
 							</a>
 						</div>
 					</div>
 				</div>
-			</div>
+			</div>-->
 
 			<!-- Queixa Principal Input -->
 			<div class="form-group sisape-required" ng-class="{ 'has-error' : agendamentoForm.queixaPrincipal.$invalid && !agendamentoForm.queixaPrincipal.$pristine }">

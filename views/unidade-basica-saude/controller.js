@@ -52,7 +52,7 @@
 		//-- Caso esteja editando, obtem os dados do cadastro
 		if(ubsID > 0){
 			UbsService.GetById(ubsID).then(function(data){
-				if(data.parametroUbs.horarioMatutinoInicio){
+				/*if(data.parametroUbs.horarioMatutinoInicio){
 					data.parametroUbs.horarioMatutinoInicio = new Date(data.parametroUbs.horarioMatutinoInicio);
 				}
 
@@ -74,7 +74,7 @@
 
 				if(data.parametroUbs.horarioNoturnoFim){
 					data.parametroUbs.horarioNoturnoFim = new Date(data.parametroUbs.horarioNoturnoFim);
-				}
+				}*/
 
 				$scope.form = data;
 			});

@@ -382,7 +382,16 @@
 											<div class="form-group" ng-class="{ 'has-error' : ubsForm.horarioMatutinoInicio.$error.time && !ubsForm.horarioMatutinoInicio.$pristine }">
 												<label class="col-sm-2 control-label" for="horarioMatutinoInicio">Início</label>
 												<div class="col-sm-6">
-													<input type="time" ng-disabled="form.parametroUbs.horarioMatutino==false" id="horarioMatutinoInicio" name="horarioMatutinoInicio" ng-model="form.parametroUbs.horarioMatutinoInicio" class="form-control"/>
+													<select class="form-control" id="horarioMatutinoInicio" ng-disabled="form.parametroUbs.horarioMatutino==false" name="horarioMatutinoInicio" required convert-to-number ng-model="form.parametroUbs.horarioMatutinoInicio">
+														<option value="7">7 horas</option>
+														<option value="8">8 horas</option>
+														<option value="9">9 horas</option>
+														<option value="10">10 horas</option>
+														<option value="11">11 horas</option>
+														<option value="12">12 horas</option>
+													</select>
+
+													<!--<input type="time" ng-disabled="form.parametroUbs.horarioMatutino==false" id="horarioMatutinoInicio" name="horarioMatutinoInicio" ng-model="form.parametroUbs.horarioMatutinoInicio" class="form-control"/>-->
 													<p ng-show="ubsForm.horarioMatutinoInicio.$error.time && !ubsForm.horarioMatutinoInicio.$pristine" class="help-block">Hora inválida.</p>
 												</div>
 											</div>
@@ -390,7 +399,16 @@
 											<div class="form-group" ng-class="{ 'has-error' : ubsForm.horarioMatutinoFim.$error.time && !ubsForm.horarioMatutinoFim.$pristine }">
 												<label class="col-sm-2 control-label" for="horarioMatutinoFim">Fim</label>
 												<div class="col-sm-6">
-													<input type="time" ng-disabled="form.parametroUbs.horarioMatutino==false" id="horarioMatutinoFim" name="horarioMatutinoFim" ng-model="form.parametroUbs.horarioMatutinoFim" class="form-control"/>
+													<select class="form-control" id="horarioMatutinoFim" ng-disabled="form.parametroUbs.horarioMatutino==false" name="horarioMatutinoFim" required convert-to-number ng-model="form.parametroUbs.horarioMatutinoFim">
+														<option value="7" selected>7 horas</option>
+														<option value="8">8 horas</option>
+														<option value="9">9 horas</option>
+														<option value="10">10 horas</option>
+														<option value="11">11 horas</option>
+														<option value="12">12 horas</option>
+													</select>
+
+													<!--<input type="time" ng-disabled="form.parametroUbs.horarioMatutino==false" id="horarioMatutinoFim" name="horarioMatutinoFim" ng-model="form.parametroUbs.horarioMatutinoFim" class="form-control"/>-->
 													<p ng-show="ubsForm.horarioMatutinoFim.$error.time && !ubsForm.horarioMatutinoFim.$pristine" class="help-block">Hora inválida.</p>
 												</div>
 											</div>
@@ -414,7 +432,14 @@
 											<div class="form-group" ng-class="{ 'has-error' : ubsForm.horarioVespertinoInicio.$error.time && !ubsForm.horarioVespertinoInicio.$pristine }">
 												<label class="col-sm-2 control-label" for="horarioVespertinoInicio">Início</label>
 												<div class="col-sm-6">
-													<input type="time" ng-disabled="form.parametroUbs.horarioVespertino==false" id="horarioVespertinoInicio" name="horarioVespertinoInicio" ng-model="form.parametroUbs.horarioVespertinoInicio" class="form-control"/>
+													<select class="form-control" id="horarioVespertinoInicio" ng-disabled="form.parametroUbs.horarioVespertino==false" name="horarioVespertinoInicio" required convert-to-number ng-model="form.parametroUbs.horarioVespertinoInicio">
+														<option value="13">13 horas</option>
+														<option value="14">14 horas</option>
+														<option value="15">15 horas</option>
+														<option value="16">16 horas</option>
+														<option value="17">17 horas</option>
+													</select>
+													<!--<input type="time" ng-disabled="form.parametroUbs.horarioVespertino==false" id="horarioVespertinoInicio" name="horarioVespertinoInicio" ng-model="form.parametroUbs.horarioVespertinoInicio" class="form-control"/>-->
 													<p ng-show="ubsForm.horarioVespertinoInicio.$error.time && !ubsForm.horarioVespertinoInicio.$pristine" class="help-block">Hora inválida.</p>
 												</div>
 											</div>
@@ -422,7 +447,14 @@
 											<div class="form-group" ng-class="{ 'has-error' : ubsForm.horarioVespertinoFim.$error.time && !ubsForm.horarioVespertinoFim.$pristine }">
 												<label class="col-sm-2 control-label" for="horarioVespertinoFim">Fim</label>
 												<div class="col-sm-6">
-													<input type="time" ng-disabled="form.parametroUbs.horarioVespertino==false" id="horarioVespertinoFim" name="horarioVespertinoFim" ng-model="form.parametroUbs.horarioVespertinoFim" class="form-control"/>
+													<select class="form-control" id="horarioVespertinoFim" ng-disabled="form.parametroUbs.horarioVespertino==false" name="horarioVespertinoFim" required convert-to-number ng-model="form.parametroUbs.horarioVespertinoFim">
+														<option value="13">13 horas</option>
+														<option value="14">14 horas</option>
+														<option value="15">15 horas</option>
+														<option value="16">16 horas</option>
+														<option value="17">17 horas</option>
+													</select>
+													<!--<input type="time" ng-disabled="form.parametroUbs.horarioVespertino==false" id="horarioVespertinoFim" name="horarioVespertinoFim" ng-model="form.parametroUbs.horarioVespertinoFim" class="form-control"/>-->
 													<p ng-show="ubsForm.horarioVespertinoFim.$error.time && !ubsForm.horarioVespertinoFim.$pristine" class="help-block">Hora inválida.</p>
 												</div>
 											</div>
@@ -446,7 +478,14 @@
 											<div class="form-group" ng-class="{ 'has-error' : ubsForm.horarioNoturnoInicio.$error.time && !ubsForm.horarioNoturnoInicio.$pristine }">
 												<label class="col-sm-2 control-label" for="horarioNoturnoInicio">Início</label>
 												<div class="col-sm-6">
-													<input type="time" ng-disabled="form.parametroUbs.horarioNoturno==false" id="horarioNoturnoInicio" name="horarioNoturnoInicio" ng-model="form.parametroUbs.horarioNoturnoInicio" class="form-control"/>
+													<select class="form-control" id="horarioNoturnoInicio" ng-disabled="form.parametroUbs.horarioNoturno==false" name="horarioNoturnoInicio" required convert-to-number ng-model="form.parametroUbs.horarioNoturnoInicio">
+														<option value="18">18 horas</option>
+														<option value="19">19 horas</option>
+														<option value="20">20 horas</option>
+														<option value="21">21 horas</option>
+														<option value="22">22 horas</option>
+													</select>
+													<!--<input type="time" ng-disabled="form.parametroUbs.horarioNoturno==false" id="horarioNoturnoInicio" name="horarioNoturnoInicio" ng-model="form.parametroUbs.horarioNoturnoInicio" class="form-control"/>-->
 													<p ng-show="ubsForm.horarioNoturnoInicio.$error.time && !ubsForm.horarioNoturnoInicio.$pristine" class="help-block">Hora inválida.</p>
 												</div>
 											</div>
@@ -454,7 +493,14 @@
 											<div class="form-group" ng-class="{ 'has-error' : ubsForm.horarioNoturnoFim.$error.time && !ubsForm.horarioNoturnoFim.$pristine }">
 												<label class="col-sm-2 control-label" for="horarioNoturnoFim">Fim</label>
 												<div class="col-sm-6">
-													<input type="time" ng-disabled="form.parametroUbs.horarioNoturno==false" id="horarioNoturnoFim" name="horarioNoturnoFim" ng-model="form.parametroUbs.horarioNoturnoFim" class="form-control"/>
+													<select class="form-control" id="horarioNoturnoFim" ng-disabled="form.parametroUbs.horarioNoturno==false" name="horarioNoturnoFim" required convert-to-number ng-model="form.parametroUbs.horarioNoturnoFim">
+														<option value="18">18 horas</option>
+														<option value="19">19 horas</option>
+														<option value="20">20 horas</option>
+														<option value="21">21 horas</option>
+														<option value="22">22 horas</option>
+													</select>
+													<!--<input type="time" ng-disabled="form.parametroUbs.horarioNoturno==false" id="horarioNoturnoFim" name="horarioNoturnoFim" ng-model="form.parametroUbs.horarioNoturnoFim" class="form-control"/>-->
 													<p ng-show="ubsForm.horarioNoturnoFim.$error.time && !ubsForm.horarioNoturnoFim.$pristine" class="help-block">Hora inválida.</p>
 												</div>
 											</div>
