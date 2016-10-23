@@ -61,7 +61,7 @@
 					//data[i].horario = new Date(data[i].horario);
 				};
 				//$scope.listaHorarios.push(null)
-				console.log($scope.listaHorarios);
+				//console.log($scope.listaHorarios);
 				//$scope.listaHorarios = data;
 			});
 		}
@@ -219,7 +219,6 @@
   		//-- Gravar os dados do cadastro no banco de dados
 		$scope.update = function(){
 			if(agendamentoID > 0){
-				console.log($scope.form);
 				AgendamentoService.Update($scope.form, agendamentoID).then(function(data){
 					var sintomaID = 0;
 
