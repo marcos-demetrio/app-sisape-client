@@ -30,6 +30,14 @@
 			return $scope.tabParmto === tabNum;
 		};
 		//--
+
+		if($scope.form == null){
+			$scope.form = {};
+		}
+		
+		if($scope.form.zonaAtendimento == null){
+			$scope.form.zonaAtendimento = [];
+		}
 		
 		//-- Pegar a variável 'id' vinda da url, se for maior que zero esta editando, senão está inserindo
 		var ubsID = ($routeParams.id) ? parseInt($routeParams.id) : 0;
@@ -52,30 +60,6 @@
 		//-- Caso esteja editando, obtem os dados do cadastro
 		if(ubsID > 0){
 			UbsService.GetById(ubsID).then(function(data){
-				/*if(data.parametroUbs.horarioMatutinoInicio){
-					data.parametroUbs.horarioMatutinoInicio = new Date(data.parametroUbs.horarioMatutinoInicio);
-				}
-
-				if(data.parametroUbs.horarioMatutinoFim){
-					data.parametroUbs.horarioMatutinoFim = new Date(data.parametroUbs.horarioMatutinoFim);
-				}
-
-				if(data.parametroUbs.horarioVespertinoInicio){
-					data.parametroUbs.horarioVespertinoInicio = new Date(data.parametroUbs.horarioVespertinoInicio);
-				}
-
-				if(data.parametroUbs.horarioVespertinoFim){
-					data.parametroUbs.horarioVespertinoFim = new Date(data.parametroUbs.horarioVespertinoFim);
-				}
-
-				if(data.parametroUbs.horarioNoturnoInicio){
-					data.parametroUbs.horarioNoturnoInicio = new Date(data.parametroUbs.horarioNoturnoInicio);
-				}
-
-				if(data.parametroUbs.horarioNoturnoFim){
-					data.parametroUbs.horarioNoturnoFim = new Date(data.parametroUbs.horarioNoturnoFim);
-				}*/
-
 				$scope.form = data;
 			});
 		}
@@ -119,19 +103,12 @@
 
 		//-- Adicionar zona
 		$scope.adicionarZona = function() {
-			var descricao = $scope.descricaoZona || '';
-
-			if(descricao === ''){
-				$window.document.getElementById('btn-input').focus();
-			}else{
-				var zona = {
-					i_sequencial: null,
-					descricao: $scope.descricaoZona
-				}
-
-				$scope.form.zonaAtendimento.push(zona);
-				$scope.descricaoZona = '';
+			var zona = {
+				i_sequencial: null,
+				descricao: ''
 			}
+
+			$scope.form.zonaAtendimento.push(zona);
 		}
 		//--
 

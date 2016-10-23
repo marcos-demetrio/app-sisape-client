@@ -515,39 +515,33 @@
 			
 			<div class="tab-content" ng-show="isSet(5)">
 				<div class="tab-pane fade in active">
-					<div class="panel panel-info">
-						<table class="table">
-							<thead class="aw-table-header-solid">
-								<tr>
-									<th>Descrição</th>
-									<th class="text-center">Ações</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr ng-repeat="item in form.zonaAtendimento">
-									<td ng-bind="item.descricao"></td>
-									<td class="table-pesq-produto-col-acoes col-md-1 col-sm-1 col-xs-1">
-										<div class="btn-group">
-											<a class="btn btn-default btn-xs" ng-click="excluirZona(item, $index)">Excluir</a>
-										</div>
-									</td>
-								</tr>
-								<tr ng-show="!form.zonaAtendimento.length">
-									<td colspan="2" class="text-center">
-										Nenum item na lista.
-									</td>
-								</tr>
-							</tbody>
-						</table>
-						<div class="panel-footer">
-							<div class="input-group">
-								<input id="btn-input" type="text" class="form-control" ng-model="descricaoZona" maxlength="255" />
-								<span class="input-group-btn">
-									<a class="btn btn-primary" ng-click="adicionarZona()">Adicionar</a>
-								</span>
-							</div>
-						</div>
-					</div>
+					<table class="table table-condensed">
+						<thead class="aw-table-header-solid">
+							<tr>
+								<th>Descrição</th>
+								<th class="text-center">Ações</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="item in form.zonaAtendimento">
+								<td>
+									<input ng-model="item.descricao" id="descricao" required name="descricao" type="text" class="form-control" maxlength="255">
+								</td>
+
+								<td class="text-center table-pesq-produto-col-acoes col-md-1 col-sm-1 col-xs-1">
+									<a class="btn btn-default btn-sm" ng-click="excluirZona(item, $index)">
+										<i class="fa fa-trash"></i>
+										<span class="visible-md-inline visible-lg-inline">Excluir</span>
+									</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+					<a class="btn btn-primary" ng-click="adicionarZona()">
+						<i class="fa fa-plus-circle"></i>
+						<span class="hidden-xs hidden-sm">Nova zona</span>
+					</a>
 				</div>
 			</div>
 

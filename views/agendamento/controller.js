@@ -31,6 +31,16 @@
 		if(agendamentoID > 0){
 			AgendamentoService.GetById(agendamentoID).then(function(data){
 				$scope.form = data;
+
+				var date = new Date();
+				var str = data.dataAgendamento;
+				var dateArray = str.split("-");
+
+				date.setFullYear(parseInt(dateArray[0]));
+				date.setMonth(parseInt(dateArray[1])-1);  // months indexed as 0-11, substract 1
+				date.setDate(parseInt(dateArray[2]));
+
+				$scope.form.dataAgendamento = date;
 			});
 		}
 		//--
@@ -100,13 +110,6 @@
 
 			return horarioAtivoReturn;
 		}
-		//--
-
-		//-- Carregar lista de horarios
-		/*AgendamentoService.GetHorariosByUbs($scope.form.cidadao.i_unidade_basica_saude).then(function(data){
-			$scope.listaHorarios = data;
-			console.log(data);
-		});*/
 		//--
 
 		//-- Campo Data
