@@ -1,0 +1,45 @@
+﻿<div ng-controller="AgendamentoListagemController">
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-8">
+					<h1 ng-bind-template="{{title}}"></h1>
+				</div>
+				
+				<div class="col-xs-4">
+					<div class="aw-page-header-controls">
+						<a class="btn btn-primary" href="#/agendamento/novo">
+							<i class="fa fa-plus-circle"></i> <span class="hidden-xs hidden-sm">Novo agendamento</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<form class="form-vertical js-form-loading">
+			<div class="form-group">
+				<button class="btn  btn-primary" ng-click="atualizarAgendamentos()">Atualizar</button>
+			</div>
+		</form>
+		
+		<div class="alert  aw-alert-no-results" role="alert" ng-show="listaVazia">
+			A pesquisa não retornou nenhum agendamento.
+		</div>
+
+		<div class="bs-callout bs-callout-info" id="callout-glyphicons-location" ng-repeat="item in itens">
+			<a href="#/agendamento/{{item.i_agendamento}}/editar">
+				<h4 ng-bind="item.cidadao.nomeCompleto"></h4>
+			</a>
+			<p ng-bind="'Data: ' + (item.dataAgendamento | date:'dd/MM/yyyy') + ' ' + (item.dataAgendamento | date:'HH:mm')"></p>
+			<p ng-bind="'Queixa Principal: ' + item.queixaPrincipal"></p>
+		</div>
+			
+		<div class="row">
+			<div class="col-xs-12  col-md-4  aw-text-xs-center  aw-text-md-right" style="float: right;">
+				<span class="aw-pagination-info" ng-bind-template="{{totalItens}} agendamento(s) encontrado(s)" ng-show="!listaVazia"></span>
+			</div>
+		</div>
+	</div>
+</div>
