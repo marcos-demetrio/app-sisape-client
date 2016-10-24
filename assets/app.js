@@ -81,6 +81,11 @@
 				{tipoUsuario: ['S', 'G'], url: '#/lotacao', descricao: 'Profissional Lotação'},
 				{tipoUsuario: ['S', 'G'], url: '#/agenda', descricao: 'Profissional Agenda'}
 			];
+			
+			$rootScope.listaMenuRelatorios = [
+				{tipoUsuario: ['S', 'G'], url: '#/rel_atendimento', descricao: 'Atendimentos'},
+				{tipoUsuario: ['S', 'G'], url: '#/rel_adoecimento', descricao: 'Adoecimentos'},
+			];
 		};
 	}
 
