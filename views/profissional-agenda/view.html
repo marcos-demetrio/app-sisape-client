@@ -44,6 +44,7 @@
 													<div class="checkbox">
 														<input	type="checkbox"
 																	ng-model="item.horarioMatutino"
+																	ng-change="setFocusHorario('M', $index)"
 																	id="horarioMatutino{{$index}}"
 																	name="horarioMatutino{{$index}}">
 														<label for="horarioMatutino{{$index}}">Matuino</label>
@@ -56,24 +57,40 @@
 											<div class="form-group">
 												<label class="col-sm-2 control-label" for="horarioMatutinoInicio{{$index}}">Início</label>
 												<div class="col-sm-6">
-													<input	type="time"
-																ng-disabled="item.horarioMatutino==false"
+													<select 	required
+																convert-to-number
+																class="form-control"
 																id="horarioMatutinoInicio{{$index}}"
 																name="horarioMatutinoInicio{{$index}}"
-																ng-model="item.horarioMatutinoInicio"
-																class="form-control"/>
+																ng-disabled="item.horarioMatutino==false"
+																ng-model="item.horarioMatutinoInicio">
+														<option value="7">7 horas</option>
+														<option value="8">8 horas</option>
+														<option value="9">9 horas</option>
+														<option value="10">10 horas</option>
+														<option value="11">11 horas</option>
+														<option value="12">12 horas</option>
+													</select>
 												</div>
 											</div>
 											
 											<div class="form-group">
 												<label class="col-sm-2 control-label" for="horarioMatutinoFim{{$index}}">Fim</label>
 												<div class="col-sm-6">
-													<input	type="time"
-																ng-disabled="item.horarioMatutino==false"
+													<select 	required
+																convert-to-number
+																class="form-control"
 																id="horarioMatutinoFim{{$index}}"
 																name="horarioMatutinoFim{{$index}}"
-																ng-model="item.horarioMatutinoFim"
-																class="form-control"/>
+																ng-disabled="item.horarioMatutino==false"
+																ng-model="item.horarioMatutinoFim">
+														<option value="7">7 horas</option>
+														<option value="8">8 horas</option>
+														<option value="9">9 horas</option>
+														<option value="10">10 horas</option>
+														<option value="11">11 horas</option>
+														<option value="12">12 horas</option>
+													</select>
 												</div>
 											</div>
 										</div>
@@ -87,6 +104,7 @@
 													<div class="checkbox">
 														<input	type="checkbox"
 																	ng-model="item.horarioVespertino"
+																	ng-change="setFocusHorario('V', $index)"
 																	id="horarioVespertino{{$index}}"
 																	name="horarioVespertino{{$index}}">
 														<label for="horarioVespertino{{$index}}">Vespertino</label>
@@ -99,24 +117,42 @@
 											<div class="form-group">
 												<label class="col-sm-2 control-label" for="horarioVespertinoInicio{{$index}}">Início</label>
 												<div class="col-sm-6">
-													<input	type="time"
-																ng-disabled="item.horarioVespertino==false"
+													<select 	required
+																convert-to-number
+																class="form-control"
 																id="horarioVespertinoInicio{{$index}}"
 																name="horarioVespertinoInicio{{$index}}"
-																ng-model="item.horarioVespertinoInicio"
-																class="form-control"/>
+																ng-disabled="item.horarioVespertino==false"
+																ng-model="item.horarioVespertinoInicio">
+														<option value="12">12 horas</option>
+														<option value="13">13 horas</option>
+														<option value="14">14 horas</option>
+														<option value="15">15 horas</option>
+														<option value="16">16 horas</option>
+														<option value="17">17 horas</option>
+														<option value="18">18 horas</option>
+													</select>
 												</div>
 											</div>
 											
 											<div class="form-group">
 												<label class="col-sm-2 control-label" for="horarioVespertinoFim{{$index}}">Fim</label>
 												<div class="col-sm-6">
-													<input	type="time"
-																ng-disabled="item.horarioVespertino==false"
+													<select 	required
+																convert-to-number
+																class="form-control"
 																id="horarioVespertinoFim{{$index}}"
 																name="horarioVespertinoFim{{$index}}"
-																ng-model="item.horarioVespertinoFim"
-																class="form-control"/>
+																ng-disabled="item.horarioVespertino==false"
+																ng-model="item.horarioVespertinoFim">
+														<option value="12">12 horas</option>
+														<option value="13">13 horas</option>
+														<option value="14">14 horas</option>
+														<option value="15">15 horas</option>
+														<option value="16">16 horas</option>
+														<option value="17">17 horas</option>
+														<option value="18">18 horas</option>
+													</select>
 												</div>
 											</div>
 										</div>
@@ -130,6 +166,7 @@
 													<div class="checkbox">
 														<input	type="checkbox"
 																	ng-model="item.horarioNoturno"
+																	ng-change="setFocusHorario('N', $index)"
 																	id="horarioNoturno{{$index}}"
 																	name="horarioNoturno{{$index}}">
 														<label for="horarioNoturno{{$index}}">Noturno</label>
@@ -142,24 +179,40 @@
 											<div class="form-group">
 												<label class="col-sm-2 control-label" for="horarioNoturnoInicio{{$index}}">Início</label>
 												<div class="col-sm-6">
-													<input	type="time"
-																ng-disabled="item.horarioNoturno==false"
+													<select 	required
+																convert-to-number
+																class="form-control"
 																id="horarioNoturnoInicio{{$index}}"
 																name="horarioNoturnoInicio{{$index}}"
-																ng-model="item.horarioNoturnoInicio"
-																class="form-control"/>
+																ng-disabled="item.horarioNoturno==false"
+																ng-model="item.horarioNoturnoInicio">
+														<option value="18">18 horas</option>
+														<option value="19">19 horas</option>
+														<option value="20">20 horas</option>
+														<option value="21">21 horas</option>
+														<option value="22">22 horas</option>
+														<option value="23">23 horas</option>
+													</select>
 												</div>
 											</div>
 											
 											<div class="form-group">
 												<label class="col-sm-2 control-label" for="horarioNoturnoFim{{$index}}">Fim</label>
 												<div class="col-sm-6">
-													<input	type="time"
-																ng-disabled="item.horarioNoturno==false"
+													<select 	required
+																convert-to-number
+																class="form-control"
 																id="horarioNoturnoFim{{$index}}"
 																name="horarioNoturnoFim{{$index}}"
-																ng-model="item.horarioNoturnoFim"
-																class="form-control"/>
+																ng-disabled="item.horarioNoturno==false"
+																ng-model="item.horarioNoturnoFim">
+														<option value="18">18 horas</option>
+														<option value="19">19 horas</option>
+														<option value="20">20 horas</option>
+														<option value="21">21 horas</option>
+														<option value="22">22 horas</option>
+														<option value="23">23 horas</option>
+													</select>
 												</div>
 											</div>
 										</div>

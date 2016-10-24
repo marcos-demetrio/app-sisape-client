@@ -28,13 +28,12 @@
 			A pesquisa não retornou nenhum agendamento.
 		</div>
 
-		<div class="list-group" ng-show="!listaVazia">
-			<a ng-repeat="item in itens" href="#/agendamento/{{item.i_agendamento}}/editar" class="list-group-item">
-				<h4 class="list-group-item-heading" ng-bind="item.cidadao.nomeCompleto"></h4>
-				<p class="list-group-item-text" ng-bind="'Data: ' + (item.dataAgendamento | date:'dd/MM/yyyy')"></p>
-				<p class="list-group-item-text" ng-bind="'Hora: ' + (item.dataAgendamento | date:'HH:mm')"></p>
-				<hr size="50" width="1" align="left" style="float:left;">
+		<div class="bs-callout bs-callout-info" id="callout-glyphicons-location" ng-repeat="item in itens">
+			<a href="#/agendamento/{{item.i_agendamento}}/editar">
+				<h4 ng-bind="item.cidadao.nomeCompleto"></h4>
 			</a>
+			<p ng-bind="'Data: ' + (item.dataAgendamento | date:'dd/MM/yyyy') + ' ' + (item.dataAgendamento | date:'HH:mm')"></p>
+			<p ng-bind="'Queixa Principal: ' + item.queixaPrincipal"></p>
 		</div>
 			
 		<div class="row">

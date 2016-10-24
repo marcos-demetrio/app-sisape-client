@@ -5,9 +5,9 @@
 		.module('app')
 		.controller('ProfissionalAgendaController', ProfissionalAgendaController);
 
-	ProfissionalAgendaController.$inject = ['$scope', '$location', '$route', '$routeParams', 'ProfissionalAgendaService', 'ProfissionalLotacaoService', 'UbsService', 'ProfissionalService', 'CboService'];
+	ProfissionalAgendaController.$inject = ['$scope', '$location', '$route', '$routeParams', '$timeout', 'ProfissionalAgendaService', 'ProfissionalLotacaoService', 'UbsService', 'ProfissionalService', 'CboService'];
 
-	function ProfissionalAgendaController($scope, $location, $route, $routeParams, ProfissionalAgendaService, ProfissionalLotacaoService, UbsService, ProfissionalService, CboService) {
+	function ProfissionalAgendaController($scope, $location, $route, $routeParams, $timeout, ProfissionalAgendaService, ProfissionalLotacaoService, UbsService, ProfissionalService, CboService) {
 		//-- Controle Panels
 		$scope.panel = [
 			{collapsed: false},
@@ -55,45 +55,6 @@
 					];
 				}
 
-				var dateArray = [];
-				for (var i = dias.length - 1; i >= 0; i--) {
-					if(dias[i].horarioMatutinoInicio != null){
-						dateArray = dias[i].horarioMatutinoInicio.split(":");
-
-						dias[i].horarioMatutinoInicio = new Date(2016, 1, 1, parseInt(dateArray[0]), parseInt(dateArray[1]), parseInt(dateArray[2]));
-					}
-
-					if(dias[i].horarioMatutinoFim != null){
-						dateArray = dias[i].horarioMatutinoFim.split(":");
-
-						dias[i].horarioMatutinoFim = new Date(2016, 1, 1, parseInt(dateArray[0]), parseInt(dateArray[1]), parseInt(dateArray[2]));
-					}
-
-					if(dias[i].horarioVespertinoInicio != null){
-						dateArray = dias[i].horarioVespertinoInicio.split(":");
-
-						dias[i].horarioVespertinoInicio = new Date(2016, 1, 1, parseInt(dateArray[0]), parseInt(dateArray[1]), parseInt(dateArray[2]));
-					}
-
-					if(dias[i].horarioVespertinoFim != null){
-						dateArray = dias[i].horarioVespertinoFim.split(":");
-
-						dias[i].horarioVespertinoFim = new Date(2016, 1, 1, parseInt(dateArray[0]), parseInt(dateArray[1]), parseInt(dateArray[2]));
-					}
-
-					if(dias[i].horarioNoturnoInicio != null){
-						dateArray = dias[i].horarioNoturnoInicio.split(":");
-
-						dias[i].horarioNoturnoInicio = new Date(2016, 1, 1, parseInt(dateArray[0]), parseInt(dateArray[1]), parseInt(dateArray[2]));
-					}
-
-					if(dias[i].horarioNoturnoFim != null){
-						dateArray = dias[i].horarioNoturnoFim.split(":");
-
-						dias[i].horarioNoturnoFim = new Date(2016, 1, 1, parseInt(dateArray[0]), parseInt(dateArray[1]), parseInt(dateArray[2]));
-					}
-				}
-
 				$scope.diasSemana = dias;
 			});
 		}
@@ -107,19 +68,19 @@
 					break;
 				case 'SEGUNDA_FEIRA':
 					descricaoDiaSemana = "Segunda-feira";
-					break;                      
+					break;
 				case 'TERCA_FEIRA':
 					descricaoDiaSemana = "Terça-feira";
-					break;                      
+					break;
 				case 'QUARTA_FEIRA':
 					descricaoDiaSemana = "Quarta-feira";
-					break;                      
+					break;
 				case 'QUINTA_FEIRA':
 					descricaoDiaSemana = "Quinta-feira";
-					break;                      
+					break;
 				case 'SEXTA_FEIRA':
 					descricaoDiaSemana = "Sexta-feira";
-					break;                      
+					break;
 				case 'SABADO':
 					descricaoDiaSemana = "Sábado";
 					break;
@@ -144,5 +105,51 @@
 			}
 		}
 		//--
+
+		//-- Limpa dados do campo caso desmarque a opção no checkbox dos horáriios
+		$scope.setFocusHorario = function(periodo, index) {
+			//horarioMatutino: false, horarioMatutinoInicio: null, horarioMatutinoFim: null,
+			//horarioVespertino: false, horarioVespertinoInicio: null, horarioVespertinoFim: null,
+			//horarioNoturno: false, horarioNoturnoInicio: null, horarioNoturnoFim: null}
+			$timeout(function() {
+				switch (periodo) {
+					case 'M':
+						if(!$scope.diasSemana[index].horarioMatutino){
+							$scope.diasSemana[index].horarioMatutinoInicio = null;
+							$scope.diasSemana[index].horarioMatutinoFim = null;
+						}else{
+							$('#horarioMatutinoInicio' + index).focus();
+						}
+
+						break;
+					case 'V':
+						if(!$scope.diasSemana[index].horarioVespertino){
+							$scope.diasSemana[index].horarioVespertinoInicio = null;
+							$scope.diasSemana[index].horarioVespertinoFim = null;
+						}else{
+							$('#horarioVespertinoInicio' + index).focus();
+						}
+
+						break;
+					case 'N':
+						if(!$scope.diasSemana[index].horarioNoturno){
+							$scope.diasSemana[index].horarioNoturnoInicio = null;
+							$scope.diasSemana[index].horarioNoturnoFim = null;
+						}else{
+							$('#horarioNoturnoInicio' + index).focus();
+						}
+
+						break;
+				}
+			}, 1);
+
+			/*$timeout(function() {
+				$(idHorarioInicio).focus();
+				
+				$(idHorarioInicio).val(null);
+				$(idHorarioFim).val("");
+			}, 1);*/
+		};
+		//--	
 	}
 })();
