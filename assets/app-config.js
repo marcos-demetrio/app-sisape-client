@@ -224,7 +224,25 @@
 				controller: 'AgendamentoController',
 				title: 'Cadastro de Agendamento'
 			})
-			
+
+			.when('/atendimento', {
+				templateUrl: 'views/atendimento/listagem.html',
+				controller: 'AtendimentoListagemController',
+				title: 'Pesquisa de Atendimento'
+			})
+
+			.when('/atendimento/:id/editar', {
+				templateUrl: 'views/atendimento/view.html',
+				controller: 'AtendimentoController',
+				title: 'Cadastro de Atendimento'
+			})
+
+			.when('/atendimento/novo', {
+				templateUrl: 'views/atendimento/view.html',
+				controller: 'AtendimentoController',
+				title: 'Cadastro de Atendimento'
+			})
+
 			.when('/medicamento', {
 				templateUrl: 'views/medicamento/listagem.html',
 				controller: 'MedicamentoListagemController',
