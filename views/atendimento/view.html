@@ -36,11 +36,11 @@
 						<label class="col-sm-2 control-label" for="dataAtendimento">Data do atendimento</label>
 						<div class="col-sm-2">
 							<p class="input-group">
-							<input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="form.dataAtendimento" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Fechar" current-text="Hoje" clear-text="Limpar" id="dataAtendimento"/>
-								<span class="input-group-btn">
-									<button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
-								</span>
-							<p ng-show="atendimentoForm.dataAtendimento.$error.required && !atendimentoForm.dataAtendimento.$pristine" class="help-block">Campo obrigatório.</p>
+								<input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="form.dataAtendimento" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Fechar" current-text="Hoje" clear-text="Limpar" id="dataAtendimento"/>
+									<span class="input-group-btn">
+										<button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+									</span>
+								<p ng-show="atendimentoForm.dataAtendimento.$error.required && !atendimentoForm.dataAtendimento.$pristine" class="help-block">Campo obrigatório.</p>
 							</p>
 						</div>
 					</div>
@@ -151,6 +151,109 @@
 						<div class="col-sm-10">
 							<textarea ng-model="form.plano" id="plano" required name="plano" class="form-control" rows="3" maxlength="5120"></textarea>
 							<p ng-show="atendimentoForm.plano.$error.required && !atendimentoForm.plano.$pristine" class="help-block">Campo obrigatório.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="tab-content" ng-show="isSet(4)">
+				<div class="tab-pane fade in active">
+					<div class="col-sm-12">
+						<!-- Sintomas Input -->
+						<div class="form-group sisape-required">
+							<table class="table table-condensed">
+								<thead>
+									<th>CID</th>
+									<th class="text-center">Ação</th>
+								</thead>
+								<tbody>
+									<tr ng-repeat="sintoma in form.atendimentoSintoma">
+										<td>
+											<select class="form-control" id="i_cid" name="i_cid" ng-options="cid.codigoCid + ' - ' + cid.descricao  for cid in listaCid track by cid.i_cid" ng-model="sintoma.cid"></select>
+										</td>
+										<td class="text-center">
+											<a class="btn btn-default btn-sm" ng-click="excluirSintoma(sintoma, $index)">
+												<i class="fa fa-trash"></i>
+												<span class="visible-md-inline visible-lg-inline">Excluir</span>
+											</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+
+							<a class="btn btn-primary" ng-click="adicionarSintoma()">
+								<i class="fa fa-plus-circle"></i>
+								<span class="hidden-xs hidden-sm">Nova CID</span>
+							</a>
+						</div>
+
+						<hr>
+
+						<!-- Medicamentos Input -->
+						<div class="form-group sisape-required">
+							<table class="table table-condensed">
+								<thead>
+									<th>Medicamento</th>
+									<th>Posologia</th>
+									<th class="text-center">Ação</th>
+								</thead>
+
+								<tbody>
+									<tr ng-repeat="m in form.atendimentoMedicamento">
+										<td>
+											<select class="form-control" id="i_medicamento" name="i_medicamento" ng-options="m.nome for m in listaMedicamento track by m.i_medicamento" ng-model="m.medicamento"></select>
+										</td>
+
+										<td>
+											<input ng-model="m.posologia" id="posologia" required name="posologia" type="text" class="form-control" maxlength="100">
+										</td>
+
+										<td class="text-center">
+											<a class="btn btn-default btn-sm" ng-click="excluirMedicamento(m, $index)">
+												<i class="fa fa-trash"></i>
+												<span class="visible-md-inline visible-lg-inline">Excluir</span>
+											</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+
+							<a class="btn btn-primary" ng-click="adicionarMedicamento()">
+								<i class="fa fa-plus-circle"></i>
+								<span class="hidden-xs hidden-sm">Novo medicamento</span>
+							</a>
+						</div>
+
+						<hr>
+
+						<!-- Exames Input -->
+						<div class="form-group sisape-required">
+							<table class="table table-condensed">
+								<thead>
+									<th>Exame</th>
+									<th class="text-center">Ação</th>
+								</thead>
+								<tbody>
+									<tr ng-repeat="exame in form.atendimentoExame">
+										<td>
+											<select class="form-control" id="i_exame" name="i_exame" ng-options="exame.i_exame + ' - ' + exame.nome for exame in listaExame track by exame.i_exame" ng-model="exame.exame"></select>
+										</td>
+
+										<td class="text-center">
+											<a class="btn btn-default btn-sm" ng-click="excluirExame(exame, $index)">
+												<i class="fa fa-trash"></i>
+												<span class="visible-md-inline visible-lg-inline">Excluir</span>
+											</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+
+							<a class="btn btn-primary" ng-click="adicionarExame()">
+								<i class="fa fa-plus-circle"></i>
+								<span class="hidden-xs hidden-sm">Novo exame</span>
+							</a>
 						</div>
 					</div>
 				</div>

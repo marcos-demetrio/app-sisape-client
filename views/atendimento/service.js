@@ -22,7 +22,15 @@
 		}
 
 		service.DeleteSintoma = function DeleteSintoma(id) {
-			return $http.delete(API + 'atendimento/sintoma/' + id).then(handleSuccess, handleError('Erro ao excluir atendimento pelo ID: ' + id));
+			return $http.delete(API + 'atendimento/sintoma/' + id).then(handleSuccess, handleError('Erro ao excluir sintoma do atendimento pelo ID: ' + id));
+		}
+
+		service.DeleteMedicamento = function DeleteMedicamento(id) {
+			return $http.delete(API + 'atendimento/medicamento/' + id).then(handleSuccess, handleError('Erro ao excluir medicamento do atendimento pelo ID: ' + id));
+		}
+
+		service.DeleteExame = function DeleteExame(id) {
+			return $http.delete(API + 'atendimento/exame/' + id).then(handleSuccess, handleError('Erro ao excluir exame do atendimento pelo ID: ' + id));
 		}
 
 		service.Create = function Create(atendimento) {
