@@ -1,4 +1,4 @@
-﻿<div ng-controller="AgendamentoController">
+﻿<div ng-controller="AtendimentoController">
 	<div class="page-header">
 		<div class="container-fluid">
 			<h1 ng-bind-template="{{title}}"></h1>
@@ -6,98 +6,153 @@
 	</div>
 
 	<div class="container-fluid">
-		<form class="form-horizontal form-vertical  js-form-loading" name="agendamentoForm" ng-submit="update()">
+		<form class="form-horizontal form-vertical  js-form-loading" name="atendimentoForm" ng-submit="update()">
 			<!-- Id input-->
-			<input type="hidden" id="i_agendamento" name="i_agendamento" ng-model="form.i_agendamento" />
+			<input type="hidden" id="i_atendimento" name="i_atendimento" ng-model="form.i_atendimento" />
 
-			<!-- Cidadão Select-->
-			<div class="form-group mdn-required" ng-class="{ 'has-error' : agendamentoForm.i_cidadao.$invalid && !agendamentoForm.i_cidadao.$pristine }">
-				<label for="i_cidadao" class="col-sm-2 control-label">Cidadão</label>
-				<div class="col-sm-5">
-					<select class="form-control" id="i_cidadao" ng-change="mudouCidadao()" name="i_cidadao" required ng-options="cidadao.nomeCompleto for cidadao in cidadaos track by cidadao.i_cidadao" ng-model="form.cidadao"></select>
+			<ul class="nav nav-pills">
+				<li class="active"><a href ng-click="setTab(1)" ng-class="{'active' : isSet(1)}" data-toggle="tab">Dados</a></li>
+				<li><a href ng-click="setTab(2)" ng-class="{'active' : isSet(2)}" data-toggle="tab">Escuta inicial</a></li>
+				<li><a href ng-click="setTab(3)" ng-class="{'active' : isSet(3)}" data-toggle="tab">SOAP</a></li>
+				<li><a href ng-click="setTab(4)" ng-class="{'active' : isSet(4)}" data-toggle="tab">Outros</a></li>
+			</ul>
 
-					<p ng-show="agendamentoForm.i_cidadao.$error.required && !agendamentoForm.i_cidadao.$pristine" class="help-block">Selecione um cidadão.</p>
+			<br>
+
+			<div class="tab-content" ng-show="isSet(1)">
+				<div class="tab-pane fade in active">
+					<!-- Agendamento Select-->
+					<div class="form-group mdn-required" ng-class="{ 'has-error' : atendimentoForm.i_agendamento.$invalid && !atendimentoForm.i_agendamento.$pristine }">
+						<label for="i_agendamento" class="col-sm-2 control-label">Agendamento</label>
+						<div class="col-sm-5">
+							<select class="form-control" id="i_agendamento" name="i_agendamento" required ng-options="agendamento.cidadao.nomeCompleto + ' - ' + (agendamento.dataAgendamento | date:'dd/MM/yyyy') + ' - ' + (agendamento.horaAgendamento | date:'HH:mm') for agendamento in agendamentos track by agendamento.i_agendamento" ng-model="form.agendamento"></select>
+
+							<p ng-show="atendimentoForm.i_agendamento.$error.required && !atendimentoForm.i_agendamento.$pristine" class="help-block">Selecione um agendamento.</p>
+						</div>
+					</div>
+
+					<!-- Data do Agendamento Input -->
+					<div class="form-group sisape-required" ng-class="{ 'has-error' : atendimentoForm.dataAtendimento.$invalid && !atendimentoForm.dataAtendimento.$pristine }">
+						<label class="col-sm-2 control-label" for="dataAtendimento">Data do atendimento</label>
+						<div class="col-sm-2">
+							<p class="input-group">
+							<input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="form.dataAtendimento" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Fechar" current-text="Hoje" clear-text="Limpar" id="dataAtendimento"/>
+								<span class="input-group-btn">
+									<button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+								</span>
+							<p ng-show="atendimentoForm.dataAtendimento.$error.required && !atendimentoForm.dataAtendimento.$pristine" class="help-block">Campo obrigatório.</p>
+							</p>
+						</div>
+					</div>
 				</div>
 			</div>
 
-			<!-- Profissional Select-->
-			<div class="form-group mdn-required" ng-class="{ 'has-error' : agendamentoForm.i_profissional.$invalid && !agendamentoForm.i_profissional.$pristine }">
-				<label for="i_profissional" class="col-sm-2 control-label">Profissional</label>
-				<div class="col-sm-5">
-					<select class="form-control" id="i_profissional" name="i_profissional" required ng-options="lotacao.profissional.nome for lotacao in profissionais track by lotacao.profissional.i_profissional" ng-model="form.profissionalLotacao"></select>
+			<div class="tab-content" ng-show="isSet(2)">
+				<div class="tab-pane fade in active">
+					<!-- Altura -->
+					<div class="form-group">
+						<label class="col-xs-2 col-sm-2 col-md-2 control-label" for="altura">Altura</label>
+						<div class="col-sm-4">
+							<input ng-model="form.altura" id="altura" name="altura" type="number" step="any" maxlength="12" class="form-control" min="0" max="999999999999">
+						</div>
+					</div>
 
-					<p ng-show="agendamentoForm.i_profissional.$error.required && !agendamentoForm.i_profissional.$pristine" class="help-block">Selecione um profissional.</p>
+					<!-- IMC -->
+					<div class="form-group">
+						<label class="col-xs-2 col-sm-2 col-md-2 control-label" for="imc">IMC</label>
+						<div class="col-sm-4">
+							<input ng-model="form.imc" id="imc" name="imc" type="number" step="any" maxlength="12" class="form-control" min="0" max="999999999999">
+						</div>
+					</div>
+
+					<!-- Frequencia Cardiaca -->
+					<div class="form-group">
+						<label class="col-xs-2 col-sm-2 col-md-2 control-label" for="frequenciaCardiaca">Freq. Card.</label>
+						<div class="col-sm-4">
+							<input ng-model="form.frequenciaCardiaca" id="frequenciaCardiaca" name="frequenciaCardiaca" type="number" step="any" maxlength="12" class="form-control" min="0" max="999999999999">
+						</div>
+					</div>
+
+					<!-- Frequencia Respiratoria -->
+					<div class="form-group">
+						<label class="col-xs-2 col-sm-2 col-md-2 control-label" for="frequenciaRespiratoria">Freq. Resp.</label>
+						<div class="col-sm-4">
+							<input ng-model="form.frequenciaRespiratoria" id="frequenciaRespiratoria" name="frequenciaRespiratoria" type="number" step="any" maxlength="12" class="form-control" min="0" max="999999999999">
+						</div>
+					</div>
+
+					<!-- Peso -->
+					<div class="form-group">
+						<label class="col-xs-2 col-sm-2 col-md-2 control-label" for="peso">Peso</label>
+						<div class="col-sm-4">
+							<input ng-model="form.peso" id="peso" name="peso" type="number" step="any" maxlength="12" class="form-control" min="0" max="999999999999">
+						</div>
+					</div>
+
+					<!-- Temperatura -->
+					<div class="form-group">
+						<label class="col-xs-2 col-sm-2 col-md-2 control-label" for="temperatura">Temperatura</label>
+						<div class="col-sm-4">
+							<input ng-model="form.temperatura" id="temperatura" name="temperatura" type="number" step="any" maxlength="12" class="form-control" min="0" max="999999999999">
+						</div>
+					</div>
+
+					<!-- Pressão Máxima -->
+					<div class="form-group">
+						<label class="col-xs-2 col-sm-2 col-md-2 control-label" for="pressaoMaxima">Pressão Máxima</label>
+						<div class="col-sm-4">
+							<input ng-model="form.pressaoMaxima" id="pressaoMaxima" name="pressaoMaxima" type="number" maxlength="12" class="form-control" min="0" max="999999999999">
+						</div>
+					</div>
+
+					<!-- Pressão Máxima -->
+					<div class="form-group">
+						<label class="col-xs-2 col-sm-2 col-md-2 control-label" for="pressaoMinima">Pressão Mínima</label>
+						<div class="col-sm-4">
+							<input ng-model="form.pressaoMinima" id="pressaoMinima" name="pressaoMinima" type="number"maxlength="12" class="form-control" min="0" max="999999999999">
+						</div>
+					</div>
+
 				</div>
 			</div>
 
-			<!-- Data do Agendamento Input -->
-			<div class="form-group sisape-required" ng-class="{ 'has-error' : agendamentoForm.dataAgendamento.$invalid && !agendamentoForm.dataAgendamento.$pristine }">
-				<label class="col-sm-2 control-label" for="dataAgendamento">Data do agendamento</label>
-				<div class="col-sm-2">
-					<p class="input-group">
-					<input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="form.dataAgendamento" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Fechar" current-text="Hoje" clear-text="Limpar" id="dataAgendamento" ng-change="mudouData()" />
-						<span class="input-group-btn">
-							<button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
-						</span>
-					<p ng-show="agendamentoForm.dataAgendamento.$error.required && !agendamentoForm.dataAgendamento.$pristine" class="help-block">Campo obrigatório.</p>
-					</p>
-				</div>
-			</div>
+			<div class="tab-content" ng-show="isSet(3)">
+				<div class="tab-pane fade in active">
+					<!-- Subjetivo Input -->
+					<div class="form-group sisape-required" ng-class="{ 'has-error' : atendimentoForm.subjetivo.$invalid && !atendimentoForm.subjetivo.$pristine }">
+						<label class="col-sm-1 control-label" for="subjetivo">Subjetivo</label>
+						<div class="col-sm-10">
+							<textarea ng-model="form.subjetivo" id="subjetivo" required name="subjetivo" class="form-control" rows="3" maxlength="5120"></textarea>
+							<p ng-show="atendimentoForm.subjetivo.$error.required && !atendimentoForm.subjetivo.$pristine" class="help-block">Campo obrigatório.</p>
+						</div>
+					</div>
 
-			<!-- Horarios Select-->
-			<div class="form-group mdn-required" ng-class="{ 'has-error' : agendamentoForm.horaAgendamento.$invalid && !agendamentoForm.horaAgendamento.$pristine }">
-				<label for="horaAgendamento" class="col-sm-2 control-label">Horário</label>
-				<div class="col-sm-3">
-					<select class="form-control" id="horaAgendamento" name="horaAgendamento" required ng-options="(listaHorario.horario | date:'HH:mm') + ' - Número da senha: ' + listaHorario.numero for listaHorario in listaHorarios | orderBy:'horario' track by listaHorario.horario" ng-model="form.horaAgendamento"></select>
+					<!-- Objetivo Input -->
+					<div class="form-group sisape-required" ng-class="{ 'has-error' : atendimentoForm.objetivo.$invalid && !atendimentoForm.objetivo.$pristine }">
+						<label class="col-sm-1 control-label" for="objetivo">Objetivo</label>
+						<div class="col-sm-10">
+							<textarea ng-model="form.objetivo" id="objetivo" required name="objetivo" class="form-control" rows="3" maxlength="5120"></textarea>
+							<p ng-show="atendimentoForm.objetivo.$error.required && !atendimentoForm.objetivo.$pristine" class="help-block">Campo obrigatório.</p>
+						</div>
+					</div>
 
-					<p ng-show="agendamentoForm.horaAgendamento.$error.required && !agendamentoForm.horaAgendamento.$pristine" class="help-block">Selecione um horário.</p>
-				</div>
-			</div>
+					<!-- Avaliação Input -->
+					<div class="form-group sisape-required" ng-class="{ 'has-error' : atendimentoForm.avaliacao.$invalid && !atendimentoForm.avaliacao.$pristine }">
+						<label class="col-sm-1 control-label" for="avaliacao">Avaliação</label>
+						<div class="col-sm-10">
+							<textarea ng-model="form.avaliacao" id="avaliacao" required name="avaliacao" class="form-control" rows="3" maxlength="5120"></textarea>
+							<p ng-show="atendimentoForm.avaliacao.$error.required && !atendimentoForm.avaliacao.$pristine" class="help-block">Campo obrigatório.</p>
+						</div>
+					</div>
 
-			<!-- Queixa Principal Input -->
-			<div class="form-group sisape-required" ng-class="{ 'has-error' : agendamentoForm.queixaPrincipal.$invalid && !agendamentoForm.queixaPrincipal.$pristine }">
-				<label class="col-sm-2 control-label" for="queixaPrincipal">Queixa Principal</label>
-				<div class="col-sm-10">
-					<textarea ng-model="form.queixaPrincipal" id="queixaPrincipal" required name="queixaPrincipal" class="form-control" rows="3" maxlength="1024"></textarea>
-					<p ng-show="agendamentoForm.queixaPrincipal.$error.required && !agendamentoForm.queixaPrincipal.$pristine" class="help-block">Campo obrigatório.</p>
-				</div>
-			</div>
-
-			<!-- Sintomas Input -->
-			<div class="form-group sisape-required">
-
-				<label class="col-sm-2 control-label">Sintomas</label>
-				<div class="col-sm-10">
-
-					<table class="table table-condensed">
-						<thead>
-							<th>CID <span class="label label-info">Caso souber</span></th>
-							<th>Descrição</th>
-							<th class="text-center">Ação</th>
-						</thead>
-						<tbody>
-							<tr ng-repeat="sintoma in form.agendamentoSintoma">
-								<td>
-									<select class="form-control" id="i_cid" name="i_cid" ng-options="cid.codigoCid + ' - ' + cid.descricao  for cid in listaCid track by cid.i_cid" ng-model="sintoma.cid"></select>
-								</td>
-
-								<td>
-									<input ng-model="sintoma.descricao" id="descricao" required name="descricao" type="text" class="form-control" maxlength="255">
-								</td>
-								<td class="text-center">
-									<a class="btn btn-default btn-sm" ng-click="excluirSintoma(sintoma, $index)">
-										<i class="fa fa-trash"></i>
-										<span class="visible-md-inline visible-lg-inline">Excluir</span>
-									</a>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-
-					<a class="btn btn-primary" ng-click="adicionarSintoma()">
-						<i class="fa fa-plus-circle"></i>
-						<span class="hidden-xs hidden-sm">Novo sintoma</span>
-					</a>
+					<!-- Plano Input -->
+					<div class="form-group sisape-required" ng-class="{ 'has-error' : atendimentoForm.plano.$invalid && !atendimentoForm.plano.$pristine }">
+						<label class="col-sm-1 control-label" for="plano">Plano</label>
+						<div class="col-sm-10">
+							<textarea ng-model="form.plano" id="plano" required name="plano" class="form-control" rows="3" maxlength="5120"></textarea>
+							<p ng-show="atendimentoForm.plano.$error.required && !atendimentoForm.plano.$pristine" class="help-block">Campo obrigatório.</p>
+						</div>
+					</div>
 				</div>
 			</div>
 
@@ -105,8 +160,8 @@
 
 			<div class="form-group">
 				<div style="margin-left: 15px;"><!--<div class="pull-right">-->
-					<button class="btn  btn-primary" type="submit" ng-disabled="agendamentoForm.$invalid">Salvar</button>
-					<a ng-click="cancelar(agendamentoForm.$dirty)" class="btn  btn-default">Cancelar</a>
+					<button class="btn  btn-primary" type="submit" ng-disabled="atendimentoForm.$invalid">Salvar</button>
+					<a ng-click="cancelar(atendimentoForm.$dirty)" class="btn  btn-default">Cancelar</a>
 					<a ng-click="excluir()" ng-show="editandoCadastro" class="btn  btn-link aw-btn-link-danger">Excluir este agendamento</a>
 				</div>
 			</div>
