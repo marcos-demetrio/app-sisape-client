@@ -278,5 +278,17 @@
 				controller: 'ExameController',
 				title: 'Cadastro de Exame'
 			})
+			
+			.when('/relatorio/atendimento', {
+				templateUrl: 'views/atendimento/rel-atendimento.html',
+				controller: 'AtendimentoController',
+				title: 'Relatório de Atendimento'
+			})
+
+			.when('/relatorio/adoecimento', {
+				templateUrl: 'views/atendimento/rel-adoecimento.html',
+				controller: 'AtendimentoController',
+				title: 'Relatório de Adoecimento'
+			})
 	}
 })();

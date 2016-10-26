@@ -83,8 +83,8 @@
 			];
 			
 			$rootScope.listaMenuRelatorios = [
-				{tipoUsuario: ['S', 'G'], url: '#/rel_atendimento', descricao: 'Atendimentos'},
-				{tipoUsuario: ['S', 'G'], url: '#/rel_adoecimento', descricao: 'Adoecimentos'},
+				{tipoUsuario: ['S', 'G'], url: '#/relatorio/atendimento', descricao: 'Atendimentos'},
+				{tipoUsuario: ['S', 'G'], url: '#/relatorio/adoecimento', descricao: 'Adoecimentos'},
 			];
 		};
 	}

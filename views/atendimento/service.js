@@ -33,6 +33,10 @@
 			return $http.put(API + 'atendimento/' + id, atendimento).then(handleSuccess, handleError('Erro ao atualizar atendimento'));
 		}
 
+		service.AtendimentoRelatorioPesquisarPorFiltro = function Update(atendimento, id) {
+			return $http.put(API + 'atendimento/' + id, atendimento).then(handleSuccess, handleError('Erro ao atualizar atendimento'));
+		}
+
 		return service;
 		
 		function handleSuccess(res) {

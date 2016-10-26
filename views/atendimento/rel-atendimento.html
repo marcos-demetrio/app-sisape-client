@@ -1,17 +1,9 @@
-﻿<div ng-controller="AgendamentoListagemController">
+﻿<div ng-controller="AtendimentoRelatorioController">
 	<div class="page-header">
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-xs-8">
+				<div class="col-xs-12">
 					<h1 ng-bind-template="{{title}}"></h1>
-				</div>
-				
-				<div class="col-xs-4">
-					<div class="aw-page-header-controls">
-						<a class="btn btn-primary" href="#/agendamento/novo">
-							<i class="fa fa-plus-circle"></i> <span class="hidden-xs hidden-sm">Novo agendamento</span>
-						</a>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -19,26 +11,125 @@
 
 	<div class="container-fluid">
 		<form class="form-vertical js-form-loading">
+			<div class="row">
+				<div class="col-sm-1">
+					<div class="form-group">
+						<label for="input-nome" class="control-label">Tipo de Filtro</label>
+					</div>
+				</div>
+				<div class="col-sm-11">
+					<div class="form-group">
+						<select class="form-control" id="filtro" name="filtro" required ng-model="filtro">
+							<option value="VAZIO" selected>Selecione um filtro</option>
+							<option value="UBS">UBS</option>
+							<option value="PROFISSIONAL">Profissional</option>
+							<option value="CIDADAO">Cidadão</option>
+							<option value="DATA_ATENDIMENTO">Data de atendimento</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-sm-1">
+					<div class="form-group">
+						<label for="input-nome" class="control-label">UBS</label>
+					</div>
+				</div>
+				<div class="col-sm-11">
+					<div class="form-group">
+						<select class="form-control" id="i_unidade_basica_saude" name="i_unidade_basica_saude" required ng-options="ubs.nome for ubs in ubss track by ubs.i_unidade_basica_saude" ng-model="unidadeBasicaSaude" ng-disabled="filtro!='UBS'"></select>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-sm-1">
+					<div class="form-group">
+						<label for="input-nome">Profissional</label>
+					</div>
+				</div>
+				<div class="col-sm-11">
+					<div class="form-group">
+						<select class="form-control" id="i_profissional" name="i_profissional" required ng-options="profissional.nome for profissional in profissionais track by profissional.i_profissional" ng-model="profissional" ng-disabled="filtro!='PROFISSIONAL'"></select>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-sm-1">
+					<div class="form-group">
+						<label for="input-nome">Cidadão</label>
+					</div>
+				</div>
+				<div class="col-sm-11">
+					<div class="form-group">
+						<select class="form-control" id="i_cidadao" name="i_cidadao" required ng-options="cidadao.nome for cidadao in cidadaos track by cidadao.i_cidadao" ng-model="cidadao" ng-disabled="filtro!='CIDADAO'"></select>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-1">
+					<div class="form-group">
+						<label for="input-nome">Data de Atendimento</label>
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<div class="form-group">
+						<p class="input-group">
+						<input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="dataAtendimentoInicio" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Fechar" current-text="Hoje" clear-text="Limpar" id="dataAtendimentoInicio" ng-disabled="filtro!='DATA_ATENDIMENTO'"/>
+							<span class="input-group-btn">
+								<button type="button" class="btn btn-default" ng-click="open2()" ng-disabled="filtro!='DATA_ATENDIMENTO'"><i class="glyphicon glyphicon-calendar"></i></button>
+							</span>
+						<p ng-show="form.dataAtendimentoInicio.$error.required && !form.dataAtendimentoInicio.$pristine" class="help-block">Campo obrigatório.</p>
+						</p>
+					</div>
+				</div>
+				<div class="col-sm-1">
+					<div class="form-group">
+						<label for="input-nome">até</label>
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<div class="form-group">
+						<p class="input-group">
+						<input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="dataAtendimentoFinal" is-open="popup3.opened" datepicker-options="dateOptions" ng-required="true" close-text="Fechar" current-text="Hoje" clear-text="Limpar" id="dataAtendimentoFinal"" ng-disabled="filtro!='DATA_ATENDIMENTO'"/>
+							<span class="input-group-btn">
+								<button type="button" class="btn btn-default" ng-click="open3()" ng-disabled="filtro!='DATA_ATENDIMENTO'"><i class="glyphicon glyphicon-calendar"></i></button>
+							</span>
+						<p ng-show="form.dataAtendimentoFinal.$error.required && !form.dataAtendimentoFinal.$pristine" class="help-block">Campo obrigatório.</p>
+						</p>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+					</div>
+				</div>
+			</div>
+
 			<div class="form-group">
-				<button class="btn  btn-primary" ng-click="atualizarAgendamentos()">Atualizar</button>
+				<button class="btn  btn-primary" ng-click="AtendimentoPesquisar()">Pesquisar</button>
+				<button class="btn  btn-primary" ng-click="AtendimentoImprimir()" ng-disabled="listaVazia">Imprimir</button>
+				<button class="btn  btn-default" ng-click="AtendimentoLimpar()">Limpar</button>
 			</div>
 		</form>
 		
 		<div class="alert  aw-alert-no-results" role="alert" ng-show="listaVazia">
-			A pesquisa não retornou nenhum agendamento.
+			A pesquisa não retornou nenhum atendimento.
 		</div>
 
 		<div class="bs-callout bs-callout-info" id="callout-glyphicons-location" ng-repeat="item in itens">
-			<a href="#/agendamento/{{item.i_agendamento}}/editar">
+			<a href="#/atendimento/{{item.i_atendimento}}/editar">
 				<h4 ng-bind="item.cidadao.nomeCompleto"></h4>
 			</a>
-			<p ng-bind="'Data: ' + (item.dataAgendamento | date:'dd/MM/yyyy') + ' ' + (item.dataAgendamento | date:'HH:mm')"></p>
+			<p ng-bind="'Data: ' + (item.dataAtendimento | date:'dd/MM/yyyy') + ' ' + (item.dataAtendimento | date:'HH:mm')"></p>
 			<p ng-bind="'Queixa Principal: ' + item.queixaPrincipal"></p>
 		</div>
 			
 		<div class="row">
 			<div class="col-xs-12  col-md-4  aw-text-xs-center  aw-text-md-right" style="float: right;">
-				<span class="aw-pagination-info" ng-bind-template="{{totalItens}} agendamento(s) encontrado(s)" ng-show="!listaVazia"></span>
+				<span class="aw-pagination-info" ng-bind-template="{{totalItens}} atendimento(s) encontrado(s)" ng-show="!listaVazia"></span>
 			</div>
 		</div>
 	</div>
