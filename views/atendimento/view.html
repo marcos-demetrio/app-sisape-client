@@ -25,7 +25,7 @@
 					<div class="form-group mdn-required" ng-class="{ 'has-error' : atendimentoForm.i_agendamento.$invalid && !atendimentoForm.i_agendamento.$pristine }">
 						<label for="i_agendamento" class="col-sm-2 control-label">Agendamento</label>
 						<div class="col-sm-5">
-							<select class="form-control" id="i_agendamento" name="i_agendamento" required ng-options="agendamento.cidadao.nomeCompleto + ' - ' + (agendamento.dataAgendamento | date:'dd/MM/yyyy') + ' - ' + (agendamento.horaAgendamento | date:'HH:mm') for agendamento in agendamentos track by agendamento.i_agendamento" ng-model="form.agendamento"></select>
+							<select class="form-control" id="i_agendamento" name="i_agendamento" required ng-options="agendamento.cidadao.nomeCompleto + ' - ' + (agendamento.dataAgendamento | date:'dd/MM/yyyy') + ' - ' + (agendamento.horaAgendamento | date:'HH:mm') for agendamento in agendamentos track by agendamento.i_agendamento" ng-model="form.agendamento" ng-change="mudouAgendamento()"></select>
 
 							<p ng-show="atendimentoForm.i_agendamento.$error.required && !atendimentoForm.i_agendamento.$pristine" class="help-block">Selecione um agendamento.</p>
 						</div>
@@ -42,6 +42,22 @@
 									</span>
 								<p ng-show="atendimentoForm.dataAtendimento.$error.required && !atendimentoForm.dataAtendimento.$pristine" class="help-block">Campo obrigatório.</p>
 							</p>
+						</div>
+					</div>
+
+					<!-- Hora do atendimento -->
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="horaAtendimento">Hora do atendimento</label>
+						<div class="col-sm-2">
+							<input ng-model="form.horaAtendimento" id="horaAtendimento" name="horaAtendimento" type="time" class="form-control">
+						</div>
+					</div>
+
+					<!-- Cidadão -->
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Cidadão</label>
+						<div class="col-sm-6">
+							<input ng-model="form.agendamento.cidadao.nomeCompleto" ng-disabled="true" id="nomeCompleto" name="nomeCompleto" type="text" class="form-control">
 						</div>
 					</div>
 				</div>
@@ -167,12 +183,14 @@
 									<th>CID</th>
 									<th class="text-center">Ação</th>
 								</thead>
+								
 								<tbody>
 									<tr ng-repeat="sintoma in form.atendimentoSintoma">
-										<td>
+										<td width="90%">
 											<select class="form-control" id="i_cid" name="i_cid" ng-options="cid.codigoCid + ' - ' + cid.descricao  for cid in listaCid track by cid.i_cid" ng-model="sintoma.cid"></select>
 										</td>
-										<td class="text-center">
+
+										<td class="text-center" width="10%">
 											<a class="btn btn-default btn-sm" ng-click="excluirSintoma(sintoma, $index)">
 												<i class="fa fa-trash"></i>
 												<span class="visible-md-inline visible-lg-inline">Excluir</span>
@@ -201,15 +219,15 @@
 
 								<tbody>
 									<tr ng-repeat="m in form.atendimentoMedicamento">
-										<td>
+										<td width="60%">
 											<select class="form-control" id="i_medicamento" name="i_medicamento" ng-options="m.nome for m in listaMedicamento track by m.i_medicamento" ng-model="m.medicamento"></select>
 										</td>
 
-										<td>
+										<td width="30%">
 											<input ng-model="m.posologia" id="posologia" required name="posologia" type="text" class="form-control" maxlength="100">
 										</td>
 
-										<td class="text-center">
+										<td class="text-center" width="10%">
 											<a class="btn btn-default btn-sm" ng-click="excluirMedicamento(m, $index)">
 												<i class="fa fa-trash"></i>
 												<span class="visible-md-inline visible-lg-inline">Excluir</span>
@@ -234,13 +252,14 @@
 									<th>Exame</th>
 									<th class="text-center">Ação</th>
 								</thead>
+
 								<tbody>
 									<tr ng-repeat="exame in form.atendimentoExame">
-										<td>
+										<td width="90%">
 											<select class="form-control" id="i_exame" name="i_exame" ng-options="exame.i_exame + ' - ' + exame.nome for exame in listaExame track by exame.i_exame" ng-model="exame.exame"></select>
 										</td>
 
-										<td class="text-center">
+										<td class="text-center" width="10%">
 											<a class="btn btn-default btn-sm" ng-click="excluirExame(exame, $index)">
 												<i class="fa fa-trash"></i>
 												<span class="visible-md-inline visible-lg-inline">Excluir</span>

@@ -156,7 +156,7 @@
 		$scope.excluir = function() {
 			swal({   
 					title: "Tem certeza?",
-					text: "Você não poderá recuperar o país após excluir.",
+					text: "Você não poderá recuperar o agendamento após excluir.",
 					type: "warning",
 					showCancelButton: true,
 					confirmButtonColor: "#DD6B55",
@@ -195,7 +195,7 @@
 			if(dirty){
 				swal({   
 						title: "Tem certeza?",
-						text: "Você não poderá recuperar os dados alterados do país após cancelar.",
+						text: "Você não poderá recuperar os dados alterados do agendamento após cancelar.",
 						type: "warning",
 						showCancelButton: true,
 						confirmButtonColor: "#DD6B55",

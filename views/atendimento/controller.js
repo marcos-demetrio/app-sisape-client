@@ -67,6 +67,7 @@
 				date.setDate(parseInt(dateArray[2]));
  
 				$scope.form.dataAtendimento = date;
+				$scope.form.horaAtendimento = new Date($scope.form.horaAtendimento);
 			});
 		}
 		//--
@@ -168,6 +169,24 @@
 		}
 		//--
 
+		//-- Excluir exame, não faz a confirmação
+		$scope.mudouAgendamento = function() {
+			//$scope.form.dataAgendamento = new Date($scope.form.agendamento.dataAgendamento);
+
+			var date = new Date();
+			var str = $scope.form.agendamento.dataAgendamento;
+			var dateArray = str.split("-");
+
+			date.setFullYear(parseInt(dateArray[0]));
+			date.setMonth(parseInt(dateArray[1])-1);  // months indexed as 0-11, substract 1
+			date.setDate(parseInt(dateArray[2]));
+
+			$scope.form.dataAtendimento = date;
+
+			$scope.form.horaAtendimento = new Date($scope.form.agendamento.horaAgendamento);
+		}
+		//--
+
 		//-- Gravar os dados do cadastro no banco de dados
 		$scope.update = function(){
 			if(atendimentoID > 0){
@@ -206,8 +225,60 @@
 				});
 			}
 		}
+		//--
+
+
+		//-- Excluir cadastro, faz a confirmação
+		$scope.excluir = function() {
+			swal({   
+					title: "Tem certeza?",
+					text: "Você não poderá recuperar o atendimento após excluir.",
+					type: "warning",
+					showCancelButton: true,
+					confirmButtonColor: "#DD6B55",
+					confirmButtonText: "Sim, excluir agora!",
+					cancelButtonText: "Não!",
+					closeOnConfirm: true,
+					closeOnCancel: true
+				},
+				function(isConfirm){
+					if (isConfirm) {
+						AtendimentoService.Delete(atendimentoID).then(function(data){
+							$location.path('/atendimento');
+							$route.reload();
+						});
+					}
+				});
+  		}
+  		//--
+
+		//-- Cancela operação no cadastro, se alterou alguma informação, faz a confirmação
+		$scope.cancelar = function(dirty) {
+			if(dirty){
+				swal({   
+						title: "Tem certeza?",
+						text: "Você não poderá recuperar os dados alterados do atendimento após cancelar.",
+						type: "warning",
+						showCancelButton: true,
+						confirmButtonColor: "#DD6B55",
+						confirmButtonText: "Sim, cancelar agora!",
+						cancelButtonText: "Não!",
+						closeOnConfirm: true,
+						closeOnCancel: true
+					},
+					function(isConfirm){
+						if (isConfirm) {
+							$location.path('/atendimento');
+							$route.reload();
+						}
+					});
+			}else{
+				$location.path('/atendimento');
+			}
+		}
+		//--
 	}
-	//--
+	
 	
 	AtendimentoListagemController.$inject = ['$scope','$location', '$window', 'AtendimentoService'];
 	
