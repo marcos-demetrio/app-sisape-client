@@ -260,6 +260,12 @@
 				controller: 'MedicamentoController',
 				title: 'Cadastro de Medicamento'
 			})
+
+			.when('/fila', {
+				templateUrl: 'views/fila-atendimento/listagem.html',
+				controller: 'FilaAtendimentoController',
+				title: 'Fila de atendimentos'
+			})
 			
 			.when('/exame', {
 				templateUrl: 'views/exame/listagem.html',

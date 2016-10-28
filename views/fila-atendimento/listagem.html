@@ -1,0 +1,43 @@
+﻿<div ng-controller="FilaAtendimentoController">
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-8">
+					<h1 ng-bind-template="{{title}}"></h1>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<form class="form-vertical js-form-loading">
+			<div class="form-group">
+				<button class="btn  btn-primary" ng-click="atualizarFilaAtendimento()">Atualizar</button>
+			</div>
+		</form>
+		
+		<div class="alert  aw-alert-no-results" role="alert" ng-show="listaVazia">
+			A pesquisa não retornou nenhum agendamento na fila.
+		</div>
+
+		<div class="bs-callout bs-callout-info" id="callout-glyphicons-location" ng-repeat="item in itens">
+			<div class="row">
+				<div class="col-md-11 col-sm-10">
+					<h4 ng-bind="item.cidadao.nomeCompleto"></h4>
+					<p ng-bind="'CPF: ' + (item.cidadao.cpf | cpf)"></p>
+					<p ng-bind="'Data: ' + (item.dataAgendamento | date:'dd/MM/yyyy') + ' ' + (item.horaAgendamento | date:'HH:mm')"></p>
+
+					<a class="btn btn-primary" href>
+						<span class="">Atender</span>
+					</a>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-xs-12  col-md-4  aw-text-xs-center  aw-text-md-right" style="float: right;">
+				<span class="aw-pagination-info" ng-bind-template="{{totalItens}} agendamento em espera(s) encontrado(s)" ng-show="!listaVazia"></span>
+			</div>
+		</div>
+	</div>
+</div>
