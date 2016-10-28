@@ -64,7 +64,7 @@
 				</div>
 				<div class="col-sm-11">
 					<div class="form-group">
-						<select class="form-control" id="i_cidadao" name="i_cidadao" required ng-options="cidadao.nome for cidadao in cidadaos track by cidadao.i_cidadao" ng-model="cidadao" ng-disabled="filtro!='CIDADAO'"></select>
+						<select class="form-control" id="i_cidadao" name="i_cidadao" required ng-options="cidadao.nomeCompleto for cidadao in cidadaos track by cidadao.i_cidadao" ng-model="cidadao" ng-disabled="filtro!='CIDADAO'"></select>
 					</div>
 				</div>
 			</div>
@@ -109,9 +109,9 @@
 			</div>
 
 			<div class="form-group">
-				<button class="btn  btn-primary" ng-click="AtendimentoPesquisar()">Pesquisar</button>
-				<button class="btn  btn-primary" ng-click="AtendimentoImprimir()" ng-disabled="listaVazia">Imprimir</button>
-				<button class="btn  btn-default" ng-click="AtendimentoLimpar()">Limpar</button>
+				<button class="btn  btn-primary" ng-click="AtendimentoRelatorioPesquisar()">Pesquisar</button>
+				<button class="btn  btn-primary" ng-click="AtendimentoRelatorioImprimir()" ng-disabled="listaVazia">Imprimir</button>
+				<button class="btn  btn-default" ng-click="AtendimentoRelatorioLimpar()">Limpar</button>
 			</div>
 		</form>
 		
