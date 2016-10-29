@@ -25,7 +25,7 @@
 					<div class="form-group mdn-required" ng-class="{ 'has-error' : atendimentoForm.i_agendamento.$invalid && !atendimentoForm.i_agendamento.$pristine }">
 						<label for="i_agendamento" class="col-sm-2 control-label">Agendamento</label>
 						<div class="col-sm-5">
-							<select class="form-control" id="i_agendamento" name="i_agendamento" required ng-options="agendamento.cidadao.nomeCompleto + ' - ' + (agendamento.dataAgendamento | date:'dd/MM/yyyy') + ' - ' + (agendamento.horaAgendamento | date:'HH:mm') for agendamento in agendamentos track by agendamento.i_agendamento" ng-model="form.agendamento" ng-change="mudouAgendamento()"></select>
+							<select class="form-control" id="i_agendamento" name="i_agendamento" required ng-options="agendamento.cidadao.nomeCompleto + ' - ' + (agendamento.dataAgendamento | date:'dd/MM/yyyy') + ' - ' + (agendamento.horaAgendamento | date:'HH:mm') for agendamento in agendamentos track by agendamento.i_agendamento" ng-model="form.agendamento" ng-change="mudouAgendamento()" ng-disabled="true"></select>
 
 							<p ng-show="atendimentoForm.i_agendamento.$error.required && !atendimentoForm.i_agendamento.$pristine" class="help-block">Selecione um agendamento.</p>
 						</div>

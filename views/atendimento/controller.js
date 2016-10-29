@@ -82,7 +82,11 @@
 				date.setDate(parseInt(dateArray[2]));
  
 				$scope.form.dataAtendimento = date;
-				$scope.form.horaAtendimento = new Date($scope.form.horaAtendimento);
+
+				var hora = new Date($scope.form.horaAtendimento);
+				hora.setSeconds(0);
+
+				$scope.form.horaAtendimento = hora;
 			});
 		}
 		//--

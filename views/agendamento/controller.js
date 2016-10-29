@@ -253,9 +253,9 @@
 		//--
 	}
 
-	AgendamentoListagemController.$inject = ['$scope','$location', '$window', 'AgendamentoService'];
+	AgendamentoListagemController.$inject = ['$scope','$location', '$window', '$filter', 'AgendamentoService'];
 
-	function AgendamentoListagemController($scope, $location, $window, AgendamentoService) {
+	function AgendamentoListagemController($scope, $location, $window, $filter, AgendamentoService) {
 		$scope.listaVazia = true;
 		$scope.itens = [];
 
@@ -269,5 +269,7 @@
 		}
 
 		$scope.atualizarAgendamentos();
+
+		$filter('orderBy')($scope.itens, ['dataAgendamento', 'horaAgendamento'], false);
 	}
 })();

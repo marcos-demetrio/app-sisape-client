@@ -5,9 +5,9 @@
 		.module('app')
 		.controller('FilaAtendimentoController', FilaAtendimentoController);
 
-	FilaAtendimentoController.$inject = ['$scope','$location', '$window', 'FilaAtendimentoService'];
+	FilaAtendimentoController.$inject = ['$scope','$location', '$window', '$filter', 'FilaAtendimentoService'];
 
-	function FilaAtendimentoController($scope, $location, $window, FilaAtendimentoService) {
+	function FilaAtendimentoController($scope, $location, $window, $filter, FilaAtendimentoService) {
 		$scope.listaVazia = true;
 		$scope.itens = [];
 
@@ -22,6 +22,8 @@
 				$scope.totalItens = $scope.itens.length;
 
 				$scope.listaVazia = $scope.itens.length === 0;
+
+				$filter('orderBy')($scope.itens, ['dataAgendamento', 'horaAgendamento'], false);
 			});
 		}
 
