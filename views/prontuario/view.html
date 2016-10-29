@@ -1,0 +1,50 @@
+﻿<div ng-controller="ProntuarioController">
+	<div class="page-header">
+		<div class="container-fluid">
+			<h1 ng-bind-template="{{title}}"></h1>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<form class="form-horizontal form-vertical  js-form-loading" name="prontuarioForm" ng-submit="update()">
+			<!-- Cidadão Select-->
+			<div class="form-group mdn-required" ng-class="{ 'has-error' : prontuarioForm.i_cidadao.$invalid && !prontuarioForm.i_cidadao.$pristine }">
+				<label for="i_cidadao" class="col-sm-1 control-label">Cidadão</label>
+				<div class="col-sm-11">
+					<select	required
+								class="form-control"
+								id="i_cidadao"
+								name="i_cidadao"
+								ng-model="cidadao"
+								ng-options="(cidadao.cpf | cpf) + ' - ' + cidadao.nomeCompleto for cidadao in cidadaos track by cidadao.i_cidadao"
+								ng-change="OnChangeCidadao(cidadao)">
+					</select>
+
+					<p ng-show="prontuarioForm.i_cidadao.$error.required && !prontuarioForm.i_cidadao.$pristine" class="help-block">Selecione um cidadão.</p>
+				</div>
+			</div>
+			
+			<div class="panel-group" aria-multiselectable="true">
+				<div class="panel panel-info" ng-repeat="item in atendimentos">
+					<div class="panel-heading" style="cursor: pointer;" ng-click="collapsePanel($index)">
+						<h4 class="panel-title" ng-bind="'Atendimento: ' + item.i_atendimento + ', Data/Hora: ' + (item.dataAtendimento | date:'dd/MM/yyyy') + ' ' + (item.horaAtendimento | date:'HH:mm')"></h4>
+					</div>
+					
+					<div ng-show="isPanelCollapsed($index)">
+						<div class="panel-body">
+							
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<hr>
+
+			<div class="form-group">
+				<div style="margin-left: 15px;">
+					<button class="btn  btn-primary" ng-click="Imprimir()" ng-disabled="listaVazia">Imprimir</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
