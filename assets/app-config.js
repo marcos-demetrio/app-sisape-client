@@ -237,6 +237,12 @@
 				title: 'Cadastro de Atendimento'
 			})
 
+			.when('/atendimento/:idgendaemnto', {
+				templateUrl: 'views/atendimento/view.html',
+				controller: 'AtendimentoController',
+				title: 'Realizar Atendimento'
+			})
+
 			.when('/atendimento/novo', {
 				templateUrl: 'views/atendimento/view.html',
 				controller: 'AtendimentoController',

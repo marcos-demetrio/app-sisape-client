@@ -54,6 +54,20 @@
 		$scope.editandoCadastro = (atendimentoID > 0);
 		//--
 
+		//-- Pegar a variável 'idgendaemnto' vinda da url, e setar o agendamento
+		var agendamentoID = ($routeParams.idgendaemnto) ? parseInt($routeParams.idgendaemnto) : 0;
+ 		//--
+
+		//-- Busca o agendamento
+		if(agendamentoID > 0){
+			AgendamentoService.GetById(agendamentoID).then(function(data){
+				$scope.form.agendamento = data;
+
+				$scope.mudouAgendamento();
+			});
+		}
+		//--
+
 		//-- Caso esteja editando, obtem os dados do cadastro
 		if(atendimentoID > 0){
 			AtendimentoService.GetById(atendimentoID).then(function(data){
@@ -218,11 +232,11 @@
 						});
 					};
 
-					$location.path('/atendimento');
+					$location.path('/fila');
 				})
 			}else{
 				AtendimentoService.Create($scope.form).then(function(data){
-					$location.path('/atendimento');
+					$location.path('/fila');
 				});
 			}
 		}
@@ -245,7 +259,7 @@
 				function(isConfirm){
 					if (isConfirm) {
 						AtendimentoService.Delete(atendimentoID).then(function(data){
-							$location.path('/atendimento');
+							$location.path('/fila');
 							$route.reload();
 						});
 					}
@@ -269,12 +283,12 @@
 					},
 					function(isConfirm){
 						if (isConfirm) {
-							$location.path('/atendimento');
+							$location.path('/fila');
 							$route.reload();
 						}
 					});
 			}else{
-				$location.path('/atendimento');
+				$location.path('/fila');
 			}
 		}
 		//--
