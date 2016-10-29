@@ -524,22 +524,29 @@
 					$scope.itens = [];
 					AtendimentoService.GeAdoecimentotAll().then(function(data){
 						for (var i = data.length - 1; i >= 0; i--) {
-								data[i].codigoCid = data[i].atendimentoSintoma[i].cid.codigoCid;
-								data[i].descricaoCid = data[i].atendimentoSintoma[i].cid.descricao;
-							};
+							data[i].codigoCid = data[i].atendimentoSintoma[i].cid.codigoCid;
+							data[i].descricaoCid = data[i].atendimentoSintoma[i].cid.descricao;
+						};
 							
-							$scope.itens = data;
-							
-							$scope.totalItens = $scope.itens.length;
+						$scope.itens = data;
+						
+						$scope.totalItens = $scope.itens.length;
 
-							$scope.listaVazia = $scope.itens.length === 0;
+						$scope.listaVazia = $scope.itens.length === 0;
 						});
 					break;
 					
 				case "MUNICIPIO":
 					$scope.itens = [];
-					AtendimentoService.AtendimentoRelatorioPesquisarPorUbs($scope.unidadeBasicaSaude.i_unidade_basica_saude).then(function(data){
+					AtendimentoService.AdoecimentoRelatorioPesquisarPorMunicipio($scope.municipio.i_municipio).then(function(data){
+						for (var i = data.length - 1; i >= 0; i--) {
+							data[i].codigoCid = data[i].atendimentoSintoma[i].cid.codigoCid;
+							data[i].descricaoCid = data[i].atendimentoSintoma[i].cid.descricao;
+						};
+						
 						$scope.itens = data;
+						
+						$scope.totalItens = $scope.itens.length;
 
 						$scope.listaVazia = $scope.itens.length === 0;
 					});
@@ -548,18 +555,25 @@
 					
 				case "UBS":
 					$scope.itens = [];
-					AtendimentoService.AtendimentoRelatorioPesquisarPorUbs($scope.unidadeBasicaSaude.i_unidade_basica_saude).then(function(data){
+					AtendimentoService.AdoecimentoRelatorioPesquisarPorUbs($scope.unidadeBasicaSaude.i_unidade_basica_saude).then(function(data){
+						for (var i = data.length - 1; i >= 0; i--) {
+							data[i].codigoCid = data[i].atendimentoSintoma[i].cid.codigoCid;
+							data[i].descricaoCid = data[i].atendimentoSintoma[i].cid.descricao;
+						};
+						
 						$scope.itens = data;
+						
+						$scope.totalItens = $scope.itens.length;
 
 						$scope.listaVazia = $scope.itens.length === 0;
 					});
 					
 					break;
 					
-				case "DATA_ATENDIMENTO":
+				case "PERIODO":
 					var parameters = {
-						aDataInicio : $scope.dataAtendimentoInicio,
-						aDataFinal : $scope.dataAtendimentoFinal
+						aDataInicio : $scope.dataInicio,
+						aDataFinal : $scope.dataFinal
 					};
 
 					var config = {
@@ -567,8 +581,15 @@
 					};
 
 					$scope.itens = [];
-					AtendimentoService.AtendimentoRelatorioPesquisarPorDataAtendimento(config).then(function(data){
+					AtendimentoService.AdoecimentoRelatorioPesquisarPorPeriodo(config).then(function(data){
+						for (var i = data.length - 1; i >= 0; i--) {
+							data[i].codigoCid = data[i].atendimentoSintoma[i].cid.codigoCid;
+							data[i].descricaoCid = data[i].atendimentoSintoma[i].cid.descricao;
+						};
+						
 						$scope.itens = data;
+						
+						$scope.totalItens = $scope.itens.length;
 
 						$scope.listaVazia = $scope.itens.length === 0;
 					});

@@ -60,6 +60,19 @@
 		service.GeAdoecimentotAll = function GeAdoecimentotAll() {
 			return $http.get(API + 'atendimento/adoecimento').then(handleSuccess, handleError('Erro obtendo lista de atendimento'));
 		}
+		
+		service.AdoecimentoRelatorioPesquisarPorMunicipio = function AdoecimentoRelatorioPesquisarPorMunicipio(id) {
+			return $http.get(API + 'atendimento/adoecimento/relatorio/municipio/' + id).then(handleSuccess, handleError('Erro obtendo lista de atendimento'));
+		}
+		
+		service.AdoecimentoRelatorioPesquisarPorUbs = function AdoecimentoRelatorioPesquisarPorUbs(id) {
+			return $http.get(API + 'atendimento/adoecimento/relatorio/ubs/' + id).then(handleSuccess, handleError('Erro obtendo lista de atendimento'));
+		}
+		
+		service.AdoecimentoRelatorioPesquisarPorPeriodo = function AdoecimentoRelatorioPesquisarPorPeriodo(config) {
+			return $http.get(API + 'atendimento/adoecimento/relatorio/periodo', config).then(handleSuccess, handleError('Erro obtendo lista de atendimento'));
+		}
+		
 		return service;
 		
 		function handleSuccess(res) {
