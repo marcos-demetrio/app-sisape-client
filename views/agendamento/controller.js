@@ -52,17 +52,9 @@
 			ubsID = $scope.form.cidadao.unidadeBasicaSaude.i_unidade_basica_saude;
 
 			AgendamentoService.GetHorariosByUbs(ubsID).then(function(data){
-				//console.log(data);
-
 				for (var i = data.length - 1; i >= 0; i--) {
-					/*$scope.listaHorarios.push({
-						horario: new Date(data[i].horario)
-					});*/
-					data[i].horario = new Date(data[i].horario);
+					$scope.listaHorarios.push(new Date(data[i].horario));
 				};
-				//$scope.listaHorarios.push(null)
-				$scope.listaHorarios = data;
-				console.log($scope.listaHorarios);
 			});
 		}
 		//--

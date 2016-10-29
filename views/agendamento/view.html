@@ -47,8 +47,8 @@
 			<!-- Horarios Select-->
 			<div class="form-group mdn-required" ng-class="{ 'has-error' : agendamentoForm.horaAgendamento.$invalid && !agendamentoForm.horaAgendamento.$pristine }">
 				<label for="horaAgendamento" class="col-sm-2 control-label">Horário</label>
-				<div class="col-sm-3">
-					<select class="form-control" id="horaAgendamento" name="horaAgendamento" required ng-options="(listaHorario.horario | date:'HH:mm') + ' - Número da senha: ' + listaHorario.numero for listaHorario in listaHorarios | orderBy:'horario' track by listaHorario.horario" ng-model="form.horaAgendamento"></select>
+				<div class="col-sm-2">
+					<select class="form-control" id="horaAgendamento" name="horaAgendamento" required ng-options="(listaHorario | date:'HH:mm') for listaHorario in listaHorarios | orderBy:listaHorario track by listaHorario" ng-model="form.horaAgendamento"></select>
 
 					<p ng-show="agendamentoForm.horaAgendamento.$error.required && !agendamentoForm.horaAgendamento.$pristine" class="help-block">Selecione um horário.</p>
 				</div>

@@ -186,8 +186,6 @@
 
 		//-- Excluir exame, não faz a confirmação
 		$scope.mudouAgendamento = function() {
-			//$scope.form.dataAgendamento = new Date($scope.form.agendamento.dataAgendamento);
-
 			var date = new Date();
 			var str = $scope.form.agendamento.dataAgendamento;
 			var dateArray = str.split("-");
