@@ -34,6 +34,8 @@
 			</a>
 			<p ng-bind="'Data: ' + (item.dataAgendamento | date:'dd/MM/yyyy') + ' ' + (item.horaAgendamento | date:'HH:mm')"></p>
 			<p ng-bind="'Queixa Principal: ' + item.queixaPrincipal"></p>
+			<span class="label label-success" ng-if="item.atendido">Atendido</span>
+			<span class="label label-warning" ng-if="!item.atendido">Em espera</span>
 		</div>
 			
 		<div class="row">
