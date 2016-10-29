@@ -41,8 +41,20 @@
 			return $http.put(API + 'atendimento/' + id, atendimento).then(handleSuccess, handleError('Erro ao atualizar atendimento'));
 		}
 
-		service.AtendimentoRelatorioPesquisarPorFiltro = function PesquisarPorFiltro(params) {
-			return $http.get(API + 'atendimento/relatorio/', params).then(handleSuccess, handleError('Erro ao atualizar atendimento'));
+		service.AtendimentoRelatorioPesquisarPorUbs = function AtendimentoRelatorioPesquisarPorUbs(id) {
+			return $http.get(API + 'atendimento/relatorio/ubs/' + id).then(handleSuccess, handleError('Erro ao atualizar atendimento'));
+		}
+
+		service.AtendimentoRelatorioPesquisarPorProfissional = function AtendimentoRelatorioPesquisarPorProfissional(id) {
+			return $http.get(API + 'atendimento/relatorio/profissional/' + id).then(handleSuccess, handleError('Erro ao atualizar atendimento'));
+		}
+
+		service.AtendimentoRelatorioPesquisarPorCidadao = function AtendimentoRelatorioPesquisarPorCidadao(id) {
+			return $http.get(API + 'atendimento/relatorio/cidadao/' + id).then(handleSuccess, handleError('Erro ao atualizar atendimento'));
+		}
+
+		service.AtendimentoRelatorioPesquisarPorDataAtendimento = function AtendimentoRelatorioPesquisarPorDataAtendimento(config) {
+			return $http.get(API + 'atendimento/relatorio/periodo', config).then(handleSuccess, handleError('Erro ao atualizar atendimento'));
 		}
 
 		return service;

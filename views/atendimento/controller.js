@@ -366,25 +366,66 @@
 
 		//-- Pesquisa
 		$scope.AtendimentoRelatorioPesquisar = function (){
-			var parameters = {
-				tipoFiltro : $scope.filtro,
-				codigoUbs : $scope.unidadeBasicaSaude,
-				codigoProfissional : $scope.profissional,
-				codigoCidadao : $scope.cidadao,
-				dataAtendimentoInicial : $scope.dataAtendimentoInicio,
-				dataAtendimentoFinal : $scope.dataAtendimentoFinal
-			};
+			switch ($scope.filtro) {
+				case "VAZIO":
+					$scope.itens = [];
+					AtendimentoService.GetAll().then(function(data){
+						$scope.itens = data;
+						$scope.totalItens = $scope.itens.length;
 
-			var config = {
-				params : parameters
-			};
+						$scope.listaVazia = $scope.itens.length === 0;
+					});
+					break;
+					
+				case "UBS":
+					$scope.itens = [];
+					AtendimentoService.AtendimentoRelatorioPesquisarPorUbs($scope.unidadeBasicaSaude.i_unidade_basica_saude).then(function(data){
+						$scope.itens = data;
 
-			$scope.itens = [];
-			AtendimentoService.PesquisarPorFiltro(config).then(function(data){
-				$scope.itens = data;
+						$scope.listaVazia = $scope.itens.length === 0;
+					});
+					
+					break;
+					
+				case "PROFISSIONAL":
+					$scope.itens = [];
+					AtendimentoService.AtendimentoRelatorioPesquisarPorProfissional($scope.profissional.i_profissional).then(function(data){
+						$scope.itens = data;
 
-				$scope.listaVazia = $scope.itens.length === 0;
-			});
+						$scope.listaVazia = $scope.itens.length === 0;
+					});
+
+					break;
+
+				case "CIDADAO":
+					$scope.itens = [];
+					AtendimentoService.AtendimentoRelatorioPesquisarPorCidadao($scope.cidadao.i_cidadao).then(function(data){
+						$scope.itens = data;
+
+						$scope.listaVazia = $scope.itens.length === 0;
+					});
+					
+					break;
+					
+				case "DATA_ATENDIMENTO":
+					var parameters = {
+						aDataInicio : $scope.dataAtendimentoInicio,
+						aDataFinal : $scope.dataAtendimentoFinal
+					};
+
+					var config = {
+						params : parameters
+					};
+
+					$scope.itens = [];
+					AtendimentoService.AtendimentoRelatorioPesquisarPorDataAtendimento(config).then(function(data){
+						$scope.itens = data;
+
+						$scope.listaVazia = $scope.itens.length === 0;
+					});
+					
+					break;
+			}
 		}
 		//--
 
