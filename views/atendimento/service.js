@@ -57,6 +57,9 @@
 			return $http.get(API + 'atendimento/relatorio/periodo', config).then(handleSuccess, handleError('Erro ao atualizar atendimento'));
 		}
 
+		service.GeAdoecimentotAll = function GeAdoecimentotAll() {
+			return $http.get(API + 'atendimento/adoecimento').then(handleSuccess, handleError('Erro obtendo lista de atendimento'));
+		}
 		return service;
 		
 		function handleSuccess(res) {

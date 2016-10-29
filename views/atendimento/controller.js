@@ -5,7 +5,8 @@
 		.module('app')
 		.controller('AtendimentoController', AtendimentoController)
 		.controller('AtendimentoListagemController', AtendimentoListagemController)
-		.controller('AtendimentoRelatorioController', AtendimentoRelatorioController);
+		.controller('AtendimentoRelatorioController', AtendimentoRelatorioController)
+		.controller('AdoecimentoRelatorioController', AdoecimentoRelatorioController);
 
 	AtendimentoController.$inject = ['$scope', '$location', '$route', '$routeParams', 'AtendimentoService', 'AgendamentoService', 'CidService', 'ExameService', 'MedicamentoService'];
 
@@ -439,6 +440,149 @@
 			$scope.unidadeBasicaSaude = null;
 			$scope.profissional = null;
 			$scope.cidadao = null;
+			$scope.dataAtendimentoInicio = null;
+			$scope.dataAtendimentoFinal = null;
+			$window.document.getElementById('filtro').focus();
+		}
+		//--
+		
+		//-- Imprimir
+		$scope.AtendimentoRelatorioImprimir = function (){
+			var parameters = {
+				nome : $scope.nomeCbo,
+				codigoCbo : $scope.codigoCbo
+			};
+
+			var config = {
+				params : parameters
+			};
+			
+			AtendimentoService.Print(config).then(function(data){
+					$location.path('/cbo');
+				})
+		}
+		//--
+	}
+
+	AdoecimentoRelatorioController.$inject = ['$scope','$location', '$window', 'AtendimentoService', 'UbsService', 'MunicipioService'];
+
+	function AdoecimentoRelatorioController($scope, $location, $window, AtendimentoService, UbsService, MunicipioService) {
+		$scope.listaVazia = true;
+		$scope.itens = [];
+		
+		$scope.filtro = 'VAZIO';
+		
+		//-- Carregar lista de Ubs
+		UbsService.GetAll().then(function(data){
+			$scope.ubss = data;
+		});
+		//--
+
+		//-- Carregar lista de Cidadao
+		MunicipioService.GetAll().then(function(data){
+			$scope.municipios = data;
+		});
+		//--
+
+		//-- Campo Data
+		$scope.popup2 = {
+			opened: false
+		};
+
+		$scope.open2 = function() {
+			$scope.popup2.opened = true;
+		};
+		//--
+		
+		//-- Campo Data
+		$scope.popup3 = {
+			opened: false
+		};
+
+		$scope.open3 = function() {
+			$scope.popup3.opened = true;
+		};
+		
+		//--
+		AtendimentoService.GeAdoecimentotAll().then(function(data){
+			for (var i = data.length - 1; i >= 0; i--) {
+				data[i].codigoCid = data[i].atendimentoSintoma[i].cid.codigoCid;
+				data[i].descricaoCid = data[i].atendimentoSintoma[i].cid.descricao;
+			};
+			
+			$scope.itens = data;
+			
+			$scope.totalItens = $scope.itens.length;
+
+			$scope.listaVazia = $scope.itens.length === 0;
+		});
+
+		//-- Pesquisa
+		$scope.AtendimentoRelatorioPesquisar = function (){
+			switch ($scope.filtro) {
+				case "VAZIO":
+					$scope.itens = [];
+					AtendimentoService.GeAdoecimentotAll().then(function(data){
+						for (var i = data.length - 1; i >= 0; i--) {
+								data[i].codigoCid = data[i].atendimentoSintoma[i].cid.codigoCid;
+								data[i].descricaoCid = data[i].atendimentoSintoma[i].cid.descricao;
+							};
+							
+							$scope.itens = data;
+							
+							$scope.totalItens = $scope.itens.length;
+
+							$scope.listaVazia = $scope.itens.length === 0;
+						});
+					break;
+					
+				case "MUNICIPIO":
+					$scope.itens = [];
+					AtendimentoService.AtendimentoRelatorioPesquisarPorUbs($scope.unidadeBasicaSaude.i_unidade_basica_saude).then(function(data){
+						$scope.itens = data;
+
+						$scope.listaVazia = $scope.itens.length === 0;
+					});
+					
+					break;
+					
+				case "UBS":
+					$scope.itens = [];
+					AtendimentoService.AtendimentoRelatorioPesquisarPorUbs($scope.unidadeBasicaSaude.i_unidade_basica_saude).then(function(data){
+						$scope.itens = data;
+
+						$scope.listaVazia = $scope.itens.length === 0;
+					});
+					
+					break;
+					
+				case "DATA_ATENDIMENTO":
+					var parameters = {
+						aDataInicio : $scope.dataAtendimentoInicio,
+						aDataFinal : $scope.dataAtendimentoFinal
+					};
+
+					var config = {
+						params : parameters
+					};
+
+					$scope.itens = [];
+					AtendimentoService.AtendimentoRelatorioPesquisarPorDataAtendimento(config).then(function(data){
+						$scope.itens = data;
+
+						$scope.listaVazia = $scope.itens.length === 0;
+					});
+					
+					break;
+			}
+		}
+		//--
+
+		//-- Limpar
+		$scope.AtendimentoRelatorioLimpar = function (){
+			$scope.filtro = 'VAZIO';
+			$scope.municipio = null;
+			$scope.unidadeBasicaSaude = null;
 			$scope.dataAtendimentoInicio = null;
 			$scope.dataAtendimentoFinal = null;
 			$window.document.getElementById('filtro').focus();
