@@ -302,5 +302,11 @@
 				controller: 'AtendimentoController',
 				title: 'Relatório de Adoecimento'
 			})
+
+			.when('/prontuario', {
+				templateUrl: 'views/prontuario/view.html',
+				controller: 'ProntuarioController',
+				title: 'Prontuário do cidadão'
+			})
 	}
 })();
