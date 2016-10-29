@@ -32,7 +32,16 @@
 					
 					<div ng-show="isPanelCollapsed($index)">
 						<div class="panel-body">
-							
+							<p ng-bind="'Cidadão: ' + item.agendamento.cidadao.nomeCompleto"></p>
+							<p ng-bind="'Profissional: ' + item.agendamento.profissionalLotacao.profissional.nome + ' - ' + item.agendamento.profissionalLotacao.cbo.nome"></p>
+							<p ng-bind="'Altura: ' + item.altura"></p>
+							<p ng-bind="'IMC: ' + item.imc"></p>
+							<p ng-bind="'Freq. Card.: ' + item.frequenciaCardiaca"></p>
+							<p ng-bind="'Freq. Resp.: ' + item.frequenciaRespiratoria"></p>
+							<p ng-bind="'Peso: ' + item.peso"></p>
+							<p ng-bind="'Temperatura: ' + item.temperatura"></p>
+							<p ng-bind="'Pressão Máxima: ' + item.pressaoMaxima"></p>
+							<p ng-bind="'Pressão Mínima: ' + item.pressaoMinima"></p>
 						</div>
 					</div>
 				</div>
