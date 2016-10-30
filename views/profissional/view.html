@@ -132,6 +132,19 @@
 							<p ng-show="profissionalForm.email.$invalid && !profissionalForm.email.$pristine" class="help-block">Campo inválido.</p>
 						</div>
 					</div>
+
+					<!-- Tipo Input -->
+					<div class="form-group sisape-required" ng-class="{ 'has-error' : profissionalForm.tipoUsuario.$invalid && !profissionalForm.tipoUsuario.$pristine }">
+						<label for="tipoUsuario" class="col-sm-2 control-label">Tipo de usuário</label>
+						<div class="col-sm-2">
+							<select class="form-control" id="tipoUsuario" name="tipoUsuario" required ng-model="form.tipoUsuario">
+								<option value="S" selected="selected">Secretário de saúde</option>
+								<option value="G">Gestor de unidade</option>
+								<option value="P">Profissional</option>
+							</select>
+							<p ng-show="profissionalForm.tipoUsuario.$error.required && !profissionalForm.tipoUsuario.$pristine" class="help-block">Campo obrigatório.</p>
+						</div>
+					</div>
 				</div>
 			</div>
 
