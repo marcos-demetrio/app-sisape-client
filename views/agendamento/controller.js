@@ -30,7 +30,6 @@
 		//-- Caso esteja editando, obtem os dados do cadastro
 		if(agendamentoID > 0){
 			AgendamentoService.GetById(agendamentoID).then(function(data){
-				console.log('antes', data);
 				ubsID = data.cidadao.unidadeBasicaSaude.i_unidade_basica_saude;
 
 				AgendamentoService.GetHorariosByUbs(ubsID).then(function(data){
@@ -44,8 +43,6 @@
 				data.horaAgendamento = new Date(data.horaAgendamento);
 
 				$scope.form = data;
-
-				console.log('depois', data);
 
 				var date = new Date();
 				var str = data.dataAgendamento;

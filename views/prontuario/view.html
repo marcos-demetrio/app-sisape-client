@@ -34,14 +34,85 @@
 						<div class="panel-body">
 							<p ng-bind="'Cidadão: ' + item.agendamento.cidadao.nomeCompleto"></p>
 							<p ng-bind="'Profissional: ' + item.agendamento.profissionalLotacao.profissional.nome + ' - ' + item.agendamento.profissionalLotacao.cbo.nome"></p>
-							<p ng-bind="'Altura: ' + item.altura"></p>
-							<p ng-bind="'IMC: ' + item.imc"></p>
-							<p ng-bind="'Freq. Card.: ' + item.frequenciaCardiaca"></p>
-							<p ng-bind="'Freq. Resp.: ' + item.frequenciaRespiratoria"></p>
-							<p ng-bind="'Peso: ' + item.peso"></p>
-							<p ng-bind="'Temperatura: ' + item.temperatura"></p>
-							<p ng-bind="'Pressão Máxima: ' + item.pressaoMaxima"></p>
-							<p ng-bind="'Pressão Mínima: ' + item.pressaoMinima"></p>
+
+							<hr>
+
+							<div class="row">
+								<div class="col-md-6">
+									<p ng-bind="'Altura: ' + item.altura"></p>
+									<p ng-bind="'IMC: ' + item.imc"></p>
+									<p ng-bind="'Freq. Card.: ' + item.frequenciaCardiaca"></p>
+									<p ng-bind="'Freq. Resp.: ' + item.frequenciaRespiratoria"></p>
+									<p ng-bind="'Peso: ' + item.peso"></p>
+									<p ng-bind="'Temperatura: ' + item.temperatura"></p>
+									<p ng-bind="'Pressão Máxima: ' + item.pressaoMaxima"></p>
+									<p ng-bind="'Pressão Mínima: ' + item.pressaoMinima"></p>
+								</div>
+
+								<div class="col-md-6">
+									<p ng-bind="'Subjetivo: ' + item.subjetivo"></p>
+									<p ng-bind="'Objetivo: ' + item.objetivo"></p>
+									<p ng-bind="'Avaliação: ' + item.avaliacao"></p>
+									<p ng-bind="'Plano: ' + item.plano"></p>
+								</div>
+							</div>
+							
+							<hr>
+
+							<ul class="nav nav-pills">
+								<li class="active"><a href ng-click="setTab($index, 1)" ng-class="{'active' : isTab($index, 1)}" data-toggle="tab">CIDs</a></li>
+								<li><a href ng-click="setTab($index, 2)" ng-class="{'active' : isTab($index, 2)}" data-toggle="tab">Medicamentos</a></li>
+								<li><a href ng-click="setTab($index, 3)" ng-class="{'active' : isTab($index, 3)}" data-toggle="tab">Exames</a></li>
+							</ul>
+
+							<br>
+
+							<div class="tab-content" ng-show="isTab($index, 1)">
+								<div class="tab-pane fade in active">
+									<table class="table table-condensed">
+										<thead>
+											<th>Descrição</th>
+										</thead>
+										<tbody>
+											<tr ng-repeat="sintoma in item.atendimentoSintoma">
+												<td ng-bind="sintoma.cid.descricao"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+
+							<div class="tab-content" ng-show="isTab($index, 2)">
+								<div class="tab-pane fade in active">
+									<table class="table table-condensed">
+										<thead>
+											<th>Nome</th>
+											<th>Posologia</th>
+										</thead>
+										<tbody>
+											<tr ng-repeat="medicamento in item.atendimentoMedicamento">
+												<td width="60%" ng-bind="medicamento.medicamento.nome"></td>
+												<td width="30%" ng-bind="medicamento.posologia"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+
+							<div class="tab-content" ng-show="isTab($index, 3)">
+								<div class="tab-pane fade in active">
+									<table class="table table-condensed">
+										<thead>
+											<th>Nome</th>
+										</thead>
+										<tbody>
+											<tr ng-repeat="exame in item.atendimentoExame">
+												<td ng-bind="exame.exame.nome"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
