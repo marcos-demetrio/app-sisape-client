@@ -20,6 +20,28 @@
 			return $scope.tab === tabNum;
 		};
 		//--
+
+		//-- Controle Panels do prontuário
+		$scope.panel = [];
+		
+		$scope.collapsePanel = function(panelNum){
+			$scope.panel[panelNum].collapsed = !$scope.panel[panelNum].collapsed;
+		};
+		$scope.isPanelCollapsed = function(panelNum){
+			return $scope.panel[panelNum].collapsed;
+		};
+		//--
+
+		//-- Controle tab do prontuário
+		$scope.panel = [];
+		
+		$scope.setTabPrintuario = function(index, tabNum){
+			$scope.panel[index].tabSelected = tabNum;
+		};
+		$scope.isTab = function(index, tabNum){
+			return $scope.panel[index].tabSelected === tabNum;
+		};
+		//--
  
 		//-- Inicializa formulário
 		if($scope.form == null){
@@ -63,6 +85,8 @@
 		if(agendamentoID > 0){
 			AgendamentoService.GetById(agendamentoID).then(function(data){
 				$scope.form.agendamento = data;
+
+				$scope.OnChangeCidadao($scope.form.agendamento.cidadao);
 
 				$scope.mudouAgendamento();
 			});
@@ -114,6 +138,28 @@
 		MedicamentoService.GetAll().then(function(data){
 			$scope.listaMedicamento = data;
 		});
+		//--
+
+		//-- Inicia variaveis do prontuário
+		$scope.listaVazia = true;
+		$scope.atendimentos = [];
+		//--
+
+		//-- Ao selecionar um cidadão
+		$scope.OnChangeCidadao = function(cidadao) {
+			AtendimentoService.GetAll().then(function(data){
+				$scope.atendimentos = data;
+
+				for (var i = data.length - 1; i >= 0; i--) {
+					$scope.panel.push({
+						collapsed: false,
+						tabSelected: 1	
+					});
+				};
+
+				$scope.listaVazia = $scope.atendimentos.length === 0;
+			});
+		}
 		//--
 
 		//-- Adicionar sintoma
