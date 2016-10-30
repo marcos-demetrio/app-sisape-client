@@ -57,6 +57,16 @@
 				date.setDate(parseInt(dateArray[2]));
 
 				$scope.form.dataNascimento = date;
+
+				var dateRegistro = new Date();
+				var strRegistro = data.dataRegistro;
+				var dateArrayRegistro = strRegistro.split("-");
+
+				dateRegistro.setFullYear(parseInt(dateArrayRegistro[0]));
+				dateRegistro.setMonth(parseInt(dateArrayRegistro[1])-1);  // months indexed as 0-11, substract 1
+				dateRegistro.setDate(parseInt(dateArrayRegistro[2]));
+
+				$scope.form.dataRegistro = dateRegistro;
 			});
 		}
 		//--
@@ -159,6 +169,16 @@
 
 		$scope.open2 = function() {
 			$scope.popup2.opened = true;
+		};
+		//--
+
+		//-- Campo Data
+		$scope.popup3 = {
+			opened: false
+		};
+
+		$scope.open3 = function() {
+			$scope.popup3.opened = true;
 		};
 		//--
 	}

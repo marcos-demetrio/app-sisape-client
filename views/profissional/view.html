@@ -30,6 +30,47 @@
 						</div>
 					</div>
 
+					<!-- Número Registro Input -->
+					<div class="form-group" ng-class="{ 'has-error' : profissionalForm.numeroRegistro.$invalid && !profissionalForm.numeroRegistro.$pristine }">
+						<label class="col-sm-2 control-label sisape-required" for="numeroRegistro">Número do registro</label>
+						<div class="col-sm-3">
+							<input ng-model="form.numeroRegistro" id="numeroRegistro" name="numeroRegistro" type="text" maxlength="50" class="form-control">
+							<p ng-show="profissionalForm.numeroRegistro.$error.required && !profissionalForm.numeroRegistro.$pristine" class="help-block">Campo obrigatório.</p>
+						</div>
+					</div>
+
+					<!-- Data de Registro Input -->
+					<div class="form-group sisape-required" ng-class="{ 'has-error' : profissionalForm.dataRegistro.$invalid && !profissionalForm.dataRegistro.$pristine }">
+						<label class="col-sm-2 control-label" for="dataRegistro">Data de registro</label>
+						<div class="col-sm-2">
+							<p class="input-group">
+							<input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="form.dataRegistro" is-open="popup3.opened" datepicker-options="dateOptions" ng-required="true" close-text="Fechar" current-text="Hoje" clear-text="Limpar" />
+								<span class="input-group-btn">
+									<button type="button" class="btn btn-default" ng-click="open3()"><i class="glyphicon glyphicon-calendar"></i></button>
+								</span>
+							<p ng-show="profissionalForm.dataRegistro.$error.required && !profissionalForm.dataRegistro.$pristine" class="help-block">Campo obrigatório.</p>
+							</p>
+						</div>
+					</div>
+
+					<!-- conselhoClasse Input -->
+					<div class="form-group sisape-required" ng-class="{ 'has-error' : profissionalForm.conselhoClasse.$invalid && !profissionalForm.conselhoClasse.$pristine }">
+						<label class="col-sm-2 control-label" for="conselhoClasse">Conselho de classe</label>
+						<div class="col-sm-10">
+							<input ng-model="form.conselhoClasse" id="conselhoClasse" required name="conselhoClasse" type="text" class="form-control" maxlength="100">
+							<p ng-show="profissionalForm.conselhoClasse.$error.required && !profissionalForm.conselhoClasse.$pristine" class="help-block">Campo obrigatório.</p>
+						</div>
+					</div>
+
+					<!-- UF Input -->
+					<div class="form-group sisape-required" ng-class="{ 'has-error' : profissionalForm.ufConselhoRegistro.$invalid && !profissionalForm.ufConselhoRegistro.$pristine }">
+						<label class="col-sm-2 control-label" for="ufConselhoRegistro">UF do Conselho</label>
+						<div class="col-sm-10">
+							<input ng-model="form.ufConselhoRegistro" id="ufConselhoRegistro" required name="ufConselhoRegistro" type="text" class="form-control" maxlength="2" style="text-transform:uppercase">
+							<p ng-show="profissionalForm.ufConselhoRegistro.$error.required && !profissionalForm.ufConselhoRegistro.$pristine" class="help-block">Campo obrigatório.</p>
+						</div>
+					</div>
+
 					<!-- CPF Input -->
 					<div class="form-group" ng-class="{ 'has-error' : profissionalForm.cpf.$invalid && !profissionalForm.cpf.$pristine }">
 						<label class="col-sm-2 control-label" for="cpf">CPF</label>
