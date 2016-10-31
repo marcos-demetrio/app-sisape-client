@@ -12,12 +12,12 @@
 	<div class="container-fluid">
 		<form class="form-vertical js-form-loading">
 			<div class="row">
-				<div class="col-sm-1">
+				<div class="col-sm-2">
 					<div class="form-group">
 						<label for="input-nome" class="control-label">Tipo de Filtro</label>
 					</div>
 				</div>
-				<div class="col-sm-11">
+				<div class="col-sm-10">
 					<div class="form-group">
 						<select class="form-control" id="filtro" name="filtro" required ng-model="filtro">
 							<option value="VAZIO" selected>Selecione um filtro</option>
@@ -30,12 +30,12 @@
 			</div>
 			
 			<div class="row">
-				<div class="col-sm-1">
+				<div class="col-sm-2">
 					<div class="form-group">
 						<label for="input-nome">Município</label>
 					</div>
 				</div>
-				<div class="col-sm-11">
+				<div class="col-sm-10">
 					<div class="form-group">
 						<select class="form-control" id="i_municipio" name="i_municipio" required ng-options="municipio.nome for municipio in municipios track by municipio.i_municipio" ng-model="municipio" ng-disabled="filtro!='MUNICIPIO'"></select>
 					</div>
@@ -43,12 +43,12 @@
 			</div>
 			
 			<div class="row">
-				<div class="col-sm-1">
+				<div class="col-sm-2">
 					<div class="form-group">
 						<label for="input-nome" class="control-label">UBS</label>
 					</div>
 				</div>
-				<div class="col-sm-11">
+				<div class="col-sm-10">
 					<div class="form-group">
 						<select class="form-control" id="i_unidade_basica_saude" name="i_unidade_basica_saude" required ng-options="ubs.nome for ubs in ubss track by ubs.i_unidade_basica_saude" ng-model="unidadeBasicaSaude" ng-disabled="filtro!='UBS'"></select>
 					</div>
@@ -56,7 +56,7 @@
 			</div>
 						
 			<div class="row">
-				<div class="col-sm-1">
+				<div class="col-sm-2">
 					<div class="form-group">
 						<label for="input-nome">Período</label>
 					</div>
@@ -80,7 +80,7 @@
 				<div class="col-sm-2">
 					<div class="form-group">
 						<p class="input-group">
-						<input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="dataFinal" is-open="popup3.opened" datepicker-options="dateOptions" ng-required="true" close-text="Fechar" current-text="Hoje" clear-text="Limpar" id="dataFinal"" ng-disabled="filtro!='PERIODO'"/>
+						<input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="dataFinal" is-open="popup3.opened" datepicker-options="dateOptions" ng-required="true" close-text="Fechar" current-text="Hoje" clear-text="Limpar" id="dataFinal" ng-disabled="filtro!='PERIODO'"/>
 							<span class="input-group-btn">
 								<button type="button" class="btn btn-default" ng-click="open3()" ng-disabled="filtro!='PERIODO'"><i class="glyphicon glyphicon-calendar"></i></button>
 							</span>
@@ -102,7 +102,7 @@
 		</form>
 		
 		<div class="alert  aw-alert-no-results" role="alert" ng-show="listaVazia">
-			A pesquisa não retornou nenhum adoecimento.
+			A pesquisa não retornou nenhuma doença por região.
 		</div>
 
 		<div class="table-responsive" ng-show="!listaVazia">
@@ -131,7 +131,7 @@
 			
 		<div class="row">
 			<div class="col-xs-12  col-md-4  aw-text-xs-center  aw-text-md-right" style="float: right;">
-				<span class="aw-pagination-info" ng-bind-template="{{totalItens}} adoecimento(s) encontrado(s)" ng-show="!listaVazia"></span>
+				<span class="aw-pagination-info" ng-bind-template="{{totalItens}} doença(s) encontrada(s)" ng-show="!listaVazia"></span>
 			</div>
 		</div>
 	</div>

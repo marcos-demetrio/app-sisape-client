@@ -64,7 +64,7 @@
 				{tipoUsuario: ['S', 'G', 'P', 'C'], url: '#/agendamento', descricao: 'Agendar atendimento'},
 				{tipoUsuario: ['S', 'G', 'P'], url: '#/fila', descricao: 'Fila de atendimentos'},
 				{tipoUsuario: ['S', 'G', 'P'], url: '#/atendimento', descricao: 'Atendimento'},
-				{tipoUsuario: ['S', 'G', 'P'], url: '#/acompanhamento', descricao: 'Acompanhamento'}
+				{tipoUsuario: ['S', 'G', 'P'], url: '#/prontuario', descricao: 'Acompanhamento'}
 			];
 
 			$rootScope.listaMenuCadastros = [
@@ -84,7 +84,7 @@
 			
 			$rootScope.listaMenuRelatorios = [
 				{tipoUsuario: ['S', 'G'], url: '#/relatorio/atendimento', descricao: 'Atendimentos'},
-				{tipoUsuario: ['S', 'G'], url: '#/relatorio/adoecimento', descricao: 'Adoecimentos'},
+				{tipoUsuario: ['S', 'G'], url: '#/relatorio/adoecimento', descricao: 'Doenças por região'},
 			];
 		};
 	}

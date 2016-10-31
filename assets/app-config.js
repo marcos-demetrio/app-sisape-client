@@ -300,7 +300,7 @@
 			.when('/relatorio/adoecimento', {
 				templateUrl: 'views/atendimento/rel-adoecimento.html',
 				controller: 'AtendimentoController',
-				title: 'Relatório de Adoecimento'
+				title: 'Relatório de Doenças por região'
 			})
 
 			.when('/prontuario', {
