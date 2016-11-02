@@ -69,7 +69,11 @@
 
 							<div class="tab-content" ng-show="isTab($index, 1)">
 								<div class="tab-pane fade in active">
-									<table class="table table-condensed">
+									<div class="alert  aw-alert-no-results" role="alert" ng-show="item.atendimentoSintoma.length === 0">
+										Não foi informado sintomas.
+									</div>
+
+									<table class="table table-condensed" ng-show="item.atendimentoSintoma.length > 0">
 										<thead>
 											<th>Descrição</th>
 										</thead>
@@ -84,7 +88,11 @@
 
 							<div class="tab-content" ng-show="isTab($index, 2)">
 								<div class="tab-pane fade in active">
-									<table class="table table-condensed">
+									<div class="alert  aw-alert-no-results" role="alert" ng-show="item.atendimentoMedicamento.length === 0">
+										Não foi solicitado medicamentos.
+									</div>
+
+									<table class="table table-condensed" ng-show="item.atendimentoMedicamento.length > 0">
 										<thead>
 											<th>Nome</th>
 											<th>Posologia</th>
@@ -102,11 +110,11 @@
 							<div class="tab-content" ng-show="isTab($index, 3)">
 								<div class="tab-pane fade in active">
 
-									<div class="alert  aw-alert-no-results" role="alert" ng-show="!temExame">
+									<div class="alert  aw-alert-no-results" role="alert" ng-show="item.atendimentoExame.length === 0">
 										Não foi solicitado exames.
 									</div>
 
-									<table class="table table-condensed" ng-show="temExame">
+									<table class="table table-condensed" ng-show="item.atendimentoExame.length > 0">
 										<thead>
 											<th>Nome</th>
 										</thead>

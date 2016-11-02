@@ -225,6 +225,7 @@
   		//-- Gravar os dados do cadastro no banco de dados
 		$scope.update = function(){
 
+			$scope.form.atendido = false
 			$scope.form.horaAgendamento = new Date($scope.form.horaAgendamento.horario);
 
 			if(agendamentoID > 0){

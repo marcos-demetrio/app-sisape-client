@@ -10,6 +10,9 @@
 			<!-- Id input-->
 			<input type="hidden" id="i_agendamento" name="i_agendamento" ng-model="form.i_agendamento" />
 
+			<!-- Atendido input-->
+			<input type="hidden" id="atendido" name="atendido" ng-model="form.atendido" ng-init="form.atendido = false" />
+
 			<!-- Cidadão Select-->
 			<div class="form-group mdn-required" ng-class="{ 'has-error' : agendamentoForm.i_cidadao.$invalid && !agendamentoForm.i_cidadao.$pristine }">
 				<label for="i_cidadao" class="col-sm-2 control-label">Cidadão</label>

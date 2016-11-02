@@ -55,7 +55,7 @@
 
 				$scope.listaVazia = $scope.atendimentos.length === 0;
 
-				$scope.temExame = $scope.atendimentos.atendimentoExame.length === 0;
+				//$scope.temExame = $scope.atendimentos.atendimentoExame.length === 0;
 			});
 		}
 		//--
