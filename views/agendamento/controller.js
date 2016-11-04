@@ -6,7 +6,7 @@
 		.controller('AgendamentoController', AgendamentoController)
 		.controller('AgendamentoListagemController', AgendamentoListagemController);
 
-	AgendamentoController.$inject = ['$scope', '$location', '$route', '$routeParams', 'AgendamentoService', 'CidadaoService', 'ProfissionalLotacaoService', 'CidService'];
+	AgendamentoController.$inject = ['$scope', '$location', '$route', '$routeParams','AgendamentoService', 'CidadaoService', 'ProfissionalLotacaoService', 'CidService'];
 
 	function AgendamentoController($scope, $location, $route, $routeParams, AgendamentoService, CidadaoService, ProfissionalLotacaoService, CidService) {
 		
@@ -27,20 +27,40 @@
 
 		var ubsID = 0;
 
+		$scope.getHorarios = function(ubsID) {
+			AgendamentoService.GetHorariosByUbs(ubsID).then(function(data){
+				var newDate;
+				$scope.listaHorarios = [];
+				for (var i = data.length - 1; i >= 0; i--) {
+					newDate = new Date(data[i].horario);
+					newDate.setSeconds(0);
+
+					$scope.listaHorarios.push({
+						horario: newDate
+					});
+				};
+
+				$scope.listaHorarios = $filter('orderBy')($scope.listaHorarios, 'horario', false);
+			});
+		}
+
 		//-- Caso esteja editando, obtem os dados do cadastro
 		if(agendamentoID > 0){
 			AgendamentoService.GetById(agendamentoID).then(function(data){
 				ubsID = data.cidadao.unidadeBasicaSaude.i_unidade_basica_saude;
 
-				AgendamentoService.GetHorariosByUbs(ubsID).then(function(data){
-					for (var i = data.length - 1; i >= 0; i--) {
-						$scope.listaHorarios.push({
-							horario: new Date(data[i].horario) 
-						});
-					};
-				});
+				$scope.getHorarios(ubsID);
 
-				data.horaAgendamento = new Date(data.horaAgendamento);
+				var newTime;
+				newTime = new Date(data.horaAgendamento);
+				newTime.setFullYear(2016);
+				newTime.setMonth(0);
+				newTime.setDate(1);
+				newTime.setSeconds(0);
+				newTime.setMilliseconds(0);
+
+
+				data.horaAgendamento = newTime;
 
 				$scope.form = data;
 
@@ -53,29 +73,18 @@
 				date.setDate(parseInt(dateArray[2]));
 
 				$scope.form.dataAgendamento = date;
+
+				console.log('data', data);
 			});
 		}
 		//--
 
-		$scope.listaHorarios = [];
 
-		//-- Adicionar sintoma
+		//-- Obter horários
 		$scope.mudouCidadao = function() {
 			ubsID = $scope.form.cidadao.unidadeBasicaSaude.i_unidade_basica_saude;
 
-			AgendamentoService.GetHorariosByUbs(ubsID).then(function(data){
-				for (var i = data.length - 1; i >= 0; i--) {
-					$scope.listaHorarios.push({
-							horario: new Date(data[i].horario) 
-					});
-				};
-			});
-		}
-		//--
-
-		//-- Adicionar sintoma
-		$scope.mudouData = function() {
-			console.log($scope.form.dataAgendamento)
+			$scope.getHorarios(ubsID);
 		}
 		//--
 

@@ -17,7 +17,7 @@
 			<div class="form-group mdn-required" ng-class="{ 'has-error' : agendamentoForm.i_cidadao.$invalid && !agendamentoForm.i_cidadao.$pristine }">
 				<label for="i_cidadao" class="col-sm-2 control-label">Cidadão</label>
 				<div class="col-sm-5">
-					<select class="form-control" id="i_cidadao" ng-change="mudouCidadao()" ng-disabled="form.atendido" name="i_cidadao" required ng-options="cidadao.nomeCompleto for cidadao in cidadaos track by cidadao.i_cidadao" ng-model="form.cidadao"></select>
+					<select class="form-control" id="i_cidadao" ng-change="mudouCidadao()" ng-disabled="form.atendido || editandoCadastro" name="i_cidadao" required ng-options="cidadao.nomeCompleto for cidadao in cidadaos track by cidadao.i_cidadao" ng-model="form.cidadao"></select>
 
 					<p ng-show="agendamentoForm.i_cidadao.$error.required && !agendamentoForm.i_cidadao.$pristine" class="help-block">Selecione um cidadão.</p>
 				</div>
@@ -27,7 +27,7 @@
 			<div class="form-group mdn-required" ng-class="{ 'has-error' : agendamentoForm.i_profissional.$invalid && !agendamentoForm.i_profissional.$pristine }">
 				<label for="i_profissional" class="col-sm-2 control-label">Profissional</label>
 				<div class="col-sm-5">
-					<select class="form-control" id="i_profissional" ng-disabled="form.atendido" name="i_profissional" required ng-options="lotacao.profissional.nome for lotacao in profissionais track by lotacao.profissional.i_profissional" ng-model="form.profissionalLotacao"></select>
+					<select class="form-control" id="i_profissional" ng-disabled="form.atendido || editandoCadastro" name="i_profissional" required ng-options="lotacao.profissional.nome for lotacao in profissionais track by lotacao.profissional.i_profissional" ng-model="form.profissionalLotacao" ng-disabled="editandoCadastro"></select>
 
 					<p ng-show="agendamentoForm.i_profissional.$error.required && !agendamentoForm.i_profissional.$pristine" class="help-block">Selecione um profissional.</p>
 				</div>
@@ -37,23 +37,25 @@
 			<div class="form-group sisape-required" ng-class="{ 'has-error' : agendamentoForm.dataAgendamento.$invalid && !agendamentoForm.dataAgendamento.$pristine }">
 				<label class="col-sm-2 control-label" for="dataAgendamento">Data do agendamento</label>
 				<div class="col-sm-2">
-					<p class="input-group">
-					<input type="text" class="form-control" ng-disabled="form.atendido" uib-datepicker-popup="dd/MM/yyyy" ng-model="form.dataAgendamento" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Fechar" current-text="Hoje" clear-text="Limpar" id="dataAgendamento" ng-change="mudouData()" />
-						<span class="input-group-btn">
-							<button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar" ng-disabled="form.atendido"></i></button>
-						</span>
-					<p ng-show="agendamentoForm.dataAgendamento.$error.required && !agendamentoForm.dataAgendamento.$pristine" class="help-block">Campo obrigatório.</p>
+					<p class="input-group" ng-show="!editandoCadastro">
+						<input type="text" class="form-control" ng-disabled="form.atendido" uib-datepicker-popup="dd/MM/yyyy" ng-model="form.dataAgendamento" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Fechar" current-text="Hoje" clear-text="Limpar" id="dataAgendamento" />
+							<span class="input-group-btn">
+								<button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar" ng-disabled="form.atendido"></i></button>
+							</span>
+						<p ng-show="agendamentoForm.dataAgendamento.$error.required && !agendamentoForm.dataAgendamento.$pristine" class="help-block">Campo obrigatório.</p>
 					</p>
+
+					<h6 ng-show="editandoCadastro" ng-bind="form.dataAgendamento | date:'dd/MM/yyyy'"></h6>
 				</div>
 			</div>
-
-			<p ng-bind="form.horaAgendamento"></p>
 
 			<!-- Horarios Select-->
 			<div class="form-group mdn-required" ng-class="{ 'has-error' : agendamentoForm.horaAgendamento.$invalid && !agendamentoForm.horaAgendamento.$pristine }">
 				<label for="horaAgendamento" class="col-sm-2 control-label">Horário</label>
-				<div class="col-sm-2">
-					<select class="form-control" id="horaAgendamento" name="horaAgendamento" required ng-options="listaHorario.horario | date:'HH:mm' for listaHorario in listaHorarios | orderBy:listaHorario.horario" ng-model="form.horaAgendamento"></select>
+				<div class="col-sm-8">
+					<select class="form-control" id="horaAgendamento" name="horaAgendamento" required ng-options="listaHorario.horario | date:'HH:mm' for listaHorario in listaHorarios | orderBy: 'horario' track by listaHorario.horario" ng-model="form.horaAgendamento" ng-disabled="!form.cidadao" ng-show="!editandoCadastro"></select>
+
+					<h6 ng-show="editandoCadastro" ng-bind="form.horaAgendamento | date:'HH:mm'"></h6>
 
 					<p ng-show="agendamentoForm.horaAgendamento.$error.required && !agendamentoForm.horaAgendamento.$pristine" class="help-block">Selecione um horário.</p>
 				</div>
@@ -112,7 +114,7 @@
 				<div style="margin-left: 15px;"><!--<div class="pull-right">-->
 					<button class="btn  btn-primary" type="submit" ng-disabled="agendamentoForm.$invalid || form.atendido">Salvar</button>
 					<a ng-click="cancelar(agendamentoForm.$dirty)" class="btn  btn-default">Cancelar</a>
-					<a ng-click="excluir()" ng-show="editandoCadastro" class="btn  btn-link aw-btn-link-danger">Excluir este agendamento</a>
+					<a ng-click="excluir()" ng-show="editandoCadastro && form.atendido == false" class="btn  btn-link aw-btn-link-danger">Excluir este agendamento</a>
 				</div>
 			</div>
 		</form>
