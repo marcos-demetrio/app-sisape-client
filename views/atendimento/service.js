@@ -77,6 +77,26 @@
 			return $http.get(API + 'atendimento/adoecimento/relatorio/periodo', config).then(handleSuccess, handleError('Erro obtendo lista de atendimento'));
 		}
 		
+		service.Print = function Print() {
+			return $http.get(API + 'atendimento/print/').then(handleSuccess, handleError('Erro obtendo lista de atendimento'));
+		}
+
+		service.PrintAtendimentoRelatorioPesquisarPorUbs = function PrintAtendimentoRelatorioPesquisarPorUbs(id) {
+			return $http.get(API + 'atendimento/printUbs/' + id).then(handleSuccess, handleError('Erro ao atualizar atendimento'));
+		}
+
+		service.PrintAtendimentoRelatorioPesquisarPorProfissional = function PrintAtendimentoRelatorioPesquisarPorProfissional(id) {
+			return $http.get(API + 'atendimento/printProfissional/' + id).then(handleSuccess, handleError('Erro ao atualizar atendimento'));
+		}
+
+		service.PrintAtendimentoRelatorioPesquisarPorCidadao = function PrintAtendimentoRelatorioPesquisarPorCidadao(id) {
+			return $http.get(API + 'atendimento/printCidadao/' + id).then(handleSuccess, handleError('Erro ao atualizar atendimento'));
+		}
+
+		service.PrintAtendimentoRelatorioPesquisarPorDataAtendimento = function PrintAtendimentoRelatorioPesquisarPorDataAtendimento(config) {
+			return $http.get(API + 'atendimento/printPeriodo', config).then(handleSuccess, handleError('Erro ao atualizar atendimento'));
+		}
+		
 		return service;
 		
 		function handleSuccess(res) {
