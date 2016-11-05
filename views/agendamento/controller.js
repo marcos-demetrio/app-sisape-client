@@ -6,9 +6,9 @@
 		.controller('AgendamentoController', AgendamentoController)
 		.controller('AgendamentoListagemController', AgendamentoListagemController);
 
-	AgendamentoController.$inject = ['$scope', '$location', '$route', '$routeParams', '$filter', 'AgendamentoService', 'CidadaoService', 'ProfissionalLotacaoService', 'CidService'];
+	AgendamentoController.$inject = ['$scope', '$rootScope', '$location', '$route', '$routeParams', '$filter', 'AgendamentoService', 'CidadaoService', 'ProfissionalLotacaoService', 'CidService'];
 
-	function AgendamentoController($scope, $location, $route, $routeParams, $filter, AgendamentoService, CidadaoService, ProfissionalLotacaoService, CidService) {
+	function AgendamentoController($scope, $rootScope, $location, $route, $routeParams, $filter, AgendamentoService, CidadaoService, ProfissionalLotacaoService, CidService) {
 		
 		//-- Pegar a variável 'id' vinda da url, se for maior que zero esta editando, senão está inserindo
 		var agendamentoID = ($routeParams.id) ? parseInt($routeParams.id) : 0;
@@ -73,8 +73,6 @@
 				date.setDate(parseInt(dateArray[2]));
 
 				$scope.form.dataAgendamento = date;
-
-				console.log('data', data);
 			});
 		}
 		//--
@@ -137,11 +135,24 @@
 		};
 		//--
 
-		//-- Carregar lista de Cidadao
-		CidadaoService.GetAll().then(function(data){
-			$scope.cidadaos = data;
-		});
-		//--
+		switch($rootScope.globals.currentUser.tipoUsuario){
+			case 'C':
+				CidadaoService.GetById($rootScope.globals.currentUser.id).then(function(data){
+					$scope.form.cidadao = data;
+
+					var ubsID = data.unidadeBasicaSaude.i_unidade_basica_saude;
+
+					$scope.getHorarios(ubsID);
+				});
+
+				break;
+			default:
+				//-- Carregar lista de Cidadao
+				CidadaoService.GetAll().then(function(data){
+					$scope.cidadaos = data;
+				});
+				//--
+		}
 
 		//-- Carregar lista de CID's
 		CidService.GetAll().then(function(data){
@@ -260,23 +271,40 @@
 		//--
 	}
 
-	AgendamentoListagemController.$inject = ['$scope','$location', '$window', '$filter', 'AgendamentoService'];
+	AgendamentoListagemController.$inject = ['$scope', '$rootScope', '$location', '$window', '$filter', 'AgendamentoService'];
 
-	function AgendamentoListagemController($scope, $location, $window, $filter, AgendamentoService) {
+	function AgendamentoListagemController($scope, $rootScope, $location, $window, $filter, AgendamentoService) {
 		$scope.listaVazia = true;
 		$scope.itens = [];
 
-		$scope.atualizarAgendamentos = function(){
+		$scope.atualizarAgendamentosTodos = function(){
 			AgendamentoService.GetAll().then(function(data){
 				$scope.itens = data;
 				$scope.totalItens = $scope.itens.length;
 
 				$scope.listaVazia = $scope.itens.length === 0;
+
+				$filter('orderBy')($scope.itens, ['dataAgendamento', 'horaAgendamento'], false);
 			});
 		}
 
-		$scope.atualizarAgendamentos();
+		$scope.atualizarAgendamentosCidadao = function(id){
+			AgendamentoService.GetByCidadao(id).then(function(data){
+				$scope.itens = data;
+				$scope.totalItens = $scope.itens.length;
 
-		$filter('orderBy')($scope.itens, ['dataAgendamento', 'horaAgendamento'], false);
+				$scope.listaVazia = $scope.itens.length === 0;
+
+				$filter('orderBy')($scope.itens, ['dataAgendamento', 'horaAgendamento'], false);
+			});
+		}
+
+		switch($rootScope.globals.currentUser.tipoUsuario){
+			case 'C':
+				$scope.atualizarAgendamentosCidadao($rootScope.globals.currentUser.id);
+				break;
+			default:
+				$scope.atualizarAgendamentosTodos();
+		}
 	}
 })();

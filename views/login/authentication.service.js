@@ -15,7 +15,7 @@
 
 		return service;
 
-		function Login(email, password, callback) {
+		function Login(email, password, tipoUsuario, callback) {
 			$timeout(function () {
 				var response;
 
@@ -28,7 +28,7 @@
 				};
 
 				UsuarioService.GetByEmail(config).then(function (user) {
-					if (user !== null && user.senha === password) {
+					if (user !== null && user.senha === password && user.tipoUsuario === tipoUsuario) {
 						response = { success: true, usuario: user };
 					} else {
 						response = { success: false, message: 'Username or password is incorrect' };
@@ -38,13 +38,13 @@
 			}, 500);
 		}
 
-		function SetCredentials(email, password, usuario) {
+		function SetCredentials(email, password, usuario, tipoUsuario) {
 			$rootScope.globals = {
 				currentUser: {
 					id:  usuario.id,
 					email: email,
 					password: password,
-					tipoUsuario: 'S',//tipoUsuario: usuario.tipoUsuario,
+					tipoUsuario: tipoUsuario,//tipoUsuario: usuario.tipoUsuario,
 					nomeUsuario: usuario.nome
 				}
 			};

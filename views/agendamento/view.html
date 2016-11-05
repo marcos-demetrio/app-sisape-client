@@ -17,7 +17,9 @@
 			<div class="form-group mdn-required" ng-class="{ 'has-error' : agendamentoForm.i_cidadao.$invalid && !agendamentoForm.i_cidadao.$pristine }">
 				<label for="i_cidadao" class="col-sm-2 control-label">Cidadão</label>
 				<div class="col-sm-5">
-					<select class="form-control" id="i_cidadao" ng-change="mudouCidadao()" ng-disabled="form.atendido || editandoCadastro" name="i_cidadao" required ng-options="cidadao.nomeCompleto for cidadao in cidadaos track by cidadao.i_cidadao" ng-model="form.cidadao"></select>
+					<select ng-hide="userLoggedIn.tipoUsuario == 'C'" class="form-control" id="i_cidadao" ng-change="mudouCidadao()" ng-disabled="form.atendido || editandoCadastro" name="i_cidadao" required ng-options="cidadao.nomeCompleto for cidadao in cidadaos track by cidadao.i_cidadao" ng-model="form.cidadao"></select>
+
+					<h6 ng-show="userLoggedIn.tipoUsuario == 'C'" ng-bind="form.cidadao.nomeCompleto"></h6>
 
 					<p ng-show="agendamentoForm.i_cidadao.$error.required && !agendamentoForm.i_cidadao.$pristine" class="help-block">Selecione um cidadão.</p>
 				</div>
@@ -27,7 +29,9 @@
 			<div class="form-group mdn-required" ng-class="{ 'has-error' : agendamentoForm.i_profissional.$invalid && !agendamentoForm.i_profissional.$pristine }">
 				<label for="i_profissional" class="col-sm-2 control-label">Profissional</label>
 				<div class="col-sm-5">
-					<select class="form-control" id="i_profissional" ng-disabled="form.atendido || editandoCadastro" name="i_profissional" required ng-options="lotacao.profissional.nome for lotacao in profissionais track by lotacao.profissional.i_profissional" ng-model="form.profissionalLotacao" ng-disabled="editandoCadastro"></select>
+					<select class="form-control" id="i_profissional" ng-hide="form.atendido || editandoCadastro" name="i_profissional" ng-options="lotacao.profissional.nome for lotacao in profissionais track by lotacao.profissional.i_profissional" ng-model="form.profissionalLotacao" ng-disabled="editandoCadastro"></select>
+
+					<h6 ng-show="form.atendido || editandoCadastro" ng-bind="form.profissionalLotacao.profissional.nome || 'Não informado'"></h6>
 
 					<p ng-show="agendamentoForm.i_profissional.$error.required && !agendamentoForm.i_profissional.$pristine" class="help-block">Selecione um profissional.</p>
 				</div>

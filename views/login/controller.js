@@ -10,7 +10,7 @@
 	function LoginController($scope, $location, $rootScope, $window, AuthenticationService) {
 		$scope.login = login;
 
-		//$scope.email = 'demetrius.marcos@gmail.com';
+		$scope.email = 'demetrius.marcos@gmail.com';
 
 		(function initController() {
 			AuthenticationService.ClearCredentials();
@@ -21,11 +21,11 @@
 
 			var senha = md5($scope.password);
 			
-			AuthenticationService.Login($scope.email, senha, function (response) {	
+			AuthenticationService.Login($scope.email, senha, $scope.tipoUsuario, function (response) {	
 				if (response.success) {
 					var url;
 
-					AuthenticationService.SetCredentials($scope.email, senha, response.usuario);
+					AuthenticationService.SetCredentials($scope.email, senha, response.usuario, $scope.tipoUsuario);
 					$location.path('/inicio');
 
 					$rootScope.criarMenu();

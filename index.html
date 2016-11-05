@@ -129,7 +129,7 @@
 									</ul>
 								</li>
 
-								<li class="aw-menu__item" ng-class="{ 'is-expanded' : pesquisaMenu && !pesquisaMenu.$pristine }" ng-hide="userLoggedIn.tipoUsuario == 'C'">
+								<li class="aw-menu__item" ng-class="{ 'is-expanded' : pesquisaMenu && !pesquisaMenu.$pristine }" ng-hide="inArray(userLoggedIn.tipoUsuario, ['P', 'C'])">
 									<a href>
 										<i class="fa  fa-fw  fa-file-text"></i><span>Relatórios</span>
 										<i class="aw-menu__navigation-icon  fa"></i>

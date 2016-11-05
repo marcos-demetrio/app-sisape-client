@@ -23,6 +23,10 @@
 					<p ng-show="prontuarioForm.i_cidadao.$error.required && !prontuarioForm.i_cidadao.$pristine" class="help-block">Selecione um cidadão.</p>
 				</div>
 			</div>
+
+			<div class="alert  aw-alert-no-results" role="alert" ng-show="listaVazia">
+				Não há dados para mostrar
+			</div>
 			
 			<div class="panel-group" aria-multiselectable="true">
 				<div class="panel panel-info" ng-repeat="item in atendimentos">
