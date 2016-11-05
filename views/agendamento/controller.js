@@ -6,9 +6,9 @@
 		.controller('AgendamentoController', AgendamentoController)
 		.controller('AgendamentoListagemController', AgendamentoListagemController);
 
-	AgendamentoController.$inject = ['$scope', '$location', '$route', '$routeParams','AgendamentoService', 'CidadaoService', 'ProfissionalLotacaoService', 'CidService'];
+	AgendamentoController.$inject = ['$scope', '$location', '$route', '$routeParams', '$filter', 'AgendamentoService', 'CidadaoService', 'ProfissionalLotacaoService', 'CidService'];
 
-	function AgendamentoController($scope, $location, $route, $routeParams, AgendamentoService, CidadaoService, ProfissionalLotacaoService, CidService) {
+	function AgendamentoController($scope, $location, $route, $routeParams, $filter, AgendamentoService, CidadaoService, ProfissionalLotacaoService, CidService) {
 		
 		//-- Pegar a variável 'id' vinda da url, se for maior que zero esta editando, senão está inserindo
 		var agendamentoID = ($routeParams.id) ? parseInt($routeParams.id) : 0;

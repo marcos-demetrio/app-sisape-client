@@ -13,6 +13,10 @@
 			return $http.get(API + 'atendimento').then(handleSuccess, handleError('Erro obtendo lista de atendimento'));
 		}
 
+		service.GetByCidadao = function GetByCidadao(id) {
+			return $http.get(API + 'atendimento/cidadao/' + id).then(handleSuccess, handleError('Erro obtendo lista de atendimento por cidadão'));
+		}
+
 		service.GetById = function GetById(id) {
 			return $http.get(API + 'atendimento/' + id).then(handleSuccess, handleError('Erro obtendo atendimento pelo ID: ' + id));
 		}

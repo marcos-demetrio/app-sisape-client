@@ -61,9 +61,12 @@
 						</div>
 					</div>
 
-					<hr ng-show="!listaVazia">
+					<hr>
 
-					<h4>Consultas anteriores</h4>
+					<h4 ng-show="!listaVazia">Consultas anteriores</h4>
+					<div class="alert  aw-alert-no-results" role="alert" ng-show="listaVazia">
+						Não há consultas anteriores
+					</div>
 
 					<br ng-show="!listaVazia">
 
@@ -82,14 +85,14 @@
 
 									<div class="row">
 										<div class="col-md-6">
-											<p ng-bind="'Altura: ' + item.altura"></p>
-											<p ng-bind="'IMC: ' + item.imc"></p>
-											<p ng-bind="'Freq. Card.: ' + item.frequenciaCardiaca"></p>
-											<p ng-bind="'Freq. Resp.: ' + item.frequenciaRespiratoria"></p>
-											<p ng-bind="'Peso: ' + item.peso"></p>
-											<p ng-bind="'Temperatura: ' + item.temperatura"></p>
-											<p ng-bind="'Pressão Máxima: ' + item.pressaoMaxima"></p>
-											<p ng-bind="'Pressão Mínima: ' + item.pressaoMinima"></p>
+											<p ng-bind="'Altura (m): ' + item.altura"></p>
+											<p ng-bind="'Peso (kg): ' + item.peso"></p>
+											<p ng-bind="'IMC: ' + (item.imc | number: 2) + ' - ' + getDescricaoIMC(item.imc)"></p>
+											<p ng-bind="'Freq. Card. (bpm): ' + item.frequenciaCardiaca"></p>
+											<p ng-bind="'Freq. Resp. (mpm): ' + item.frequenciaRespiratoria"></p>
+											<p ng-bind="'Temperatura (ºC): ' + item.temperatura"></p>
+											<p ng-bind="'Pressão Máxima (mmHg): ' + item.pressaoMaxima"></p>
+											<p ng-bind="'Pressão Mínima (mmHg): ' + item.pressaoMinima"></p>
 										</div>
 
 										<div class="col-md-6">
@@ -179,9 +182,17 @@
 				<div class="tab-pane fade in active">
 					<!-- Altura -->
 					<div class="form-group">
-						<label class="col-xs-2 col-sm-2 col-md-2 control-label" for="altura">Altura</label>
+						<label class="col-xs-2 col-sm-2 col-md-2 control-label" for="altura">Altura (m)</label>
 						<div class="col-sm-4">
-							<input ng-model="form.altura" id="altura" name="altura" type="number" step="any" maxlength="12" class="form-control" min="0" max="999999999999">
+							<input ng-model="form.altura" id="altura" name="altura" type="number" step="any" maxlength="12" class="form-control" min="0" max="999999999999" ng-change="calcularIMC()">
+						</div>
+					</div>
+
+					<!-- Peso -->
+					<div class="form-group">
+						<label class="col-xs-2 col-sm-2 col-md-2 control-label" for="peso">Peso (kg)</label>
+						<div class="col-sm-4">
+							<input ng-model="form.peso" id="peso" name="peso" type="number" step="any" maxlength="12" class="form-control" min="0" max="999999999999" ng-change="calcularIMC()">
 						</div>
 					</div>
 
@@ -189,13 +200,13 @@
 					<div class="form-group">
 						<label class="col-xs-2 col-sm-2 col-md-2 control-label" for="imc">IMC</label>
 						<div class="col-sm-4">
-							<input ng-model="form.imc" id="imc" name="imc" type="number" step="any" maxlength="12" class="form-control" min="0" max="999999999999">
+							<h6 ng-bind="(form.imc | number:2) + ' - ' + descricaoIMC"></h6>
 						</div>
 					</div>
 
 					<!-- Frequencia Cardiaca -->
 					<div class="form-group">
-						<label class="col-xs-2 col-sm-2 col-md-2 control-label" for="frequenciaCardiaca">Freq. Card.</label>
+						<label class="col-xs-2 col-sm-2 col-md-2 control-label" for="frequenciaCardiaca">Freq. Card. (bpm)</label>
 						<div class="col-sm-4">
 							<input ng-model="form.frequenciaCardiaca" id="frequenciaCardiaca" name="frequenciaCardiaca" type="number" step="any" maxlength="12" class="form-control" min="0" max="999999999999">
 						</div>
@@ -203,23 +214,15 @@
 
 					<!-- Frequencia Respiratoria -->
 					<div class="form-group">
-						<label class="col-xs-2 col-sm-2 col-md-2 control-label" for="frequenciaRespiratoria">Freq. Resp.</label>
+						<label class="col-xs-2 col-sm-2 col-md-2 control-label" for="frequenciaRespiratoria">Freq. Resp. (mpm)</label>
 						<div class="col-sm-4">
 							<input ng-model="form.frequenciaRespiratoria" id="frequenciaRespiratoria" name="frequenciaRespiratoria" type="number" step="any" maxlength="12" class="form-control" min="0" max="999999999999">
 						</div>
 					</div>
 
-					<!-- Peso -->
-					<div class="form-group">
-						<label class="col-xs-2 col-sm-2 col-md-2 control-label" for="peso">Peso</label>
-						<div class="col-sm-4">
-							<input ng-model="form.peso" id="peso" name="peso" type="number" step="any" maxlength="12" class="form-control" min="0" max="999999999999">
-						</div>
-					</div>
-
 					<!-- Temperatura -->
 					<div class="form-group">
-						<label class="col-xs-2 col-sm-2 col-md-2 control-label" for="temperatura">Temperatura</label>
+						<label class="col-xs-2 col-sm-2 col-md-2 control-label" for="temperatura">Temperatura (ºC)</label>
 						<div class="col-sm-4">
 							<input ng-model="form.temperatura" id="temperatura" name="temperatura" type="number" step="any" maxlength="12" class="form-control" min="0" max="999999999999">
 						</div>
@@ -227,7 +230,7 @@
 
 					<!-- Pressão Máxima -->
 					<div class="form-group">
-						<label class="col-xs-2 col-sm-2 col-md-2 control-label" for="pressaoMaxima">Pressão Máxima</label>
+						<label class="col-xs-2 col-sm-2 col-md-2 control-label" for="pressaoMaxima">Pressão Máxima (mmHg)</label>
 						<div class="col-sm-4">
 							<input ng-model="form.pressaoMaxima" id="pressaoMaxima" name="pressaoMaxima" type="number" maxlength="12" class="form-control" min="0" max="999999999999">
 						</div>
@@ -235,7 +238,7 @@
 
 					<!-- Pressão Máxima -->
 					<div class="form-group">
-						<label class="col-xs-2 col-sm-2 col-md-2 control-label" for="pressaoMinima">Pressão Mínima</label>
+						<label class="col-xs-2 col-sm-2 col-md-2 control-label" for="pressaoMinima">Pressão Mínima (mmHg)</label>
 						<div class="col-sm-4">
 							<input ng-model="form.pressaoMinima" id="pressaoMinima" name="pressaoMinima" type="number"maxlength="12" class="form-control" min="0" max="999999999999">
 						</div>
@@ -394,8 +397,20 @@
 
 			<div class="form-group">
 				<div style="margin-left: 15px;"><!--<div class="pull-right">-->
-					<button class="btn  btn-primary" type="submit" ng-disabled="atendimentoForm.$invalid">Salvar</button>
-					<a ng-click="cancelar(atendimentoForm.$dirty)" class="btn  btn-default">Cancelar</a>
+					<button class="btn btn-primary" type="submit" ng-disabled="atendimentoForm.$invalid">Finalizar</button>
+
+					<div class="btn-group">
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Imprimir <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu">
+							<li><a href ng-click="imprimirAtestado()">Atestado</a></li>
+							<li><a href ng-click="imprimirReceita()">Receita</a></li>
+							<li><a href ng-click="imprimirExames()">Exames</a></li>
+						</ul>
+					</div>
+
+					<a ng-click="cancelar(atendimentoForm.$dirty)" class="btn btn-default">Cancelar</a>
 					<a ng-click="excluir()" ng-show="editandoCadastro" class="btn  btn-link aw-btn-link-danger">Excluir este agendamento</a>
 				</div>
 			</div>

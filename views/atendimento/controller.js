@@ -118,8 +118,8 @@
 
 		//-- Carregar lista de Agendamento
 		AgendamentoService.GetAll().then(function(data){
-				$scope.agendamentos = data;
-			});
+			$scope.agendamentos = data;
+		});
 			//--
 
 		//-- Carregar lista de CID's
@@ -147,7 +147,7 @@
 
 		//-- Ao selecionar um cidadão
 		$scope.OnChangeCidadao = function(cidadao) {
-			AtendimentoService.GetAll().then(function(data){
+			AtendimentoService.GetByCidadao(cidadao.i_cidadao).then(function(data){
 				$scope.atendimentos = data;
 
 				for (var i = data.length - 1; i >= 0; i--) {
@@ -339,6 +339,59 @@
 			}else{
 				$location.path('/fila');
 			}
+		}
+		//--
+
+		//-- Imprimir Atestado
+		$scope.imprimirAtestado = function() {
+			
+		}
+		//--
+
+		//-- Imprimir Receita
+		$scope.imprimirReceita = function() {
+			
+		}
+		//--
+
+		//-- Imprimir Exames
+		$scope.imprimirExames = function() {
+			
+		}
+		//--
+
+		//-- Calcular IMC
+		$scope.calcularIMC = function() {
+			var altura = $scope.form.altura;
+			var peso = $scope.form.peso;
+			var imc = peso / (altura * altura);
+
+			$scope.form.imc = imc;
+
+			$scope.descricaoIMC = $scope.getDescricaoIMC(imc);
+		}
+		//--
+
+		//-- Retornar descrição IMC
+		$scope.getDescricaoIMC = function(imc) {
+			var descricaoIMC = '';
+
+			switch(true){
+				case imc < 18.5:
+					descricaoIMC = 'Baixo peso';
+					break;
+				case imc >= 18.5 && imc < 25:
+					descricaoIMC = 'Peso adequado';
+					break;
+				case imc >= 25 && imc < 30:
+					descricaoIMC = 'Sobrepeso';
+					break;
+				case imc >= 30:
+					descricaoIMC = 'Obesidade';
+					break;
+			}
+
+			return descricaoIMC;
 		}
 		//--
 	}

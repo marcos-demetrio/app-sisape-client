@@ -39,14 +39,14 @@
 
 							<div class="row">
 								<div class="col-md-6">
-									<p ng-bind="'Altura: ' + item.altura"></p>
-									<p ng-bind="'IMC: ' + item.imc"></p>
-									<p ng-bind="'Freq. Card.: ' + item.frequenciaCardiaca"></p>
-									<p ng-bind="'Freq. Resp.: ' + item.frequenciaRespiratoria"></p>
-									<p ng-bind="'Peso: ' + item.peso"></p>
-									<p ng-bind="'Temperatura: ' + item.temperatura"></p>
-									<p ng-bind="'Pressão Máxima: ' + item.pressaoMaxima"></p>
-									<p ng-bind="'Pressão Mínima: ' + item.pressaoMinima"></p>
+									<p ng-bind="'Altura (m): ' + item.altura"></p>
+									<p ng-bind="'Peso (kg): ' + item.peso"></p>
+									<p ng-bind="'IMC: ' + (item.imc | number: 2) + ' - ' + getDescricaoIMC(item.imc)"></p>
+									<p ng-bind="'Freq. Card. (bpm): ' + item.frequenciaCardiaca"></p>
+									<p ng-bind="'Freq. Resp. (mpm): ' + item.frequenciaRespiratoria"></p>
+									<p ng-bind="'Temperatura (ºC): ' + item.temperatura"></p>
+									<p ng-bind="'Pressão Máxima (mmHg): ' + item.pressaoMaxima"></p>
+									<p ng-bind="'Pressão Mínima (mmHg): ' + item.pressaoMinima"></p>
 								</div>
 
 								<div class="col-md-6">
