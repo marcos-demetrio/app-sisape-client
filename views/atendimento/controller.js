@@ -557,32 +557,23 @@
 					
 				case "UBS":
 					$scope.itens = [];
-					AtendimentoService.AtendimentoRelatorioPesquisarPorUbs($scope.unidadeBasicaSaude.i_unidade_basica_saude).then(function(data){
-						$scope.itens = data;
-
-						$scope.listaVazia = $scope.itens.length === 0;
+					AtendimentoService.PrintAtendimentoRelatorioPesquisarPorUbs($scope.unidadeBasicaSaude.i_unidade_basica_saude).then(function(data){
+						$location.path('/relatorio/atendimento');
 					});
-					
 					break;
 					
 				case "PROFISSIONAL":
 					$scope.itens = [];
-					AtendimentoService.AtendimentoRelatorioPesquisarPorProfissional($scope.profissional.i_profissional).then(function(data){
-						$scope.itens = data;
-
-						$scope.listaVazia = $scope.itens.length === 0;
+					AtendimentoService.PrintAtendimentoRelatorioPesquisarPorProfissional($scope.profissional.i_profissional).then(function(data){
+						$location.path('/relatorio/atendimento');
 					});
-
 					break;
 
 				case "CIDADAO":
 					$scope.itens = [];
-					AtendimentoService.AtendimentoRelatorioPesquisarPorCidadao($scope.cidadao.i_cidadao).then(function(data){
-						$scope.itens = data;
-
-						$scope.listaVazia = $scope.itens.length === 0;
+					AtendimentoService.PrintAtendimentoRelatorioPesquisarPorCidadao($scope.cidadao.i_cidadao).then(function(data){
+						$location.path('/relatorio/atendimento');
 					});
-					
 					break;
 					
 				case "DATA_ATENDIMENTO":
@@ -596,12 +587,9 @@
 					};
 
 					$scope.itens = [];
-					AtendimentoService.AtendimentoRelatorioPesquisarPorDataAtendimento(config).then(function(data){
-						$scope.itens = data;
-
-						$scope.listaVazia = $scope.itens.length === 0;
+					AtendimentoService.PrintAtendimentoRelatorioPesquisarPorDataAtendimento(config).then(function(data){
+						$location.path('/relatorio/atendimento');
 					});
-					
 					break;
 			}
 		}
