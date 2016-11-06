@@ -271,24 +271,6 @@
 							<p ng-show="cidadaoForm.telefoneContato.$invalid && !cidadaoForm.telefoneContato.$pristine" class="help-block">Campo inválido.</p>
 						</div>
 					</div>
-
-					<!-- Email Input -->
-					<div class="form-group" ng-class="{ 'has-error' : cidadaoForm.email.$invalid && !cidadaoForm.email.$pristine }">
-						<label class="col-sm-2 control-label" for="email">E-mail</label>
-						<div class="col-sm-7">
-							<input ng-model="form.email" id="email" name="email" type="mail" class="form-control" maxlength="100">
-							<p ng-show="cidadaoForm.email.$invalid && !cidadaoForm.email.$pristine" class="help-block">Campo inválido.</p>
-						</div>
-					</div>
-
-					<!-- Senha Input -->
-					<div class="form-group" ng-class="{ 'has-error' : cidadaoForm.email.$invalid && !cidadaoForm.email.$pristine }">
-						<label class="col-sm-2 control-label" for="email">Senha de acesso</label>
-						<div class="col-sm-7">
-							<input ng-model="form.email" id="email" name="senha" type="password" class="form-control" maxlength="100">
-							<p ng-show="cidadaoForm.email.$invalid && !cidadaoForm.email.$pristine" class="help-block">Campo inválido.</p>
-						</div>
-					</div>
 				</div>
 			</div>
 
@@ -339,11 +321,32 @@
 								</div>
 							</div>
 
-							<!-- Número do prontuário Input -->
-							<div class="form-group">
-								<label class="col-sm-4 control-label" for="numeroProntuario">Número do prontuário</label>
+							<hr>
+
+							<!-- Email Input -->
+							<div class="form-group" ng-class="{ 'has-error' : cidadaoForm.email.$invalid && !cidadaoForm.email.$pristine }">
+								<label class="col-sm-4 control-label" for="email">E-mail</label>
 								<div class="col-sm-7">
-									<input ng-model="form.numeroProntuario" id="numeroProntuario" name="numeroProntuario" type="number" min="0" class="form-control">
+									<input ng-model="form.email" id="email" name="email" type="mail" class="form-control" maxlength="100">
+									<p ng-show="cidadaoForm.email.$invalid && !cidadaoForm.email.$pristine" class="help-block">Campo inválido.</p>
+								</div>
+							</div>
+
+							<!-- Senha Input -->
+							<div class="form-group" ng-class="{ 'has-error' : cidadaoForm.senha.$invalid && !cidadaoForm.senha.$pristine }" ng-show="editandoCadastro">
+								<label class="col-sm-4 control-label" for="senha">Senha antiga</label>
+								<div class="col-sm-7">
+									<input ng-model="form.senha" id="senha" name="senha" type="password" class="form-control" maxlength="32">
+									<p ng-show="cidadaoForm.senha.$invalid && !cidadaoForm.senha.$pristine" class="help-block">Campo inválido.</p>
+								</div>
+							</div>
+
+							<!-- Senha Input -->
+							<div class="form-group" ng-class="{ 'has-error' : cidadaoForm.novaSenha.$invalid && !cidadaoForm.novaSenha.$pristine }">
+								<label class="col-sm-4 control-label" for="novaSenha">Nova senha</label>
+								<div class="col-sm-7">
+									<input ng-model="novaSenha" id="novaSenha" name="novaSenha" type="password" class="form-control" maxlength="32">
+									<p ng-show="cidadaoForm.novaSenha.$invalid && !cidadaoForm.novaSenha.$pristine" class="help-block">Campo inválido.</p>
 								</div>
 							</div>
 
@@ -383,6 +386,14 @@
 								</div>
 							</div>
 
+							<!-- Número do prontuário Input -->
+							<div class="form-group">
+								<label class="col-sm-4 control-label" for="numeroProntuario">Número do prontuário</label>
+								<div class="col-sm-7">
+									<input ng-model="form.numeroProntuario" id="numeroProntuario" name="numeroProntuario" type="number" min="0" class="form-control">
+								</div>
+							</div>
+
 						</div>
 					</div>
 				</div>
@@ -394,8 +405,8 @@
 				<div style="margin-left: 15px;"><!--<div class="pull-right">-->
 					<button class="btn  btn-primary" type="submit" ng-disabled="cidadaoForm.$invalid">Salvar</button>
 					<a ng-click="cancelar(cidadaoForm.$dirty)" class="btn  btn-default">Cancelar</a>
-					<a ng-click="excluir()" ng-show="editandoCadastro" class="btn  btn-link aw-btn-link-danger" ng-show="userLoggedIn.tipoUsuario == 'C'">Excluir meu cadastro</a>
-					<a ng-click="excluir()" ng-show="editandoCadastro" class="btn  btn-link aw-btn-link-danger" ng-hide="userLoggedIn.tipoUsuario == 'C'">Excluir este cidadão</a>
+					<a ng-click="excluir()" class="btn  btn-link aw-btn-link-danger" ng-show="userLoggedIn.tipoUsuario == 'C' || editandoCadastro">Excluir meu cadastro</a>
+					<a ng-click="excluir()" class="btn  btn-link aw-btn-link-danger" ng-show="userLoggedIn.tipoUsuario != 'C' && editandoCadastro">Excluir este cidadão</a>
 				</div>
 			</div>
 		</form>

@@ -64,31 +64,47 @@
 				date.setDate(parseInt(dateArray[2]));
 
 				$scope.form.dataNascimento = date;
+
+				$scope.form.senha = '';
 			});
 		}
 		//--
 
-		var controleUrlRedirecionamento;
+		var controleUrlRedirecionamento = '/login';
 
-		switch ($rootScope.userLoggedIn.tipoUsuario) {
-			case "C":
-				controleUrlRedirecionamento = '/inicio';
-				break;
-			default:
-				controleUrlRedirecionamento = '/cidadao';
-				break;
+		if($rootScope.userLoggedIn){
+			switch ($rootScope.userLoggedIn.tipoUsuario) {
+				case "C":
+					controleUrlRedirecionamento = '/inicio';
+					break;
+				default:
+					controleUrlRedirecionamento = '/cidadao';
+					break;
+			}
 		}
 
 		//-- Gravar os dados do cadastro no banco de dados
 		$scope.update = function(){
-			if(cidadaoID > 0){
-				CidadaoService.Update($scope.form, cidadaoID).then(function(data){
-					$location.path(controleUrlRedirecionamento);
-				})
+			var senhaDigitada = $scope.form.senha;
+			var senhaNova = $scope.novaSenha || senhaDigitada;
+
+			if(md5(senhaDigitada) != $rootScope.userLoggedIn.password){
+				sweetAlert("Oops...", "A senha está incorreta!", "error");
 			}else{
-				CidadaoService.Create($scope.form).then(function(data){
-					$location.path(controleUrlRedirecionamento);
-				});
+				senhaNova = md5(senhaNova);
+
+				$scope.form.senha = senhaNova;
+				$rootScope.userLoggedIn.password = senhaNova;
+				
+				if(cidadaoID > 0){
+					CidadaoService.Update($scope.form, cidadaoID).then(function(data){
+						$location.path(controleUrlRedirecionamento);
+					})
+				}else{
+					CidadaoService.Create($scope.form).then(function(data){
+						$location.path(controleUrlRedirecionamento);
+					});
+				}				
 			}
 		}
 		//--
