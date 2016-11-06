@@ -297,8 +297,6 @@
 				$scope.totalItens = $scope.itens.length;
 
 				$scope.listaVazia = $scope.itens.length === 0;
-
-				$filter('orderBy')($scope.itens, ['dataAgendamento', 'horaAgendamento'], false);
 			});
 		}
 

@@ -44,7 +44,7 @@
 					id:  usuario.id,
 					email: email,
 					password: password,
-					tipoUsuario: tipoUsuario,//tipoUsuario: usuario.tipoUsuario,
+					tipoUsuario: 'S', //tipoUsuario,//tipoUsuario: usuario.tipoUsuario,
 					nomeUsuario: usuario.nome
 				}
 			};

@@ -88,14 +88,23 @@
 			var senhaDigitada = $scope.form.senha;
 			var senhaNova = $scope.novaSenha || senhaDigitada;
 
-			if(md5(senhaDigitada) != $rootScope.userLoggedIn.password){
-				sweetAlert("Oops...", "A senha está incorreta!", "error");
-			}else{
+			var fazUpdate = true;
+
+			if($rootScope.userLoggedIn){
+				if(md5(senhaDigitada) != $rootScope.userLoggedIn.password){
+					sweetAlert("Oops...", "A senha está incorreta!", "error");
+					fazUpdate = false;
+				}
+			}
+
+			if(fazUpdate){
 				senhaNova = md5(senhaNova);
 
+				if($rootScope.userLoggedIn && $rootScope.userLoggedIn.tipoUsuario == 'C'){
+					$rootScope.userLoggedIn.password = senhaNova;
+				}
 				$scope.form.senha = senhaNova;
-				$rootScope.userLoggedIn.password = senhaNova;
-				
+
 				if(cidadaoID > 0){
 					CidadaoService.Update($scope.form, cidadaoID).then(function(data){
 						$location.path(controleUrlRedirecionamento);

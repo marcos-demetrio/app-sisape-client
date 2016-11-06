@@ -20,12 +20,12 @@
 			A pesquisa não retornou nenhum agendamento na fila.
 		</div>
 
-		<div class="bs-callout bs-callout-info" id="callout-glyphicons-location" ng-repeat="item in itens">
+		<div class="bs-callout bs-callout-info" id="callout-glyphicons-location" ng-repeat="item in itens | orderBy: 'dataAgendamento'">
 			<div class="row">
 				<div class="col-md-11 col-sm-10">
 					<h4 ng-bind="item.cidadao.nomeCompleto"></h4>
 					<p ng-bind="'CPF: ' + (item.cidadao.cpf | cpf)"></p>
-					<p ng-bind="'Data: ' + (item.dataAgendamento | date:'dd/MM/yyyy') + ' ' + (item.horaAgendamento | date:'HH:mm')"></p>
+					<p ng-bind="'Data: ' + (item.dataAgendamento | date:'dd/MM/yyyy HH:mm')"></p>
 
 					<a class="btn btn-primary" href="#/atendimento/{{item.i_agendamento}}" ng-hide="userLoggedIn.tipoUsuario == 'C'">
 						<span class="">Atender</span>

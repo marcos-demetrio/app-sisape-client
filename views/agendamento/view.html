@@ -26,7 +26,7 @@
 			</div>
 
 			<!-- Profissional Select-->
-			<div class="form-group mdn-required" ng-class="{ 'has-error' : agendamentoForm.i_profissional.$invalid && !agendamentoForm.i_profissional.$pristine }">
+			<div class="form-group mdn-required" ng-class="{ 'has-error' : agendamentoForm.i_profissional.$invalid && !agendamentoForm.i_profissional.$pristine }" ng-hide="userLoggedIn.tipoUsuario == 'C'">
 				<label for="i_profissional" class="col-sm-2 control-label">Profissional</label>
 				<div class="col-sm-5">
 					<select class="form-control" id="i_profissional" ng-hide="form.atendido || editandoCadastro" name="i_profissional" ng-options="lotacao.profissional.nome for lotacao in profissionais track by lotacao.profissional.i_profissional" ng-model="form.profissionalLotacao" ng-disabled="editandoCadastro"></select>
