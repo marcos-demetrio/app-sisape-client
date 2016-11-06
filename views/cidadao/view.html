@@ -333,7 +333,7 @@
 							</div>
 
 							<!-- Senha Input -->
-							<div class="form-group" ng-class="{ 'has-error' : cidadaoForm.senha.$invalid && !cidadaoForm.senha.$pristine }" ng-show="editandoCadastro">
+							<div class="form-group" ng-class="{ 'has-error' : cidadaoForm.senha.$invalid && !cidadaoForm.senha.$pristine }" ng-show="userLoggedIn.tipoUsuario == 'C' && editandoCadastro">
 								<label class="col-sm-4 control-label" for="senha">Senha antiga</label>
 								<div class="col-sm-7">
 									<input ng-model="form.senha" id="senha" name="senha" type="password" class="form-control" maxlength="32">
@@ -405,7 +405,7 @@
 				<div style="margin-left: 15px;"><!--<div class="pull-right">-->
 					<button class="btn  btn-primary" type="submit" ng-disabled="cidadaoForm.$invalid">Salvar</button>
 					<a ng-click="cancelar(cidadaoForm.$dirty)" class="btn  btn-default">Cancelar</a>
-					<a ng-click="excluir()" class="btn  btn-link aw-btn-link-danger" ng-show="userLoggedIn.tipoUsuario == 'C' || editandoCadastro">Excluir meu cadastro</a>
+					<a ng-click="excluir()" class="btn  btn-link aw-btn-link-danger" ng-show="userLoggedIn.tipoUsuario == 'C' && editandoCadastro">Excluir meu cadastro</a>
 					<a ng-click="excluir()" class="btn  btn-link aw-btn-link-danger" ng-show="userLoggedIn.tipoUsuario != 'C' && editandoCadastro">Excluir este cidadão</a>
 				</div>
 			</div>

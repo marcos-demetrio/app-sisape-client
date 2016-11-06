@@ -64,7 +64,9 @@
 				date.setDate(parseInt(dateArray[2]));
 
 				$scope.form.dataNascimento = date;
+				$scope.form.dataNascimento = date;
 
+				$scope.senhaBkp = $scope.form.senha;
 				$scope.form.senha = '';
 			});
 		}
@@ -85,12 +87,21 @@
 
 		//-- Gravar os dados do cadastro no banco de dados
 		$scope.update = function(){
-			var senhaDigitada = $scope.form.senha;
+			
+			var senhaDigitada;
+			if($rootScope.userLoggedIn){
+				if($rootScope.userLoggedIn.tipoUsuario == 'C'){
+					senhaDigitada = $scope.form.senha;
+				}else{
+					senhaDigitada = $scope.senhaBkp;
+				}
+			}
+			
 			var senhaNova = $scope.novaSenha || senhaDigitada;
 
 			var fazUpdate = true;
 
-			if($rootScope.userLoggedIn){
+			if($rootScope.userLoggedIn && $rootScope.userLoggedIn.tipoUsuario == 'C'){
 				if(md5(senhaDigitada) != $rootScope.userLoggedIn.password){
 					sweetAlert("Oops...", "A senha está incorreta!", "error");
 					fazUpdate = false;
@@ -98,7 +109,13 @@
 			}
 
 			if(fazUpdate){
-				senhaNova = md5(senhaNova);
+				if($rootScope.userLoggedIn){
+					if($rootScope.userLoggedIn.tipoUsuario == 'C'){
+						senhaNova = md5(senhaNova);
+					}
+				}else{
+					senhaNova = md5(senhaNova);
+				}
 
 				if($rootScope.userLoggedIn && $rootScope.userLoggedIn.tipoUsuario == 'C'){
 					$rootScope.userLoggedIn.password = senhaNova;

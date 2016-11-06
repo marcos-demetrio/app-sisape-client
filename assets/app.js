@@ -63,7 +63,6 @@
 			$rootScope.listaMenuProcessos = [
 				{tipoUsuario: ['S', 'G', 'P', 'C'], url: '#/agendamento', descricao: 'Agendar atendimento'},
 				{tipoUsuario: ['S', 'G', 'P'], url: '#/fila', descricao: 'Fila de atendimentos'},
-				{tipoUsuario: ['S', 'G', 'P'], url: '#/atendimento', descricao: 'Atendimento'},
 				{tipoUsuario: ['S', 'G', 'P'], url: '#/prontuario', descricao: 'Acompanhamento'}
 			];
 
