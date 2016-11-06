@@ -27,7 +27,7 @@
 					<p ng-bind="'CPF: ' + (item.cidadao.cpf | cpf)"></p>
 					<p ng-bind="'Data: ' + (item.dataAgendamento | date:'dd/MM/yyyy') + ' ' + (item.horaAgendamento | date:'HH:mm')"></p>
 
-					<a class="btn btn-primary" href="#/atendimento/{{item.i_agendamento}}">
+					<a class="btn btn-primary" href="#/atendimento/{{item.i_agendamento}}" ng-hide="userLoggedIn.tipoUsuario == 'C'">
 						<span class="">Atender</span>
 					</a>
 				</div>

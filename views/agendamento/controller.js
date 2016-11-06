@@ -77,7 +77,6 @@
 		}
 		//--
 
-
 		//-- Obter horários
 		$scope.mudouCidadao = function() {
 			ubsID = $scope.form.cidadao.unidadeBasicaSaude.i_unidade_basica_saude;
@@ -174,7 +173,9 @@
 				descricao: ''
 			}
 
-			$scope.form.agendamentoSintoma.push(sintoma);
+			if(!$scope.editandoCadastro){
+				$scope.form.agendamentoSintoma.push(sintoma);
+			}
 		}
 		//--
 
@@ -206,13 +207,15 @@
 
 		//-- Excluir sintoma, não faz a confirmação
 		$scope.excluirSintoma = function(item, index) {
-			if(item.i_sequencial > 0){
-				$scope.sintomasExcluidos.push({
-					itemSintoma: item
-				});
-			}
+			if(!$scope.editandoCadastro){
+				if(item.i_sequencial > 0){
+					$scope.sintomasExcluidos.push({
+						itemSintoma: item
+					});
+				}
 
-			$scope.form.agendamentoSintoma.splice(index, 1);
+				$scope.form.agendamentoSintoma.splice(index, 1);
+			}
 		}
 		//--
 
