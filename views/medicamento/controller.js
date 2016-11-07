@@ -6,14 +6,20 @@
 		.controller('MedicamentoController', MedicamentoController)
 		.controller('MedicamentoListagemController', MedicamentoListagemController);
 
-	MedicamentoController.$inject = ['$scope', '$location', '$route', '$routeParams', 'MedicamentoService'];
+	MedicamentoController.$inject = ['$scope', '$location', '$route', '$routeParams', 'MedicamentoService', 'UbsService'];
 
-	function MedicamentoController($scope, $location, $route, $routeParams, MedicamentoService) {
+	function MedicamentoController($scope, $location, $route, $routeParams, MedicamentoService, UbsService) {
 		
 		//-- Pegar a variável 'id' vinda da url, se for maior que zero esta editando, senão está inserindo
 		var medicamentoID = ($routeParams.id) ? parseInt($routeParams.id) : 0;
 
 		$scope.editandoCadastro = (medicamentoID > 0);
+		//--
+
+		//-- Carregar lista de UBS
+		UbsService.GetAll().then(function(data){
+			$scope.unidades = data;
+		});
 		//--
 
 		//-- Caso esteja editando, obtem os dados do cadastro

@@ -45,13 +45,19 @@
 		};
 
 		$rootScope.ajustarMenuUsuario = function (id, tipoUsuario) {
-			var url;
+			var url = '';
 
 			switch (tipoUsuario) {
 				case "C":
 					url = '#/cidadao/';
 					break;
 				case "P":
+					url = '#/profissional/';
+					break;
+				case "S":
+					url = '#/profissional/';
+					break;
+				case "G":
 					url = '#/profissional/';
 					break;
 			}

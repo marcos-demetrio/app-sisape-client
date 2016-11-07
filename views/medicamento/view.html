@@ -27,6 +27,16 @@
 				</div>
 			</div>
 
+			<!-- UBS Select-->
+			<div class="form-group mdn-required" ng-class="{ 'has-error' : medicamentoForm.i_unidade_basica_saude.$invalid && !medicamentoForm.i_unidade_basica_saude.$pristine }">
+				<label for="i_unidade_basica_saude" class="col-sm-2 control-label">UBS</label>
+				<div class="col-sm-6">
+					<select class="form-control" id="i_unidade_basica_saude" name="i_unidade_basica_saude" required ng-options="unidade.nome for unidade in unidades track by unidade.i_unidade_basica_saude" ng-model="form.unidadeBasicaSaude" ></select>
+
+					<p ng-show="medicamentoForm.i_unidade_basica_saude.$error.required && !medicamentoForm.i_unidade_basica_saude.$pristine" class="help-block">Selecione uma UBS.</p>
+				</div>
+			</div>
+
 			<hr>
 
 			<div class="form-group">
