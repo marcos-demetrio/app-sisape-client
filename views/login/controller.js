@@ -10,8 +10,6 @@
 	function LoginController($scope, $location, $rootScope, $window, AuthenticationService) {
 		$scope.login = login;
 
-		$scope.email = 'demetrius.marcos@gmail.com';
-
 		(function initController() {
 			AuthenticationService.ClearCredentials();
 		})();
