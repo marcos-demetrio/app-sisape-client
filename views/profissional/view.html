@@ -133,8 +133,26 @@
 						</div>
 					</div>
 
+					<!-- Senha Input -->
+					<div class="form-group" ng-class="{ 'has-error' : profissionalForm.senha.$invalid && !profissionalForm.senha.$pristine }" ng-show="userLoggedIn.tipoUsuario == 'P' && editandoCadastro">
+						<label class="col-sm-2 control-label" for="senha">Senha antiga</label>
+						<div class="col-sm-4">
+							<input ng-model="form.senha" id="senha" name="senha" type="password" class="form-control" maxlength="32">
+							<p ng-show="profissionalForm.senha.$invalid && !profissionalForm.senha.$pristine" class="help-block">Campo inválido.</p>
+						</div>
+					</div>
+
+					<!-- Senha Input -->
+					<div class="form-group" ng-class="{ 'has-error' : profissionalForm.novaSenha.$invalid && !profissionalForm.novaSenha.$pristine }">
+						<label class="col-sm-2 control-label" for="novaSenha">Nova senha</label>
+						<div class="col-sm-4">
+							<input ng-model="novaSenha" id="novaSenha" name="novaSenha" type="password" class="form-control" maxlength="32">
+							<p ng-show="profissionalForm.novaSenha.$invalid && !profissionalForm.novaSenha.$pristine" class="help-block">Campo inválido.</p>
+						</div>
+					</div>
+
 					<!-- Tipo Input -->
-					<div class="form-group sisape-required" ng-class="{ 'has-error' : profissionalForm.tipoUsuario.$invalid && !profissionalForm.tipoUsuario.$pristine }">
+					<div class="form-group sisape-required" ng-class="{ 'has-error' : profissionalForm.tipoUsuario.$invalid && !profissionalForm.tipoUsuario.$pristine }" ng-hide="userLoggedIn.tipoUsuario == 'P' || userLoggedIn.tipoUsuario == 'G'">
 						<label for="tipoUsuario" class="col-sm-2 control-label">Tipo de usuário</label>
 						<div class="col-sm-2">
 							<select class="form-control" id="tipoUsuario" name="tipoUsuario" required ng-model="form.tipoUsuario">
@@ -145,6 +163,7 @@
 							<p ng-show="profissionalForm.tipoUsuario.$error.required && !profissionalForm.tipoUsuario.$pristine" class="help-block">Campo obrigatório.</p>
 						</div>
 					</div>
+
 				</div>
 			</div>
 
@@ -239,7 +258,7 @@
 				<div style="margin-left: 15px;"><!--<div class="pull-right">-->
 					<button class="btn  btn-primary" type="submit" ng-disabled="profissionalForm.$invalid">Salvar</button>
 					<a ng-click="cancelar(profissionalForm.$dirty)" class="btn  btn-default">Cancelar</a>
-					<a ng-click="excluir()" ng-show="editandoCadastro" class="btn  btn-link aw-btn-link-danger">Excluir este profissional</a>
+					<a ng-click="excluir()" ng-show="editandoCadastro" ng-hide="userLoggedIn.tipoUsuario == 'P' || userLoggedIn.id == form.i_profissional" class="btn  btn-link aw-btn-link-danger">Excluir este profissional</a>
 				</div>
 			</div>
 		</form>

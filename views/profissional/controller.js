@@ -84,6 +84,11 @@
 
 		//-- Gravar os dados do cadastro no banco de dados
 		$scope.update = function(){
+
+			if($rootScope.userLoggedIn.tipoUsuario == 'G'){
+				$scope.form.tipoUsuario = 'P';
+			}
+
 			if(profissionalID > 0){
 				ProfissionalService.Update($scope.form, profissionalID).then(function(data){
 					$location.path(controleUrlRedirecionamento);
