@@ -283,17 +283,17 @@
 		$scope.atualizarAgendamentosTodos = function(){
 			AgendamentoService.GetAll().then(function(data){
 				$scope.itens = data;
+				
 				$scope.totalItens = $scope.itens.length;
 
 				$scope.listaVazia = $scope.itens.length === 0;
-
-				$filter('orderBy')($scope.itens, ['dataAgendamento', 'horaAgendamento'], false);
 			});
 		}
 
 		$scope.atualizarAgendamentosCidadao = function(id){
 			AgendamentoService.GetByCidadao(id).then(function(data){
 				$scope.itens = data;
+
 				$scope.totalItens = $scope.itens.length;
 
 				$scope.listaVazia = $scope.itens.length === 0;

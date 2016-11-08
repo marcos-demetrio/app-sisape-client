@@ -8,9 +8,9 @@
 		.controller('AtendimentoRelatorioController', AtendimentoRelatorioController)
 		.controller('AdoecimentoRelatorioController', AdoecimentoRelatorioController);
 
-	AtendimentoController.$inject = ['$scope', '$location', '$route', '$routeParams', 'AtendimentoService', 'AgendamentoService', 'CidService', 'ExameService', 'MedicamentoService'];
+	AtendimentoController.$inject = ['$scope', '$location', '$route', '$routeParams', 'AtendimentoService', 'ProfissionalLotacaoService', 'AgendamentoService', 'CidService', 'ExameService', 'MedicamentoService'];
 
-	function AtendimentoController($scope, $location, $route, $routeParams, AtendimentoService, AgendamentoService, CidService, ExameService, MedicamentoService) {
+	function AtendimentoController($scope, $location, $route, $routeParams, AtendimentoService, ProfissionalLotacaoService, AgendamentoService, CidService, ExameService, MedicamentoService) {
 		//-- Controle Tabs
 			$scope.tab = 1;
 		$scope.setTab = function(newTab){
@@ -86,11 +86,21 @@
 			AgendamentoService.GetById(agendamentoID).then(function(data){
 				$scope.form.agendamento = data;
 
+				if($scope.form.agendamento.profissionalLotacao){
+					$scope.form.profissionalLotacao = $scope.form.agendamento.profissionalLotacao;
+				}
+
 				$scope.OnChangeCidadao($scope.form.agendamento.cidadao);
 
 				$scope.mudouAgendamento();
 			});
 		}
+		//--
+
+		//-- Carregar lista de Profissionais
+		ProfissionalLotacaoService.GetAll().then(function(data){
+			$scope.profissionais = data;
+		});
 		//--
 
 		//-- Caso esteja editando, obtem os dados do cadastro
