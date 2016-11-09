@@ -85,18 +85,41 @@
 		//-- Gravar os dados do cadastro no banco de dados
 		$scope.update = function(){
 
-			if($rootScope.userLoggedIn.tipoUsuario == 'G'){
-				$scope.form.tipoUsuario = 'P';
+			var fazUpdate = true;
+			var senhaAntiga = '';
+			var senhaNova = '';
+
+			senhaAntiga	= ($scope.form.senha || '');
+			senhaNova	= ($scope.novaSenha || '');
+
+			if($rootScope.userLoggedIn && $rootScope.userLoggedIn.tipoUsuario == 'P'){
+				if(md5(senhaAntiga) != $rootScope.userLoggedIn.password){
+					sweetAlert("Oops...", "A senha está incorreta!", "error");
+					fazUpdate = false;
+				}
 			}
 
-			if(profissionalID > 0){
-				ProfissionalService.Update($scope.form, profissionalID).then(function(data){
-					$location.path(controleUrlRedirecionamento);
-				})
-			}else{
-				ProfissionalService.Create($scope.form).then(function(data){
-					$location.path(controleUrlRedirecionamento);
-				});
+			var senhaGravar = (senhaNova || senhaAntiga);
+
+			senhaGravar = md5(senhaGravar);
+
+			if(fazUpdate){
+				$rootScope.userLoggedIn.password = senhaGravar;
+				$scope.form.senha = senhaGravar;
+
+				if($rootScope.userLoggedIn.tipoUsuario == 'G'){
+					$scope.form.tipoUsuario = 'P';
+				}
+
+				if(profissionalID > 0){
+					ProfissionalService.Update($scope.form, profissionalID).then(function(data){
+						$location.path(controleUrlRedirecionamento);
+					})
+				}else{
+					ProfissionalService.Create($scope.form).then(function(data){
+						$location.path(controleUrlRedirecionamento);
+					});
+				}
 			}
 		}
 		//--
@@ -188,14 +211,23 @@
 		//--
 	}
 
-	ProfissionalListagemController.$inject = ['$scope', '$location', '$window', 'ProfissionalService'];
+	ProfissionalListagemController.$inject = ['$scope', '$rootScope', '$location', '$window', 'ProfissionalService'];
 
-	function ProfissionalListagemController($scope, $location, $window, ProfissionalService) {
+	function ProfissionalListagemController($scope, $rootScope, $location, $window, ProfissionalService) {
 		$scope.listaVazia = true;
 		$scope.itens = [];
 
 		ProfissionalService.GetAll().then(function(data){
+			if($rootScope.userLoggedIn.tipoUsuario == 'G'){
+				for (var i = data.length - 1; i >= 0; i--) {
+					if(data[i].tipoUsuario == 'S'){
+						data.splice(i, 1);
+					}
+				};
+			}
+
 			$scope.itens = data;
+
 			$scope.totalItens = $scope.itens.length;
 
 			$scope.listaVazia = $scope.itens.length === 0;
@@ -213,6 +245,14 @@
 
 			$scope.itens = [];
 			ProfissionalService.PesquisarPorNome(config).then(function(data){
+				if($rootScope.userLoggedIn.tipoUsuario == 'G'){
+					for (var i = data.length - 1; i >= 0; i--) {
+						if(data[i].tipoUsuario == 'S'){
+							data.splice(i, 1);
+						}
+					};
+				}
+
 				$scope.itens = data;
 
 				$scope.listaVazia = $scope.itens.length === 0;

@@ -258,7 +258,7 @@
 				<div style="margin-left: 15px;"><!--<div class="pull-right">-->
 					<button class="btn  btn-primary" type="submit" ng-disabled="profissionalForm.$invalid">Salvar</button>
 					<a ng-click="cancelar(profissionalForm.$dirty)" class="btn  btn-default">Cancelar</a>
-					<a ng-click="excluir()" ng-show="editandoCadastro" ng-hide="userLoggedIn.tipoUsuario == 'P' || userLoggedIn.id == form.i_profissional" class="btn  btn-link aw-btn-link-danger">Excluir este profissional</a>
+					<a ng-click="excluir()" ng-hide="!editandoCadastro || userLoggedIn.tipoUsuario == 'P' || userLoggedIn.id == form.i_profissional" class="btn  btn-link aw-btn-link-danger">Excluir este profissional</a>
 				</div>
 			</div>
 		</form>

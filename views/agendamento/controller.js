@@ -162,6 +162,14 @@
 
 		//-- Carregar lista de Profissionais
 		ProfissionalLotacaoService.GetAll().then(function(data){
+			if($rootScope.userLoggedIn.tipoUsuario == 'G'){
+				for (var i = data.length - 1; i >= 0; i--) {
+					if(data[i].profissional.tipoUsuario == 'S'){
+						data.splice(i, 1);
+					}
+				};
+			}
+			
 			$scope.profissionais = data;
 		});
 		//--

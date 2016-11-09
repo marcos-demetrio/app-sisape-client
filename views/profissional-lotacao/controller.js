@@ -6,9 +6,9 @@
 		.controller('ProfissionalLotacaoController', ProfissionalLotacaoController)
 		.controller('ProfissionalLotacaoListagemController', ProfissionalLotacaoListagemController);
 
-	ProfissionalLotacaoController.$inject = ['$scope', '$location', '$route', '$routeParams', 'ProfissionalLotacaoService', 'UbsService', 'ProfissionalService', 'CboService'];
+	ProfissionalLotacaoController.$inject = ['$scope', '$rootScope', '$location', '$route', '$routeParams', 'ProfissionalLotacaoService', 'UbsService', 'ProfissionalService', 'CboService'];
 
-	function ProfissionalLotacaoController($scope, $location, $route, $routeParams, ProfissionalLotacaoService, UbsService, ProfissionalService, CboService) {
+	function ProfissionalLotacaoController($scope, $rootScope, $location, $route, $routeParams, ProfissionalLotacaoService, UbsService, ProfissionalService, CboService) {
 
 		//-- Pegar a variável 'id' vinda da url, se for maior que zero esta editando, senão está inserindo
 		var lotacaoID = ($routeParams.id) ? parseInt($routeParams.id) : 0;
@@ -24,6 +24,14 @@
 		
 		//-- Carregar lista de Profissionais
 		ProfissionalService.GetAll().then(function(data){
+			if($rootScope.userLoggedIn.tipoUsuario == 'G'){
+				for (var i = data.length - 1; i >= 0; i--) {
+					if(data[i].tipoUsuario == 'S'){
+						data.splice(i, 1);
+					}
+				};
+			}
+
 			$scope.profissionais = data;
 		});
 		//--
@@ -107,13 +115,21 @@
 		//--
 	}
 
-	ProfissionalLotacaoListagemController.$inject = ['$scope', '$location', '$window', 'ProfissionalLotacaoService'];
+	ProfissionalLotacaoListagemController.$inject = ['$scope', '$rootScope', '$location', '$window', 'ProfissionalLotacaoService'];
 
-	function ProfissionalLotacaoListagemController($scope, $location, $window, ProfissionalLotacaoService) {
+	function ProfissionalLotacaoListagemController($scope, $rootScope, $location, $window, ProfissionalLotacaoService) {
 		$scope.listaVazia = true;
 		$scope.itens = [];
 
 		ProfissionalLotacaoService.GetAll().then(function(data){
+			if($rootScope.userLoggedIn.tipoUsuario == 'G'){
+				for (var i = data.length - 1; i >= 0; i--) {
+					if(data[i].profissional.tipoUsuario == 'S'){
+						data.splice(i, 1);
+					}
+				};
+			}
+
 			$scope.itens = data;
 			$scope.totalItens = $scope.itens.length;
 

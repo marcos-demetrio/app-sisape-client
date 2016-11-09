@@ -425,9 +425,9 @@
 		$scope.atualizarAtendimentos();
 		}
 
-	AtendimentoRelatorioController.$inject = ['$scope','$location', '$window', 'AtendimentoService', 'UbsService', 'ProfissionalService', 'CidadaoService'];
+	AtendimentoRelatorioController.$inject = ['$scope', '$rootScope','$location', '$window', 'AtendimentoService', 'UbsService', 'ProfissionalService', 'CidadaoService'];
 
-	function AtendimentoRelatorioController($scope, $location, $window, AtendimentoService, UbsService, ProfissionalService, CidadaoService) {
+	function AtendimentoRelatorioController($scope, $rootScope, $location, $window, AtendimentoService, UbsService, ProfissionalService, CidadaoService) {
 		$scope.listaVazia = true;
 		$scope.itens = [];
 		
@@ -441,6 +441,14 @@
 		
 		//-- Carregar lista de Profissional
 		ProfissionalService.GetAll().then(function(data){
+			if($rootScope.userLoggedIn.tipoUsuario == 'G'){
+				for (var i = data.length - 1; i >= 0; i--) {
+					if(data[i].tipoUsuario == 'S'){
+						data.splice(i, 1);
+					}
+				};
+			}
+
 			$scope.profissionais = data;
 		});
 		//--

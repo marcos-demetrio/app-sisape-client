@@ -35,7 +35,7 @@
 					<div class="form-group mdn-required" ng-class="{ 'has-error' : atendimentoForm.i_profissional.$invalid && !atendimentoForm.i_profissional.$pristine }" ng-hide="userLoggedIn.tipoUsuario == 'C'">
 						<label for="i_profissional" class="col-sm-2 control-label">Profissional</label>
 						<div class="col-sm-5">
-							<select class="form-control" id="i_profissional" ng-hide="form.atendido || editandoCadastro" name="i_profissional" ng-options="lotacao.profissional.nome for lotacao in profissionais track by lotacao.profissional.i_profissional" ng-model="form.profissionalLotacao"></select>
+							<select class="form-control" id="i_profissional" ng-hide="form.atendido || editandoCadastro" name="i_profissional" ng-options="lotacao.profissional.nome + ' - ' + lotacao.cbo.nome for lotacao in profissionais track by lotacao.profissional.i_profissional" ng-model="form.profissionalLotacao"></select>
 
 							<p ng-show="atendimentoForm.i_profissional.$error.required && !atendimentoForm.i_profissional.$pristine" class="help-block">Selecione um profissional.</p>
 						</div>

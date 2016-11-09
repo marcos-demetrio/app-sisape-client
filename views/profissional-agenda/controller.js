@@ -5,9 +5,9 @@
 		.module('app')
 		.controller('ProfissionalAgendaController', ProfissionalAgendaController);
 
-	ProfissionalAgendaController.$inject = ['$scope', '$location', '$route', '$routeParams', '$timeout', 'ProfissionalAgendaService', 'ProfissionalLotacaoService', 'UbsService', 'ProfissionalService', 'CboService'];
+	ProfissionalAgendaController.$inject = ['$scope', '$rootScope', '$location', '$route', '$routeParams', '$timeout', 'ProfissionalAgendaService', 'ProfissionalLotacaoService', 'UbsService', 'ProfissionalService', 'CboService'];
 
-	function ProfissionalAgendaController($scope, $location, $route, $routeParams, $timeout, ProfissionalAgendaService, ProfissionalLotacaoService, UbsService, ProfissionalService, CboService) {
+	function ProfissionalAgendaController($scope, $rootScope, $location, $route, $routeParams, $timeout, ProfissionalAgendaService, ProfissionalLotacaoService, UbsService, ProfissionalService, CboService) {
 		//-- Controle Panels
 		$scope.panel = [
 			{collapsed: false},
@@ -29,6 +29,13 @@
 
 		//-- Carregar lista de Lotação
 		ProfissionalLotacaoService.GetAll().then(function(data){
+			if($rootScope.userLoggedIn.tipoUsuario == 'G'){
+				for (var i = data.length - 1; i >= 0; i--) {
+					if(data[i].profissional.tipoUsuario == 'S'){
+						data.splice(i, 1);
+					}
+				};
+			}
 			$scope.lotacoes = data;
 		});
 		//--
