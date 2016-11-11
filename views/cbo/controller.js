@@ -105,8 +105,7 @@
 		//-- Pesquisa
 		$scope.Pesquisar = function (){
 			var parameters = {
-				nome : $scope.nomeCbo,
-				codigoCbo : $scope.codigoCbo
+				nome : $scope.nomeCbo
 			};
 
 			var config = {

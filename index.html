@@ -24,7 +24,7 @@
 				<nav class="navbar  navbar-fixed-top  navbar-default  js-sticky-reference" id="main-navbar" ng-hide="urlLogin">
 					<div class="container-fluid" >
 
-						<div class="navbar-header">
+						<div class="navbar-header" ng-hide="!userLoggedIn">
 							<a class="navbar-brand  hidden-xs" href="#/inicio">
 								<img alt="AlgaWorks" src="assets/images/logo.png"/>
 							</a>
@@ -54,7 +54,7 @@
 								</ul>
 							</li>-->
 							
-							<li class="dropdown">
+							<li class="dropdown" ng-hide="!userLoggedIn">
 								<a href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 									<i class="fa  fa-user"></i>
 								</a>
@@ -80,7 +80,7 @@
 					</div>
 				</nav>
 
-				<aside class="aw-layout-sidebar  js-sidebar" ng-hide="urlLogin">
+				<aside class="aw-layout-sidebar  js-sidebar" ng-hide="urlLogin || !userLoggedIn">
 
 					<div class="aw-layout-sidebar__content">
 						<form role="search" style="margin: 10px;">

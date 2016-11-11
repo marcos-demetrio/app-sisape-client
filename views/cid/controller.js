@@ -105,8 +105,7 @@
 		//-- Pesquisa
 		$scope.Pesquisar = function (){
 			var parameters = {
-				descricao : $scope.descricao,
-				codigoCid : $scope.codigoCid
+				descricao : $scope.descricao
 			};
 
 			var config = {
@@ -124,7 +123,7 @@
 
 		//-- Limpar
 		$scope.Limpar = function (){
-			$scope.keyword = '';
+			$scope.descricao = '';
 			$window.document.getElementById('input-nome').focus();
 		}
 		//--
