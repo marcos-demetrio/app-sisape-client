@@ -15,7 +15,7 @@
 
 		return service;
 
-		function Login(email, password, tipoUsuario, callback) {
+		function Login(email, password, callback) {
 			$timeout(function () {
 				var response;
 
@@ -28,7 +28,7 @@
 				};
 
 				UsuarioService.GetByEmail(config).then(function (user) {
-					if (user !== null && user.senha === password && user.tipoUsuario === tipoUsuario) {
+					if (user !== null && user.senha === password) {
 						response = { success: true, usuario: user };
 					} else {
 						response = { success: false, message: 'Username or password is incorrect' };

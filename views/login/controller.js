@@ -19,11 +19,11 @@
 
 			var senha = md5($scope.password);
 			
-			AuthenticationService.Login($scope.email, senha, $scope.tipoUsuario, function (response) {	
+			AuthenticationService.Login($scope.email, senha, function (response) {	
 				if (response.success) {
 					var url;
 
-					AuthenticationService.SetCredentials($scope.email, senha, response.usuario, $scope.tipoUsuario);
+					AuthenticationService.SetCredentials($scope.email, senha, response.usuario, response.usuario.tipoUsuario);
 					$location.path('/inicio');
 
 					$rootScope.criarMenu();
