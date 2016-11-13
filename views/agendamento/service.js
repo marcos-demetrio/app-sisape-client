@@ -21,6 +21,10 @@
 			return $http.get(API + 'agendamento/cidadao/' + id).then(handleSuccess, handleError('Erro obtendo agendamento pelo ID: ' + id));
 		}
 
+		service.GetTotalNaoAtendidoByCidadao = function GetTotalNaoAtendidoByCidadao(id) {
+			return $http.get(API + 'agendamento/totalagendamentonaoatendidoporcidadao/' + id).then(handleSuccess, handleError('Erro obtendo total de agendamento pelo ID do cidadão: ' + id));
+		}
+
 		service.GetHorarios = function GetHorarios(config) {
 			return $http.get(API + 'agendamento/horarios', config).then(handleSuccess, handleError('Erro obtendo horarios disponiveis para agendamento'));
 		}

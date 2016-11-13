@@ -17,7 +17,7 @@
 			<div class="form-group mdn-required" ng-class="{ 'has-error' : agendamentoForm.i_cidadao.$invalid && !agendamentoForm.i_cidadao.$pristine }">
 				<label for="i_cidadao" class="col-sm-2 control-label">Cidadão</label>
 				<div class="col-sm-5">
-					<select ng-hide="userLoggedIn.tipoUsuario == 'C'" class="form-control" id="i_cidadao" ng-disabled="form.atendido || editandoCadastro" name="i_cidadao" required ng-options="cidadao.nomeCompleto for cidadao in cidadaos track by cidadao.i_cidadao" ng-model="form.cidadao"></select>
+					<select ng-hide="userLoggedIn.tipoUsuario == 'C'" class="form-control" id="i_cidadao" ng-change="isValidarCidadaoNaoAtendido()" ng-disabled="form.atendido || editandoCadastro" name="i_cidadao" required ng-options="cidadao.nomeCompleto for cidadao in cidadaos track by cidadao.i_cidadao" ng-model="form.cidadao"></select>
 
 					<h6 ng-show="userLoggedIn.tipoUsuario == 'C'" ng-bind="form.cidadao.nomeCompleto"></h6>
 

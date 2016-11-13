@@ -29,9 +29,11 @@
 
 		$scope.getHorarios = function(ubsID, dataAgendamento) {
 
+			var data = (dataAgendamento || new Date());
+
 			var parameters = {
 				i_ubs : ubsID,
-				data_agendamento: dataAgendamento
+				data_agendamento: data
 			};
 
 			var config = {
@@ -146,6 +148,43 @@
 		};
 		//--
 
+		$scope.isValidarCidadaoNaoAtendido = function() {
+			var cidadaoID = $scope.form.cidadao.i_cidadao || 0;
+
+			AgendamentoService.GetTotalNaoAtendidoByCidadao(cidadaoID).then(function(data){
+				if(data > 0){
+
+					swal({
+						title: "Atenção!",
+						text: "Não será possível realizar agendamentos enquanto houver agendamento pendente para o cidadão: " + $scope.form.cidadao.nomeCompleto + ", CPF: " + $filter('cpf')($scope.form.cidadao.cpf),
+						type: "warning",
+						confirmButtonText: "Ok"
+					});
+
+					$scope.form.cidadao = {};
+				}
+			});
+		}
+
+		$scope.isValidarCidadaoNaoAtendidoTipoC = function(cidadao) {
+			if(!$scope.editandoCadastro){
+				AgendamentoService.GetTotalNaoAtendidoByCidadao(cidadao.i_cidadao).then(function(data){
+					if(data > 0){
+						swal({
+							title: "Atenção!",
+							text: "Não é possível realizar agendamentos enquanto houver agendamento pendente.",
+							type: "warning",
+							confirmButtonText: "Ok"
+						},
+						function(){
+							$location.path('/agendamento');
+							$route.reload();
+						});
+					}
+				});
+			}
+		}
+
 		switch($rootScope.globals.currentUser.tipoUsuario){
 			case 'C':
 				CidadaoService.GetById($rootScope.globals.currentUser.id).then(function(data){
@@ -154,6 +193,8 @@
 					var ubsID = data.unidadeBasicaSaude.i_unidade_basica_saude;
 
 					$scope.getHorarios(ubsID);
+
+					$scope.isValidarCidadaoNaoAtendidoTipoC(data);
 				});
 
 				break;
