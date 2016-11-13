@@ -21,8 +21,8 @@
 			return $http.get(API + 'agendamento/cidadao/' + id).then(handleSuccess, handleError('Erro obtendo agendamento pelo ID: ' + id));
 		}
 
-		service.GetHorariosByUbs = function GetHorariosByUbs(id) {
-			return $http.get(API + 'agendamento/horarios/' + id).then(handleSuccess, handleError('Erro obtendo horariosdo agendamento pelo ID da ubs: ' + id));
+		service.GetHorarios = function GetHorarios(config) {
+			return $http.get(API + 'agendamento/horarios', config).then(handleSuccess, handleError('Erro obtendo horarios disponiveis para agendamento'));
 		}
 
 		service.Delete = function Delete(id) {

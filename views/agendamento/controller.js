@@ -27,17 +27,29 @@
 
 		var ubsID = 0;
 
-		$scope.getHorarios = function(ubsID) {
-			AgendamentoService.GetHorariosByUbs(ubsID).then(function(data){
+		$scope.getHorarios = function(ubsID, dataAgendamento) {
+
+			var parameters = {
+				i_ubs : ubsID,
+				data_agendamento: dataAgendamento
+			};
+
+			var config = {
+				params : parameters
+			};
+
+			AgendamentoService.GetHorarios(config).then(function(data){
+
 				var newDate;
 				$scope.listaHorarios = [];
 				for (var i = data.length - 1; i >= 0; i--) {
 					newDate = new Date(data[i].horario);
-					newDate.setSeconds(0);
 
-					$scope.listaHorarios.push({
-						horario: newDate
-					});
+					if(data[i].disponivel){
+						$scope.listaHorarios.push({
+							horario: newDate
+						});
+					}
 				};
 
 				$scope.listaHorarios = $filter('orderBy')($scope.listaHorarios, 'horario', false);
@@ -49,7 +61,7 @@
 			AgendamentoService.GetById(agendamentoID).then(function(data){
 				ubsID = data.cidadao.unidadeBasicaSaude.i_unidade_basica_saude;
 
-				$scope.getHorarios(ubsID);
+				$scope.getHorarios(ubsID, data.dataAgendamento);
 
 				var newTime;
 				newTime = new Date(data.horaAgendamento);
@@ -78,10 +90,10 @@
 		//--
 
 		//-- Obter horários
-		$scope.mudouCidadao = function() {
+		$scope.mudouDataAgendamento = function() {
 			ubsID = $scope.form.cidadao.unidadeBasicaSaude.i_unidade_basica_saude;
-
-			$scope.getHorarios(ubsID);
+			
+			$scope.getHorarios(ubsID, $scope.form.dataAgendamento);
 		}
 		//--
 

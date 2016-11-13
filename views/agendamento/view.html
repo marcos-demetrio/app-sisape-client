@@ -17,7 +17,7 @@
 			<div class="form-group mdn-required" ng-class="{ 'has-error' : agendamentoForm.i_cidadao.$invalid && !agendamentoForm.i_cidadao.$pristine }">
 				<label for="i_cidadao" class="col-sm-2 control-label">Cidadão</label>
 				<div class="col-sm-5">
-					<select ng-hide="userLoggedIn.tipoUsuario == 'C'" class="form-control" id="i_cidadao" ng-change="mudouCidadao()" ng-disabled="form.atendido || editandoCadastro" name="i_cidadao" required ng-options="cidadao.nomeCompleto for cidadao in cidadaos track by cidadao.i_cidadao" ng-model="form.cidadao"></select>
+					<select ng-hide="userLoggedIn.tipoUsuario == 'C'" class="form-control" id="i_cidadao" ng-disabled="form.atendido || editandoCadastro" name="i_cidadao" required ng-options="cidadao.nomeCompleto for cidadao in cidadaos track by cidadao.i_cidadao" ng-model="form.cidadao"></select>
 
 					<h6 ng-show="userLoggedIn.tipoUsuario == 'C'" ng-bind="form.cidadao.nomeCompleto"></h6>
 
@@ -29,7 +29,7 @@
 			<div class="form-group mdn-required" ng-class="{ 'has-error' : agendamentoForm.i_profissional.$invalid && !agendamentoForm.i_profissional.$pristine }" ng-hide="userLoggedIn.tipoUsuario == 'C'">
 				<label for="i_profissional" class="col-sm-2 control-label">Profissional</label>
 				<div class="col-sm-5">
-					<select class="form-control" id="i_profissional" ng-hide="form.atendido || editandoCadastro" required name="i_profissional" ng-options="lotacao.profissional.nome + ' - ' + lotacao.cbo.nome for lotacao in profissionais track by lotacao.profissional.i_profissional" ng-model="form.profissionalLotacao" ng-disabled="editandoCadastro"></select>
+					<select class="form-control" id="i_profissional" ng-hide="form.atendido || editandoCadastro" name="i_profissional" ng-options="lotacao.profissional.nome + ' - ' + lotacao.cbo.nome for lotacao in profissionais track by lotacao.profissional.i_profissional" ng-model="form.profissionalLotacao" ng-disabled="editandoCadastro"></select>
 
 					<h6 ng-show="form.atendido || editandoCadastro" ng-bind="form.profissionalLotacao.profissional.nome || 'Não informado'"></h6>
 
@@ -42,7 +42,7 @@
 				<label class="col-sm-2 control-label" for="dataAgendamento">Data do agendamento</label>
 				<div class="col-sm-2">
 					<p class="input-group" ng-show="!editandoCadastro">
-						<input type="text" class="form-control" ng-disabled="form.atendido" uib-datepicker-popup="dd/MM/yyyy" ng-model="form.dataAgendamento" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Fechar" current-text="Hoje" clear-text="Limpar" id="dataAgendamento" />
+						<input type="text" class="form-control" ng-disabled="form.atendido || !form.cidadao" uib-datepicker-popup="dd/MM/yyyy" ng-change="mudouDataAgendamento()" min-date="new Date()" ng-model="form.dataAgendamento" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Fechar" current-text="Hoje" clear-text="Limpar" id="dataAgendamento" />
 							<span class="input-group-btn">
 								<button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar" ng-disabled="form.atendido"></i></button>
 							</span>
@@ -57,7 +57,7 @@
 			<div class="form-group mdn-required" ng-class="{ 'has-error' : agendamentoForm.horaAgendamento.$invalid && !agendamentoForm.horaAgendamento.$pristine }">
 				<label for="horaAgendamento" class="col-sm-2 control-label">Horário</label>
 				<div class="col-sm-8">
-					<select class="form-control" id="horaAgendamento" name="horaAgendamento" required ng-options="listaHorario.horario | date:'HH:mm' for listaHorario in listaHorarios | orderBy: 'horario' track by listaHorario.horario" ng-model="form.horaAgendamento" ng-disabled="!form.cidadao" ng-show="!editandoCadastro"></select>
+					<select class="form-control" id="horaAgendamento" name="horaAgendamento" required ng-options="listaHorario.horario | date:'HH:mm' for listaHorario in listaHorarios | orderBy: 'horario' track by listaHorario.horario" ng-model="form.horaAgendamento" ng-disabled="!form.dataAgendamento" ng-show="!editandoCadastro"></select>
 
 					<h6 ng-show="editandoCadastro" ng-bind="form.horaAgendamento | date:'HH:mm'"></h6>
 
@@ -116,7 +116,7 @@
 
 			<div class="form-group">
 				<div style="margin-left: 15px;"><!--<div class="pull-right">-->
-					<button class="btn  btn-primary" type="submit" ng-disabled="agendamentoForm.$invalid || form.atendido">Salvar</button>
+					<button class="btn  btn-primary" type="submit" ng-disabled="agendamentoForm.$invalid || form.atendido == 1">Salvar</button>
 					<a ng-click="cancelar(agendamentoForm.$dirty)" class="btn  btn-default">Cancelar</a>
 					<a ng-click="excluir()" ng-show="editandoCadastro && form.atendido == false" class="btn  btn-link aw-btn-link-danger">Excluir este agendamento</a>
 				</div>
