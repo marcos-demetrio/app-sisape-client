@@ -5,15 +5,38 @@
 		.module('app')
 		.factory('AuthenticationService', AuthenticationService);
 
-	AuthenticationService.$inject = ['$http', '$cookieStore', '$rootScope', '$timeout', 'UsuarioService'];
-	function AuthenticationService($http, $cookieStore, $rootScope, $timeout, UsuarioService) {
+	AuthenticationService.$inject = ['$http', '$cookieStore', '$rootScope', '$timeout', 'UsuarioService', 'API'];
+	function AuthenticationService($http, $cookieStore, $rootScope, $timeout, UsuarioService, API) {
 		var service = {};
 
 		service.Login = Login;
 		service.SetCredentials = SetCredentials;
 		service.ClearCredentials = ClearCredentials;
+		service.GetNovaSenha = GetNovaSenha;
 
 		return service;
+
+		function GetNovaSenha(email) {
+			var parameters = {
+				email : email
+			};
+
+			var config = {
+				params : parameters
+			};
+
+			return $http.get(API + 'usuario/novasenha', config).then(handleSuccess, handleError('Erro obtendo nova senha pelo e-mail: ' + email));
+		}
+
+		function handleSuccess(res) {
+			return res.data;
+		}
+
+		function handleError(error) {
+			return function () {
+				return { success: false, message: error };
+			};
+		}
 
 		function Login(email, password, callback) {
 			$timeout(function () {

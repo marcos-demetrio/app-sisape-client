@@ -1,22 +1,23 @@
-<div ng-controller="LoginController">
+<div ng-controller="RecuperarSenhaController">
 	<div class="aw-layout-simple-page__container">
-		<form>
+		<form name="form" ng-submit="novaSenha()" role="form">
 			<div class="aw-simple-panel">
 				<h1>SISAPE</h1>
 				<!--<img alt="AlgaWorks" src="assets/images/logo-gray.png"/>-->
 				
 				<div class="aw-simple-panel__message">
-					Informe o seu e-mail abaixo para receber as instruções de como criar uma nova senha.
+					Informe o seu e-mail abaixo para receber uma nova senha.
 				</div>
 				
 				<div class="aw-simple-panel__box">
 					<div class="form-group  has-feedback">
-						<input type="text" class="form-control  input-lg" placeholder="Seu e-mail">
-						<span class="glyphicon  glyphicon-envelope  form-control-feedback" aria-hidden="true"></span>
+					<input type="email" class="form-control input-lg" placeholder="Seu e-mail" ng-model="emailRecuperar" required />
+						<span class="glyphicon glyphicon-envelope form-control-feedback" aria-hidden="true"></span>
 					</div>
 					
 					<div class="form-group">
-						<button type="submit" class="btn  btn-primary  btn-lg  aw-btn-full-width">Criar nova senha</button>
+						<button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">Criar nova senha</button>
+						<a href="#/login" class="btn btn-default">Cancelar</a>
 					</div>
 				</div>
 			</div>
