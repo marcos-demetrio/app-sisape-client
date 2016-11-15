@@ -675,70 +675,40 @@
 		$scope.open3 = function() {
 			$scope.popup3.opened = true;
 		};
-		
+
+		//-- Limpar
+		$scope.AdoecimentoRelatorioLimpar = function (){
+			$scope.filtro = 'VAZIO';
+			$scope.municipio = null;
+			$scope.unidadeBasicaSaude = null;
+			$scope.dataAtendimentoInicio = null;
+			$scope.dataAtendimentoFinal = null;
+			$window.document.getElementById('filtro').focus();
+		}
 		//--
-		AtendimentoService.GeAdoecimentotAll().then(function(data){
-			for (var i = data.length - 1; i >= 0; i--) {
-				data[i].codigoCid = data[i].atendimentoSintoma[i].cid.codigoCid;
-				data[i].descricaoCid = data[i].atendimentoSintoma[i].cid.descricao;
-			};
-			
-			$scope.itens = data;
-			
-			$scope.totalItens = $scope.itens.length;
-
-			$scope.listaVazia = $scope.itens.length === 0;
-		});
-
-		//-- Pesquisa
-		$scope.AtendimentoRelatorioPesquisar = function (){
+		
+		//-- Imprimir
+		$scope.AdoecimentoRelatorioImprimir = function (){
 			switch ($scope.filtro) {
 				case "VAZIO":
 					$scope.itens = [];
-					AtendimentoService.GeAdoecimentotAll().then(function(data){
-						for (var i = data.length - 1; i >= 0; i--) {
-							data[i].codigoCid = data[i].atendimentoSintoma[i].cid.codigoCid;
-							data[i].descricaoCid = data[i].atendimentoSintoma[i].cid.descricao;
-						};
-							
-						$scope.itens = data;
+					AtendimentoService.PrintAdoecimento().then(function(data){
 						
-						$scope.totalItens = $scope.itens.length;
-
-						$scope.listaVazia = $scope.itens.length === 0;
-						});
+					});
 					break;
 					
 				case "MUNICIPIO":
 					$scope.itens = [];
-					AtendimentoService.AdoecimentoRelatorioPesquisarPorMunicipio($scope.municipio.i_municipio).then(function(data){
-						for (var i = data.length - 1; i >= 0; i--) {
-							data[i].codigoCid = data[i].atendimentoSintoma[i].cid.codigoCid;
-							data[i].descricaoCid = data[i].atendimentoSintoma[i].cid.descricao;
-						};
+					AtendimentoService.PrintAdoecimentoRelatorioPesquisarPorMunicipio($scope.municipio.i_municipio).then(function(data){
 						
-						$scope.itens = data;
-						
-						$scope.totalItens = $scope.itens.length;
-
-						$scope.listaVazia = $scope.itens.length === 0;
 					});
 					
 					break;
 					
 				case "UBS":
 					$scope.itens = [];
-					AtendimentoService.AdoecimentoRelatorioPesquisarPorUbs($scope.unidadeBasicaSaude.i_unidade_basica_saude).then(function(data){
-						for (var i = data.length - 1; i >= 0; i--) {
-							data[i].codigoCid = data[i].atendimentoSintoma[i].cid.codigoCid;
-							data[i].descricaoCid = data[i].atendimentoSintoma[i].cid.descricao;
-						};
+					AtendimentoService.PrintAdoecimentoRelatorioPesquisarPorUbs($scope.unidadeBasicaSaude.i_unidade_basica_saude).then(function(data){
 						
-						$scope.itens = data;
-						
-						$scope.totalItens = $scope.itens.length;
-
-						$scope.listaVazia = $scope.itens.length === 0;
 					});
 					
 					break;
@@ -754,49 +724,12 @@
 					};
 
 					$scope.itens = [];
-					AtendimentoService.AdoecimentoRelatorioPesquisarPorPeriodo(config).then(function(data){
-						for (var i = data.length - 1; i >= 0; i--) {
-							data[i].codigoCid = data[i].atendimentoSintoma[i].cid.codigoCid;
-							data[i].descricaoCid = data[i].atendimentoSintoma[i].cid.descricao;
-						};
+					AtendimentoService.PrintAdoecimentoRelatorioPesquisarPorDataAtendimento(config).then(function(data){
 						
-						$scope.itens = data;
-						
-						$scope.totalItens = $scope.itens.length;
-
-						$scope.listaVazia = $scope.itens.length === 0;
 					});
 					
 					break;
 			}
-		}
-		//--
-
-		//-- Limpar
-		$scope.AtendimentoRelatorioLimpar = function (){
-			$scope.filtro = 'VAZIO';
-			$scope.municipio = null;
-			$scope.unidadeBasicaSaude = null;
-			$scope.dataAtendimentoInicio = null;
-			$scope.dataAtendimentoFinal = null;
-			$window.document.getElementById('filtro').focus();
-		}
-		//--
-		
-		//-- Imprimir
-		$scope.AtendimentoRelatorioImprimir = function (){
-			var parameters = {
-				nome : $scope.nomeCbo,
-				codigoCbo : $scope.codigoCbo
-			};
-
-			var config = {
-				params : parameters
-			};
-			
-			AtendimentoService.Print(config).then(function(data){
-					$location.path('/cbo');
-				})
 		}
 		//--
 	}
