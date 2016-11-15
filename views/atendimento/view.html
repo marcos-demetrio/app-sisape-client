@@ -407,7 +407,7 @@
 
 			<div class="form-group">
 				<div style="margin-left: 15px;"><!--<div class="pull-right">-->
-					<button class="btn btn-primary" type="submit" ng-disabled="atendimentoForm.$invalid">Finalizar</button>
+					<a class="btn btn-primary" ng-click="update(atendimentoForm.$invalid)" ng-disabled="atendimentoForm.$invalid">Finalizar</a>
 
 					<div class="btn-group">
 						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -422,6 +422,7 @@
 
 					<a ng-click="cancelar(atendimentoForm.$dirty)" class="btn btn-default">Cancelar</a>
 					<a ng-click="excluir()" ng-show="editandoCadastro" class="btn  btn-link aw-btn-link-danger">Excluir este agendamento</a>
+					<a class="btn btn-primary" ng-click="cancelar(atendimentoForm.$dirty)">Fila de Atendimento</a>
 				</div>
 			</div>
 		</form>

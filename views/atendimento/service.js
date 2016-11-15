@@ -45,6 +45,18 @@
 			return $http.put(API + 'atendimento/' + id, atendimento).then(handleSuccess, handleError('Erro ao atualizar atendimento'));
 		}
 
+		service.PrintAtestado = function PrintAtestado() {
+			return $http.get(API + 'atendimento/printAtestado/').then(handleSuccess, handleError('Erro obtendo lista de atendimento'));
+		}
+
+		service.PrintReceita = function PrintReceita() {
+			return $http.get(API + 'atendimento/printReceita/').then(handleSuccess, handleError('Erro obtendo lista de atendimento'));
+		}
+
+		service.PrintExames = function PrintExames() {
+			return $http.get(API + 'atendimento/printExame/').then(handleSuccess, handleError('Erro obtendo lista de atendimento'));
+		}
+
 		service.AtendimentoRelatorioPesquisarPorUbs = function AtendimentoRelatorioPesquisarPorUbs(id) {
 			return $http.get(API + 'atendimento/relatorio/ubs/' + id).then(handleSuccess, handleError('Erro ao atualizar atendimento'));
 		}
