@@ -12,9 +12,9 @@
 
 	function AtendimentoController($scope, $location, $route, $routeParams, AtendimentoService, ProfissionalLotacaoService, AgendamentoService, CidService, ExameService, MedicamentoService) {
 		//-- Controle Tabs
-			$scope.tab = 1;
+		$scope.tab = 1;
 		$scope.setTab = function(newTab){
-			$scope.tab = newTab;
+		$scope.tab = newTab;
 		};
 		$scope.isSet = function(tabNum){
 			return $scope.tab === tabNum;
@@ -383,19 +383,19 @@
 
 		//-- Imprimir Atestado
 		$scope.imprimirAtestado = function() {
-			AtendimentoService.PrintAtestado().then(function(data){});
+			AtendimentoService.PrintAtestado(atendimentoID).then(function(data){});
 		}
 		//--
 
 		//-- Imprimir Receita
 		$scope.imprimirReceita = function() {
-			AtendimentoService.PrintReceita().then(function(data){});
+			AtendimentoService.PrintReceita(atendimentoID).then(function(data){});
 		}
 		//--
 
 		//-- Imprimir Exames
 		$scope.imprimirExames = function() {
-			AtendimentoService.PrintExames().then(function(data){});
+			AtendimentoService.PrintExames(atendimentoID).then(function(data){});
 		}
 		//--
 
