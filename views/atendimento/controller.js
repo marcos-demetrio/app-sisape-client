@@ -454,9 +454,9 @@
 		$scope.atualizarAtendimentos();
 		}
 
-	AtendimentoRelatorioController.$inject = ['$scope', '$rootScope','$location', '$window', 'AtendimentoService', 'UbsService', 'ProfissionalService', 'CidadaoService', 'API'];
+	AtendimentoRelatorioController.$inject = ['$scope', '$rootScope','$location', '$window', 'AtendimentoService', 'UbsService', 'ProfissionalService', 'CidadaoService', 'API', '$http'];
 
-	function AtendimentoRelatorioController($scope, $rootScope, $location, $window, AtendimentoService, UbsService, ProfissionalService, CidadaoService, API) {
+	function AtendimentoRelatorioController($scope, $rootScope, $location, $window, AtendimentoService, UbsService, ProfissionalService, CidadaoService, API, $http) {
 		$scope.listaVazia = true;
 		$scope.itens = [];
 		
@@ -630,35 +630,18 @@
 					};
 
 					var config = {
-						params : parameters
+						params : parameters,
+						responseType: 'arraybuffer'
 					};
-
-					$window.open(API + 'atendimento/printPeriodo?aDataFinal=' + new Date($scope.dataAtendimentoFinal) + '&aDataInicio=' + new Date($scope.dataAtendimentoInicio));
-
-					//http://localhost:8080/atendimento/printPeriodo?aDataFinal=2016-11-24T02:00:00.000Z&aDataInicio=2016-10-31T02:00:00.000Z
 
 					$scope.itens = [];
 					AtendimentoService.PrintAtendimentoRelatorioPesquisarPorDataAtendimento(config).then(function(data){
-						//$window.open(data);
-
-						var file = new Blob([ data ], {
-							type : 'application/*'
-						});
-
-						//saveAs(file, "download.pdf");
-						/*
+						var file = new Blob([data], { type: 'application/pdf' });
 						var fileURL = URL.createObjectURL(file);
-						$window.open(fileURL);
-
-						var a         = document.createElement('a');
-					    a.href        = fileURL; 
-					    a.target      = '_blank';
-					    a.download    = 'yourfilename.pdf';
-					    document.body.appendChild(a);
-					    a.click();*/
-						//console.log(data);
-
-					//	$location.path('/relatorio/atendimento');
+						
+						saveAs(file, 'filename.pdf'); //Faz o download
+						
+						$window.open(fileURL); //Abre em outra aba
 					});
 					break;
 			}
