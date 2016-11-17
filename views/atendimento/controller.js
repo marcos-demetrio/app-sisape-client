@@ -298,6 +298,7 @@
 					})
 				}else{
 					AtendimentoService.Create($scope.form).then(function(data){
+						console.log(data);
 					});
 				}
 			}
