@@ -35,7 +35,7 @@
 					<div class="form-group mdn-required" ng-class="{ 'has-error' : atendimentoForm.i_profissional.$invalid && !atendimentoForm.i_profissional.$pristine }" ng-hide="userLoggedIn.tipoUsuario == 'C'">
 						<label for="i_profissional" class="col-sm-2 control-label">Profissional</label>
 						<div class="col-sm-5">
-							<select class="form-control" id="i_profissional" ng-hide="form.atendido || editandoCadastro" name="i_profissional" ng-options="lotacao.profissional.nome + ' - ' + lotacao.cbo.nome for lotacao in profissionais track by lotacao.profissional.i_profissional" ng-model="form.profissionalLotacao"></select>
+							<select class="form-control" id="i_profissional" ng-hide="form.atendido" ng-disabled="editandoCadastro" name="i_profissional" ng-options="lotacao.profissional.nome + ' - ' + lotacao.cbo.nome for lotacao in profissionais track by lotacao.profissional.i_profissional" ng-model="form.profissionalLotacao"></select>
 
 							<p ng-show="atendimentoForm.i_profissional.$error.required && !atendimentoForm.i_profissional.$pristine" class="help-block">Selecione um profissional.</p>
 						</div>
@@ -46,7 +46,7 @@
 						<label class="col-sm-2 control-label" for="dataAtendimento">Data do atendimento</label>
 						<div class="col-sm-2">
 							<p class="input-group">
-								<input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="form.dataAtendimento" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Fechar" current-text="Hoje" clear-text="Limpar" id="dataAtendimento"/>
+								<input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-disabled="editandoCadastro" ng-model="form.dataAtendimento" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Fechar" current-text="Hoje" clear-text="Limpar" id="dataAtendimento"/>
 									<span class="input-group-btn">
 										<button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
 									</span>
@@ -59,7 +59,7 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label" for="horaAtendimento">Hora do atendimento</label>
 						<div class="col-sm-2">
-							<input ng-model="form.horaAtendimento" id="horaAtendimento" name="horaAtendimento" type="time" class="form-control">
+							<input ng-model="form.horaAtendimento" id="horaAtendimento" name="horaAtendimento" ng-disabled="editandoCadastro" type="time" class="form-control">
 						</div>
 					</div>
 
@@ -194,7 +194,7 @@
 					<div class="form-group">
 						<label class="col-xs-2 col-sm-2 col-md-2 control-label" for="altura">Altura (m)</label>
 						<div class="col-sm-4">
-							<input ng-model="form.altura" id="altura" name="altura" type="number" step="any" maxlength="12" class="form-control" min="0" max="999999999999" ng-change="calcularIMC()">
+							<input ng-model="form.altura" id="altura" name="altura" ng-disabled="editandoCadastro" type="number" step="any" maxlength="12" class="form-control" min="0" max="999999999999" ng-change="calcularIMC()">
 						</div>
 					</div>
 
@@ -202,7 +202,7 @@
 					<div class="form-group">
 						<label class="col-xs-2 col-sm-2 col-md-2 control-label" for="peso">Peso (kg)</label>
 						<div class="col-sm-4">
-							<input ng-model="form.peso" id="peso" name="peso" type="number" step="any" maxlength="12" class="form-control" min="0" max="999999999999" ng-change="calcularIMC()">
+							<input ng-model="form.peso" id="peso" name="peso" type="number" ng-disabled="editandoCadastro" step="any" maxlength="12" class="form-control" min="0" max="999999999999" ng-change="calcularIMC()">
 						</div>
 					</div>
 
@@ -218,7 +218,7 @@
 					<div class="form-group">
 						<label class="col-xs-2 col-sm-2 col-md-2 control-label" for="frequenciaCardiaca">Freq. Card. (bpm)</label>
 						<div class="col-sm-4">
-							<input ng-model="form.frequenciaCardiaca" id="frequenciaCardiaca" name="frequenciaCardiaca" type="number" step="any" maxlength="12" class="form-control" min="0" max="999999999999">
+							<input ng-model="form.frequenciaCardiaca" id="frequenciaCardiaca" ng-disabled="editandoCadastro" name="frequenciaCardiaca" type="number" step="any" maxlength="12" class="form-control" min="0" max="999999999999">
 						</div>
 					</div>
 
@@ -226,7 +226,7 @@
 					<div class="form-group">
 						<label class="col-xs-2 col-sm-2 col-md-2 control-label" for="frequenciaRespiratoria">Freq. Resp. (mpm)</label>
 						<div class="col-sm-4">
-							<input ng-model="form.frequenciaRespiratoria" id="frequenciaRespiratoria" name="frequenciaRespiratoria" type="number" step="any" maxlength="12" class="form-control" min="0" max="999999999999">
+							<input ng-model="form.frequenciaRespiratoria" id="frequenciaRespiratoria" ng-disabled="editandoCadastro" name="frequenciaRespiratoria" type="number" step="any" maxlength="12" class="form-control" min="0" max="999999999999">
 						</div>
 					</div>
 
@@ -234,7 +234,7 @@
 					<div class="form-group">
 						<label class="col-xs-2 col-sm-2 col-md-2 control-label" for="temperatura">Temperatura (ºC)</label>
 						<div class="col-sm-4">
-							<input ng-model="form.temperatura" id="temperatura" name="temperatura" type="number" step="any" maxlength="12" class="form-control" min="0" max="999999999999">
+							<input ng-model="form.temperatura" id="temperatura" name="temperatura" ng-disabled="editandoCadastro" type="number" step="any" maxlength="12" class="form-control" min="0" max="999999999999">
 						</div>
 					</div>
 
@@ -242,7 +242,7 @@
 					<div class="form-group">
 						<label class="col-xs-2 col-sm-2 col-md-2 control-label" for="pressaoMaxima">Pressão Máxima (mmHg)</label>
 						<div class="col-sm-4">
-							<input ng-model="form.pressaoMaxima" id="pressaoMaxima" name="pressaoMaxima" type="number" maxlength="12" class="form-control" min="0" max="999999999999">
+							<input ng-model="form.pressaoMaxima" id="pressaoMaxima" name="pressaoMaxima" ng-disabled="editandoCadastro" type="number" maxlength="12" class="form-control" min="0" max="999999999999">
 						</div>
 					</div>
 
@@ -250,7 +250,7 @@
 					<div class="form-group">
 						<label class="col-xs-2 col-sm-2 col-md-2 control-label" for="pressaoMinima">Pressão Mínima (mmHg)</label>
 						<div class="col-sm-4">
-							<input ng-model="form.pressaoMinima" id="pressaoMinima" name="pressaoMinima" type="number"maxlength="12" class="form-control" min="0" max="999999999999">
+							<input ng-model="form.pressaoMinima" id="pressaoMinima" name="pressaoMinima" ng-disabled="editandoCadastro" type="number"maxlength="12" class="form-control" min="0" max="999999999999">
 						</div>
 					</div>
 
@@ -263,7 +263,7 @@
 					<div class="form-group sisape-required" ng-class="{ 'has-error' : atendimentoForm.subjetivo.$invalid && !atendimentoForm.subjetivo.$pristine }">
 						<label class="col-sm-1 control-label" for="subjetivo">Subjetivo</label>
 						<div class="col-sm-10">
-							<textarea ng-model="form.subjetivo" id="subjetivo" required name="subjetivo" class="form-control" rows="3" maxlength="5120"></textarea>
+							<textarea ng-model="form.subjetivo" id="subjetivo" required ng-disabled="editandoCadastro"  name="subjetivo" class="form-control" rows="3" maxlength="5120"></textarea>
 							<p ng-show="atendimentoForm.subjetivo.$error.required && !atendimentoForm.subjetivo.$pristine" class="help-block">Campo obrigatório.</p>
 						</div>
 					</div>
@@ -272,7 +272,7 @@
 					<div class="form-group sisape-required" ng-class="{ 'has-error' : atendimentoForm.objetivo.$invalid && !atendimentoForm.objetivo.$pristine }">
 						<label class="col-sm-1 control-label" for="objetivo">Objetivo</label>
 						<div class="col-sm-10">
-							<textarea ng-model="form.objetivo" id="objetivo" required name="objetivo" class="form-control" rows="3" maxlength="5120"></textarea>
+							<textarea ng-model="form.objetivo" id="objetivo" required ng-disabled="editandoCadastro" name="objetivo" class="form-control" rows="3" maxlength="5120"></textarea>
 							<p ng-show="atendimentoForm.objetivo.$error.required && !atendimentoForm.objetivo.$pristine" class="help-block">Campo obrigatório.</p>
 						</div>
 					</div>
@@ -281,7 +281,7 @@
 					<div class="form-group sisape-required" ng-class="{ 'has-error' : atendimentoForm.avaliacao.$invalid && !atendimentoForm.avaliacao.$pristine }">
 						<label class="col-sm-1 control-label" for="avaliacao">Avaliação</label>
 						<div class="col-sm-10">
-							<textarea ng-model="form.avaliacao" id="avaliacao" required name="avaliacao" class="form-control" rows="3" maxlength="5120"></textarea>
+							<textarea ng-model="form.avaliacao" id="avaliacao" required ng-disabled="editandoCadastro" name="avaliacao" class="form-control" rows="3" maxlength="5120"></textarea>
 							<p ng-show="atendimentoForm.avaliacao.$error.required && !atendimentoForm.avaliacao.$pristine" class="help-block">Campo obrigatório.</p>
 						</div>
 					</div>
@@ -290,7 +290,7 @@
 					<div class="form-group sisape-required" ng-class="{ 'has-error' : atendimentoForm.plano.$invalid && !atendimentoForm.plano.$pristine }">
 						<label class="col-sm-1 control-label" for="plano">Plano</label>
 						<div class="col-sm-10">
-							<textarea ng-model="form.plano" id="plano" required name="plano" class="form-control" rows="3" maxlength="5120"></textarea>
+							<textarea ng-model="form.plano" id="plano" required name="plano" ng-disabled="editandoCadastro" class="form-control" rows="3" maxlength="5120"></textarea>
 							<p ng-show="atendimentoForm.plano.$error.required && !atendimentoForm.plano.$pristine" class="help-block">Campo obrigatório.</p>
 						</div>
 					</div>
@@ -312,11 +312,11 @@
 								<tbody>
 									<tr ng-repeat="sintoma in form.atendimentoSintoma">
 										<td width="90%">
-											<select class="form-control" id="i_cid" name="i_cid" ng-options="cid.codigoCid + ' - ' + cid.descricao  for cid in listaCid track by cid.i_cid" ng-model="sintoma.cid"></select>
+											<select class="form-control" id="i_cid" name="i_cid" ng-disabled="editandoCadastro" ng-options="cid.codigoCid + ' - ' + cid.descricao  for cid in listaCid track by cid.i_cid" ng-model="sintoma.cid"></select>
 										</td>
 
-										<td class="text-center" width="10%">
-											<a class="btn btn-default btn-sm" ng-click="excluirSintoma(sintoma, $index)">
+										<td class="text-center" width="10%" >
+											<a class="btn btn-default btn-sm" ng-click="excluirSintoma(sintoma, $index)" ng-disabled="editandoCadastro" >
 												<i class="fa fa-trash"></i>
 												<span class="visible-md-inline visible-lg-inline">Excluir</span>
 											</a>
@@ -325,7 +325,7 @@
 								</tbody>
 							</table>
 
-							<a class="btn btn-primary" ng-click="adicionarSintoma()">
+							<a class="btn btn-primary" ng-click="adicionarSintoma()" ng-disabled="editandoCadastro" >
 								<i class="fa fa-plus-circle"></i>
 								<span class="hidden-xs hidden-sm">Nova CID</span>
 							</a>
@@ -345,15 +345,15 @@
 								<tbody>
 									<tr ng-repeat="m in form.atendimentoMedicamento">
 										<td width="60%">
-											<select class="form-control" id="i_medicamento" name="i_medicamento" ng-options="m.nome for m in listaMedicamento track by m.i_medicamento" ng-model="m.medicamento"></select>
+											<select class="form-control" id="i_medicamento" name="i_medicamento" ng-options="m.nome for m in listaMedicamento track by m.i_medicamento" ng-model="m.medicamento" ng-disabled="editandoCadastro" ></select>
 										</td>
 
 										<td width="30%">
-											<input ng-model="m.posologia" id="posologia" required name="posologia" type="text" class="form-control" maxlength="100">
+											<input ng-model="m.posologia" id="posologia" required name="posologia" type="text" class="form-control" maxlength="100" ng-disabled="editandoCadastro" >
 										</td>
 
 										<td class="text-center" width="10%">
-											<a class="btn btn-default btn-sm" ng-click="excluirMedicamento(m, $index)">
+											<a class="btn btn-default btn-sm" ng-click="excluirMedicamento(m, $index)" ng-disabled="editandoCadastro" >
 												<i class="fa fa-trash"></i>
 												<span class="visible-md-inline visible-lg-inline">Excluir</span>
 											</a>
@@ -362,7 +362,7 @@
 								</tbody>
 							</table>
 
-							<a class="btn btn-primary" ng-click="adicionarMedicamento()">
+							<a class="btn btn-primary" ng-click="adicionarMedicamento()" ng-disabled="editandoCadastro" >
 								<i class="fa fa-plus-circle"></i>
 								<span class="hidden-xs hidden-sm">Novo medicamento</span>
 							</a>
@@ -381,11 +381,11 @@
 								<tbody>
 									<tr ng-repeat="exame in form.atendimentoExame">
 										<td width="90%">
-											<select class="form-control" id="i_exame" name="i_exame" ng-options="exame.i_exame + ' - ' + exame.nome for exame in listaExame track by exame.i_exame" ng-model="exame.exame"></select>
+											<select class="form-control" ng-disabled="editandoCadastro" id="i_exame" name="i_exame" ng-options="exame.i_exame + ' - ' + exame.nome for exame in listaExame track by exame.i_exame" ng-model="exame.exame"></select>
 										</td>
 
 										<td class="text-center" width="10%">
-											<a class="btn btn-default btn-sm" ng-click="excluirExame(exame, $index)">
+											<a class="btn btn-default btn-sm" ng-click="excluirExame(exame, $index)" ng-disabled="editandoCadastro" >
 												<i class="fa fa-trash"></i>
 												<span class="visible-md-inline visible-lg-inline">Excluir</span>
 											</a>
@@ -394,7 +394,7 @@
 								</tbody>
 							</table>
 
-							<a class="btn btn-primary" ng-click="adicionarExame()">
+							<a class="btn btn-primary" ng-click="adicionarExame()" ng-disabled="editandoCadastro" >
 								<i class="fa fa-plus-circle"></i>
 								<span class="hidden-xs hidden-sm">Novo exame</span>
 							</a>
@@ -407,22 +407,22 @@
 
 			<div class="form-group">
 				<div style="margin-left: 15px;"><!--<div class="pull-right">-->
-					<a class="btn btn-primary" ng-click="update(atendimentoForm.$invalid)" ng-disabled="atendimentoForm.$invalid">Finalizar</a>
+					<a class="btn btn-primary" ng-click="update(atendimentoForm.$invalid)" ng-disabled="atendimentoForm.$invalid || editandoCadastro">Finalizar</a>
 
 					<div class="btn-group">
 						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Imprimir <span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu">
-							<li><a href ng-click="imprimirAtestado()">Atestado</a></li>
-							<li><a href ng-click="imprimirReceita()">Receita</a></li>
-							<li><a href ng-click="imprimirExames()">Exames</a></li>
+							<li><a style="cursor: pointer;" ng-click="imprimirAtestado()">Atestado</a></li>
+							<li><a style="cursor: pointer;" ng-click="imprimirReceita()">Receita</a></li>
+							<li><a style="cursor: pointer;" ng-click="imprimirExames()">Exames</a></li>
 						</ul>
 					</div>
 
-					<a ng-click="cancelar(atendimentoForm.$dirty)" class="btn btn-default">Cancelar</a>
-					<a ng-click="excluir()" ng-show="editandoCadastro" class="btn  btn-link aw-btn-link-danger">Excluir este agendamento</a>
-					<a class="btn btn-primary" ng-click="cancelar(atendimentoForm.$dirty)">Fila de Atendimento</a>
+					<a ng-click="cancelar(atendimentoForm.$dirty)" class="btn btn-default" ng-disabled="editandoCadastro">Cancelar</a>
+					<!--<a ng-click="excluir()" ng-show="editandoCadastro" class="btn  btn-link aw-btn-link-danger">Excluir este agendamento</a>-->
+					<a class="btn btn-primary" ng-click="fila(atendimentoForm.$dirty)">Fila de Atendimento</a>
 				</div>
 			</div>
 		</form>

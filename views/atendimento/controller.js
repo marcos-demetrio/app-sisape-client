@@ -178,7 +178,9 @@
 				i_cid: null
 			}
 
-			$scope.form.atendimentoSintoma.push(sintoma);
+			if(!$scope.editandoCadastro){
+				$scope.form.atendimentoSintoma.push(sintoma);
+			}
 		}
 		//--
 
@@ -192,7 +194,9 @@
 				});
 			}
 
-			$scope.form.atendimentoSintoma.splice(index, 1);
+			if(!$scope.editandoCadastro){
+				$scope.form.atendimentoSintoma.splice(index, 1);
+			}
 		}
 		//--
 
@@ -203,7 +207,9 @@
 				posologia: ''
 			}
 
-			$scope.form.atendimentoMedicamento.push(medicamento);
+			if(!$scope.editandoCadastro){
+				$scope.form.atendimentoMedicamento.push(medicamento);
+			}
 		}
 		//--
 
@@ -217,7 +223,9 @@
 				});
 			}
 
-			$scope.form.atendimentoMedicamento.splice(index, 1);
+			if(!$scope.editandoCadastro){
+				$scope.form.atendimentoMedicamento.splice(index, 1);
+			}
 		}
 		//--
 
@@ -227,7 +235,9 @@
 				exame: null
 			}
 
-			$scope.form.atendimentoExame.push(exame);
+			if(!$scope.editandoCadastro){
+				$scope.form.atendimentoExame.push(exame);
+			}
 		}
 		//--
 
@@ -241,7 +251,9 @@
 				});
 			}
 
-			$scope.form.atendimentoExame.splice(index, 1);
+			if(!$scope.editandoCadastro){
+				$scope.form.atendimentoExame.splice(index, 1);
+			}
 		}
 		//--
 
@@ -263,43 +275,48 @@
 
 		//-- Gravar os dados do cadastro no banco de dados
 		$scope.update = function(invalid){
-			if(!invalid){
-				if(atendimentoID > 0){
-					AtendimentoService.Update($scope.form, atendimentoID).then(function(data){
-						var id = 0;
+			if(!$scope.editandoCadastro){
+				if(!invalid){
+					if(atendimentoID > 0){
+						AtendimentoService.Update($scope.form, atendimentoID).then(function(data){
+							var id = 0;
 
-						for (var i = $scope.sintomasExcluidos.length - 1; i >= 0; i--) {
-							id = $scope.sintomasExcluidos[i].itemSintoma.i_sequencial;
+							for (var i = $scope.sintomasExcluidos.length - 1; i >= 0; i--) {
+								id = $scope.sintomasExcluidos[i].itemSintoma.i_sequencial;
 
-							AtendimentoService.DeleteSintoma(id).then(function(data){
+								AtendimentoService.DeleteSintoma(id).then(function(data){
 
-							});
-						};
+								});
+							};
 
-						for (var i = $scope.medicamentosExcluidos.length - 1; i >= 0; i--) {
-							id = $scope.medicamentosExcluidos[i].itemMedicamento.i_sequencial;
+							for (var i = $scope.medicamentosExcluidos.length - 1; i >= 0; i--) {
+								id = $scope.medicamentosExcluidos[i].itemMedicamento.i_sequencial;
 
-							AtendimentoService.DeleteMedicamento(id).then(function(data){
+								AtendimentoService.DeleteMedicamento(id).then(function(data){
 
-							});
-						};
+								});
+							};
 
-						for (var i = $scope.examesExcluidos.length - 1; i >= 0; i--) {
-							id = $scope.examesExcluidos[i].itemExame.i_sequencial;
+							for (var i = $scope.examesExcluidos.length - 1; i >= 0; i--) {
+								id = $scope.examesExcluidos[i].itemExame.i_sequencial;
 
-							AtendimentoService.DeleteExame(id).then(function(data){
+								AtendimentoService.DeleteExame(id).then(function(data){
 
-							});
-						};
-						
-						$scope.form.
+								});
+							};
 
-						$location.path('/fila');
-					})
-				}else{
-					AtendimentoService.Create($scope.form).then(function(data){
-						console.log(data);
-					});
+							$location.path('/fila');
+						})
+					}else{
+						AtendimentoService.Create($scope.form).then(function(data){
+							var location = '/atendimento/' + data + '/editar';
+							console.log(location);
+							atendimentoID = data+0;
+
+							$scope.editandoCadastro = (atendimentoID > 0);
+							//$location.path(location);
+						});
+					}
 				}
 			}
 		}
@@ -332,32 +349,33 @@
 
 		//-- Cancela operação no cadastro, se alterou alguma informação, faz a confirmação
 		$scope.cancelar = function(dirty) {
-			if(dirty){
-				swal({   
-						title: "Tem certeza?",
-						text: "Você não poderá recuperar os dados alterados do atendimento após cancelar.",
-						type: "warning",
-						showCancelButton: true,
-						confirmButtonColor: "#DD6B55",
-						confirmButtonText: "Sim, cancelar agora!",
-						cancelButtonText: "Não!",
-						closeOnConfirm: true,
-						closeOnCancel: true
-					},
-					function(isConfirm){
-						if (isConfirm) {
-							$location.path('/fila');
-							$route.reload();
-						}
-					});
-			}else{
-				$location.path('/fila');
+			if(!$scope.editandoCadastro){
+				if(dirty){
+					swal({   
+							title: "Tem certeza?",
+							text: "Você não poderá recuperar os dados alterados do atendimento após cancelar.",
+							type: "warning",
+							showCancelButton: true,
+							confirmButtonColor: "#DD6B55",
+							confirmButtonText: "Sim, cancelar agora!",
+							cancelButtonText: "Não!",
+							closeOnConfirm: true,
+							closeOnCancel: true
+						},
+						function(isConfirm){
+							if (isConfirm) {
+								$location.path('/fila');
+								$route.reload();
+							}
+						});
+				}else{
+					$location.path('/fila');
+				}
 			}
 		}
 		//--
 
-		//-- Cancela operação no cadastro, se alterou alguma informação, faz a confirmação
-		$scope.cancelar = function(dirty) {
+		$scope.fila = function(dirty) {
 			if(dirty){
 				swal({   
 						title: "Tem certeza?",
