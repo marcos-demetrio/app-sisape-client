@@ -42,7 +42,7 @@
 				<label class="col-sm-2 control-label" for="dataAgendamento">Data do agendamento</label>
 				<div class="col-sm-2">
 					<p class="input-group" ng-show="!editandoCadastro">
-						<input type="text" class="form-control" ng-disabled="form.atendido || !form.cidadao" uib-datepicker-popup="dd/MM/yyyy" ng-change="mudouDataAgendamento()" min-date="new Date()" ng-model="form.dataAgendamento" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Fechar" current-text="Hoje" clear-text="Limpar" id="dataAgendamento" />
+						<input type="text" class="form-control" min="minDate" ng-disabled="form.atendido || !form.cidadao" uib-datepicker-popup="dd/MM/yyyy" ng-change="mudouDataAgendamento()" ng-model="form.dataAgendamento" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Fechar" current-text="Hoje" clear-text="Limpar" id="dataAgendamento" />
 							<span class="input-group-btn">
 								<button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar" ng-disabled="form.atendido"></i></button>
 							</span>

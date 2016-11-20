@@ -17,6 +17,8 @@
 
 		//--
 
+		$scope.minDate = new Date();
+
 		if($scope.form == null){
 			$scope.form = {};
 		}
@@ -26,6 +28,22 @@
 		}
 
 		var ubsID = 0;
+
+		$scope.ajustarData = function(data) {
+			var novaData = new Date();
+
+			novaData.setFullYear(2016);
+			novaData.setMonth(0);
+			novaData.setDate(1);
+
+			novaData.setHours(data.getHours());
+			novaData.setMinutes(data.getMinutes());
+
+			novaData.setSeconds(0);
+			novaData.setMilliseconds(0);
+
+			return novaData;
+		}
 
 		$scope.getHorarios = function(ubsID, dataAgendamento) {
 
@@ -43,15 +61,20 @@
 			AgendamentoService.GetHorarios(config).then(function(data){
 
 				var newDate;
+				var dataAtual = new Date();
+
 				$scope.listaHorarios = [];
 				for (var i = data.length - 1; i >= 0; i--) {
 					newDate = new Date(data[i].horario);
-
-					if(data[i].disponivel){
-						$scope.listaHorarios.push({
-							horario: newDate
-						});
+					
+					if(data[i].disponivel == true){
+						if(newDate > dataAtual){
+							$scope.listaHorarios.push({
+								horario: newDate
+							});
+						}
 					}
+
 				};
 
 				$scope.listaHorarios = $filter('orderBy')($scope.listaHorarios, 'horario', false);
@@ -146,6 +169,11 @@
 		$scope.open2 = function() {
 			$scope.popup2.opened = true;
 		};
+
+		$scope.dateOptions = {
+			minDate: new Date()
+		};
+
 		//--
 
 		$scope.isValidarCidadaoNaoAtendido = function() {

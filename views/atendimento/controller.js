@@ -308,13 +308,22 @@
 							$location.path('/fila');
 						})
 					}else{
+						var date = new Date();
+						var str = $scope.form.agendamento.dataAgendamento;
+						var dateArray = str.split("-");
+
+						date.setFullYear(parseInt(dateArray[0]));
+						date.setMonth(parseInt(dateArray[1])-1);  // months indexed as 0-11, substract 1
+						date.setDate(parseInt(dateArray[2]));
+
+						$scope.form.agendamento.dataAgendamento = date;
+
 						AtendimentoService.Create($scope.form).then(function(data){
 							var location = '/atendimento/' + data + '/editar';
-							console.log(location);
+
 							atendimentoID = data+0;
 
 							$scope.editandoCadastro = (atendimentoID > 0);
-							//$location.path(location);
 						});
 					}
 				}
