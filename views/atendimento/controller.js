@@ -431,6 +431,7 @@
 				saveAs(file, 'receita.pdf'); //Faz o download
 				
 				$window.open(fileURL); //Abre em outra aba});
+			});
 		}
 		//--
 
@@ -443,6 +444,7 @@
 				saveAs(file, 'exame.pdf'); //Faz o download
 				
 				$window.open(fileURL); //Abre em outra aba});
+			});
 		}
 		//--
 
