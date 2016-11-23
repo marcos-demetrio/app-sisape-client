@@ -141,7 +141,12 @@
 			};
 			
 			CboService.Print(config).then(function(data){
-					$location.path('/cbo');
+					var file = new Blob([data], { type: 'application/pdf' });
+					var fileURL = URL.createObjectURL(file);
+					
+					saveAs(file, 'cbo.pdf'); //Faz o download
+					
+					$window.open(fileURL); //Abre em outra aba
 				})
 		}
 		//--

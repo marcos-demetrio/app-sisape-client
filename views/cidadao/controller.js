@@ -262,7 +262,12 @@
 			};
 			
 			CidadaoService.Print(config).then(function(data){
-					$location.path('/cidadao');
+					var file = new Blob([data], { type: 'application/pdf' });
+					var fileURL = URL.createObjectURL(file);
+					
+					saveAs(file, 'cidadao.pdf'); //Faz o download
+					
+					$window.open(fileURL); //Abre em outra aba
 				})
 		}
 		//--

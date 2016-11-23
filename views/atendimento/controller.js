@@ -411,19 +411,38 @@
 
 		//-- Imprimir Atestado
 		$scope.imprimirAtestado = function() {
-			AtendimentoService.PrintAtestado(atendimentoID).then(function(data){});
+			AtendimentoService.PrintAtestado(atendimentoID).then(function(data){
+				var file = new Blob([data], { type: 'application/pdf' });
+				var fileURL = URL.createObjectURL(file);
+				
+				saveAs(file, 'atestado.pdf'); //Faz o download
+				
+				$window.open(fileURL); //Abre em outra aba
+			});
 		}
 		//--
 
 		//-- Imprimir Receita
 		$scope.imprimirReceita = function() {
-			AtendimentoService.PrintReceita(atendimentoID).then(function(data){});
+			AtendimentoService.PrintReceita(atendimentoID).then(function(data){
+				var file = new Blob([data], { type: 'application/pdf' });
+				var fileURL = URL.createObjectURL(file);
+				
+				saveAs(file, 'receita.pdf'); //Faz o download
+				
+				$window.open(fileURL); //Abre em outra aba});
 		}
 		//--
 
 		//-- Imprimir Exames
 		$scope.imprimirExames = function() {
-			AtendimentoService.PrintExames(atendimentoID).then(function(data){});
+			AtendimentoService.PrintExames(atendimentoID).then(function(data){
+				var file = new Blob([data], { type: 'application/pdf' });
+				var fileURL = URL.createObjectURL(file);
+				
+				saveAs(file, 'exame.pdf'); //Faz o download
+				
+				$window.open(fileURL); //Abre em outra aba});
 		}
 		//--
 
@@ -626,28 +645,48 @@
 				case "VAZIO":
 					$scope.itens = [];
 					AtendimentoService.Print().then(function(data){
-						$location.path('/relatorio/atendimento');
+						var file = new Blob([data], { type: 'application/pdf' });
+						var fileURL = URL.createObjectURL(file);
+						
+						saveAs(file, 'atendimento.pdf'); //Faz o download
+						
+						$window.open(fileURL); //Abre em outra aba
 					});
 					break;
 					
 				case "UBS":
 					$scope.itens = [];
 					AtendimentoService.PrintAtendimentoRelatorioPesquisarPorUbs($scope.unidadeBasicaSaude.i_unidade_basica_saude).then(function(data){
-						$location.path('/relatorio/atendimento');
+						var file = new Blob([data], { type: 'application/pdf' });
+						var fileURL = URL.createObjectURL(file);
+						
+						saveAs(file, 'atendimento.pdf'); //Faz o download
+						
+						$window.open(fileURL); //Abre em outra aba
 					});
 					break;
 					
 				case "PROFISSIONAL":
 					$scope.itens = [];
 					AtendimentoService.PrintAtendimentoRelatorioPesquisarPorProfissional($scope.profissional.i_profissional).then(function(data){
-						$location.path('/relatorio/atendimento');
+						var file = new Blob([data], { type: 'application/pdf' });
+						var fileURL = URL.createObjectURL(file);
+						
+						saveAs(file, 'atendimento.pdf'); //Faz o download
+						
+						$window.open(fileURL); //Abre em outra aba
 					});
 					break;
 
 				case "CIDADAO":
 					$scope.itens = [];
 					AtendimentoService.PrintAtendimentoRelatorioPesquisarPorCidadao($scope.cidadao.i_cidadao).then(function(data){
-						$location.path('/relatorio/atendimento');
+						var file = new Blob([data], { type: 'application/pdf' });
+						var fileURL = URL.createObjectURL(file);
+						
+						saveAs(file, 'atendimento.pdf'); //Faz o download
+						
+						$window.open(fileURL); //Abre em outra aba
 					});
 					break;
 					
@@ -733,14 +772,24 @@
 				case "VAZIO":
 					$scope.itens = [];
 					AtendimentoService.PrintAdoecimento().then(function(data){
+						var file = new Blob([data], { type: 'application/pdf' });
+						var fileURL = URL.createObjectURL(file);
 						
+						saveAs(file, 'adoecimento.pdf'); //Faz o download
+						
+						$window.open(fileURL); //Abre em outra aba
 					});
 					break;
 					
 				case "MUNICIPIO":
 					$scope.itens = [];
 					AtendimentoService.PrintAdoecimentoRelatorioPesquisarPorMunicipio($scope.municipio.i_municipio).then(function(data){
+						var file = new Blob([data], { type: 'application/pdf' });
+						var fileURL = URL.createObjectURL(file);
 						
+						saveAs(file, 'adoecimento.pdf'); //Faz o download
+						
+						$window.open(fileURL); //Abre em outra aba
 					});
 					
 					break;
@@ -748,7 +797,12 @@
 				case "UBS":
 					$scope.itens = [];
 					AtendimentoService.PrintAdoecimentoRelatorioPesquisarPorUbs($scope.unidadeBasicaSaude.i_unidade_basica_saude).then(function(data){
+						var file = new Blob([data], { type: 'application/pdf' });
+						var fileURL = URL.createObjectURL(file);
 						
+						saveAs(file, 'adoecimento.pdf'); //Faz o download
+						
+						$window.open(fileURL); //Abre em outra aba
 					});
 					
 					break;
@@ -765,7 +819,12 @@
 
 					$scope.itens = [];
 					AtendimentoService.PrintAdoecimentoRelatorioPesquisarPorDataAtendimento(config).then(function(data){
+						var file = new Blob([data], { type: 'application/pdf' });
+						var fileURL = URL.createObjectURL(file);
 						
+						saveAs(file, 'adoecimento.pdf'); //Faz o download
+						
+						$window.open(fileURL); //Abre em outra aba
 					});
 					
 					break;

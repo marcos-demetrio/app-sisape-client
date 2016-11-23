@@ -278,7 +278,12 @@
 			};
 
 			ProfissionalService.Print(config).then(function(data){
-					$location.path('/profissional');
+					var file = new Blob([data], { type: 'application/pdf' });
+					var fileURL = URL.createObjectURL(file);
+					
+					saveAs(file, 'profissional.pdf'); //Faz o download
+					
+					$window.open(fileURL); //Abre em outra aba
 				})
 		}
 		//--

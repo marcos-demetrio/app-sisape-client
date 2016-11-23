@@ -139,7 +139,12 @@
 			};
 
 			PaisService.Print(config).then(function(data){
-					$location.path('/pais');
+					var file = new Blob([data], { type: 'application/pdf' });
+					var fileURL = URL.createObjectURL(file);
+					
+					saveAs(file, 'pais.pdf'); //Faz o download
+					
+					$window.open(fileURL); //Abre em outra aba
 				})
 		}
 		//--

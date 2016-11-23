@@ -139,7 +139,12 @@
 				params : parameters
 			};
 			CidService.Print(config).then(function(data){
-					$location.path('/cid');
+					var file = new Blob([data], { type: 'application/pdf' });
+					var fileURL = URL.createObjectURL(file);
+					
+					saveAs(file, 'cid.pdf'); //Faz o download
+					
+					$window.open(fileURL); //Abre em outra aba
 				})
 		}
 		//--

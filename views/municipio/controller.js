@@ -149,7 +149,12 @@
 			};
 
 			MunicipioService.Print(config).then(function(data){
-					$location.path('/municipio');
+					var file = new Blob([data], { type: 'application/pdf' });
+					var fileURL = URL.createObjectURL(file);
+					
+					saveAs(file, 'municipio.pdf'); //Faz o download
+					
+					$window.open(fileURL); //Abre em outra aba
 				})
 		}
 		//--
