@@ -6,8 +6,8 @@
 		.run(run)
 		.controller('MenuController', MenuController)
 		.directive('convertToNumber', ConvertToNumber)
-		//.value('API', 'http://localhost:8080/');//Desenvolviemnto
-		.value('API', 'http://localhost:8080/app-sisape-ws/');//Produção
+		.value('API', 'http://localhost:8080/');//Desenvolviemnto
+		//.value('API', 'http://localhost:8080/app-sisape-ws/');//Produção
 
 	run.$inject = ['$rootScope', '$location', '$cookieStore', '$http'];
 	
