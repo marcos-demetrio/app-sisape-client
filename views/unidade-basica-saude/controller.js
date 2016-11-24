@@ -234,7 +234,8 @@
 			};
 
 			var config = {
-				params : parameters
+				params : parameters,
+				responseType: 'arraybuffer'
 			};
 
 			UbsService.Print(config).then(function(data){

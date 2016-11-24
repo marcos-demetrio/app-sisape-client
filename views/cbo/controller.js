@@ -137,7 +137,8 @@
 			};
 
 			var config = {
-				params : parameters
+				params : parameters,
+				responseType: 'arraybuffer'
 			};
 			
 			CboService.Print(config).then(function(data){

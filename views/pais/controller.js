@@ -135,7 +135,8 @@
 			};
 
 			var config = {
-				params : parameters
+				params : parameters,
+				responseType: 'arraybuffer'
 			};
 
 			PaisService.Print(config).then(function(data){

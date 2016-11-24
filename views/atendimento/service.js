@@ -45,16 +45,16 @@
 			return $http.put(API + 'atendimento/' + id, atendimento).then(handleSuccess, handleError('Erro ao atualizar atendimento'));
 		}
 
-		service.PrintAtestado = function PrintAtestado(id) {
-			return $http.get(API + 'atendimento/printAtestado/' + id).then(handleSuccess, handleError('Erro obtendo lista de atendimento'));
+		service.PrintAtestado = function PrintAtestado(config) {
+			return $http.get(API + 'atendimento/printAtestado', config).then(handleSuccess, handleError('Erro obtendo lista de atendimento'));
 		}
 
-		service.PrintReceita = function PrintReceita(id) {
-			return $http.get(API + 'atendimento/printReceita/' + id).then(handleSuccess, handleError('Erro obtendo lista de atendimento'));
+		service.PrintReceita = function PrintReceita(config) {
+			return $http.get(API + 'atendimento/printReceita', config).then(handleSuccess, handleError('Erro obtendo lista de atendimento'));
 		}
 
-		service.PrintExames = function PrintExames(id) {
-			return $http.get(API + 'atendimento/printExame/' + id).then(handleSuccess, handleError('Erro obtendo lista de atendimento'));
+		service.PrintExames = function PrintExames(config) {
+			return $http.get(API + 'atendimento/printExame', config).then(handleSuccess, handleError('Erro obtendo lista de atendimento'));
 		}
 
 		service.AtendimentoRelatorioPesquisarPorUbs = function AtendimentoRelatorioPesquisarPorUbs(id) {
@@ -89,36 +89,36 @@
 			return $http.get(API + 'atendimento/adoecimento/relatorio/periodo', config).then(handleSuccess, handleError('Erro obtendo lista de atendimento'));
 		}
 		
-		service.Print = function Print() {
-			return $http.get(API + 'atendimento/print/').then(handleSuccess, handleError('Erro obtendo lista de atendimento'));
+		service.Print = function Print(config) {
+			return $http.get(API + 'atendimento/print', config).then(handleSuccess, handleError('Erro obtendo lista de atendimento'));
 		}
 
-		service.PrintAtendimentoRelatorioPesquisarPorUbs = function PrintAtendimentoRelatorioPesquisarPorUbs(id) {
-			return $http.get(API + 'atendimento/printUbs/' + id).then(handleSuccess, handleError('Erro ao atualizar atendimento'));
+		service.PrintAtendimentoRelatorioPesquisarPorUbs = function PrintAtendimentoRelatorioPesquisarPorUbs(config) {
+			return $http.get(API + 'atendimento/printUbs', config).then(handleSuccess, handleError('Erro ao atualizar atendimento'));
 		}
 
-		service.PrintAtendimentoRelatorioPesquisarPorProfissional = function PrintAtendimentoRelatorioPesquisarPorProfissional(id) {
-			return $http.get(API + 'atendimento/printProfissional/' + id).then(handleSuccess, handleError('Erro ao atualizar atendimento'));
+		service.PrintAtendimentoRelatorioPesquisarPorProfissional = function PrintAtendimentoRelatorioPesquisarPorProfissional(config) {
+			return $http.get(API + 'atendimento/printProfissional', config).then(handleSuccess, handleError('Erro ao atualizar atendimento'));
 		}
 
-		service.PrintAtendimentoRelatorioPesquisarPorCidadao = function PrintAtendimentoRelatorioPesquisarPorCidadao(id) {
-			return $http.get(API + 'atendimento/printCidadao/' + id).then(handleSuccess, handleError('Erro ao atualizar atendimento'));
+		service.PrintAtendimentoRelatorioPesquisarPorCidadao = function PrintAtendimentoRelatorioPesquisarPorCidadao(config) {
+			return $http.get(API + 'atendimento/printCidadao', config).then(handleSuccess, handleError('Erro ao atualizar atendimento'));
 		}
 
 		service.PrintAtendimentoRelatorioPesquisarPorDataAtendimento = function PrintAtendimentoRelatorioPesquisarPorDataAtendimento(config) {
 			return $http.get(API + 'atendimento/printPeriodo', config).then(handleSuccess, handleError('Erro ao atualizar atendimento'));
 		}
 		
-		service.PrintAdoecimento = function PrintAdoecimento() {
-			return $http.get(API + 'atendimento/printAdoecimento/').then(handleSuccess, handleError('Erro obtendo lista de atendimento'));
+		service.PrintAdoecimento = function PrintAdoecimento(config) {
+			return $http.get(API + 'atendimento/printAdoecimento', config).then(handleSuccess, handleError('Erro obtendo lista de atendimento'));
 		}
 
-		service.PrintAdoecimentoRelatorioPesquisarPorMunicipio = function PrintAdoecimentoRelatorioPesquisarPorMunicipio(id) {
-			return $http.get(API + 'atendimento/printAdoecimentoMunicipio/' + id).then(handleSuccess, handleError('Erro ao atualizar atendimento'));
+		service.PrintAdoecimentoRelatorioPesquisarPorMunicipio = function PrintAdoecimentoRelatorioPesquisarPorMunicipio(config) {
+			return $http.get(API + 'atendimento/printAdoecimentoMunicipio', config).then(handleSuccess, handleError('Erro ao atualizar atendimento'));
 		}
 		
-		service.PrintAdoecimentoRelatorioPesquisarPorUbs = function PrintAdoecimentoRelatorioPesquisarPorUbs(id) {
-			return $http.get(API + 'atendimento/printAdoecimentoUbs/' + id).then(handleSuccess, handleError('Erro ao atualizar atendimento'));
+		service.PrintAdoecimentoRelatorioPesquisarPorUbs = function PrintAdoecimentoRelatorioPesquisarPorUbs(config) {
+			return $http.get(API + 'atendimento/printAdoecimentoUbs', config).then(handleSuccess, handleError('Erro ao atualizar atendimento'));
 		}
 
 		service.PrintAdoecimentoRelatorioPesquisarPorDataAtendimento = function PrintAdoecimentoRelatorioPesquisarPorDataAtendimento(config) {

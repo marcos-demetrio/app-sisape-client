@@ -141,7 +141,8 @@
 			};
 
 			var config = {
-				params : parameters
+				params : parameters,
+				responseType: 'arraybuffer'
 			};
 
 			MedicamentoService.Print(config).then(function(data){

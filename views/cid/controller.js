@@ -136,7 +136,8 @@
 			};
 
 			var config = {
-				params : parameters
+				params : parameters,
+				responseType: 'arraybuffer'
 			};
 			CidService.Print(config).then(function(data){
 					var file = new Blob([data], { type: 'application/pdf' });

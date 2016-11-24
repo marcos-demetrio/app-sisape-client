@@ -135,7 +135,8 @@
 			};
 
 			var config = {
-				params : parameters
+				params : parameters,
+				responseType: 'arraybuffer'
 			};
 
 			ExameService.Print(config).then(function(data){

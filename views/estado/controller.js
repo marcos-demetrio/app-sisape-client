@@ -145,7 +145,8 @@
 			};
 
 			var config = {
-				params : parameters
+				params : parameters,
+				responseType: 'arraybuffer'
 			};
 
 			EstadoService.Print(config).then(function(data){

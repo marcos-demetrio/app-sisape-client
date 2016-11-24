@@ -411,7 +411,16 @@
 
 		//-- Imprimir Atestado
 		$scope.imprimirAtestado = function() {
-			AtendimentoService.PrintAtestado(atendimentoID).then(function(data){
+			var parameters = {
+				aAtendimento : atendimentoID
+			};
+
+			var config = {
+				params : parameters,
+				responseType: 'arraybuffer'
+			};
+			
+			AtendimentoService.PrintAtestado(config).then(function(data){
 				var file = new Blob([data], { type: 'application/pdf' });
 				var fileURL = URL.createObjectURL(file);
 				
@@ -424,7 +433,16 @@
 
 		//-- Imprimir Receita
 		$scope.imprimirReceita = function() {
-			AtendimentoService.PrintReceita(atendimentoID).then(function(data){
+			var parameters = {
+				aAtendimento : atendimentoID
+			};
+
+			var config = {
+				params : parameters,
+				responseType: 'arraybuffer'
+			};
+			
+			AtendimentoService.PrintReceita(config).then(function(data){
 				var file = new Blob([data], { type: 'application/pdf' });
 				var fileURL = URL.createObjectURL(file);
 				
@@ -437,7 +455,16 @@
 
 		//-- Imprimir Exames
 		$scope.imprimirExames = function() {
-			AtendimentoService.PrintExames(atendimentoID).then(function(data){
+			var parameters = {
+				aAtendimento : atendimentoID
+			};
+
+			var config = {
+				params : parameters,
+				responseType: 'arraybuffer'
+			};
+			
+			AtendimentoService.PrintExames(config).then(function(data){
 				var file = new Blob([data], { type: 'application/pdf' });
 				var fileURL = URL.createObjectURL(file);
 				
@@ -645,8 +672,11 @@
 		$scope.AtendimentoRelatorioImprimir = function (){
 			switch ($scope.filtro) {
 				case "VAZIO":
-					$scope.itens = [];
-					AtendimentoService.Print().then(function(data){
+					var config = {
+						responseType: 'arraybuffer'
+					};
+					
+					AtendimentoService.Print(config).then(function(data){
 						var file = new Blob([data], { type: 'application/pdf' });
 						var fileURL = URL.createObjectURL(file);
 						
@@ -657,8 +687,16 @@
 					break;
 					
 				case "UBS":
-					$scope.itens = [];
-					AtendimentoService.PrintAtendimentoRelatorioPesquisarPorUbs($scope.unidadeBasicaSaude.i_unidade_basica_saude).then(function(data){
+					var parameters = {
+						aUnidadeBasicaSaude : $scope.unidadeBasicaSaude.i_unidade_basica_saude
+					};
+
+					var config = {
+						params : parameters,
+						responseType: 'arraybuffer'
+					};
+					
+					AtendimentoService.PrintAtendimentoRelatorioPesquisarPorUbs(config).then(function(data){
 						var file = new Blob([data], { type: 'application/pdf' });
 						var fileURL = URL.createObjectURL(file);
 						
@@ -669,8 +707,16 @@
 					break;
 					
 				case "PROFISSIONAL":
-					$scope.itens = [];
-					AtendimentoService.PrintAtendimentoRelatorioPesquisarPorProfissional($scope.profissional.i_profissional).then(function(data){
+					var parameters = {
+						aProfissional : $scope.profissional.i_profissional
+					};
+
+					var config = {
+						params : parameters,
+						responseType: 'arraybuffer'
+					};
+					
+					AtendimentoService.PrintAtendimentoRelatorioPesquisarPorProfissional(config).then(function(data){
 						var file = new Blob([data], { type: 'application/pdf' });
 						var fileURL = URL.createObjectURL(file);
 						
@@ -681,8 +727,16 @@
 					break;
 
 				case "CIDADAO":
-					$scope.itens = [];
-					AtendimentoService.PrintAtendimentoRelatorioPesquisarPorCidadao($scope.cidadao.i_cidadao).then(function(data){
+					var parameters = {
+						aCidadao : $scope.cidadao.i_cidadao
+					};
+
+					var config = {
+						params : parameters,
+						responseType: 'arraybuffer'
+					};
+					
+					AtendimentoService.PrintAtendimentoRelatorioPesquisarPorCidadao(config).then(function(data){
 						var file = new Blob([data], { type: 'application/pdf' });
 						var fileURL = URL.createObjectURL(file);
 						
@@ -703,7 +757,6 @@
 						responseType: 'arraybuffer'
 					};
 
-					$scope.itens = [];
 					AtendimentoService.PrintAtendimentoRelatorioPesquisarPorDataAtendimento(config).then(function(data){
 						var file = new Blob([data], { type: 'application/pdf' });
 						var fileURL = URL.createObjectURL(file);
@@ -772,8 +825,11 @@
 		$scope.AdoecimentoRelatorioImprimir = function (){
 			switch ($scope.filtro) {
 				case "VAZIO":
-					$scope.itens = [];
-					AtendimentoService.PrintAdoecimento().then(function(data){
+					var config = {
+						responseType: 'arraybuffer'
+					};
+					
+					AtendimentoService.PrintAdoecimento(config).then(function(data){
 						var file = new Blob([data], { type: 'application/pdf' });
 						var fileURL = URL.createObjectURL(file);
 						
@@ -784,8 +840,16 @@
 					break;
 					
 				case "MUNICIPIO":
-					$scope.itens = [];
-					AtendimentoService.PrintAdoecimentoRelatorioPesquisarPorMunicipio($scope.municipio.i_municipio).then(function(data){
+					var parameters = {
+						aMunicipio : $scope.municipio.i_municipio
+					};
+
+					var config = {
+						params : parameters,
+						responseType: 'arraybuffer'
+					};
+					
+					AtendimentoService.PrintAdoecimentoRelatorioPesquisarPorMunicipio(config).then(function(data){
 						var file = new Blob([data], { type: 'application/pdf' });
 						var fileURL = URL.createObjectURL(file);
 						
@@ -797,8 +861,16 @@
 					break;
 					
 				case "UBS":
-					$scope.itens = [];
-					AtendimentoService.PrintAdoecimentoRelatorioPesquisarPorUbs($scope.unidadeBasicaSaude.i_unidade_basica_saude).then(function(data){
+					var parameters = {
+						aUnidadeBasicaSaude : $scope.unidadeBasicaSaude.i_unidade_basica_saude
+					};
+
+					var config = {
+						params : parameters,
+						responseType: 'arraybuffer'
+					};
+					
+					AtendimentoService.PrintAdoecimentoRelatorioPesquisarPorUbs(config).then(function(data){
 						var file = new Blob([data], { type: 'application/pdf' });
 						var fileURL = URL.createObjectURL(file);
 						
@@ -816,10 +888,10 @@
 					};
 
 					var config = {
-						params : parameters
+						params : parameters,
+						responseType: 'arraybuffer'
 					};
 
-					$scope.itens = [];
 					AtendimentoService.PrintAdoecimentoRelatorioPesquisarPorDataAtendimento(config).then(function(data){
 						var file = new Blob([data], { type: 'application/pdf' });
 						var fileURL = URL.createObjectURL(file);

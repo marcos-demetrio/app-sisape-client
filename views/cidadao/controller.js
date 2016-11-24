@@ -258,7 +258,8 @@
 			};
 
 			var config = {
-				params : parameters
+				params : parameters,
+				responseType: 'arraybuffer'
 			};
 			
 			CidadaoService.Print(config).then(function(data){

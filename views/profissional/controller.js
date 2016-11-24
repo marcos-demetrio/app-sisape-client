@@ -274,7 +274,8 @@
 			};
 
 			var config = {
-				params : parameters
+				params : parameters,
+				responseType: 'arraybuffer'
 			};
 
 			ProfissionalService.Print(config).then(function(data){
