@@ -109,28 +109,28 @@
 			</div>
 
 			<div class="form-group">
-				<button class="btn  btn-primary" ng-click="AtendimentoRelatorioPesquisar()">Pesquisar</button>
+				<!--<button class="btn  btn-primary" ng-click="AtendimentoRelatorioPesquisar()">Pesquisar</button>-->
 				<button class="btn  btn-primary" ng-click="AtendimentoRelatorioImprimir()" ng-disabled="listaVazia">Imprimir</button>
 				<button class="btn  btn-default" ng-click="AtendimentoRelatorioLimpar()">Limpar</button>
 			</div>
 		</form>
 		
-		<div class="alert  aw-alert-no-results" role="alert" ng-show="listaVazia">
+		<!--<div class="alert  aw-alert-no-results" role="alert" ng-show="listaVazia">
 			A pesquisa não retornou nenhum atendimento.
-		</div>
+		</div>-->
 
-		<div class="bs-callout bs-callout-info" id="callout-glyphicons-location" ng-repeat="item in itens">
+		<!--<div class="bs-callout bs-callout-info" id="callout-glyphicons-location" ng-repeat="item in itens">
 			<a href="#/atendimento/{{item.i_atendimento}}/editar">
 				<h4 ng-bind="item.cidadao.nomeCompleto"></h4>
 			</a>
 			<p ng-bind="'Data: ' + (item.dataAtendimento | date:'dd/MM/yyyy') + ' ' + (item.dataAtendimento | date:'HH:mm')"></p>
 			<p ng-bind="'Queixa Principal: ' + item.queixaPrincipal"></p>
-		</div>
+		</div>-->
 			
-		<div class="row">
+		<!--<div class="row">
 			<div class="col-xs-12  col-md-4  aw-text-xs-center  aw-text-md-right" style="float: right;">
 				<span class="aw-pagination-info" ng-bind-template="{{totalItens}} atendimento(s) encontrado(s)" ng-show="!listaVazia"></span>
 			</div>
-		</div>
+		</div>-->
 	</div>
 </div>
